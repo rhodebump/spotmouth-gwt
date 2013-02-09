@@ -1,0 +1,346 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'   xmlns:xx='urn:import:com.spotmouth.gwt.client'>
+
+    <ui:with field="myResources" type="com.spotmouth.gwt.client.icons.SpotImageResource"/>
+
+
+
+
+  <g:HTMLPanel>
+
+
+
+      <div style="display:none">
+          <g:SimplePanel ui:field='searchBox'>
+
+            </g:SimplePanel>
+      </div>
+
+
+
+
+<div id="wrapper">
+
+
+    <div id="top2">
+
+        <div id="searchwrapper">
+            <form id="search">
+                <label>
+                    <g:TextBox ui:field='keywordsTextBox'/>
+                    <br/>Search for (e.g. chinese, jim's, kabob)
+                </label>
+
+
+
+                <div id="search_tgl">
+                    <input type="radio" name="search_tgl" id="search_tgl_near" checked="true"/>
+                    <input type="text" name="search_tgl" id="search_tgl_prev"/>
+
+                 <label><g:TextBox ui:field='locationTextBox'/><p>Near(Address, Neighborhood etc.)</p></label>
+                 <label><input type="text" placeholder="two"/><p>Previous Locations</p>
+                  <div id="search_tgl_list">
+
+                      <xx:ULPanel ui:field="previousLocationsULPanel"/>
+                  </div>
+                 </label>
+                </div>
+
+
+
+                <input type="submit"/>
+                <br/>
+                <a href="#!search/">Advanced Search</a>
+            </form>
+        </div>
+    </div>
+
+    <div id="top">
+        <ul id="page-nav" class="topnav">
+            <li class="first">
+                <a href="#!home/">Home</a>
+            </li>
+
+            <li class="page_item page-item-6">
+                <a href="#!about-us/">About</a>
+            </li>
+            <li class="page_item page-item-35" id="login-menu">
+                <a href="#!login/">Login</a>
+            </li>
+            <li class="page_item page-item-36">
+                <a href="#!contact">Contact</a>
+            </li>
+
+            <li class="page_item page-item-36">
+                <a href="#!features/">Features</a>
+            </li>
+            <li class="page_item page-item-36">
+                <a href="#biz-owner/">Business Owners</a>
+            </li>
+
+
+            <div id="usmenu" class="hideme">
+            <input type="checkbox"/>
+            <span id="usava"><!-- <img src="ava.jpg"></img>-->
+                <!--
+                <g:Image ui:field="profilePicImage"/>
+                -->
+                <g:SimplePanel ui:field="profilePicPanel"/>
+            </span>
+            <ul id="usnav">
+                <!--
+            <h3 id="usname">%User_Name%</h3>
+            -->
+                <h3 id="usname"><span ui:field='usernameSpan'/> </h3>
+            <li><a href="#account-settings">Edit your account</a></li>
+            <li><a href="#favorites">Favorite spots</a></li>
+            <li><a href="#notifications">Notifications</a></li>
+            <li><a href="#logout">Sign Out</a></li>
+            </ul>
+
+            </div>
+
+
+
+        </ul>
+
+
+        <div id="search">
+
+            <form method="get" id="searchform" action="http://www.google.com/search">
+                <input type="hidden" name="sitesearch" value="www.spotmouth.com"/>
+                <input type="text" class="field" name="q" onblur="blurme()" onfocus="focusme()" id="searchinput"
+                       value="Search this site..."/>
+                <input class="submit btn" type="image" src="images/icon-search.gif" value="Go"/>
+
+            </form>
+
+
+        </div>
+        <!-- end #search -->
+
+        <div class="clear"></div>
+
+    </div>
+    <!--end #top-->
+
+    <div id="header">
+
+
+        <!--
+          no add for now
+          <div class='header-ad'><a href="http://www.theme-junkie.com"><img src="http://demo.theme-junkie.com/freshlife/wp-content/themes/freshlife/images/banners/468x60.gif" alt="Header Ad" /></a></div>
+          -->
+
+        <a href="/">
+            <g:Image resource="{myResources.worldlogo}" />
+        </a>
+
+
+        <div class="clear"></div>
+
+
+    </div>
+    <!--end #header-->
+
+
+    <div id="content">
+
+
+        <div id="m_nav" class="m_nav">
+       			<ul>
+                       <li> <g:Button ui:field="markSpotButton"/></li>
+       				<li>
+       					<input type="text" class="m_dd" id="mInput"/>
+       					<a href="#" id="m_placeholder" class="m_placeholder">All</a> <!-- All means "home page" -->
+       					<ul class="m_dd_sel">
+       						<!-- "this.text" - kind of template, it's needed if you will add some categories in future  -->
+       						<li><a href="#!home/" onclick="ddHolder(this.text);">All</a></li>
+       						<li><a href="#!dining/" onclick="ddHolder(this.text);">Dining</a></li>
+       						<li><a href="#drinking/" onclick="ddHolder(this.text);">Drinking</a></li>
+       						<li><a href="#!lodging/" onclick="ddHolder(this.text);">Lodging</a></li>
+       						<li><a href="#!fun/" onclick="ddHolder(this.text);">Fun</a></li>
+       					</ul>
+       				</li>
+       				<li><a href="#!contests/">Contests</a></li>
+       				<li><a href="#!driver_reports/">Drivers</a></li>
+                       <li><a href="#!chats/">Chats</a></li>
+                       <!--
+       				<li><a href="#coupons/">Coupons</a></li>
+                           -->
+       				<li><a href="#!directory/">Directory</a></li>
+       				<li><a href="#!menu/">Menu</a></li>
+       			</ul>
+
+       			<div class="m_nav_sub add_group_yn" id="results_controls">
+       				<input type="text" class="m_show_tags"/>
+       				<button class="button">Show tags</button>
+       				<button class="button">Hide tags</button>
+       				<div class="m_tags">
+                           <g:ListBox ui:field="tagListBox"/>
+                           <g:ListBox ui:field="sortingListBox"/>
+
+       				</div>
+
+       				<label class="add_lb m_mode">
+                           <g:SimpleCheckBox ui:field="toggleMapMode"/>
+
+
+       					<span class="yes">List</span>
+                           <span class="no">Map</span>
+       				</label>
+
+       				<label class="add_lb">
+                           <g:SimpleCheckBox ui:field="toggleMilesCheckBox"/>
+                           <!--
+       					<input type="checkbox" value="on"/>
+       					-->
+
+       					<span class="yes">km</span>
+                           <span class="no">mi</span>
+       				</label>
+       		</div>
+       		</div>
+
+
+
+        <g:SimplePanel ui:field='messages'>
+
+        </g:SimplePanel>
+
+
+        <div class="heading">
+
+        </div>
+        <!-- end .heading -->
+
+        <g:SimplePanel ui:field='body'>
+
+        </g:SimplePanel>
+
+        <div class="clear"></div>
+
+    </div>
+    <!-- end #content -->
+
+
+
+
+<div class="clear"></div>
+
+
+
+         <div style="display:none">
+
+
+    <div id="footer">
+
+        <div id="footer-widget-1">
+            <div id="recent-posts-3" class="widget footer-widget widget_recent_entries">
+
+
+            </div>
+        </div>
+
+        <div id="footer-widget-2">
+            <div id="tag_cloud-3" class="widget footer-widget widget_tag_cloud">
+                <h3 class="widget-title">Tags</h3>
+
+
+
+
+            </div>
+
+        </div>
+
+        <div id="footer-widget-3">
+            <div id="linkcat-2" class="widget footer-widget widget_links">
+                <h3 class="widget-title">Links</h3>
+                <ul class="xoxo blogroll">
+                    <li>
+                        <a href="#!about-us/">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#!contact/">Contact Us</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="footer-widget-4">
+            <div id="archives-3" class="widget footer-widget widget_archive">
+
+
+            </div>
+            <div id="meta-3" class="widget footer-widget widget_meta">
+
+            </div>
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+    <!--end #footer-->
+
+         </div>
+
+
+
+<div id="bottom">
+
+	<div class="left">
+        &copy; <a href="http://www.spotmouth.com" title="spotmouth" rel="home">spotmouth</a>. All rights reserved.
+	</div> <!--end .left-->
+
+	<div class="right">
+Powered by Grails, SOLR, GWT, MGWT, Factual
+	</div> <!--end .right-->
+
+	<div class="clear"></div>
+
+</div> <!--end #bottom-->
+
+
+<div class="clear"></div>
+
+</div> <!--end #wrapper-->
+
+
+
+<div  style="display: none;">
+
+
+
+
+
+</div>
+
+
+
+
+
+<div id="popup" class="_pop" onmousedown="hidePop()"><!-- "onmousedown" should be removed-->
+	<span class="_loader" id="loader">
+		<img src="css/preloader.gif"/>
+		<p>Loading</p>
+	</span>
+</div>
+
+
+<script>
+    <![CDATA[
+var hidePop = function(){
+	document.getElementById('popup').style.opacity = "0";
+	document.getElementById('popup').style.zIndex = "-1";
+}
+         ]]>
+</script>
+
+
+
+  </g:HTMLPanel>
+
+</ui:UiBinder>

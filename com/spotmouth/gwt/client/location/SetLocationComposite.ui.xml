@@ -1,0 +1,88 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:x='urn:import:com.spotmouth.gwt.client'     xmlns:mu='urn:import:gwtupload.client'
+             xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:datepicker='urn:import:com.google.gwt.user.datepicker.client'
+             xmlns:gm='urn:import:com.google.gwt.maps.client'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+
+
+    <g:HTMLPanel>
+
+        <div id="set_location" class="set_location">
+        	<h1 class="sl_title">Set Location</h1>
+        	<input type="radio" name="sl_switch" class="sl_switch" id="sl_use_previous" checked="true"/>
+            <g:SimpleRadioButton ui:field="mapRadioButton"/>
+        	<input type="radio" name="sl_switch" class="sl_switch" id="sl_use_form"/>
+        	<input type="radio" name="sl_switch" class="sl_switch" id="sl_use_device"/>
+        	<ul class="sl_nav">
+        		<li>Previous Locations</li>
+        		<li>Use Map</li>
+        		<li>Use Form</li>
+        		<li><g:Button ui:field="fromDeviceButton"/></li>
+
+        	</ul>
+        	<div class="sl_tab" id="sl_tab_previous">
+        		<p class="sl_not" id="sl_not">There are no previous locations</p>
+        		<div id="sl_prev_list">
+                    <x:ULPanel ui:field="previousLocations"/>
+
+        	</div>
+        	</div>
+        	<div class="sl_tab" id="sl_tab_map">
+        		<div id="sl_map">
+        			<!-- Map should be loaded here -->
+
+                    <g:SimplePanel ui:field="mapPanel"/>
+        		</div>
+        	</div>
+        	<div class="sl_tab" id="sl_tab_form">
+        		<p class="sl_hint">You do not have to provide values for everything below, for example, you could just enter in your city and state, but the more accurate that you are, the better we can refine what is around you.</p>
+        		<h2 class="sl_title">Location</h2>
+        		<label class="sl_lb"> <g:SuggestBox ui:field="countryTextBox"/></label>
+        		<label class="sl_lb">  <g:SuggestBox ui:field="stateTextBox"/></label>
+        		<label class="sl_lb">   <g:SuggestBox ui:field="cityTextBox"/></label>
+        		<ul class="mc_loc_list"><button class="button"/></ul>
+        		<h2 class="sl_title">Address</h2>
+                <label class="sl_lb">   <g:TextBox ui:field="zipcodeTextBox"/></label>
+        		<label class="sl_lb"> <g:TextBox ui:field="address1TextBox"/></label>
+
+        		<ul class="mc_loc_list mc_adrs_list"><button class="button"></button></ul>
+                <g:Button ui:field="updateButton"/>
+        	</div>
+        </div>
+        <script>
+  <![CDATA[
+        //scroll bar
+
+        fleXenv.fleXcrollMain('sl_prev_list'); // init scroll bar
+
+        var pList = document.getElementById('sl_prev_list'),
+        	pCount = pList.getElementsByTagName('li').length, // getting locations length to set locations list height
+        	pListHeight = Math.round(pCount / 5) * 185; // 185 - approx string height, 5 - string itmes length
+
+        window.onload = function(){
+
+        if ( pCount == 0 ){
+        	document.getElementById('sl_not').style.display = "block";
+        	pList.style.display = "none";
+        } else if ( pCount < 5) {
+        	document.getElementById('sl_prev_list_mcontentwrapper').style.height = "200px";
+        	document.getElementById('sl_prev_list_vscrollerbar').style.display = "none"; // hiding scrollbar
+        } else if (pListHeight <= 560){
+        	document.getElementById('sl_prev_list_mcontentwrapper').style.height = pListHeight + "px";
+        	document.getElementById('sl_prev_list_vscrollerbar').style.display = "none"; // hiding scrollbar
+        } else {
+        	document.getElementById('sl_prev_list_mcontentwrapper').style.height = "560px"; // max height of locations list
+        }
+
+
+        fleXenv.updateScrollBars(); // plugin has some bugs with height and this sting solves them
+        }
+      ]]>
+
+        </script>
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

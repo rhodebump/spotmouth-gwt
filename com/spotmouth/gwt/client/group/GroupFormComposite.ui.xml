@@ -1,0 +1,83 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+<div id="add_group">
+
+<h1>Manage Group</h1>
+	<label><h3 class="gr_title">Group Name</h3><g:TextBox ui:field="groupNameTextBox"/>
+        <!-- <input type="text" name="gr_name"/>--></label>
+	<label><h3 class="gr_title">Description</h3><!--<textarea cols="200" rows="3"></textarea>--> <g:TextArea ui:field="descriptionTextArea"/> </label>
+	<label><h3 class="gr_title">Group Code</h3><g:TextBox ui:field="groupCodeTextBox"/> </label>
+	<label><span class="add_group_tt ttl"><p>Authoritative CSV means files you upload will remove members.</p></span> <h3 class="gr_title">Group Code Prompt</h3>
+        <g:TextArea ui:field="groupCodeDescriptionTextArea"/> </label>
+
+	<div class="add_group_yn">
+		<div class="add_group_check">
+		<span class="add_group_tt"><p>Visible to members allows all members of the group to see each other.</p></span> <p>Visible to members?</p>
+			<label class="add_lb">
+                <!--
+				<input type="checkbox" checked="checked"/>
+				-->
+                <g:SimpleCheckBox ui:field="visibleToMembersCheckbox"/>
+				<span class="yes">yes</span>
+				<span class="no">no</span>
+			</label>
+		</div>
+
+		<div class="add_group_check">
+		<span class="add_group_tt"><p>Manage by members allows all members of the group to add/remove/approve members of the group.</p></span> <p>Manage by members?</p>
+			<label class="add_lb">
+                <g:SimpleCheckBox ui:field="manageByMembersCheckbox"/>
+				<span class="yes">yes</span>
+				<span class="no">no</span>
+			</label>
+		</div>
+
+		<div class="add_group_check">
+		<span class="add_group_tt"><p>Open enrollment allows anyone who wants to join the group to join</p></span> <p>Open Enrollment?</p>
+			<label class="add_lb">
+                <g:SimpleCheckBox ui:field="openEnrollmentCheckbox"/>
+				<span class="yes">yes</span>
+				<span class="no">no</span>
+			</label>
+		</div>
+
+        <div class="add_group_check" id="opt-in-required-div">
+      		<span class="add_group_tt"><p>Requires users to confirm they want to be part of your group.</p></span> <p>Opt-in required?</p>
+      			<label class="add_lb">
+                      <g:SimpleCheckBox ui:field="optinRequiredCheckbox"/>
+      				<span class="yes">yes</span>
+      				<span class="no">no</span>
+      			</label>
+      		</div>
+
+
+		<div class="add_group_check">
+		<span class="add_group_tt"><p>Authoritative CSV means files you upload will remove members.</p></span> <p>Authoritative CSV</p>
+			<label class="add_lb">
+                <g:SimpleCheckBox ui:field="authoritativeCSVCheckbox"/>
+				<span class="yes">yes</span>
+				<span class="no">no</span>
+			</label>
+		</div>
+	</div>
+
+<div id="add_group_count">
+	<h1>Member Count</h1>
+
+    <span ui:field='memberCountSpan'/>
+</div>
+
+    <g:Button ui:field="saveGroupButton"/>
+    <!--
+<button>Save Group</button>
+    -->
+</div>
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

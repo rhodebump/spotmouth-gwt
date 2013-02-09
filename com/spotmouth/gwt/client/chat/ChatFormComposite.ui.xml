@@ -1,0 +1,59 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:x='urn:import:com.spotmouth.gwt.client'     xmlns:mu='urn:import:gwtupload.client'
+             xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:datepicker='urn:import:com.google.gwt.user.datepicker.client'
+             xmlns:slider="urn:import:com.kiouri.sliderbar.client.solution.simplehorizontal"
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+
+
+<div class="manage_contents" id="manage_contents">
+     	<div class="content">
+     		<h1 class="mc_title">Manage Chat<button class="button">Cancel</button></h1>
+
+
+             <div>
+
+                 <span id="ddselect">
+                     <mu:MultiUploader  ui:field="multiUploader"/>
+                     <p>Select New Photo</p>
+
+
+                 </span>
+                 <g:SimplePanel ui:field="imagePanel"/>
+                 <dnd:DropPanel ui:field="dropPanel"/>
+             </div>
+
+
+
+     		<label class="mc_name">
+                 <g:TextBox ui:field="nameTextBox" />
+
+     		</label>
+
+
+
+     		<h2 class="mc_title" >Description</h2>
+
+             <g:TextArea ui:field="descriptionTextArea"/>
+
+
+     		<div class="mc_tags">
+     			<h2 class="mc_title">Tags</h2>
+     			<label id="mc_tags" class="mc_tags">
+                     <g:SuggestBox ui:field="tagSearchTextBox"/>
+
+     				<p>Maximum five tags</p>
+     			</label>
+                 <g:FlowPanel ui:field="selectedTagsPanel" />
+
+     		</div>
+
+     		<div class="mc_buttons"><g:Button ui:field="saveButton"/> </div>
+     	</div>
+     </div>
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

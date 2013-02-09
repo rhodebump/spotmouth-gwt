@@ -1,0 +1,18 @@
+.nav{
+border: none; /*Or just remove all borders in this menu*/
+}
+
+.nav li a{
+font: 14pt/100% Arial, Helvetica, sans-serif;
+}
+
+.nav li a:hover,.nav li a:focus {
+box-shadow: inset 0 0 5px #5C5C5C;
+border-radius: 3px;
+background: none;
+color: black;
+}
+
+.nav li a:active {
+box-shadow: inset 0 0 5px #5C5C5C,inset 0 -5px 15px rgba(0, 0, 0, 0.27);
+}

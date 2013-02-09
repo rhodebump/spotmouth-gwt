@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='mywebapp'>
+    <!-- Inherit the core Web Toolkit stuff.                        -->
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name='org.cobogw.gwt.user.User'/>
+
+
+    <inherits name="org.atmosphere.gwt.Client"/>
+    <inherits name="com.kiouri.sliderbar.SliderBarMVP" />
+    <inherits name="com.googlecode.mgwt.MGWT" />
+
+    <inherits name='com.googlecode.gwtphonegap.PhoneGap' />
+
+
+    <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
+    <inherits name="gdurelle.tagcloud.TagCloud"/>
+
+    <inherits name='com.google.gwt.maps.GoogleMaps'/>
+
+    <!--
+    <inherits name='com.google.gwt.user.theme.standard.StandardResources' />
+        -->
+    <inherits name="com.bramosystems.oss.player.capsule.Capsule"/>
+    <inherits name="com.bramosystems.oss.player.flat.FlatVideoPlayer"/>
+    <inherits name="com.bramosystems.oss.player.youtube.YouTube"/>
+
+
+    <inherits name="com.phonegap.gwt.capture.Capture"/>
+    <inherits name="com.phonegap.gwt.filetransfer.FileTransfer"/>
+    <inherits name="com.phonegap.gwt.media.Media"/>
+
+
+    <inherits name="com.google.api.gwt.oauth2.OAuth2"/>
+
+    <inherits name='com.google.gwt.user.User'/>
+    <inherits name='com.google.gwt.http.HTTP'/>
+    <inherits name='com.google.gwt.json.JSON'/>
+    <!--
+     <inherits name='com.google.code.gwt.storage.Html5Storage' />
+         <inherits name='com.phonegap.gwt.geolocation.Geolocation'/>
+      -->
+    <inherits name='com.phonegap.gwt.camera.Camera'/>
+
+    <inherits name='com.google.gwt.user.theme.standard.StandardResources'/>
+
+
+
+    <inherits name="com.google.code.gwt.geolocation.Html5Geolocation"/>
+
+
+    <inherits name='com.phonegap.gwt.childbrowser.ChildBrowser'/>
+    <inherits name='com.phonegap.gwt.fbconnect.FBConnect'/>
+    <inherits name='com.phonegap.gwt.console.Console'/>
+    <inherits name='com.phonegap.gwt.device.Device'/>
+
+    <!-- Include GWTUpload library -->
+    <inherits name="gwtupload.GWTUpload"/>
+    <!-- Load dinamically predefined styles in the library when the application starts -->
+
+    <!--
+    added this css into my css
+    <stylesheet src="Upload.css"/>
+        -->
+
+
+
+    <!--
+    this is to hide the logger that is added by phonegap mgwt
+       -->
+
+
+    <set-property name="gwt.logging.enabled" value="FALSE" />
+    <set-property name="phonegap.logging.consoleHandler" value="DISABLED" />
+
+
+
+    <!--
+
+
+         <inherits name="com.allen_sauer.gwt.log.gwt-log-DEBUG" />
+
+    <set-property name="log_DivLogger" value="ENABLED" />
+
+
+
+                  -->
+
+
+    <inherits name="com.allen_sauer.gwt.log.gwt-log-OFF" />
+
+    <set-property name="log_DivLogger" value="DISABLED" />
+
+
+    <inherits name="org.vectomatic.libgwtfile" />
+
+
+
+    <inherits name='com.google.gwt.jsonp.Jsonp'/>
+
+    <!-- Specify the app entry point class.                         -->
+    <entry-point class='com.spotmouth.gwt.client.MyWebApp'/>
+
+
+    <!-- Specify the paths for translatable code                    -->
+    <source path='client'/>
+    <source path='shared'/>
+
+</module>

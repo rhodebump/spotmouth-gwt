@@ -1,0 +1,53 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:x='urn:import:com.spotmouth.gwt.client'     xmlns:mu='urn:import:gwtupload.client'
+             xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:datepicker='urn:import:com.google.gwt.user.datepicker.client'
+             xmlns:slider="urn:import:com.kiouri.sliderbar.client.solution.simplehorizontal"
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+
+        <div class="search_page" id="serch_page">
+        	<div class="sp_content">
+        	<h1 class="sp_title">Search</h1>
+        	<label class="sp_inp">
+
+                        <g:TextBox ui:field="keywordsTextBox"/>
+        	</label>
+        	<h2 class="sp_title">Filter by:</h2>
+        	<fieldset>
+        		<label class="sp_check"><g:SimpleCheckBox ui:field="geoFilterCheckbox"/><i></i><span>Distance</span></label>
+        		<label class="sp_check"><g:SimpleCheckBox ui:field="spotFilterCheckbox"/><i></i><span>Spots</span></label>
+        		<label class="sp_check"><g:SimpleCheckBox ui:field="plateFilterCheckbox"/><i></i><span>Drivers</span></label>
+        		<label class="sp_check"><g:SimpleCheckBox ui:field="markFilterCheckbox"/><i></i><span>Marks</span></label>
+        		<label class="sp_check"><g:SimpleCheckBox ui:field="contestsFilterCheckbox"/><i></i><span>Contests</span></label>
+        	</fieldset>
+
+        	<h2 class="sp_title">Tags</h2>
+        	<label class="sp_inp">   <g:SuggestBox ui:field="tagSearchTextBox"/></label>
+        	<span class="sp_sel_tags">      <g:FlowPanel ui:field="selectedTagsPanel" /></span>
+        	<fieldset class="sp_sel_area">
+        		<label class="sp_sel">
+        			<h2 class="sp_title">Color</h2>
+                    <g:ListBox ui:field="colorsListBox"/>
+        		</label>
+        		<label class="sp_sel">
+        			<h2 class="sp_title">Manufacturer</h2>
+                    <g:ListBox ui:field="manufacturersListBox"/>
+        		</label>
+        		<label class="sp_sel">
+        			<h2 class="sp_title">Vehicle Type</h2>
+                    <g:ListBox ui:field="vehicleTypeListBox"/>
+        		</label>
+
+        	</fieldset>
+
+                <g:Button ui:field="searchButton"/>
+        	</div>
+        </div>
+
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

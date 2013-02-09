@@ -1,0 +1,48 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+
+
+        <div id="profile_public">
+<input type="checkbox" id="pp_show_msg"/>
+<div id="pp_send_msg">
+<div class="pp_content">
+	<textarea rows="7"></textarea>
+	<button class="pp_add_msg">Send</button>
+</div></div>
+
+<div id="pp_left_side">
+	<span id="pp_ava"></span>
+	<button class="pp_add_msg" id="pp_add_msg_h">Cancel Message</button>
+	<button class="pp_add_msg">Send Message</button>
+
+    <g:Button ui:field="addToFriendsButton"/>
+
+	<div id="pp_is_friend" class="hideme">
+	<p>You are friends!</p>
+	<button class="pp_add_msg">Remove from Friends</button>
+	</div >
+</div>
+
+<div class="pp_content">
+	<h1> <span ui:field='firstNameSpan'/> <span ui:field='lastNameSpan'/></h1>
+	<h3><span ui:field='citySpan'/> <span ui:field='stateSpan'/> <span ui:field='countrySpan'/></h3>
+	<div id="pp_about">
+        <!--
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </p>
+	-->
+      <p> <span ui:field='aboutSpan'/> </p>
+
+	</div>
+</div>
+
+</div>
+
+
+
+
+</g:HTMLPanel>
+
+   </ui:UiBinder>

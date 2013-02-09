@@ -1,0 +1,78 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+
+
+
+
+  <g:HTMLPanel>
+
+<div id="prof">
+<ul id="nav">
+    <!--
+<li><a title="Account Settings" href="account-set.html"></a></li>
+-->
+    <li><a title="Account Settings" href="#account-settings"></a></li>
+<li><a title="Profile Settings" href="#profile-settings" id="prop"></a></li>
+<li class="pact"><a title="Favorite Places" href="#favorites" id="pfav"></a></li>
+</ul>
+<div class="prof-content">
+<div id="accp">
+
+<h1>Favorite Spots</h1>
+
+    <g:Panel ui:field="spotsAreaPanel"/>
+
+    <!--
+<div id="spots-area">
+
+<span class="fspots">
+<span class="remove"></span>
+<img src="y_e4525243.jpg"/>
+<a href="#">A Technical Hair Systems</a>
+</span>
+
+<span class="fspots">
+<span class="remove"></span>
+<img src="y_e4525243.jpg"/>
+<a href="#">A Technical Hair Systems A Technical Hair Systems</a>
+</span>
+
+<span class="fspots">
+<span class="remove"></span>
+<img src="y_e4525243.jpg"/>
+<a href="#">A Technical Hair Systems</a>
+</span>
+
+<span class="fspots">
+<span class="remove"></span>
+<img src="y_e4525243.jpg"/>
+<a href="#">A Technical Hair Systems A Technical Hair Systems</a>
+</span>
+
+<span class="fspots">
+<span class="remove"></span>
+<img src="y_e4525243.jpg"/>
+<a href="#">A Technical Hair Systems</a>
+</span>
+
+<span class="fspots">
+<span class="remove"></span>
+<img src="y_e4525243.jpg"/>
+<a href="#">A Technical Hair Systems</a>
+</span>
+
+</div>
+-->
+
+
+</div>
+</div>
+</div>
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

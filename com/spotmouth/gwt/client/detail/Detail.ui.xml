@@ -1,0 +1,100 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <ui:with field="myResources" type="com.spotmouth.gwt.client.icons.SpotImageResource"/>
+
+
+
+
+  <g:HTMLPanel>
+
+
+
+<div class="content">
+    <!--
+     <a href="#" id="goback" title="Back to Search Results">
+     <img src="images/back.png"></img>
+     </a>
+     -->
+    <g:Anchor title="Back to Search Results" ui:field="backToSearchResultsAnchor">  <img src="images/back.png"/></g:Anchor>
+     <div class="photo">
+
+         <g:Image ui:field="mainImage"/>
+
+     <div class="partners">
+     <span class="yelp"><a href="#"></a><a href="#"></a></span>
+     <span class="forsq"><a href="#"></a></span>
+     </div>
+     </div>
+     <div class="info">
+         <!--
+     <h1>La Gourmandine Bakery &amp; Pastry Shop</h1>
+     -->
+         <h1><span ui:field='nameSpan'/></h1>
+
+         <h4 class="address"><span ui:field='addressSpan'/></h4>
+
+       <g:HTML ui:field="hoursHTML"/>
+
+<div style="display:none">
+    <g:Anchor title="Groups" ui:field="groupsAnchor">Groups</g:Anchor>
+     </div>
+
+
+
+         <input type="radio" id="fw-tab-one" class="fw-tab" name="switch" value="descr" checked="checked"/>
+         <input type="radio" id="fw-tab-two" class="fw-tab" name="switch" value="groups"/>
+         <h3 id="tab-tgl">Description</h3>
+         <span href="#" id="tab-tgl-two" class="groups"><a>Groups</a></span>
+         <g:Anchor title="View Map" ui:field="mapAnchor">View Map</g:Anchor>
+         <p id="fw-desc"><span ui:field='descriptionSpan'/></p>
+         <div id="fw-group">
+             <g:FlowPanel ui:field="groupsPanel"/>
+             <g:Button ui:field="addGroupButton"/>
+
+         </div>
+
+
+     <ul class="btm-bar">
+
+
+         <li><g:Anchor ui:field="phoneAnchor"></g:Anchor></li>
+
+     <li class="mark">
+         <g:Anchor title="Mark This Spot" ui:field="markSpotAnchor"></g:Anchor>
+
+         <!--
+         <a title="Mark This Spot" href="#"></a>
+         -->
+     </li>
+     <li class="biz">
+         <!--
+         <a title="This is my biz" href="#"></a><
+             -->
+         <g:Anchor title="This is my biz" ui:field="addMyBizAnchor"></g:Anchor>
+
+         </li>
+     <li class="admin">
+
+         <g:Anchor title="Administer Spot" ui:field="adminSpotAnchor"></g:Anchor>
+         <!--
+         <a title ="Administer Spot" href="#"></a>
+         -->
+         </li>
+     <li class="addf">
+         <!--
+         <a title ="Add to Favorite" href="#"></a>
+         -->
+         <g:Anchor title="Add to Favorite" ui:field="addtoFavoriteAnchor"></g:Anchor>
+
+     </li>
+     </ul>
+     </div>
+     </div>
+     <div class="comments">
+     </div>
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

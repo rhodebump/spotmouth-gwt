@@ -1,0 +1,75 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:x='urn:import:com.spotmouth.gwt.client'     xmlns:mu='urn:import:gwtupload.client'
+             xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:datepicker='urn:import:com.google.gwt.user.datepicker.client'
+             xmlns:slider="urn:import:com.kiouri.sliderbar.client.solution.simplehorizontal"
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+
+
+<div class="view_user_group">
+     	<div class="content">
+     		<div id="add_group_count">
+     			<h1>Member Count</h1>
+     			<span ui:field='memberCountSpan'/>
+     		</div>
+
+             <g:Button ui:field="inviteButton"/>
+
+     		<label class="vug_lb vug_group_name"><g:TextBox ui:field="groupNameTextBox"/> </label>
+     		<label class="vug_lb vug_select_friends"><input type="text" placeholder="Find a friend..."/></label>
+     		<div id="s_list" class="_add_scroll">
+
+                 <x:ULPanel ui:field="membersULPanel"/>
+     		<span class="list_holder">No selected friends</span>
+     		</div>
+     		<div id="f_list" class="_add_scroll">
+
+                 <x:ULPanel ui:field="availableULPanel"/>
+                 <!--
+     			<ul class="vug_f_list" id="f_list_c">
+
+     				<li class="vug_f_list_item" onmousedown="selFriend(this);">
+     					<span class="vug_ava" style="background: url('photo.jpg') no-repeat center center"></span>
+     					<h2 class="vug_name">User Name</h2>
+     				</li>
+
+     				<li class="vug_f_list_item" onmousedown="selFriend(this);"><span class="vug_ava" style="background: url('photo.jpg') no-repeat center center"></span><h2 class="vug_name">User Name</h2></li>
+     				<li class="vug_f_list_item" onmousedown="selFriend(this);"><span class="vug_ava" style="background: url('photo.jpg') no-repeat center center"></span><h2 class="vug_name">User Name</h2></li>
+     				<li class="vug_f_list_item" onmousedown="selFriend(this);"><span class="vug_ava" style="background: url('photo.jpg') no-repeat center center"></span><h2 class="vug_name">User Name</h2></li>
+     				<li class="vug_f_list_item" onmousedown="selFriend(this);"><span class="vug_ava" style="background: url('photo.jpg') no-repeat center center"></span><h2 class="vug_name">User Name</h2></li>
+     				<li class="vug_f_list_item" onmousedown="selFriend(this);"><span class="vug_ava" style="background: url('photo.jpg') no-repeat center center"></span><h2 class="vug_name">User Name</h2></li>
+     				<li class="vug_f_list_item" onmousedown="selFriend(this);"><span class="vug_ava" style="background: url('photo.jpg') no-repeat center center"></span><h2 class="vug_name">User Name</h2></li>
+     			</ul>
+     			-->
+
+     			<span class="list_holder">No friends</span>
+     		</div>
+     		<div class="vug_btns">
+
+                 <g:Button ui:field="cancelButton"/>
+                 <g:Button ui:field="saveButton"/>
+
+     		</div>
+     	</div>
+     </div>
+
+     <script>
+<![CDATA[
+     fleXenv.initByClass("_add_scroll");// init scroll bar
+
+     window.onload = function(){
+     	fleXenv.updateScrollBars(); // plugin has some bugs with height and this sting solves them
+     }
+
+
+
+      ]]>
+
+      </script>
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,324 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+
+
+  <g:HTMLPanel>
+
+
+
+
+
+
+<div id="mapwrapper">
+
+
+    <div id="top2" style="display:none">
+
+        <g:SimplePanel ui:field='searchBox'>
+
+          </g:SimplePanel>
+
+
+
+    </div>
+
+	<div id="top">
+
+					<ul id="page-nav" class="topnav">
+									<li class="first"><a href="#!home/">Home</a></li>
+
+				<li class="page_item page-item-6"><a href="#!about-us/">About</a>
+
+</li>
+
+                        <li class="page_item page-item-35"><a href="#!login/">Login</a></li>
+
+                        <li class="page_item page-item-50"><a href="#user-profile-form">Profile</a></li>
+
+
+
+
+<li class="page_item page-item-36"><a href="#!contact/">Contact</a></li>
+
+                        <li class="page_item page-item-36"><a href="#!features/">Features</a></li>
+                        <li class="page_item page-item-36"><a href="#biz-owner/">Business Owners</a></li>
+
+
+			</ul>
+
+
+	    <div id="search">
+
+	    	<form method="get" id="searchform" action="http://www.google.com/search">
+                <input type="hidden" name="sitesearch" value="www.spotmouth.com" />
+	<input type="text" class="field" name="q" onblur="blurme()" onfocus="focusme()" id="searchinput"  value="Search this site..."  />
+	<input class="submit btn" type="image" src="images/icon-search.gif" value="Go" />
+</form>
+
+
+
+        </div> <!-- end #search -->
+
+		<div class="clear"></div>
+
+	</div> <!--end #top-->
+
+	<div id="header" style="display:none">
+
+
+
+        <!--
+        no add for now
+	    <div class='header-ad'><a href="http://www.theme-junkie.com"><img src="http://demo.theme-junkie.com/freshlife/wp-content/themes/freshlife/images/banners/468x60.gif" alt="Header Ad" /></a></div>
+	    -->
+
+        <a href="/"><img src="images/worldlogo.png" alt="spotmouth logo" id="logo"/></a>
+
+
+        <div class="clear"></div>
+
+
+
+
+	</div> <!--end #header-->
+
+	<div id="cat-menu" style="display:none">
+					<ul id="cat-nav" class="nav">
+
+
+                        <li class="cat-item cat-item-4"><a href="#!mark-spot/" title="Mark Spot">Mark Spot</a>
+                      </li>
+
+                        <li class="cat-item cat-item-4"><a href="#!search/" title="Search">Search</a>
+                       </li>
+
+                        <li class="cat-item cat-item-5"><a href="#!contests/" title="View contests around you.">Contests</a>
+</li>
+
+                        <li class="cat-item cat-item-5"><a href="#!driver_reports/" title="View driver reports.">Drivers</a>
+</li>
+
+                        <li class="cat-item cat-item-5"><a href="#!dining/" title="Dining">Dining</a>
+</li>
+
+                        <li class="cat-item cat-item-5"><a href=" #drinking/" title="Drinking">Drinking</a>
+</li>
+                        <li class="cat-item cat-item-5"><a href=" #!lodging/" title="Lodging">Lodging</a>
+</li>
+                        <li class="cat-item cat-item-5"><a href=" #!fun/" title="Fun">Fun</a>
+</li>
+
+                        <li class="cat-item cat-item-5"><a href=" #!favorites/" title="Favorites">Favorites</a>
+</li>
+
+                        <li class="cat-item cat-item-5"><a href=" #coupons/" title="Coupons">Coupons</a>
+</li>
+
+
+                        <li class="cat-item cat-item-5"><a href=" #!menu/" title="Menu">Menu</a>
+</li>
+
+                        <li class="cat-item cat-item-5"><a href=" #!directory/" title="Directory">Directory</a>
+</li>
+
+
+			</ul>
+
+	</div> <div id="mapcontent">
+
+
+
+
+    <div id="m_nav" class="m_nav">
+   			<ul>
+   				<li> <g:Button ui:field="markSpotButton"/></li>
+   				<li>
+   					<input type="text" class="m_dd" id="mInput"/>
+   					<a href="#" id="m_placeholder" class="m_placeholder">All</a> <!-- All means "home page" -->
+   					<ul class="m_dd_sel">
+   						<!-- "this.text" - kind of template, it's needed if you will add some categories in future  -->
+   						<li><a href="#!home/" onclick="ddHolder(this.text);">All</a></li>
+   						<li><a href="#!dining/" onclick="ddHolder(this.text);">Dining</a></li>
+   						<li><a href="#drinking/" onclick="ddHolder(this.text);">Drinking</a></li>
+   						<li><a href="#!lodging/" onclick="ddHolder(this.text);">Lodging</a></li>
+   						<li><a href="#!fun/" onclick="ddHolder(this.text);">Fun</a></li>
+   					</ul>
+   				</li>
+   				<li><a href="#!contests/">Contests</a></li>
+   				<li><a href="#!driver_reports/">Drivers</a></li>
+   				<li><a href="#coupons/">Coupons</a></li>
+   				<li><a href="#!directory/">Directory</a></li>
+   				<li><a href="#!menu/">Menu</a></li>
+   			</ul>
+
+   			<div class="m_nav_sub add_group_yn" id="results_controls">
+   				<input type="text" class="m_show_tags"/>
+   				<button class="button">Show tags</button>
+   				<button class="button">Hide tags</button>
+   				<div class="m_tags">
+                       <g:ListBox ui:field="tagListBox"/>
+                         <g:ListBox ui:field="sortingListBox"/>
+   				</div>
+
+   				<label class="add_lb m_mode">
+                       <g:SimpleCheckBox ui:field="toggleMapMode"/>
+                       <span class="yes">List</span>
+   					<span class="no">Map</span>
+
+   				</label>
+
+   				<label class="add_lb">
+                       <g:SimpleCheckBox ui:field="toggleMilesCheckBox"/>
+                       <span class="yes">km</span>
+                       <span class="no">mi</span>
+
+
+   				</label>
+   		</div>
+   		</div>
+
+
+    <g:SimplePanel ui:field='messages'>
+
+    </g:SimplePanel>
+
+
+
+    <div class="heading">
+
+	</div> <!-- end .heading -->
+
+
+
+
+    <g:SimplePanel ui:field='body'>
+
+    </g:SimplePanel>
+
+		<div class="clear"></div>
+
+	</div> <!-- end #content -->
+
+<!--
+sidebar was here
+-->
+<div class="clear"></div>
+
+
+
+         <div style="display:none">
+
+
+    <div id="footer">
+
+        <div id="footer-widget-1">
+            <div id="recent-posts-3" class="widget footer-widget widget_recent_entries">
+
+
+            </div>
+        </div>
+
+        <div id="footer-widget-2">
+            <div id="tag_cloud-3" class="widget footer-widget widget_tag_cloud">
+                <h3 class="widget-title">Tags</h3>
+
+
+
+
+            </div>
+
+        </div>
+
+        <div id="footer-widget-3">
+            <div id="linkcat-2" class="widget footer-widget widget_links">
+                <h3 class="widget-title">Links</h3>
+                <ul class="xoxo blogroll">
+                    <li>
+                        <a href="#!about-us">About Us</a>
+                    </li>
+                    <li>
+                        <a href="#!contact">Contact Us</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+
+        <div id="footer-widget-4">
+            <div id="archives-3" class="widget footer-widget widget_archive">
+
+
+            </div>
+            <div id="meta-3" class="widget footer-widget widget_meta">
+
+            </div>
+        </div>
+
+        <div class="clear"></div>
+
+    </div>
+    <!--end #footer-->
+
+         </div>
+
+
+
+<div id="bottom">
+
+	<div class="left">
+        &copy; <a href="http://www.spotmouth.com" title="spotmouth" rel="home">spotmouth</a>. All rights reserved.
+	</div> <!--end .left-->
+
+	<div class="right">
+Powered by Grails, SOLR, GWT, MGWT, Factual
+	</div> <!--end .right-->
+
+	<div class="clear"></div>
+
+</div> <!--end #bottom-->
+
+
+<div class="clear"></div>
+
+</div> <!--end #wrapper-->
+
+
+
+<div  style="display: none;">
+
+
+
+
+
+</div>
+
+
+
+
+<div id="popup" class="_pop" onmousedown="hidePop()"><!-- "onmousedown" should be removed-->
+	<span class="_loader" id="loader">
+		<img src="css/preloader.gif"/>
+		<p>Loading</p>
+	</span>
+</div>
+
+
+<script>
+    <![CDATA[
+
+
+var hidePop = function(){
+	document.getElementById('popup').style.opacity = "0";
+	document.getElementById('popup').style.zIndex = "-1";
+}
+         ]]>
+</script>
+
+
+
+  </g:HTMLPanel>
+
+</ui:UiBinder>

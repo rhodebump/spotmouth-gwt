@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:xx='urn:import:com.spotmouth.gwt.client'>
+
+
+
+
+
+
+  <g:HTMLPanel>
+
+
+
+
+<div id="coupons">
+	<div id="coupons_bar">
+	<span id="coupons_eight"></span>
+	</div>
+
+
+    <xx:ULPanel ui:field="couponResultsUL"/>
+
+
+</div>
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

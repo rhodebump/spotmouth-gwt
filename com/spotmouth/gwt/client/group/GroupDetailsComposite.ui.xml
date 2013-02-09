@@ -1,0 +1,73 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:x='urn:import:com.spotmouth.gwt.client'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+        <div class="_gdp">
+
+            <g:Anchor ui:field="backToSearchResultsAnchor"> <img src="images/back.png"/></g:Anchor>
+       		<div class="gdp_content">
+       		<h1 class="gdp_name"> <span ui:field='groupNameSpan'/></h1><div class="gdp_top_btns"><g:Button ui:field="leaveGroupButton"/> <g:Button ui:field="joinGroupButton"/> </div>
+       		<p class="gdp_description">  <span ui:field='groupDescriptionSpan'/>  </p>
+       		<span class="gdp_code">
+       			<span class="gdp_code_tittle">Group Code Description</span>
+                   <span ui:field='groupCodeDescriptionSpan'/>
+       		</span>
+       		<span class="gdp_code">
+       			<span class="gdp_code_tittle">Group Code</span>
+       			<g:TextBox ui:field="groupCodeTextBox"/>
+       		</span>
+
+       		<div class="add_group_yn">
+       			<div class="add_group_check">
+       				<p>Receive SMS notifications</p>
+       				<label class="add_lb">
+       				<g:SimpleCheckBox ui:field="smsCheckBox"/>
+       				<span class="yes">yes</span>
+       				<span class="no">no</span>
+       				</label>
+       			</div>
+
+       		<div class="add_group_check">
+       				<p>Receive E-mail notifications</p>
+       				<label class="add_lb">
+       			    <g:SimpleCheckBox ui:field="emailCheckBox"/>
+       				<span class="yes">yes</span>
+       				<span class="no">no</span>
+       				</label>
+       			</div>
+
+       		<div class="add_group_check">
+       				<p>Receive Device notifications  <span class="add_gr_det">iPhone and Android</span></p>
+       				<label class="add_lb">
+                           <g:SimpleCheckBox ui:field="deviceCheckBox"/>
+       				<span class="yes">yes</span>
+       				<span class="no">no</span>
+       				</label>
+       			</div>
+
+       		</div>
+
+                   <x:ULPanel ui:field="gdpUL"/>
+          <!--
+
+       		<ul class="gdp_list">
+       			<li>This group does not allow approval to join</li>
+       			<li>This group requires membership to join</li>
+       			<li>This group is managed by it's creator. Members do not manage this group</li>
+       			<li>CSV file upload is not authorative. This means members will only be added via CSV file upload</li>
+       			<li>This group does not require users yo opt-in</li>
+       		</ul>
+       		-->
+       <div class="gdp_btns">
+           <g:Button ui:field="manageGroupButton"/>
+           <!--
+       <button class="btn_blue">Update</button>
+       -->
+       	</div></div></div>
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

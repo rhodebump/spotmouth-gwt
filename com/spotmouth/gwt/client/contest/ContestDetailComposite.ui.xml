@@ -1,0 +1,33 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:x='urn:import:com.spotmouth.gwt.client'     xmlns:mu='urn:import:gwtupload.client'
+             xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:datepicker='urn:import:com.google.gwt.user.datepicker.client'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+
+
+
+<div class="add_contest" id="add_contest">
+       	<div class="content">
+
+               <g:InlineLabel ui:field="photoSpan"/>
+
+       		<h1 class="ac_title"><span ui:field='nameSpan'/><span class="ac_stars">x&nbsp;<span ui:field='starCountSpan'/></span></h1>
+       		<h2 class="ac_title"><span ui:field='locationSpan'/><span class="ac_radius" title="Radius"><span ui:field='radiusSpan'/></span></h2>
+       		<p class="ac_description"><span ui:field='descriptionSpan'/></p>
+       		<div class="ac_date_block">
+       			<span class="ac_date ac_date_from"><img src="css/date.png"/><span ui:field='startDateSpan'/></span>
+       			<span class="ac_date ac_date_to"><img src="css/enddate.png"/><span ui:field='endDateSpan'/></span>
+       		</div>
+               <g:Button ui:field="winnersButton"/>
+               <g:Button ui:field="mostVotedButton"/>
+               <g:Button ui:field="editButton"/>
+
+
+       	</div>
+       </div>
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

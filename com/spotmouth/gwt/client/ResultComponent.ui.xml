@@ -1,0 +1,37 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:xx='urn:import:com.spotmouth.gwt.client'  xmlns:xx1='urn:import:com.spotmouth.gwt.client.common'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+        <!--
+        <input type="checkbox" class="ex_toggle"/>
+                <span class="expand"><g:Anchor ui:field="expandAnchor"/> </span>
+        <span class="expand"><span class="ex_switch">Expand</span><span class="ex_switch">Hide</span></span>
+        -->
+
+        <div class="ex_areaXX">
+            <h3>Last 5 marks</h3>
+            <xx:ULPanel ui:field="latestMarksPanel"/>
+              <div class="ex_mark">
+                  <g:TextArea ui:field="markTextArea"/>
+
+
+
+
+                  <span class="h_leave_mark">
+
+                      <g:Button ui:field="leaveMarkButton"/>
+                      <g:Button ui:field="leaveMarkFacebookButton">Share on facebook</g:Button>
+                  </span>
+
+
+
+                  <g:Button ui:field="showAdvancedButton"/>
+              </div>
+            <g:Image ui:field="userImage"/>
+        </div>
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

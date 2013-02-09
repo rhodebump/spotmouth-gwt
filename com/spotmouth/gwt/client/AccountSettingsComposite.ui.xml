@@ -1,0 +1,66 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+
+<div id="prof">
+<ul id="nav">
+<li class="pact"><a title="Account Settings" href="#account-settings"></a></li>
+<li><a title="Profile Settings" href="#profile-settings" id="prop"></a></li>
+<li><a title="Favorite Places" href="#favorites" id="pfav"></a></li>
+</ul>
+<div class="prof-content">
+<div id="accp">
+<h1>Account Settings</h1>
+<span id="kill-prof">
+    <g:Anchor ui:field="removeProfileAnchor"/>
+    <!--<a href="remove-profile.html" title="Remove Profile">x</a>
+--></span>
+<label>
+<p>Username</p>
+<!--
+<input type="text" value="Dima" class="pcheck"/>
+-->
+    <g:TextBox ui:field="usernameTextBox"/>
+</label>
+
+<label>
+<p>E-mail</p>
+    <!--
+<input type="text" value="test-email@sm.com" class="pcheck">
+        -->
+        <g:TextBox ui:field="emailAddressTextBox"/>
+</label><br/>
+
+<label>
+<p>Old Password</p>
+<g:TextBox ui:field="oldPasswordTextBox"/>
+</label>
+
+<label>
+<p>New Password</p>
+    <g:TextBox ui:field="newPasswordTextBox"/>
+</label><br/>
+
+<label>
+<p>SMS Phone Number</p>
+    <!--
+<input type="text"  value="+8 800 25 500" class="pcheck">
+-->
+    <g:TextBox ui:field="smsPhoneNumberTextBox"/>
+</label>
+<!--
+<button>Save</button>
+-->
+    <g:Button ui:field="saveAccountSettingsButton"/>
+</div>
+</div>
+</div>
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>
+

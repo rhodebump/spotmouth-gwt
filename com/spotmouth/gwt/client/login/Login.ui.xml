@@ -1,0 +1,69 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <ui:with field="myResources" type="com.spotmouth.gwt.client.icons.SpotImageResource"/>
+
+
+
+
+  <g:HTMLPanel>
+
+
+
+<a id="big-btn" href="#"></a>
+
+<div id="login">
+	<input type="radio" checked="checked" id="spl-login" name="switcher" value="simple"/>
+	<input type="radio" name="switcher" id="soc-login" value="social"/>
+	<span class="switch first">Login</span>
+	<span class="switch last">Social</span>
+	<form>
+        <g:TextBox  ui:field='usernameTextBox' />
+        <g:TextBox  ui:field='passwordTextBox' />
+        <g:TextBox  ui:field='maskedPasswordTextBox' />
+
+		<span class="check-log">
+            <!--
+            <label>
+              <input type="checkbox">
+              <span>...</span>
+            </label>
+            -->
+            <label> <g:SimpleCheckBox ui:field="rememberMeCheckbox"/><span>remember me</span></label>
+		<label><g:SimpleCheckBox ui:field="showTypingCheckbox"/><span>show typing</span></label>
+
+
+
+
+
+		</span><br/>
+        <g:Anchor ui:field="resetAnchor"></g:Anchor> <br />
+		<span class="sub-log">
+            <g:Button  ui:field='signUp' />
+            <!--
+			<input type="button" value="Sign Up"/>
+						<input type="submit" value="Log in"/>
+			-->
+            <g:Button  ui:field='loginButton' />
+
+		</span>
+	</form>
+	<div id="soc-tab">
+
+        <g:Anchor ui:field="twitterAnchor"></g:Anchor>
+
+        <g:Anchor ui:field="facebookAnchor"></g:Anchor>
+        <!--
+		<a href="#" id="fb"></a>
+				<a href="#" id="gp"></a>
+		-->
+
+        <g:Anchor ui:field="googleAnchor"></g:Anchor>
+
+	</div>
+</div>
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

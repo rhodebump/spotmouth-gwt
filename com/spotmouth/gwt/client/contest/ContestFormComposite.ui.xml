@@ -1,0 +1,175 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:x='urn:import:com.spotmouth.gwt.client'     xmlns:mu='urn:import:gwtupload.client'
+             xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:datepicker='urn:import:com.google.gwt.user.datepicker.client'
+             xmlns:slider="urn:import:com.kiouri.sliderbar.client.solution.simplehorizontal"
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+
+
+<div class="manage_contents" id="manage_contents">
+     	<div class="content">
+     		<h1 class="mc_title">Manage Contest<button class="button">Cancel</button></h1>
+
+
+             <div>
+
+                 <span id="ddselect">
+                     <mu:MultiUploader  ui:field="multiUploader"/>
+                     <p>Select New Photo</p>
+
+
+                 </span>
+                 <g:SimplePanel ui:field="imagePanel"/>
+                 <dnd:DropPanel ui:field="dropPanel"/>
+             </div>
+
+
+
+
+
+     		<div class="mc_right_bar">
+
+     			<div class="mc_icon_select" id="mc_icon_select"><span class="mc_select_name">Contest Icon</span>
+                     <g:TextBox ui:field="iconStyleTextBox"/>
+
+                     <g:Image ui:field="currentIcon"/>
+     				<span id="mc_icons" class="mc_icons">
+                         <g:Image ui:field="starImage"/>
+                         <g:Image ui:field="thumbUpImage"/>
+                         <g:Image ui:field="thumbDownImage"/>
+
+     				</span>
+     			</div>
+
+     			<div class="mc_icon_select mc_stars_select" id="mc_stars_select"><span class="mc_select_name">Stars</span>
+     				<g:TextBox ui:field="numberOfStarsTextBox"/>
+
+
+                     <g:InlineLabel ui:field='numberOfStars'>0</g:InlineLabel>
+     				<span id="mc_stars" class="mc_icons">
+     					<g:InlineLabel ui:field='numberOfStars0'>0</g:InlineLabel>
+                         <g:InlineLabel ui:field='numberOfStars3'>3</g:InlineLabel>
+                     <g:InlineLabel ui:field='numberOfStars4'>4</g:InlineLabel>
+                     <g:InlineLabel ui:field='numberOfStars5'>5</g:InlineLabel>
+                     <g:InlineLabel ui:field='numberOfStars10'>10</g:InlineLabel>
+     				</span>
+     			</div>
+
+     		</div>
+
+     		<label class="mc_name">
+
+                 <g:TextBox ui:field="contestNameTextBox" />
+                 <!--
+     			<input type="text"  onblur="inpValidate(this, this.value)" tabindex="1" placeholder="Contest Name"/>
+     			-->
+     		</label>
+
+     		<div class="mc_date">
+
+     			<label>
+                     <!--
+     				<input type="text" class="gwt-DateBox" id="startDate" tabindex="2" placeholder="Start Date"/>
+     				-->
+                     <datepicker:DateBox ui:field="startDatePicker"/>
+     			</label>
+
+     			<label>
+                     <!--
+     				<input type="text" class="gwt-DateBox" id="endDate" tabindex="3" placeholder="End date"/>
+     				-->
+                     <datepicker:DateBox ui:field="endDatePicker"/>
+     			</label>
+
+     		</div>
+
+     		<h2 class="mc_title" >Description</h2>
+
+             <g:TextArea ui:field="descriptionTextArea"/>
+             <!--
+     		<textarea class="mc_desc"  onblur="inpValidate(this, this.value)" tabindex="4" rows="4"></textarea>
+                    -->
+     		<h2 class="mc_title">Location</h2>
+
+     		<div class="mc_location" id="mc_location">
+
+                 <span class="mc_inp_loc">
+                     <g:SuggestBox ui:field="countryTextBox"/>
+                 </span>
+
+                 <span class="mc_inp_loc">
+                     <g:SuggestBox ui:field="stateTextBox"/>
+                 </span>
+
+
+                 <span class="mc_inp_loc">
+                     <g:SuggestBox ui:field="cityTextBox"/>
+                 </span>
+
+
+
+
+
+     			<ul id="mc_done" class="mc_loc_list">
+     				<button class="button" id="mc_loc_edit">edit</button>
+     			</ul>
+
+     		</div>
+
+     		<div class="mc_address" id="mc_address">
+
+     			<h2 class="mc_title">Address</h2>
+
+     			<span class="mc_inp_loc">
+                     <g:TextBox ui:field="address1TextBox"/>
+                         <!--
+     				<input type="text" placeholder="Address"  tabindex="8" onblur="inpValidate(this, this.value);mcShowRadius(this.value);"/>
+     				-->
+     			</span>
+
+                 <span class="mc_inp_loc">
+                     <g:TextBox ui:field="zipcodeTextBox"/>
+                     <!--
+     				<input type="text" placeholder="Zip Code" maxlength="6" tabindex="9" onblur="inpValidate(this, this.value);mcShowRadius(this.value);"/>
+     				-->
+     			</span>
+
+     			<ul id="mc_adrs_done" class="mc_loc_list mc_adrs_list">
+     				<button class="button" id="mc_adrs_edit">edit</button>
+     			</ul>
+     		</div>
+     		<div class="mc_radius" id="mc_radius">
+
+
+
+     			<h2 class="mc_title">Radius<span>(in miles)</span><span ui:field='radiusSpan'/> </h2>
+
+                 <slider:SliderBarSimpleHorizontal ui:field="radiusSlider"/>
+
+
+     		</div>
+     		<div class="mc_tags">
+     			<h2 class="mc_title">Tags</h2>
+     			<label id="mc_tags" class="mc_tags">
+                     <g:SuggestBox ui:field="tagSearchTextBox"/>
+
+     				<p>Maximum five tags</p>
+     			</label>
+                 <g:FlowPanel ui:field="selectedTagsPanel" />
+
+     		</div>
+     		<div class="mc_appended">
+     			<h2 class="mc_title">Applies to</h2>
+                 <g:ListBox ui:field="appliesToListBox"  />
+
+
+     		</div>
+     		<div class="mc_buttons"><g:Button ui:field="saveButton"/> </div>
+     	</div>
+     </div>
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>
