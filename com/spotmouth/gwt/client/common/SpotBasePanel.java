@@ -1660,11 +1660,25 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     protected SuggestBox initTagHolderForm(List<TagHolder> tagHolders) {
         TagSuggestOracle oracle = new TagSuggestOracle();
-        SuggestBox tagSearchTextBox = new SuggestBox(oracle);
+        FlowPanel suggestionsPanel = new FlowPanel();
+
+
+        //com.google.gwt.user.client.ui.SuggestOracle oracle, com.google.gwt.user.client.ui.TextBoxBase box, com.google.gwt.user.client.ui.SuggestBox.SuggestionDisplay suggestDisplay
+        SuggestBox tagSearchTextBox = new SuggestBox(oracle, new TextBox(),new CustomSuggestionDisplay(suggestionsPanel));
+
+
+       // tagSearchTextBox.s
+
         tagSearchTextBox.addSelectionHandler(tagSelectionHandler);
         FlowPanel selectedTagsPanel = new FlowPanel();
         selectedTagsPanel.setStyleName("ma_tags");
         widgetSelectedTagsPanelMap.put(tagSearchTextBox, selectedTagsPanel);
+
+        widgetSelectedTagsPanelMap2.put(tagSearchTextBox, suggestionsPanel);
+
+
+
+
         //why are we creating a new object of tagHolders here?
         //tagHolders = new ArrayList<TagHolder>();
         widgetTagHoldersMap.put(tagSearchTextBox, tagHolders);
@@ -1993,6 +2007,8 @@ public abstract class SpotBasePanel extends FlowPanel {
 
    protected Map<Widget, SuggestBox> widgetTagHoldersMap2 = new HashMap<Widget, SuggestBox>();
 
+
+    protected Map<Widget, FlowPanel> widgetSelectedTagsPanelMap2 = new HashMap<Widget, FlowPanel>();
 
 
     protected Map<Widget, FlowPanel> widgetSelectedTagsPanelMap = new HashMap<Widget, FlowPanel>();
@@ -2545,11 +2561,13 @@ public abstract class SpotBasePanel extends FlowPanel {
             addTagAnchor.getElement().setId("addTag");
             addTagAnchor.addClickHandler(addTagHandler);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
+            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+
             //MultiUploader multiUploader = new MultiUploader();
             //FlowPanel panelImages = new FlowPanel();
             //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
             //multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-            SmallAdvancedForm smallAdvancedForm = new SmallAdvancedForm(selectedTagsPanel, tagSearchTextBox, markData.secretKeyTextBox, multiUploader, panelImages);
+            SmallAdvancedForm smallAdvancedForm = new SmallAdvancedForm(selectedTagsPanel, tagSearchTextBox, markData.secretKeyTextBox, multiUploader, panelImages,suggestionsPanel);
             //MarkComposite markComposite = new MarkComposite(leaveMarkButton, advancedMarkData.saySomethingTextArea, multiUploader, panelImages, mywebapp,tagSearchTextBox,selectedTagsPanel,addTagAnchor);
             hideAdvancedMap.put(label, smallAdvancedForm);
             FormPanel myform = new FormPanel();
@@ -3865,10 +3883,15 @@ public abstract class SpotBasePanel extends FlowPanel {
         if (markData.tagSearchTextBox != null) {
             GWT.log("adding tag to item");
             List<TagHolder> tagHolders = widgetTagHoldersMap.get(markData.tagSearchTextBox);
-            for (TagHolder th : tagHolders) {
-                GWT.log("adding tag " + th.getName());
+            if (tagHolders != null) {
+                for (TagHolder th : tagHolders) {
+                    GWT.log("adding tag " + th.getName());
+                }
+                itemHolder.getTagHolders().addAll(tagHolders);
+
+
             }
-            itemHolder.getTagHolders().addAll(tagHolders);
+
         } else {
             GWT.log("tagSearchTextBox is null");
         }

@@ -27,6 +27,8 @@
                 -->
             <g:FlowPanel ui:field="imagesPanel"/>
             <g:FlowPanel ui:field="selectedTagsPanel"/>
+            <g:FlowPanel ui:field="suggestionsPanel"/>
+
             <!--
      			<div class="ma_tags">
      				<span class="ma_sel_tag">Tag1</span>

@@ -283,6 +283,8 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
             tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
             tagSearchTextBox.setTabIndex(11);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
+            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+
             appliesToListBox.addItem("This contest applies to...", "0");
             appliesToListBox.setStyleName("mc_select");
             appliesToListBox.addStyleName("mc_ap_sel");
@@ -325,7 +327,7 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
             }
             this.cfc = new ContestFormComposite(nameTextBox, contentTextArea, numberOfStarsTextBox, iconStyleTextBox, startDatePicker, endDatePicker,
                     countryTextBox, stateTextBox, citySuggestBox, zipcodeTextBox, address1TextBox, tagSearchTextBox, selectedTagsPanel, appliesToListBox, saveButton,
-                    sliderBarSimpleHorizontal, defaultUploader, contestImagePanel, mywebapp, contestHolder);
+                    sliderBarSimpleHorizontal, defaultUploader, contestImagePanel, mywebapp, contestHolder,suggestionsPanel);
             add(cfc);
             return;
         }

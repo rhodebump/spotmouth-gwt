@@ -112,8 +112,9 @@
 
 	<div id="md_key_input" class="btm_input_h"> <g:TextBox ui:field="secretKeyTextBox"/><g:InlineLabel ui:field="killkey"/></div>
 	<div id="md_tag_input" class="btm_input_h"><g:Button ui:field="addTagButton"/> <g:SuggestBox ui:field="tagSearchTextBox"/><g:InlineLabel ui:field="killtag"/></div>
-
+        <g:FlowPanel ui:field="suggestionsPanel"/>
         <g:FlowPanel ui:field="selectedTagsPanel"/>
+
 	<output id="md_files" class="md_files"></output>
 
         <g:FlowPanel ui:field="panelImages"/>

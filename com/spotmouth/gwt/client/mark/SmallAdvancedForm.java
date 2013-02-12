@@ -19,9 +19,9 @@ public class SmallAdvancedForm extends Composite {
 
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
-    public SmallAdvancedForm(FlowPanel selectedTagsPanel,SuggestBox tagSearchTextBox,TextBox secretKeyTextBox,MultiUploader multiUploader,FlowPanel imagesPanel) {
+    public SmallAdvancedForm(FlowPanel selectedTagsPanel,SuggestBox tagSearchTextBox,TextBox secretKeyTextBox,MultiUploader multiUploader,FlowPanel imagesPanel,FlowPanel suggestionsPanel) {
 
-       // this.shareOnFacebookCheckbox = shareOnFacebookCheckbox;
+      this.suggestionsPanel = suggestionsPanel;
         this.selectedTagsPanel = selectedTagsPanel;
         this.tagSearchTextBox = tagSearchTextBox;
         this.secretKeyTextBox = secretKeyTextBox;
@@ -40,8 +40,9 @@ public class SmallAdvancedForm extends Composite {
     @UiField(provided=true)
     final SuggestBox tagSearchTextBox;
 
-//    @UiField(provided=true)
-//    final SimpleCheckBox shareOnFacebookCheckbox;
+    @UiField(provided=true)
+    final FlowPanel suggestionsPanel;
+
 
 
 

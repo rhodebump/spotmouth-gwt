@@ -157,7 +157,7 @@
      				<p>Maximum five tags</p>
      			</label>
                  <g:FlowPanel ui:field="selectedTagsPanel" />
-
+                 <g:FlowPanel ui:field="suggestionsPanel" />
      		</div>
      		<div class="mc_appended">
      			<h2 class="mc_title">Applies to</h2>

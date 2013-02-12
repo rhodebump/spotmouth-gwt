@@ -45,14 +45,8 @@
 
 <label>
 <p>SMS Phone Number</p>
-    <!--
-<input type="text"  value="+8 800 25 500" class="pcheck">
--->
     <g:TextBox ui:field="smsPhoneNumberTextBox"/>
 </label>
-<!--
-<button>Save</button>
--->
     <g:Button ui:field="saveAccountSettingsButton"/>
 </div>
 </div>

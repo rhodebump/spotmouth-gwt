@@ -155,6 +155,11 @@ public class ContestFormComposite extends BaseComposite {
 
 
     @UiField(provided = true)
+    final FlowPanel suggestionsPanel;
+
+
+
+    @UiField(provided = true)
     final FlowPanel selectedTagsPanel;
     @UiField(provided = true)
     final ListBox appliesToListBox;
@@ -175,8 +180,9 @@ public class ContestFormComposite extends BaseComposite {
                                 SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, TextBox zipcodeTextBox, TextBox address1TextBox, SuggestBox tagSearchTextBox,
                                 FlowPanel selectedTagsPanel, ListBox appliesToListBox, Button saveButton,
                                 SliderBarSimpleHorizontal radiusSlider, MultiUploader multiUploader, final SimplePanel imagePanel,
-                                MyWebApp mywebapp, ContestHolder contestHolder) {
+                                MyWebApp mywebapp, ContestHolder contestHolder,FlowPanel suggestionsPanel) {
         super(mywebapp,imagePanel);
+        this.suggestionsPanel = suggestionsPanel;
         this.radiusSlider = radiusSlider;
         this.contestHolder = contestHolder;
         this.contestNameTextBox = contestNameTextBox;

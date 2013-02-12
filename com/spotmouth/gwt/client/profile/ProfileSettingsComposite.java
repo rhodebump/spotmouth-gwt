@@ -55,6 +55,9 @@ public class ProfileSettingsComposite extends Composite {
     final MultiUploader multiUploader;
     @UiField(provided = true)
     final FlowPanel panelImages;
+    @UiField(provided = true)
+    final FlowPanel suggestionsPanel;
+
 
     interface MyUiBinder extends UiBinder<Widget, ProfileSettingsComposite> {
     }
@@ -68,7 +71,9 @@ public class ProfileSettingsComposite extends Composite {
     public ProfileSettingsComposite(SuggestBox countryTextBox, SuggestBox cityTextBox, SuggestBox stateTextBox,
                                     TextArea aboutMeTextArea, Button saveButton, FlowPanel selectedTagsPanel, SuggestBox tagSearchTextBox, Anchor addTagAnchor,
                                     Anchor removeProfileImageAnchor, MultiUploader multiUploader, FlowPanel panelImages, final SimplePanel profileImagePanel,MyWebApp mywebapp,
-                                    ProfileSettingsPanel profileSettingsPanel) {
+                                    ProfileSettingsPanel profileSettingsPanel,FlowPanel suggestionsPanel) {
+        this.suggestionsPanel = suggestionsPanel;
+
         this.mywebapp = mywebapp;
         this.profileSettingsPanel=  profileSettingsPanel;
         this.countryTextBox = countryTextBox;

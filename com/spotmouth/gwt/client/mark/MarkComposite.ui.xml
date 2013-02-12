@@ -82,7 +82,7 @@
                     <p class="msdescription">maximum five tags</p>
                 </label>
                 <g:FlowPanel ui:field="selectedTagsPanel"/>
-
+                <g:FlowPanel ui:field="suggestionsPanel"/>
 
 
                 <span class="h_leave_mark">

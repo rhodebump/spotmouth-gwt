@@ -49,6 +49,9 @@ public class SearchFormComposite extends Composite  {
     final Button searchButton;
 
 
+    @UiField(provided = true)
+    final FlowPanel suggestionsPanel;
+
 
     @UiField(provided = true)
     final FlowPanel selectedTagsPanel;
@@ -73,7 +76,8 @@ public class SearchFormComposite extends Composite  {
                                  SuggestBox tagSearchTextBox,FlowPanel selectedTagsPanel,
                                  ListBox vehicleTypeListBox, ListBox colorsListBox,
                                  ListBox manufacturersListBox,
-                                 Button searchButton) {
+                                 Button searchButton, FlowPanel suggestionsPanel) {
+          this.suggestionsPanel = suggestionsPanel;
           this.keywordsTextBox = keywordsTextBox;
           this.geoFilterCheckbox = geoFilterCheckbox;
           this.spotFilterCheckbox = spotFilterCheckbox;

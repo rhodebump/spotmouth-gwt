@@ -100,10 +100,12 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
         selectedTagsPanel.getElement().setAttribute("id", "seltags");
 
+        FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
 
 
         ProfileSettingsComposite profileSettingsComposite = new ProfileSettingsComposite(countryTextBox, citySuggestBox,
-                stateTextBox, contentTextArea, saveButton, selectedTagsPanel, tagSearchTextBox, addTagAnchor, removeProfileImageAnchor, defaultUploader, panelImages, profileImagePanel, mywebapp,this);
+                stateTextBox, contentTextArea, saveButton, selectedTagsPanel, tagSearchTextBox, addTagAnchor,
+                removeProfileImageAnchor, defaultUploader, panelImages, profileImagePanel, mywebapp,this,suggestionsPanel);
         add(profileSettingsComposite);
     }
 

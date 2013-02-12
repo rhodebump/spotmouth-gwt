@@ -41,6 +41,10 @@ public class ChatFormComposite extends Composite {
     final FlowPanel selectedTagsPanel;
 
     @UiField(provided = true)
+    final FlowPanel suggestionsPanel;
+
+
+    @UiField(provided = true)
     final SuggestBox tagSearchTextBox;
     @UiField(provided = true)
     final Button saveButton;
@@ -61,9 +65,9 @@ public class ChatFormComposite extends Composite {
                                     SuggestBox tagSearchTextBox,
                                     FlowPanel selectedTagsPanel, Button saveButton,
                                  MultiUploader multiUploader, final SimplePanel imagePanel,
-                                    MyWebApp mywebapp,ItemHolder itemHolder) {
+                                    MyWebApp mywebapp,ItemHolder itemHolder,FlowPanel suggestionsPanel) {
 
-
+         this.suggestionsPanel = suggestionsPanel;
         this.nameTextBox = nameTextBox;
         this.descriptionTextArea = descriptionTextArea;
 //        this.startDatePicker = startDatePicker;

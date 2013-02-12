@@ -271,6 +271,9 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
 
+            FlowPanel selectedTagsPanel2 = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+
+
             selectedTagsPanel.setStyleName("selected_tags");
             TextArea saySomethingTextArea = new TextArea();
             //we are using markData1 because we are creating new form, not using the old non-advanced form
@@ -310,7 +313,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
             this.markDetailComposite = new MarkDetailComposite(mainImage, markSpotButton, viewMapButton, usernameAnchor, profileImage, markContentPanel, repliesULPanel,bigImage,
                     killPhoto,itemTagsPanel,backToSearchResultsAnchor,replyButton,cancelButton,selectedTagsPanel,tagSearchTextBox,replyMarkData.secretKeyTextBox,replyMarkData.saySomethingTextArea,
-                    saveReplyButton,multiUploader,panelImages,addTagButton,repliesH1);
+                    saveReplyButton,multiUploader,panelImages,addTagButton,repliesH1,selectedTagsPanel2);
             markDetailComposite.setMarkContent(itemHolder.getTextData());
             markDetailComposite.setFullAddress(spotHolder.getAddressLabel());
             markDetailComposite.setPhoneNumber(spotHolder.getVoicephone());

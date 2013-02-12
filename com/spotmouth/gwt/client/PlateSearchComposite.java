@@ -86,6 +86,12 @@ public class PlateSearchComposite extends Composite {
     @UiField(provided = true)
     final ULPanel pickSpotUL;
 
+
+    @UiField(provided = true)
+    final FlowPanel suggestionsPanel;
+
+
+
     public void setTab3(boolean x) {
         tab3.setValue(x);
     }
@@ -97,8 +103,10 @@ public class PlateSearchComposite extends Composite {
 
     public PlateSearchComposite(ListBox colorsListBox, TextBox plateNameTextBox, TextBox keywordsTextBox, ListBox manufacturersListBox, SuggestBox stateTextBox, ListBox vehicleTypeListBox,
                                 Button plateSearchButton, SuggestBox tagSearchTextBox, TextBox secretKeyTextBox, TextArea contentTextArea, FlowPanel selectedTagsPanel,
-                                Button leaveMarkButton, MultiUploader multiUploader, FlowPanel panelImages1, ULPanel pickSpotUL,MyWebApp mywebapp,Button shareOnFacebookButton,Button addTagButton
+                                Button leaveMarkButton, MultiUploader multiUploader, FlowPanel panelImages1, ULPanel pickSpotUL,MyWebApp mywebapp,Button shareOnFacebookButton,Button addTagButton,
+                                FlowPanel suggestionsPanel
     ) {
+        this.suggestionsPanel = suggestionsPanel;
         this.addTagButton = addTagButton;
         this.addTagButton.setStyleName("btn_blue");
         this.mywebapp = mywebapp;

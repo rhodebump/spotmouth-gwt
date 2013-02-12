@@ -132,6 +132,9 @@ public class MarkDetailComposite extends Composite {
     final MultiUploader multiUploader;
 
 
+    @UiField(provided = true)
+    final FlowPanel suggestionsPanel;
+
 
     @UiField(provided = true)
     final FlowPanel panelImages;
@@ -140,7 +143,8 @@ public class MarkDetailComposite extends Composite {
     public MarkDetailComposite(Image mainImage,Button markSpotButton,Button viewMapButton,Anchor usernameAnchor,Image profileImage,FlowPanel markContentPanel,ULPanel repliesULPanel,
                                Image bigImage,    InlineLabel killPhoto,FlowPanel itemTagsPanel,Anchor backToSearchResultsAnchor,InlineLabel replyButton,InlineLabel cancelButton,
                                FlowPanel selectedTagsPanel,SuggestBox tagSearchTextBox,TextBox secretKeyTextBox,TextArea contentTextArea,Button saveReplyButton,MultiUploader multiUploader,FlowPanel panelImages,
-                               Button addTagButton, H1 repliesH1) {
+                               Button addTagButton, H1 repliesH1,FlowPanel suggestionsPanel) {
+        this.suggestionsPanel =  suggestionsPanel;
         this.repliesH1 = repliesH1;
         this.tagSearchTextBox = tagSearchTextBox;
         this.secretKeyTextBox = secretKeyTextBox;

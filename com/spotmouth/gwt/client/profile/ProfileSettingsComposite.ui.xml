@@ -87,7 +87,7 @@
       <div id="seltags"></div>
                 -->
           <gwt:FlowPanel ui:field="selectedTagsPanel"/>
-
+          <gwt:FlowPanel ui:field="suggestionsPanel"/>
 
       <h3 id="tag-status">No tags selected yet </h3>
       </label>

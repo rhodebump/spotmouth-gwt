@@ -24,7 +24,7 @@
 
         	<h2 class="sp_title">Tags</h2>
         	<label class="sp_inp">   <g:SuggestBox ui:field="tagSearchTextBox"/></label>
-        	<span class="sp_sel_tags">      <g:FlowPanel ui:field="selectedTagsPanel" /></span>
+        	<span class="sp_sel_tags">      <g:FlowPanel ui:field="selectedTagsPanel" /></span>  <g:FlowPanel ui:field="suggestionsPanel" /></span>
         	<fieldset class="sp_sel_area">
         		<label class="sp_sel">
         			<h2 class="sp_title">Color</h2>

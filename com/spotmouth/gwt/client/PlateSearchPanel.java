@@ -61,6 +61,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             ULPanel pickSpotListBox = getPickSpotULPanel();
 
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
+            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
 
             Button shareOnFacebookButton =   getFacebookButton(markData);
 
@@ -75,7 +76,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
 
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox,plateNameTextBox,keywordsTextBox,manufacturersListBox,stateTextBox,
                     vehicleTypeListBox,plateSearchButton,markData.tagSearchTextBox , markData.secretKeyTextBox,markData.saySomethingTextArea,
-                    selectedTagsPanel,leaveMarkButton,multiUploader,panelImages3,pickSpotListBox,mywebapp,shareOnFacebookButton,addTagButton);
+                    selectedTagsPanel,leaveMarkButton,multiUploader,panelImages3,pickSpotListBox,mywebapp,shareOnFacebookButton,addTagButton,suggestionsPanel);
             plateSearchComposite.tab1.setValue(true);
             add(plateSearchComposite);
 

@@ -108,8 +108,11 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
 
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
+            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+
+
             MarkComposite markComposite = new MarkComposite(leaveMarkButton,contentTextArea,multiUploader,panelImages,mywebapp,markData.tagSearchTextBox,selectedTagsPanel,
-                    addTagButton,markData.secretKeyTextBox,shareOnFacebookButton);
+                    addTagButton,markData.secretKeyTextBox,shareOnFacebookButton,suggestionsPanel);
             markComposite.setLocationName(spotHolder.getName());
             markComposite.setFullAddress(spotHolder.getAddressLabel());
             markComposite.setPhoneNumber(spotHolder.getVoicephone());

@@ -87,6 +87,9 @@ public class MarkComposite extends Composite {
 
     @UiField(provided = true)
     final FlowPanel selectedTagsPanel;
+    @UiField(provided = true)
+    final FlowPanel suggestionsPanel;
+
 
 
     @UiField(provided = true)
@@ -124,7 +127,9 @@ public class MarkComposite extends Composite {
 
 
     public MarkComposite(Button leaveMarkButton,TextArea contentTextArea,MultiUploader multiUploader,FlowPanel panelImages1,MyWebApp mywebapp,SuggestBox tagSearchTextBox,FlowPanel selectedTagsPanel,Button addTagButton,
-                         TextBox secretKeyTextBox, Button shareOnFacebookButton) {
+                         TextBox secretKeyTextBox, Button shareOnFacebookButton,FlowPanel suggestionsPanel) {
+        this.suggestionsPanel = suggestionsPanel;
+
         this.leaveMarkButton = leaveMarkButton;
         this.contentTextArea  = contentTextArea;
         this.multiUploader = multiUploader;

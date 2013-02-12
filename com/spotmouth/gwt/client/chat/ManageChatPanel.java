@@ -186,6 +186,7 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
             tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
             //tagSearchTextBox.setTabIndex(11);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
+            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
 
             Button saveButton = saveButton();
 
@@ -200,7 +201,7 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
             }
             this.cfc = new ChatFormComposite(nameTextBox, contentTextArea, startDatePicker, endDatePicker,
                  tagSearchTextBox, selectedTagsPanel, saveButton,
-                     defaultUploader, chatImagePanel, mywebapp, itemHolder);
+                     defaultUploader, chatImagePanel, mywebapp, itemHolder,suggestionsPanel);
             add(cfc);
         }
 

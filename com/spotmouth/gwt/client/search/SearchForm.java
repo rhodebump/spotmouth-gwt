@@ -63,13 +63,16 @@ public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
             tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
             // tagSearchTextBox.setTabIndex(11);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
+
+            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+
             initVehicleType("");
             initColorListBox("");
             initManufacturersListBox(null);
 
 
             SearchFormComposite sfc = new SearchFormComposite(keywordsTextBox, geoFilterCheckbox, spotFilterCheckbox, plateFilterCheckbox,
-                    markFilterCheckbox, contestFilterCheckbox, tagSearchTextBox, selectedTagsPanel, vehicleTypeListBox,colorsListBox, manufacturersListBox,searchButton);
+                    markFilterCheckbox, contestFilterCheckbox, tagSearchTextBox, selectedTagsPanel, vehicleTypeListBox,colorsListBox, manufacturersListBox,searchButton,suggestionsPanel);
             add(sfc);
             return;
         }

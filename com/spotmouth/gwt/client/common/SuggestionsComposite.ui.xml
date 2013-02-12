@@ -1,0 +1,44 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:sm="urn:import:com.spotmouth.gwt.client"
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <g:HTMLPanel>
+
+        <div class="gwt-SuggestBoxPopup">
+        	<div id="pop_tag">
+                  <sm:ULPanel ui:field="popTagList"/>
+                <!--
+        <ul class="pop_tag_list" id="pop_tag_list">
+        	<li>Item</li>
+        	<li>Item</li>
+        	<li>Item</li>
+        	<li>Item</li>
+        	<li>Item</li>
+        	<li>Item</li>
+        	<li>Item</li>
+        	<li>Item</li>
+        	<li>Item</li>
+        	<li>Item</li>
+        </ul>
+
+        -->
+
+        </div>
+
+        </div>
+
+        <script>
+            <![CDATA[
+        //scroll bar
+
+        fleXenv.fleXcrollMain('pop_tag'); // init scroll bar
+      ]]>
+
+        </script>
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>
+
