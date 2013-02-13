@@ -18,8 +18,8 @@
 
      			<span class="ma_add_file"><mu:MultiUploader ui:field="multiUploader"/><img src="css/at_icn.png"/></span>
      			<span class="ma_inputs">
-     				<label class="ma_add_key">  <g:TextBox ui:field="secretKeyTextBox"/><br/><span class="ma_inp_det">Secret Key</span></label>
-     				<label class="ma_add_tag">  <g:SuggestBox ui:field="tagSearchTextBox"/><br/> <span class="ma_inp_det">Select Tags</span></label>
+     				<label class="ma_add_key">  <g:TextBox ui:field="secretKeyTextBox"/><span class="ma_inp_det">Secret Key</span></label>
+     				<label class="ma_add_tag">  <g:SuggestBox ui:field="tagSearchTextBox"/><span class="ma_inp_det">Select Tags</span></label>
      			</span>
             <!--
      			<div class="ma_files">
