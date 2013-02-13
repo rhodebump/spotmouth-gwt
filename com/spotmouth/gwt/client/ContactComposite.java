@@ -22,7 +22,7 @@ public class ContactComposite  extends Composite {
 
 
     @UiField(provided=true)
-    final TextBox yourNameTextBox;
+    final TextField yourNameTextBox;
     @UiField(provided=true)
     final TextField email;
 
@@ -35,7 +35,7 @@ public class ContactComposite  extends Composite {
 
 
 
-    public ContactComposite(TextBox yourNameTextBox,TextField email, TextBox messageSubject,Button sendButton,TextArea contentTextArea   ) {
+    public ContactComposite(TextField yourNameTextBox,TextField email, TextBox messageSubject,Button sendButton,TextArea contentTextArea   ) {
         this.yourNameTextBox = yourNameTextBox;
         this.email = email;
         this.messageSubject = messageSubject;

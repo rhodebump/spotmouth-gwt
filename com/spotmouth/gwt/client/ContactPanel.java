@@ -44,7 +44,7 @@ public class ContactPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     TextBox messageSubject = new TextBox();
-    TextBox yourName = new TextBox();
+    TextField yourName = new TextField();
     TextField email = new TextField();
 
     public ContactPanel(MyWebApp mywebapp) {

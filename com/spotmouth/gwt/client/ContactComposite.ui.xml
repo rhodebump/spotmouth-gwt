@@ -1,5 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 
@@ -16,7 +17,7 @@
     <!--
 <input type="text" required>
 -->
-    <g:TextBox ui:field="yourNameTextBox"/>
+    <smc:TextField required="true" ui:field="yourNameTextBox"/>
 </label>
 
 <label>
@@ -24,7 +25,7 @@
     <!--
 <input type="email" placeholder="example@mail.com" required>
 -->
-    <g:TextBox type="email" placeholder="example@mail.com" required="true" ui:field="email"/> </label>
+    <smc:TextField type="email" placeholder="example@mail.com" required="true" ui:field="email"/> </label>
 
 <label>
 <p>Message Subject</p>
