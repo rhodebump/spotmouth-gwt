@@ -12,6 +12,7 @@ import com.spotmouth.gwt.client.dto.ContestHolder;
 import com.spotmouth.gwt.client.dto.ItemHolder;
 import gwtupload.client.MultiUploader;
 import org.vectomatic.dnd.DropPanel;
+import com.spotmouth.gwt.client.common.TextField;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,7 +30,7 @@ public class ChatFormComposite extends Composite {
 
 
     @UiField(provided = true)
-    final TextBox nameTextBox;
+    final TextField nameTextBox;
     @UiField(provided = true)
     final TextArea descriptionTextArea;
 //    @UiField(provided = true)
@@ -61,7 +62,7 @@ public class ChatFormComposite extends Composite {
     private ItemHolder itemHolder = null;
 
 
-    public ChatFormComposite(TextBox nameTextBox, TextArea descriptionTextArea,  DateBox startDatePicker, DateBox endDatePicker,
+    public ChatFormComposite(TextField nameTextBox, TextArea descriptionTextArea,  DateBox startDatePicker, DateBox endDatePicker,
                                     SuggestBox tagSearchTextBox,
                                     FlowPanel selectedTagsPanel, Button saveButton,
                                  MultiUploader multiUploader, final SimplePanel imagePanel,
