@@ -60,7 +60,7 @@
 
      		<label class="mc_name">
 
-                 <g:TextBox ui:field="contestNameTextBox" />
+                 <g:TextBox ui:field="contestNameTextBox" placeholder="Contest Name" />
                  <!--
      			<input type="text"  onblur="inpValidate(this, this.value)" tabindex="1" placeholder="Contest Name"/>
      			-->

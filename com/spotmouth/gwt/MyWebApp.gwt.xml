@@ -12,6 +12,8 @@
     <inherits name='com.googlecode.gwtphonegap.PhoneGap' />
 
 
+    <inherits name='com.google.gwt.modernizr.Gwtmodernizr'/>
+
     <inherits name='com.google.gwt.user.theme.standard.Standard'/>
 
     <inherits name="gdurelle.tagcloud.TagCloud"/>

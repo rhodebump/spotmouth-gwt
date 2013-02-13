@@ -16,6 +16,7 @@ import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.friends.ManageFriendPanel;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
@@ -210,9 +211,7 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
             //     			<button class="btn_blue">Save</button>
             Button saveButton = saveButton();
             Button cancelButton = cancelButton();
-            groupNameTextBox = new TextBox();
-            groupNameTextBox.getElement().setAttribute("placeholder", "Group Name...");
-            // <input type="text" placeholder="Group Name...">
+            groupNameTextBox = new TextField();
             availableULPanel.setStyleName("vug_f_list");
             availableULPanel.getElement().setId("f_list_c");
             membersULPanel.getElement().setId("f_sel_list");
@@ -267,7 +266,7 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
             }
         }
     };
-    private TextBox groupNameTextBox = new TextBox();
+    private TextField groupNameTextBox = new TextField();
 
     public void toggleFirst() {
         groupNameTextBox.setFocus(true);

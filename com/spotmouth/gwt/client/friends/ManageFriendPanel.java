@@ -14,6 +14,7 @@ import com.spotmouth.gwt.client.SpotLabel;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.Fieldset;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.FriendHolder;
 import com.spotmouth.gwt.client.dto.FriendRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
@@ -68,17 +69,17 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         if (MyWebApp.isDesktop()) {
             //	<input type="text" placeholder="Enter your friend's e-mail" required="true" tabindex="3"/>
 
-            emailTextBox = new TextBox();
-            emailTextBox.getElement().setAttribute("placeholder","Enter your friend's e-mail");
-            emailTextBox.getElement().setAttribute("required","required");
+            emailTextBox = new TextField();
+//            emailTextBox.getElement().setAttribute("placeholder","Enter your friend's e-mail");
+//            emailTextBox.getElement().setAttribute("required","required");
 
             emailTextBox.setTabIndex(3);
           //  emailTextBox.getElement().setAttribute("placeholder","Enter your friend's e-mail");
 
             //	<input type="text" placeholder="Enter your friend's phone number" required="true" tabindex="3"/>
 
-            smsPhoneNumberBox.getElement().setAttribute("placeholder","Enter your friend's phone number");
-            smsPhoneNumberBox.getElement().setAttribute("required","required");
+           // smsPhoneNumberBox.getElement().setAttribute("placeholder","Enter your friend's phone number");
+         //   smsPhoneNumberBox.getElement().setAttribute("required","required");
 
             smsPhoneNumberBox.setTabIndex(3);
 
@@ -93,7 +94,7 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
 
             //<input type="text" placeholder="Enter your friend's name" tabindex="1"/>
 
-            friendNameTextBox.getElement().setAttribute("placeholder","Enter your friend's name");
+            //friendNameTextBox.getElement().setAttribute("placeholder","Enter your friend's name");
 
             friendNameTextBox.setTabIndex(1);
             FriendFormComposite ffc = new FriendFormComposite(emailTextBox,smsPhoneNumberBox,inviteFriendButton,friendNameTextBox,friendJoinMessageTextArea);
@@ -169,8 +170,8 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         }
     };
     //private TextBox emailAddressTextBox = new TextBox();
-    private TextBox smsPhoneNumberBox = new TextBox();
-    private TextBox friendNameTextBox = new TextBox();
+    private TextField smsPhoneNumberBox = new TextField();
+    private TextField friendNameTextBox = new TextField();
 
     private TextArea friendJoinMessageTextArea = new TextArea();
 

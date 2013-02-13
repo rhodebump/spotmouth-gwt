@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.spotmouth.gwt.client.common.Fieldset;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.UserHolder;
 import com.spotmouth.gwt.client.dto.UserRequest;
@@ -180,7 +181,7 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         addRequired(usernameTextBox);
         usernameTextBox.setValue(user.getUsername());
         usernameTextBox.setReadOnly(true);
-        emailTextBox = new TextBox();
+        emailTextBox = new TextField();
         emailTextBox.setValue(user.getEmailAddress());
 
 

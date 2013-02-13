@@ -22,6 +22,8 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.Timer;
 import com.spotmouth.gwt.client.login.*;
+import com.spotmouth.gwt.client.common.TextField;
+
 //import com.gwtfb.client.Callback;
 //import com.gwtfb.sdk.FBEvent;
 
@@ -56,9 +58,9 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
 
     //    public FBCore fbCore = GWT.create(FBCore.class);
 //    public FBEvent fbEvent = GWT.create(FBEvent.class);
-    private TextBox usernameTextBox = new TextBox();
+    private TextField usernameTextBox = new TextField();
     //clear text password
-    private TextBox passwordTextBox = new TextBox();
+    private TextField passwordTextBox = new TextField();
     //masking text password
     private PasswordTextBox maskedPasswordTextBox = new PasswordTextBox();
     private Fieldset clearTextFieldset = null;
@@ -112,17 +114,7 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
         super(mywebapp, false, false, true);
         //MyWebApp mywebapp, boolean displayTopPanel,boolean displayHelp,boolean newStyle
         if (MyWebApp.isDesktop()) {
-            //newForm();
-            //usernameTextBox
-            //    //placeholder="E-mail..."  type="email" required="required"
-            DOM.setElementAttribute(usernameTextBox.getElement(), "type", "email");
-            DOM.setElementAttribute(usernameTextBox.getElement(), "placeholder", "E-mail...");
-            DOM.setElementAttribute(usernameTextBox.getElement(), "required", "required");
-            //		<input type="password" required="required" placeholder="Password..."/>
-            // DOM.setElementAttribute(passwordTextBox.getElement(), "type", "password");
-            DOM.setElementAttribute(passwordTextBox.getElement(), "placeholder", "Password...");
-            addRequired(passwordTextBox);
-            //  DOM.setElementAttribute(passwordTextBox.getElement(), "required", "required");
+            //DOM.setElementAttribute(usernameTextBox.getElement(), "type", "email");
             DOM.setElementAttribute(maskedPasswordTextBox.getElement(), "placeholder", "Password...");
             addRequired(maskedPasswordTextBox);
             Button signUp = new Button("Sign Up");
@@ -182,6 +174,8 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
                     }
                 }
             });
+            makeNoMessing(usernameTextBox);
+            makeNoMessing(passwordTextBox);
             Login login = new Login(usernameTextBox, passwordTextBox, maskedPasswordTextBox, signUp, loginButton, showTypingCheckbox, rememberMeCheckbox, facebookAnchor, resetAnchor, googleAnchor, twitterAnchor);
             add(login);
         } else {

@@ -16,6 +16,7 @@ import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHori
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.contest.ViewContestPanel;
 import com.spotmouth.gwt.client.dto.ContestHolder;
 import com.spotmouth.gwt.client.dto.ContestRequest;
@@ -134,9 +135,9 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
         super(mywebapp, false, true, false);
        setItemHolder(itemHolder);
         if (MyWebApp.isDesktop()) {
-            nameTextBox = new TextBox();
+            nameTextBox = new TextField();
             nameTextBox.setTabIndex(1);
-            nameTextBox.getElement().setAttribute("placeholder", "Chat Name");
+           // nameTextBox.getElement().setAttribute("placeholder", "Chat Name");
             nameTextBox.setValue(itemHolder.getTitle());
 
             contentTextArea = new TextArea();
@@ -151,36 +152,6 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
             endDatePicker.setTabIndex(3);
             endDatePicker.getElement().setAttribute("placeholder", "End Date");
 
-//            countryTextBox = getCountrySuggestBox(contestHolder.getCountryCode());
-//            countryTextBox.getElement().setId("mc_sel_country");
-//            countryTextBox.setStyleName("mc_select");
-//            countryTextBox.setTabIndex(5);
-//            stateTextBox = getStateSuggestBox(contestHolder.getState());
-//            stateTextBox.getElement().setId("mc_sel_state");
-//            stateTextBox.setStyleName("mc_select");
-//            stateTextBox.setTabIndex(6);
-//            //only show stateTextBox if there is country set
-//            countryTextBox.addValueChangeHandler(vch);
-//            stateTextBox.addValueChangeHandler(vch);
-//            citySuggestBox = getCitySuggestBox(contestHolder.getCity());
-//            citySuggestBox.getElement().setId("mc_sel_city");
-//            citySuggestBox.setStyleName("mc_select");
-//            citySuggestBox.setTabIndex(7);
-//            citySuggestBox.addValueChangeHandler(vch);
-//            //		<input type="text" placeholder="Zip Code" maxlength="6" tabindex="9" onblur="inpValidate(this, this.value);mcShowRadius(this.value);"/>
-//            zipcodeTextBox = new TextBox();
-//            zipcodeTextBox.getElement().setAttribute("placeholder", "Zip Code");
-//            zipcodeTextBox.setTabIndex(9);
-//            zipcodeTextBox.setMaxLength(6);
-//            zipcodeTextBox.setValue(contestHolder.getZip());
-//            zipcodeTextBox.addValueChangeHandler(vch);
-//            //	<input type="text" placeholder="Address"  tabindex="8" onblur="inpValidate(this, this.value);mcShowRadius(this.value);"/>
-//            address1TextBox = new TextBox();
-//            address1TextBox.getElement().setAttribute("placeholder", "Address");
-//            address1TextBox.setTabIndex(8);
-//            address1TextBox.addValueChangeHandler(vch);
-//            address1TextBox.setValue(contestHolder.getAddressLine1());
-            //tagHolders.addAll(contestHolder.getTagHolders());
             SuggestBox tagSearchTextBox = getTagSuggestBox(itemHolder.getTagHolders());
             tagSearchTextBox.getElement().setId("mc_tags_inp");
             tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");

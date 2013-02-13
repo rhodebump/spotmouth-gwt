@@ -1475,7 +1475,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         mywebapp.getResultsPanel().setImageResources(resources.search(), resources.searchMobile());
     }
 
-    protected TextBox keywordsTextBox = new TextBox();
+    protected TextField keywordsTextBox = new TextField();
 
     /*
     the following addHelp and addTopPanel are used to add
@@ -1510,7 +1510,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         //flowPanel.setStyleName("topsearch");
         Fieldset fs = new Fieldset();
         fs.addStyleName("globalsearch");
-        keywordsTextBox = new TextBox();
+        keywordsTextBox = new TextField();
         final String text = "Find People, Places, and Stuff";
         keywordsTextBox.setText(text);
         //hp.getFlexCellFormatter().setColSpan(0, 1, 2);
@@ -1797,8 +1797,8 @@ public abstract class SpotBasePanel extends FlowPanel {
     }
     //spotreadonly
 
-    protected TextBox addTextBoxNoMessing(String labelText, String name, String value) {
-        TextBox textbox = addTextBox(labelText, name, value, false);
+    protected TextField addTextBoxNoMessing(String labelText, String name, String value) {
+        TextField textbox = addTextBox(labelText, name, value, false);
         makeNoMessing(textbox);
         return textbox;
     }
@@ -1809,16 +1809,16 @@ public abstract class SpotBasePanel extends FlowPanel {
         textBox.getElement().setAttribute("autocomplete", "off");
     }
 
-    protected TextBox addTextBox(String labelText, String name, String value) {
+    protected TextField addTextBox(String labelText, String name, String value) {
         return addTextBox(labelText, name, value, false);
     }
 
-    protected TextBox addTextBox(String labelText, String name, String value, boolean spotreadonly) {
+    protected TextField addTextBox(String labelText, String name, String value, boolean spotreadonly) {
         return addTextBox(labelText, name, value, spotreadonly, this);
     }
 
-    protected TextBox addTextBox(String labelText, String name, String value, boolean spotreadonly, Panel panel) {
-        TextBox textBox = new TextBox();
+    protected TextField addTextBox(String labelText, String name, String value, boolean spotreadonly, Panel panel) {
+        TextField textBox = new TextField();
         textBox.setName(name);
         textBox.setValue(value);
         textBox.setReadOnly(spotreadonly);
@@ -4731,7 +4731,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     protected SuggestBox countryTextBox = null;
     public SuggestBox stateTextBox = null;
     protected TextBox zipcodeTextBox = null;
-    protected TextBox emailTextBox = null;
+    protected TextField emailTextBox = null;
     protected TextBox websiteTextBox = null;
     protected TextBox titleTextBox = null;
     protected TextBox factualIdTextBox = null;

@@ -33,8 +33,6 @@ public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
     public SearchForm(MyWebApp mywebapp) {
         super(mywebapp, false);
         if (MyWebApp.isDesktop()) {
-            //	<input type="text" placeholder="Keywords" autofocus>
-            keywordsTextBox.getElement().setAttribute("placeholder", "Keywords");
             keywordsTextBox.addKeyDownHandler(new KeyDownHandler() {
                 @Override
                 public void onKeyDown(KeyDownEvent event) {
@@ -43,7 +41,6 @@ public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
                     }
                 }
             });
-            // <input type="checkbox" name="filtering"/>
             geoFilterCheckbox = new SimpleCheckBox();
             geoFilterCheckbox.setName("filtering");
             spotFilterCheckbox = new SimpleCheckBox();

@@ -24,7 +24,7 @@
     <!--
 <input type="email" placeholder="example@mail.com" required>
 -->
-    <g:TextBox ui:field="email"/> </label>
+    <g:TextBox type="email" placeholder="example@mail.com" required="true" ui:field="email"/> </label>
 
 <label>
 <p>Message Subject</p>

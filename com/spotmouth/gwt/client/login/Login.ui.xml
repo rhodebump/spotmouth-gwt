@@ -1,5 +1,5 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:sm='urn:import:com.spotmouth.gwt.client.common'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
     <ui:with field="myResources" type="com.spotmouth.gwt.client.icons.SpotImageResource"/>
@@ -19,8 +19,8 @@
 	<span class="switch first">Login</span>
 	<span class="switch last">Social</span>
 	<form>
-        <g:TextBox  ui:field='usernameTextBox' />
-        <g:TextBox  ui:field='passwordTextBox' />
+        <sm:TextField  placeholder="Username..." required="true" ui:field='usernameTextBox' />
+        <sm:TextField  placeholder="Password..." required="true" ui:field='passwordTextBox' />
         <g:TextBox  ui:field='maskedPasswordTextBox' />
 
 		<span class="check-log">

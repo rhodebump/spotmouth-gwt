@@ -10,6 +10,7 @@ import com.spotmouth.gwt.client.dto.ContactRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
+import com.spotmouth.gwt.client.common.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -44,7 +45,7 @@ public class ContactPanel extends SpotBasePanel implements SpotMouthPanel {
 
     TextBox messageSubject = new TextBox();
     TextBox yourName = new TextBox();
-    TextBox email = new TextBox();
+    TextField email = new TextField();
 
     public ContactPanel(MyWebApp mywebapp) {
         super(mywebapp);
@@ -53,8 +54,8 @@ public class ContactPanel extends SpotBasePanel implements SpotMouthPanel {
             addRequired(yourName);
 
             //placeholder="example@mail.com"
-            addRequired(email);
-            email.getElement().setAttribute("placeholder","example@mail.com");
+            //addRequired(email);
+           // email.getElement().setAttribute("placeholder","example@mail.com");
 
             Button sendButton = new Button("send");
             sendButton.addClickHandler(saveHandler);

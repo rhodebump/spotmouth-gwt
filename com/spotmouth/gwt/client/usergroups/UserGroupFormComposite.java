@@ -10,6 +10,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.common.TextField;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,7 +41,7 @@ public class UserGroupFormComposite extends Composite {
     @UiField(provided = true)
     final ULPanel membersULPanel;
     @UiField(provided = true)
-    final TextBox groupNameTextBox;
+    final TextField groupNameTextBox;
     @UiField(provided = true)
     final ULPanel availableULPanel;
 
@@ -49,7 +50,7 @@ public class UserGroupFormComposite extends Composite {
 
 
     public UserGroupFormComposite(Button saveButton,
-                                  Button cancelButton, TextBox groupNameTextBox, ULPanel membersULPanel, ULPanel availableULPanel,Button inviteButton) {
+                                  Button cancelButton, TextField groupNameTextBox, ULPanel membersULPanel, ULPanel availableULPanel,Button inviteButton) {
         this.saveButton = saveButton;
         this.cancelButton = cancelButton;
         this.membersULPanel = membersULPanel;

@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client;
 
+import com.spotmouth.gwt.client.common.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -23,7 +24,7 @@ public class ContactComposite  extends Composite {
     @UiField(provided=true)
     final TextBox yourNameTextBox;
     @UiField(provided=true)
-    final TextBox email;
+    final TextField email;
 
     @UiField(provided=true)
     final TextBox messageSubject;
@@ -34,7 +35,7 @@ public class ContactComposite  extends Composite {
 
 
 
-    public ContactComposite(TextBox yourNameTextBox,TextBox email, TextBox messageSubject,Button sendButton,TextArea contentTextArea   ) {
+    public ContactComposite(TextBox yourNameTextBox,TextField email, TextBox messageSubject,Button sendButton,TextArea contentTextArea   ) {
         this.yourNameTextBox = yourNameTextBox;
         this.email = email;
         this.messageSubject = messageSubject;

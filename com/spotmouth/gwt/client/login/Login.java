@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client.login;
 
+import  com.spotmouth.gwt.client.common.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
@@ -24,10 +25,10 @@ public class Login extends Composite {
     //placeholder="E-mail..."  type="email" required="required"
 
     @UiField(provided=true)
-    final TextBox usernameTextBox;
+    final TextField usernameTextBox;
 
     @UiField(provided=true)
-    final TextBox passwordTextBox;
+    final TextField passwordTextBox;
 
 
     @UiField(provided=true)
@@ -65,7 +66,7 @@ public class Login extends Composite {
     //<input type="submit" value="Log in"/>
 
 
-    public Login( TextBox usernameTextBox, TextBox passwordTextBox,PasswordTextBox maskedPasswordTextBox, Button signUp,Button loginButton,SimpleCheckBox showTypingCheckbox,
+    public Login( TextField usernameTextBox, TextField passwordTextBox,PasswordTextBox maskedPasswordTextBox, Button signUp,Button loginButton,SimpleCheckBox showTypingCheckbox,
                   SimpleCheckBox rememberMeCheckbox,Anchor facebookAnchor,Anchor resetAnchor,Anchor googleAnchor,Anchor twitterAnchor) {
         this.usernameTextBox = usernameTextBox;
         this.passwordTextBox = passwordTextBox;

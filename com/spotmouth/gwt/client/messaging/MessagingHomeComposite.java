@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.dto.ItemHolder;
+import com.spotmouth.gwt.client.common.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -65,7 +66,7 @@ public class MessagingHomeComposite  extends Composite {
 
 
     @UiField(provided=true)
-    final TextBox messageSearchTextBox;
+    final TextField messageSearchTextBox;
 
     @UiField(provided=true)
     final Button searchButton;
@@ -76,7 +77,7 @@ public class MessagingHomeComposite  extends Composite {
     private MessagingPanel messagingPanel = null;
     private MyWebApp mywebapp = null;
 
-    public MessagingHomeComposite(MyWebApp mywebapp,ULPanel inUL,ULPanel sentUL,ULPanel draftUL,MessageComposite messageComposite,MessagingPanel messagingPanel,TextBox messageSearchTextBox,Button searchButton,ULPanel resultsUL) {
+    public MessagingHomeComposite(MyWebApp mywebapp,ULPanel inUL,ULPanel sentUL,ULPanel draftUL,MessageComposite messageComposite,MessagingPanel messagingPanel,TextField messageSearchTextBox,Button searchButton,ULPanel resultsUL) {
         this.inUL = inUL;
         this.mywebapp = mywebapp;
         this.sentUL = sentUL;

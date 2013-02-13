@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.IUploadStatus;
@@ -225,9 +226,9 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
         super(mywebapp, false, true, false);
         this.contestHolder = contestHolder;
         if (MyWebApp.isDesktop()) {
-            nameTextBox = new TextBox();
+            nameTextBox = new TextField();
             nameTextBox.setTabIndex(1);
-            nameTextBox.getElement().setAttribute("placeholder", "Contest Name");
+           // nameTextBox.getElement().setAttribute("placeholder", "Contest Name");
             nameTextBox.setValue(contestHolder.getName());
             nameTextBox.addValueChangeHandler(vch);
             //   		<textarea class="mc_desc"  onblur="inpValidate(this, this.value)" tabindex="4" rows="4"></textarea>

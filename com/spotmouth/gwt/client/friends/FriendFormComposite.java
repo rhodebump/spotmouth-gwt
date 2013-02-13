@@ -11,6 +11,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.common.TextField;
 
 
 /**
@@ -28,22 +29,22 @@ public class FriendFormComposite extends Composite {
 
 
     @UiField(provided = true)
-    final TextBox emailAddressTextBox;
+    final TextField emailAddressTextBox;
 
     @UiField(provided = true)
-    final TextBox smsPhoneNumberBox;
+    final TextField smsPhoneNumberBox;
 
     @UiField(provided = true)
     final Button inviteFriendButton;
 
     @UiField(provided = true)
-    final TextBox friendNameTextBox;
+    final TextField friendNameTextBox;
 
     @UiField(provided = true)
     final TextArea friendJoinMessageTextArea;
 
 
-    public FriendFormComposite( TextBox emailAddressTextBox,TextBox smsPhoneNumberBox,Button inviteFriendButton,TextBox friendNameTextBox,TextArea friendJoinMessageTextArea) {
+    public FriendFormComposite( TextField emailAddressTextBox,TextField smsPhoneNumberBox,Button inviteFriendButton,TextField friendNameTextBox,TextArea friendJoinMessageTextArea) {
 
         this.emailAddressTextBox = emailAddressTextBox;
 

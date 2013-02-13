@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.common.TextField;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +23,7 @@ public class SearchFormComposite extends Composite  {
 
 
     @UiField(provided = true)
-    final TextBox keywordsTextBox;
+    final TextField keywordsTextBox;
 
 
     @UiField(provided = true)
@@ -71,7 +72,7 @@ public class SearchFormComposite extends Composite  {
 
 
 
-      public SearchFormComposite(TextBox keywordsTextBox,SimpleCheckBox geoFilterCheckbox,SimpleCheckBox spotFilterCheckbox,
+      public SearchFormComposite(TextField keywordsTextBox,SimpleCheckBox geoFilterCheckbox,SimpleCheckBox spotFilterCheckbox,
                                  SimpleCheckBox plateFilterCheckbox,SimpleCheckBox markFilterCheckbox,SimpleCheckBox contestsFilterCheckbox,
                                  SuggestBox tagSearchTextBox,FlowPanel selectedTagsPanel,
                                  ListBox vehicleTypeListBox, ListBox colorsListBox,

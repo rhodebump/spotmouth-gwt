@@ -115,7 +115,7 @@ public class MessagingPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     private ULPanel addAddressesUL = new ULPanel();
-    private TextBox messageSearchTextBox = new TextBox();
+    private TextField messageSearchTextBox = new TextField();
 
     protected ClickHandler searchMessagesHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -245,7 +245,7 @@ public class MessagingPanel extends SpotBasePanel implements SpotMouthPanel {
 
             mpFriendsList.setStyleName("mp_friends_list");
             MessageComposite messageComposite = new MessageComposite(addAddressesUL, mpFriendsList, this,contentTextArea);
-            messageSearchTextBox.getElement().setAttribute("placeholder","Find Message");
+
 
             Button searchButton= new Button();
              searchButton.setStyleName("_btn");
