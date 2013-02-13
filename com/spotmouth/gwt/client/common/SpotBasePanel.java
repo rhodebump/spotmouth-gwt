@@ -1664,12 +1664,10 @@ public abstract class SpotBasePanel extends FlowPanel {
         TagSuggestOracle oracle = new TagSuggestOracle();
         FlowPanel suggestionsPanel = new FlowPanel();
 
-
-        //com.google.gwt.user.client.ui.SuggestOracle oracle, com.google.gwt.user.client.ui.TextBoxBase box, com.google.gwt.user.client.ui.SuggestBox.SuggestionDisplay suggestDisplay
         SuggestBox tagSearchTextBox = new SuggestBox(oracle, new TextBox(),new CustomSuggestionDisplay(suggestionsPanel));
+        //autocomplete="off"
+        tagSearchTextBox.getElement().setPropertyString("autocomplete","off");
 
-
-       // tagSearchTextBox.s
 
         tagSearchTextBox.addSelectionHandler(tagSelectionHandler);
         FlowPanel selectedTagsPanel = new FlowPanel();
@@ -4725,7 +4723,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     final Button libraryButton = new Button("From Library");
     protected Hidden mimeType = null;
     //protected boolean newspot = false;
-    protected TextBox nameTextBox = null;
+    protected TextField nameTextBox = null;
     protected TextBox address1TextBox = null;
     protected SuggestBox citySuggestBox = null;
     protected SuggestBox countryTextBox = null;
