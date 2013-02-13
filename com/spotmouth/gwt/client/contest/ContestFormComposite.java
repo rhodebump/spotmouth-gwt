@@ -21,6 +21,7 @@ import org.vectomatic.dnd.DataTransferExt;
 import org.vectomatic.dnd.DropPanel;
 import org.vectomatic.file.*;
 import org.vectomatic.file.events.*;
+import com.spotmouth.gwt.client.common.TextField;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +142,7 @@ public class ContestFormComposite extends BaseComposite {
     final TextBox address1TextBox;
 
     @UiField(provided = true)
-    final TextBox contestNameTextBox;
+    final TextField contestNameTextBox;
     @UiField(provided = true)
     final TextBox numberOfStarsTextBox;
     @UiField(provided = true)
@@ -176,7 +177,7 @@ public class ContestFormComposite extends BaseComposite {
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
     private ContestHolder contestHolder = null;
 
-    public ContestFormComposite(TextBox contestNameTextBox, TextArea descriptionTextArea, TextBox numberOfStarsTextBox, TextBox iconStyleTextBox, DateBox startDatePicker, DateBox endDatePicker,
+    public ContestFormComposite(TextField contestNameTextBox, TextArea descriptionTextArea, TextBox numberOfStarsTextBox, TextBox iconStyleTextBox, DateBox startDatePicker, DateBox endDatePicker,
                                 SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, TextBox zipcodeTextBox, TextBox address1TextBox, SuggestBox tagSearchTextBox,
                                 FlowPanel selectedTagsPanel, ListBox appliesToListBox, Button saveButton,
                                 SliderBarSimpleHorizontal radiusSlider, MultiUploader multiUploader, final SimplePanel imagePanel,
