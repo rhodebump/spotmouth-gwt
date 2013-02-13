@@ -180,8 +180,8 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         addRequired(usernameTextBox);
         usernameTextBox.setValue(user.getUsername());
         usernameTextBox.setReadOnly(true);
-
-            emailTextBox.setValue(user.getEmailAddress());
+        emailTextBox = new TextBox();
+        emailTextBox.setValue(user.getEmailAddress());
 
 
         smsPhoneNumberTextBox.setValue(user.getSmsPhoneNumber());

@@ -136,9 +136,6 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
     };
 
 
-    public void doSaveImage() {
-        doSaveImage(null,null);
-    }
 
     public void toggleFirst() {
         //To change body of implemented methods use File | Settings | File Templates.
@@ -148,6 +145,9 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    public void doSaveImage() {
+        doSaveImage(null,null);
+    }
     public void doSaveImage(String name,String data) {
         getMessagePanel().clear();
         GWT.log("doSaveImage");

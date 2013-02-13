@@ -459,6 +459,8 @@ public abstract class SpotBasePanel extends FlowPanel {
         add(addToFavoritesLabel);
     }
 
+
+
     protected void addToFavorites(SpotHolder spotHolder) {
         String addLink = MyWebApp.ADD_SPOT_FRIEND + spotHolder.getId();
         Hyperlink addToFavoritesLabel = new Hyperlink("Add to Favorites", addLink);

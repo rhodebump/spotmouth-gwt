@@ -2635,7 +2635,7 @@ public class MyWebApp implements EntryPoint {
 
     //     toggleManageSpotFriend
     public static String MANAGE_SPOT_FRIEND = "manage_spot_friend/";
-    public static String MANAGE_SPOT = "manage_spot_/";
+    public static String MANAGE_SPOT = "manage_spot/";
     public static String ADD_MY_BIZ = "add-my-biz/";
     public static String ADD_SPOT_FRIEND = "add_spot_friend/";
     public static String MANAGE_CONTEST = "managecontest/";
