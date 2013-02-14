@@ -206,8 +206,8 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
                 spotHolder.setName(nameTextBox.getValue());
             }
             //following stuff is for a plate
-            if (address1TextBox != null) {
-                spotHolder.setAddressLine1(address1TextBox.getValue());
+            if (address1TextField != null) {
+                spotHolder.setAddressLine1(address1TextField.getValue());
             }
             if (citySuggestBox != null) {
                 spotHolder.setCity(citySuggestBox.getValue());
@@ -267,10 +267,10 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
             checkRequired(nameTextBox, "Name is required");
         }
 
-        checkRequired(address1TextBox, "Address is required");
+        checkRequired(address1TextField, "Address is required");
         checkRequired(citySuggestBox, "City is required");
         checkRequired(stateTextBox, "State is required");
-        checkRequired(zipcodeTextBox, "Zipcode is required");
+        checkRequired(zipcodeTextField, "Zipcode is required");
         checkRequired(contentTextArea, "To submit a mark, you need to say something.");
         boolean isvalid =  (!getMessagePanel().isHaveMessages());
         mywebapp.log("isvalid=" +isvalid);

@@ -181,15 +181,15 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         addRequired(usernameTextBox);
         usernameTextBox.setValue(user.getUsername());
         usernameTextBox.setReadOnly(true);
-        emailTextBox = new TextField();
-        emailTextBox.setValue(user.getEmailAddress());
+        emailTextField = new TextField();
+        emailTextField.setValue(user.getEmailAddress());
 
 
         smsPhoneNumberTextBox.setValue(user.getSmsPhoneNumber());
         if (MyWebApp.isDesktop()) {
             //it's not registration, just profile
             usernameTextBox.setStyleName("pcheck");
-            emailTextBox.setStyleName("pcheck");
+            emailTextField.setStyleName("pcheck");
             smsPhoneNumberTextBox.setStyleName("pcheck");
             Button saveAccountSettingsButton = new Button("Save");
             saveAccountSettingsButton.addClickHandler(saveAccountSettingsHandler);
@@ -198,7 +198,7 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
             removeProfileAnchor.setTitle("Remove Profile");
             removeProfileAnchor.addClickHandler(removeProfileHandler);
             //removeProfileAnchor.setStyleName("ddkill");
-            AccountSettingsComposite accountSettingsComposite = new AccountSettingsComposite(usernameTextBox, emailTextBox, oldPasswordTextBox, newPasswordTextBox,
+            AccountSettingsComposite accountSettingsComposite = new AccountSettingsComposite(usernameTextBox, emailTextField, oldPasswordTextBox, newPasswordTextBox,
                     smsPhoneNumberTextBox, saveAccountSettingsButton, removeProfileAnchor);
             add(accountSettingsComposite);
             return;
@@ -222,7 +222,7 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         Label changeWarning = new Label("If you change your phone number or email, you will have to re-validate those accounts");
         add(changeWarning);
         smsPhoneNumberTextBox = addTextBox("SMS Phone Number", "smsPhoneNumber", user.getSmsPhoneNumber());
-        emailTextBox = addTextBox("Email", "email", user.getEmailAddress());
+        emailTextField = addTextBox("Email", "email", user.getEmailAddress());
         Fieldset nameFieldset = new Fieldset();
         VerticalPanel nameVP = new VerticalPanel();
         firstNameTextBox = addTextBox("First Name", "fn", user.getFirstName(), false, nameVP);
@@ -235,7 +235,7 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         stateTextBox = addState(user.getState(), this);
         citySuggestBox = addCity(user.getCity(), this);
         //stateTextBox = addTextBox("State", "na5", user.getState(), false);
-        zipcodeTextBox = addTextBox("Zip", "na6", user.getZip(), false);
+        zipcodeTextField = addTextBox("Zip", "na6", user.getZip(), false);
         //dont want to show an email address since one cannot change it
         //emailTextBox = addTextBox("Email Address", "emaial", mywebapp.getAuthenticatedUser().getEmailAddress());
         Label lbl = new Label("Tell us a little about yourself");
@@ -267,8 +267,8 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         userRequest.setUserHolder(mywebapp.getAuthenticatedUser());
         userRequest.setAuthToken(mywebapp.getAuthToken());
         UserHolder userHolder = userRequest.getUserHolder();
-        if (emailTextBox != null) {
-            userHolder.setEmailAddress(emailTextBox.getValue());
+        if (emailTextField != null) {
+            userHolder.setEmailAddress(emailTextField.getValue());
         }
         if (passwordTextBox.getValue().length() > 0) {
             userHolder.setPassword(passwordTextBox.getValue());
@@ -280,8 +280,8 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         if (stateTextBox != null) {
             userHolder.setState(stateTextBox.getValue());
         }
-        if (zipcodeTextBox != null) {
-            userHolder.setZip(zipcodeTextBox.getValue());
+        if (zipcodeTextField != null) {
+            userHolder.setZip(zipcodeTextField.getValue());
         }
         if (countryTextBox != null) {
             userHolder.setCountryCode(countryTextBox.getValue());
@@ -292,7 +292,7 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         if (lastNameTextBox != null) {
             userHolder.setLastName(lastNameTextBox.getValue());
         }
-        userHolder.setEmailAddress(emailTextBox.getValue());
+        userHolder.setEmailAddress(emailTextField.getValue());
         userHolder.setSmsPhoneNumber(smsPhoneNumberTextBox.getValue());
         ApiServiceAsync myService = mywebapp.getApiServiceAsync();
         myService.saveUser(userRequest, new AsyncCallback() {

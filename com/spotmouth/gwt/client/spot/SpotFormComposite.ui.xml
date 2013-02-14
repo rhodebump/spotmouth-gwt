@@ -1,0 +1,133 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:mu='urn:import:gwtupload.client'
+             xmlns:smc="urn:import:com.spotmouth.gwt.client.common"
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:gwt="urn:import:com.google.gwt.user.client.ui">
+
+
+
+
+
+  <g:HTMLPanel>
+
+      <div id="listing_info" class="create_coupon">
+      		<h1>Listing Info<button class="button">Cancel</button></h1>
+      	<div class="content">
+
+
+      		<label>
+      			<h3>Name</h3>
+                  <smc:TextField ui:field="spotNameTextField"  tabIndex="1" placeholder="Name..."/>
+      		</label>
+
+              <!--
+              not sure going to expose this on this form
+      		<label class="_label_small">
+      			<h3>Time</h3>
+      			<input type="text" tabindex="2" placeholder="From..."/>
+      		</label>
+      		<label class="_label_small" style='float: right; margin-top: 33px; margin-right:0;'>
+      			<input type="text" tabindex="3" placeholder="To..."/>
+      			rows="4" tabindex="4"
+      		</label>
+
+-->
+
+      		<label>
+      			<h3>Description</h3>
+      			<g:TextArea visibleLines="4" tabIndex="4" ui:field="spotDescriptionTextArea"/>
+      		</label>
+      <fieldset >
+      			<h3>Location</h3>
+      		<label>
+      			<!-- Note: if text input or select is filled(selected) it should have "_done" class-->
+                  <g:SuggestBox ui:field="countryTextBox"/>
+      		</label>
+      		<label>
+                  <g:SuggestBox ui:field="stateTextBox"/>
+      		</label>
+      		<label>
+                  <g:SuggestBox ui:field="cityTextBox"/>
+      		</label>
+
+      </fieldset>
+
+      <fieldset>
+      		<label>
+      			<h3>Address</h3>
+                  <smc:TextField ui:field="address1TextBox"  tabIndex="8" placeholder="Address"/>
+      		</label>
+      		<label>
+                  <smc:TextField tabIndex="9" maxLength="6" placeholder="ZIP code" ui:field="zipcodeTextField"/>
+
+      		</label>
+      </fieldset>
+
+      <fieldset>
+      		<label>
+      			<h3>Contact</h3>
+                  <smc:TextField type="email" ui:field="emailTextField"  tabIndex="10" placeholder="Example@mail.com"/>
+      			<p class="hint">Email address can be saved, but will never be displayed.  This is to protect email addresses from being spammed.</p>
+      		</label>
+      		<label>
+                  <smc:TextField ui:field="websiteTextField"  tabIndex="11" placeholder="Website..."/>
+      		</label>
+      		<label>
+                  <smc:TextField ui:field="voicePhoneTextField"  tabIndex="12" placeholder="Voice Phone..."/>
+      		</label>
+
+      </fieldset>
+
+      <fieldset>
+      		<label>
+      			<h3>Tags</h3>
+                  <g:SuggestBox tabIndex="13"  ui:field="tagSearchTextBox"/>
+
+      		</label>
+
+      		<div class="ma_tags">
+                  <g:FlowPanel ui:field="selectedTagsPanel" />
+                  <g:FlowPanel ui:field="suggestionsPanel" />
+
+
+      		</div>
+      </fieldset>
+
+      <fieldset class="_label_cbs">
+      			<label class="_label_cb">
+                      <g:SimpleCheckBox tabIndex="14" ui:field="lodgingCheckBox"/>
+      				<span>Lodging</span><i></i>
+      			</label>
+      			<label class="_label_cb">
+                      <g:SimpleCheckBox tabIndex="15" ui:field="funCheckBox"/><span>Fun</span><i></i>
+      			</label>
+      			<label class="_label_cb">
+                      <g:SimpleCheckBox tabIndex="16" ui:field="drinkingCheckBox"/><span>Drinking</span><i></i>
+      			</label>
+      			<label class="_label_cb">
+                      <g:SimpleCheckBox tabIndex="17" ui:field="diningCheckBox"/><span>Dining</span><i></i>
+      			</label>
+      </fieldset>
+
+      <fieldset>
+      		<label>
+      			<h3>ID's</h3>
+      			<!-- Note: if text input or select is filled(selected) it should have "_done" class-->
+                  <smc:TextField ui:field="factualTextField"  addStyleNames="_inp_sm"  tabIndex="18" placeholder="Factual ID..."/>
+      		</label>
+      		<label>
+                  <smc:TextField ui:field="woeIDTextField"  addStyleNames="_inp_woe" tabIndex="19"  placeholder="WOE ID..."/>
+      		</label>
+      		<label>
+                  <smc:TextField ui:field="yelpIDTextField"  addStyleNames="_inp_yelp" tabIndex="20" placeholder="Yelp ID..."/>
+      		</label>
+      </fieldset>
+              <g:Button ui:field="saveButton" addStyleNames="btn_blue">Save</g:Button>
+      	</div>
+      </div>
+
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

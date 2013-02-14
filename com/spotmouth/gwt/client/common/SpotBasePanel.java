@@ -179,15 +179,15 @@ public abstract class SpotBasePanel extends FlowPanel {
 
 
     protected void initZipCodeTextBox() {
-        zipcodeTextBox = new TextBox();
-        zipcodeTextBox.getElement().setAttribute("placeholder", "Zip Code");
-        zipcodeTextBox.setMaxLength(6);
+        zipcodeTextField = new TextField();
+       // zipcodeTextBox.getElement().setAttribute("placeholder", "Zip Code");
+       // zipcodeTextBox.setMaxLength(6);
 
     }
 
     protected void initAddress1TextBox() {
-        address1TextBox = new TextBox();
-        address1TextBox.getElement().setAttribute("placeholder", "Address");
+        address1TextField = new TextField();
+        address1TextField.getElement().setAttribute("placeholder", "Address");
 
 
     }
@@ -388,7 +388,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         userRequest.setUserHolder(mywebapp.getAuthenticatedUser());
         userRequest.setAuthToken(mywebapp.getAuthToken());
         UserHolder userHolder = userRequest.getUserHolder();
-        userHolder.setEmailAddress(emailTextBox.getValue());
+        userHolder.setEmailAddress(emailTextField.getValue());
         userHolder.setSmsPhoneNumber(smsPhoneNumberTextBox.getValue());
         userRequest.setOldPassword(oldPasswordTextBox.getValue());
         userRequest.setNewPassword(newPasswordTextBox.getValue());
@@ -1667,6 +1667,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         SuggestBox tagSearchTextBox = new SuggestBox(oracle, new TextBox(),new CustomSuggestionDisplay(suggestionsPanel));
         //autocomplete="off"
         tagSearchTextBox.getElement().setPropertyString("autocomplete","off");
+        tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
 
 
         tagSearchTextBox.addSelectionHandler(tagSelectionHandler);
@@ -1952,11 +1953,11 @@ public abstract class SpotBasePanel extends FlowPanel {
             addSpotHeader(spotHolder);
         } else {
             nameTextBox = addTextBox("Name", "name", spotHolder.getName(), spotreadonly);
-            address1TextBox = addTextBox("Address Line #1", "addressLine1", spotHolder.getAddressLine1(), spotreadonly);
+            address1TextField = addTextBox("Address Line #1", "addressLine1", spotHolder.getAddressLine1(), spotreadonly);
             citySuggestBox = addCity(spotHolder.getCity(), this);
             stateTextBox = addState(spotHolder.getState(), this);
             //addTextBox("State", "state", spotHolder.getState(), spotreadonly);
-            zipcodeTextBox = addTextBox("Postal Code", "zip", spotHolder.getZip(), spotreadonly);
+            zipcodeTextField = addTextBox("Postal Code", "zip", spotHolder.getZip(), spotreadonly);
         }
     }
 
@@ -4724,16 +4725,16 @@ public abstract class SpotBasePanel extends FlowPanel {
     protected Hidden mimeType = null;
     //protected boolean newspot = false;
     protected TextField nameTextBox = null;
-    protected TextBox address1TextBox = null;
+    protected TextField address1TextField = null;
     protected SuggestBox citySuggestBox = null;
     protected SuggestBox countryTextBox = null;
     public SuggestBox stateTextBox = null;
-    protected TextBox zipcodeTextBox = null;
-    protected TextField emailTextBox = null;
-    protected TextBox websiteTextBox = null;
+    protected TextField zipcodeTextField = null;
+    protected TextField emailTextField = null;
+    protected TextField websiteTextField = new TextField();
     protected TextBox titleTextBox = null;
-    protected TextBox factualIdTextBox = null;
-    protected TextBox voiceTextBox = null;
+    protected TextField factualIdTextField = null;
+    protected TextField voicePhoneTextField = new TextField();
     protected DateBox startDatePicker = new DateBox();
     protected DateBox endDatePicker = new DateBox();
 

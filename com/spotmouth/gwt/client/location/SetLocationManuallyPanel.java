@@ -225,7 +225,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
                             public void run() {
                                 geocoder = new Geocoder();
                                 initMap(mywebapp.getCurrentLocation(),mapPanel);
-                                SetLocationComposite slc = new SetLocationComposite(previousLocations, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextBox, address1TextBox,
+                                SetLocationComposite slc = new SetLocationComposite(previousLocations, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField,
                                         updateButton,fromDeviceButton,mapPanel,mapRadioButton);
                                 add(slc);
 
@@ -290,10 +290,10 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
             GeocodeRequest geocodeRequest = new GeocodeRequest();
             Location location = new Location();
             geocodeRequest.setLocation(location);
-            location.setAddress1(address1TextBox.getValue());
+            location.setAddress1(address1TextField.getValue());
             location.setCity(citySuggestBox.getValue());
             location.setState(stateTextBox.getValue());
-            location.setZipcode(zipcodeTextBox.getValue());
+            location.setZipcode(zipcodeTextField.getValue());
             ApiServiceAsync myService = mywebapp.getApiServiceAsync();
             myService.geocode(geocodeRequest, new AsyncCallback() {
                 public void onFailure(Throwable caught) {
@@ -371,9 +371,9 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
         countryTextBox = addCountry("", formPanel);
         stateTextBox = addState("", formPanel);
         citySuggestBox = addCity("", formPanel);
-        zipcodeTextBox = addTextBox("Postal Code", "na3", "", false, formPanel);
+        zipcodeTextField = addTextBox("Postal Code", "na3", "", false, formPanel);
         //String labelText, String name, String value, boolean spotreadonly,Panel pane
-        address1TextBox = addTextBox("Address Line #1 *", "address1", "", false, formPanel);
+        address1TextField = addTextBox("Address Line #1 *", "address1", "", false, formPanel);
         formPanel.add(setLocationButton());
         captionPanel.add(formPanel);
         return captionPanel;

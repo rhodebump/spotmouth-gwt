@@ -41,7 +41,7 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
                 getMessagePanel().displayError("Example: 1-412-123-4567");
 
             }
-        } else if (isEmpty(emailTextBox)) {
+        } else if (isEmpty(emailTextField)) {
             getMessagePanel().displayError("A valid phone number or email address is required");
         }
         return (!getMessagePanel().isHaveMessages());
@@ -69,11 +69,11 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         if (MyWebApp.isDesktop()) {
             //	<input type="text" placeholder="Enter your friend's e-mail" required="true" tabindex="3"/>
 
-            emailTextBox = new TextField();
+            emailTextField = new TextField();
 //            emailTextBox.getElement().setAttribute("placeholder","Enter your friend's e-mail");
 //            emailTextBox.getElement().setAttribute("required","required");
 
-            emailTextBox.setTabIndex(3);
+            emailTextField.setTabIndex(3);
           //  emailTextBox.getElement().setAttribute("placeholder","Enter your friend's e-mail");
 
             //	<input type="text" placeholder="Enter your friend's phone number" required="true" tabindex="3"/>
@@ -97,7 +97,7 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
             //friendNameTextBox.getElement().setAttribute("placeholder","Enter your friend's name");
 
             friendNameTextBox.setTabIndex(1);
-            FriendFormComposite ffc = new FriendFormComposite(emailTextBox,smsPhoneNumberBox,inviteFriendButton,friendNameTextBox,friendJoinMessageTextArea);
+            FriendFormComposite ffc = new FriendFormComposite(emailTextField,smsPhoneNumberBox,inviteFriendButton,friendNameTextBox,friendJoinMessageTextArea);
             add(ffc);
             return;
         }
@@ -115,8 +115,8 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
             Label requiredLabel = new Label("Please provide either an email address or a phone number");
             add(requiredLabel);
         }
-        emailTextBox = addTextBox("Email", "email", friendHolder.getEmailAddress());
-        emailTextBox.setReadOnly(readonly);
+        emailTextField = addTextBox("Email", "email", friendHolder.getEmailAddress());
+        emailTextField.setReadOnly(readonly);
         smsPhoneNumberBox = addTextBox("SMS Phone Number", "smsPhoneNumber", friendHolder.getSmsPhoneNumber());
         smsPhoneNumberBox.setReadOnly(readonly);
 
@@ -181,7 +181,7 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         friendHolder.setFriendInviteMessage(friendJoinMessageTextarea.getValue());
      */
     public void toggleFirst() {
-        emailTextBox.setFocus(true);
+        emailTextField.setFocus(true);
     }
 
 
@@ -208,7 +208,7 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         FriendRequest friendRequest = new FriendRequest();
         friendRequest.setFriendHolder(friendHolder);
         friendRequest.setAuthToken(mywebapp.getAuthToken());
-        friendHolder.setEmailAddress(emailTextBox.getValue());
+        friendHolder.setEmailAddress(emailTextField.getValue());
         friendHolder.setSmsPhoneNumber(smsPhoneNumberBox.getValue());
         friendHolder.setFriendName(friendNameTextBox.getValue());
         friendHolder.setFriendInviteMessage(friendJoinMessageTextArea.getValue());

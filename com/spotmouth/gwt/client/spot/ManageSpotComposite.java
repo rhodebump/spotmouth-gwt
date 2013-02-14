@@ -21,12 +21,14 @@ public class ManageSpotComposite  extends Composite {
     interface MyUiBinder extends UiBinder<Widget, ManageSpotComposite> {
     }
 
+    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
     @UiField(provided = true)
     final MultiUploader multiUploader;
 
 
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
 
     private ManageSpotPanel manageSpotPanel = null;
 

@@ -4,13 +4,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
+import  com.spotmouth.gwt.client.common.TextField;
+import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
@@ -81,22 +80,22 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
         return HelpResources.INSTANCE.getPlaceForm();
     }
 
-    CheckBox lodgingCheckBox = null;
-    CheckBox diningCheckBox = null;
-    CheckBox funCheckBox = null;
-    CheckBox drinkingCheckBox = null;
-    CheckBox shareImageCheckBox = null;
+    SimpleCheckBox lodgingCheckBox = new SimpleCheckBox();
+    SimpleCheckBox diningCheckBox= new SimpleCheckBox();
+    SimpleCheckBox funCheckBox = new SimpleCheckBox();
+    SimpleCheckBox drinkingCheckBox = new SimpleCheckBox();
+    CheckBox shareImageCheckBox = new CheckBox();
 
     protected void doSave() {
         SaveSpotRequest saveSpotRequest = new SaveSpotRequest();
         saveSpotRequest.setSpotHolder(spotHolder);
         spotHolder.setName(nameTextBox.getValue());
-        spotHolder.setAddressLine1(address1TextBox.getValue());
+        spotHolder.setAddressLine1(address1TextField.getValue());
         spotHolder.setCity(citySuggestBox.getValue());
         spotHolder.setState(stateTextBox.getValue());
-        spotHolder.setZip(zipcodeTextBox.getValue());
-        spotHolder.setEmail(emailTextBox.getValue());
-        spotHolder.setWebsite(websiteTextBox.getValue());
+        spotHolder.setZip(zipcodeTextField.getValue());
+        spotHolder.setEmail(emailTextField.getValue());
+        spotHolder.setWebsite(websiteTextField.getValue());
         spotHolder.setHours(hoursTextArea.getValue());
         spotHolder.setDescription(contentTextArea.getValue());
         spotHolder.setLodging(lodgingCheckBox.getValue());
@@ -104,15 +103,15 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
         spotHolder.setFun(funCheckBox.getValue());
         spotHolder.setDrinking(drinkingCheckBox.getValue());
         spotHolder.setShareImage(shareImageCheckBox.getValue());
-        spotHolder.setVoicephone(voiceTextBox.getValue());
+        spotHolder.setVoicephone(voicePhoneTextField.getValue());
         spotHolder.setContentsToRemove(contentsToRemove);
-        spotHolder.setFactualId(factualIdTextBox.getValue());
-        if (!isEmpty(woeIdTextBox)) {
-            int woeid = Integer.parseInt(woeIdTextBox.getValue());
+        spotHolder.setFactualId(factualIdTextField.getValue());
+        if (!isEmpty(woeIdTextField)) {
+            int woeid = Integer.parseInt(woeIdTextField.getValue());
             spotHolder.setWoeid(woeid);
         }
 
-        spotHolder.setYelpId(yelpIdTextBox.getValue());
+        spotHolder.setYelpId(yelpIdTextField.getValue());
 
 
 
@@ -149,28 +148,60 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
     public PlaceForm(MyWebApp mywebapp, SpotHolder spotHolder) {
         super(mywebapp);
         this.spotHolder = spotHolder;
+        if (MyWebApp.isDesktop()) {
+
+
+            Button saveButton = new Button();
+            saveButton.addClickHandler(saveHandler);
+
+            SuggestBox tagSearchTextBox = getTagSuggestBox(spotHolder.getTagHolders());
+            FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
+            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+
+            factualIdTextField = new TextField();
+            nameTextBox = new TextField();
+            address1TextField = new TextField();
+            countryTextBox = getCountrySuggestBox(spotHolder.getCountryCode());
+            stateTextBox = getStateSuggestBox(spotHolder.getState());
+            citySuggestBox = getCitySuggestBox(spotHolder.getCity());
+            emailTextField = new TextField();
+            initZipCodeTextBox();
+            initForm(spotHolder);
+
+            SpotFormComposite sfc = new SpotFormComposite( nameTextBox, voicePhoneTextField, websiteTextField,  emailTextField,
+                                          contentTextArea, saveButton,
+                                          lodgingCheckBox, funCheckBox, drinkingCheckBox, diningCheckBox,
+                                          countryTextBox,  stateTextBox,  citySuggestBox,  zipcodeTextField,  address1TextField,
+                                          tagSearchTextBox,
+                                                                         selectedTagsPanel, suggestionsPanel,
+                                                                         factualIdTextField, woeIdTextField, yelpIdTextField);
+            add(sfc);
+
+            return;
+        }
+
         this.addStyleName("PlaceForm");
         nameTextBox = addTextBox("Name", "name", spotHolder.getName());
-        address1TextBox = addTextBox("Address Line #1", "addressLine1",
+        address1TextField = addTextBox("Address Line #1", "addressLine1",
                 spotHolder.getAddressLine1());
         citySuggestBox = addCity(spotHolder.getCity(),this);
         //stateTextBox = addTextBox("State", "state", spotHolder.getState());
         stateTextBox = addState(spotHolder.getState(),this);
-        zipcodeTextBox = addTextBox("Zip", "zip", spotHolder.getZip());
-        emailTextBox = addTextBox("Email", "email", "");
+        zipcodeTextField = addTextBox("Zip", "zip", spotHolder.getZip());
+        emailTextField = addTextBox("Email", "email", "");
         Label label2 = new Label();
         label2.setText("Email address can be saved, but will never be displayed.  This is to protect email addresses from being spammed.");
         add(label2);
-        websiteTextBox = addTextBox("Website", "website", spotHolder
+        websiteTextField = addTextBox("Website", "website", spotHolder
                 .getWebsite());
 
 
-        voiceTextBox= addTextBox("Voice Phone", "voice", spotHolder.getVoicephone());
+        voicePhoneTextField= addTextBox("Voice Phone", "voice", spotHolder.getVoicephone());
         addTagHolderForm(spotHolder.getTagHolders());
-        lodgingCheckBox = addCheckbox2("Lodging", "lodging", spotHolder.getLodging(), mywebapp.getResources().lodging());
-        diningCheckBox = addCheckbox2("Dining", "dining", spotHolder.getDining(), mywebapp.getResources().dining());
-        funCheckBox = addCheckbox2("Fun", "fun", spotHolder.getFun(), mywebapp.getResources().fun());
-        drinkingCheckBox = addCheckbox2("Drinking", "drinking", spotHolder.getDrinking(), mywebapp.getResources().drinking());
+//        lodgingCheckBox = addCheckbox2("Lodging", "lodging", spotHolder.getLodging(), mywebapp.getResources().lodging());
+//        diningCheckBox = addCheckbox2("Dining", "dining", spotHolder.getDining(), mywebapp.getResources().dining());
+//        funCheckBox = addCheckbox2("Fun", "fun", spotHolder.getFun(), mywebapp.getResources().fun());
+//        drinkingCheckBox = addCheckbox2("Drinking", "drinking", spotHolder.getDrinking(), mywebapp.getResources().drinking());
         shareImageCheckBox = addCheckbox2("Share Image", "shareImage", spotHolder.getShareImage(), null);
         contentTextArea = addTextArea("Description", "description", spotHolder.getDescription(), false);
         hoursTextArea = addTextArea("Hours", "hours", spotHolder.getHours(),
@@ -181,9 +212,9 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
         addTagHolderForm(spotHolder.getTagHolders());
 
 
-        factualIdTextBox= addTextBox("Factual ID", "facId", spotHolder.getFactualId());
-        woeIdTextBox = addTextBox("WOEID", "woeid", new Integer(spotHolder.getWoeid()).toString());
-        yelpIdTextBox = addTextBox("Yelp ID", "yelpId", spotHolder.getYelpId());
+        factualIdTextField= addTextBox("Factual ID", "facId", spotHolder.getFactualId());
+        woeIdTextField = addTextBox("WOEID", "woeid", new Integer(spotHolder.getWoeid()).toString());
+        yelpIdTextField = addTextBox("Yelp ID", "yelpId", spotHolder.getYelpId());
 
 //        addMediaFields("Upload images OR video for spot");
 //        add(contentsPanel);
@@ -198,23 +229,23 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
     }
 
 
-    protected TextBox woeIdTextBox = null;
-    protected TextBox yelpIdTextBox = null;
+    protected TextField woeIdTextField  = new TextField();
+    protected TextField yelpIdTextField  = new TextField();
 
 
     private void initForm(SpotHolder spotHolder) {
         nameTextBox.setValue(spotHolder.getName());
-        address1TextBox.setValue(spotHolder.getAddressLine1());
+        address1TextField.setValue(spotHolder.getAddressLine1());
         citySuggestBox.setValue(spotHolder.getCity());
         stateTextBox.setValue(spotHolder.getState());
 
-        zipcodeTextBox.setValue(spotHolder.getZip());
+        zipcodeTextField.setValue(spotHolder.getZip());
 
-        websiteTextBox.setValue( spotHolder
+        websiteTextField.setValue( spotHolder
                 .getWebsite());
 
 
-        voiceTextBox.setValue(spotHolder.getVoicephone());
+        voicePhoneTextField.setValue(spotHolder.getVoicephone());
         //addTagHolderForm(spotHolder.getTagHolders());
         lodgingCheckBox.setValue( spotHolder.getLodging());
         diningCheckBox.setValue(spotHolder.getDining());
@@ -226,11 +257,11 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
         hoursTextArea.setValue(spotHolder.getHours());
 
 
-        factualIdTextBox.setValue(spotHolder.getFactualId());
+        factualIdTextField.setValue(spotHolder.getFactualId());
 
-        woeIdTextBox.setValue( new Integer(spotHolder.getWoeid()).toString());
+        woeIdTextField.setValue(new Integer(spotHolder.getWoeid()).toString());
 
-        yelpIdTextBox.setValue(spotHolder.getYelpId());
+        yelpIdTextField.setValue(spotHolder.getYelpId());
 
 
 

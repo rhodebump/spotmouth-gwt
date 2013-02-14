@@ -37,6 +37,9 @@ public class TextField extends TextBox {
 
 
 
+    //_done
+
+
   /**
    * Creates an empty text box.
    */
@@ -66,6 +69,29 @@ public class TextField extends TextBox {
 
 
 
+    private void checkDone() {
+
+        if (getValue().isEmpty()) {
+            this.removeStyleName("_done");
+
+        } else if (getValue().equals(placeholder)) {
+            this.removeStyleName("_done");
+
+
+        } else {
+            this.addStyleName("_done");
+        }
+
+
+
+
+    }
+
+    public void setValue(String value) {
+        super.setValue(value);
+        checkDone();
+    }
+
     private void doPlaceHolder() {
         if (Modernizr.inputAttribute(Modernizr.InputAttribute.PLACEHOLDER)) {
             return;
@@ -76,6 +102,7 @@ public class TextField extends TextBox {
                 if (getValue().isEmpty()) {
                    TextField.this.setValue(placeholder);
                 }
+                checkDone();
             }
         });
         this.addFocusHandler(new FocusHandler() {

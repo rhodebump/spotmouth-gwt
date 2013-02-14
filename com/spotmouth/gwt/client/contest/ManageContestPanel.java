@@ -101,7 +101,7 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
         checkRequired(countryTextBox, "Country is required");
         checkRequired(stateTextBox, "State is required");
         checkRequired(citySuggestBox, "City is required");
-        checkRequired(zipcodeTextBox, "Zip is required");
+        checkRequired(zipcodeTextField, "Zip is required");
         if (contestHolder.getRadius() == null) {
             getMessagePanel().displayMessage("Please select a radius.");
         }
@@ -177,15 +177,15 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
         } else {
             citySuggestBox.addStyleName("mc_selected");
         }
-        if (isEmpty(address1TextBox)) {
-            address1TextBox.removeStyleName("mc_selected");
+        if (isEmpty(address1TextField)) {
+            address1TextField.removeStyleName("mc_selected");
         } else {
-            address1TextBox.addStyleName("mc_selected");
+            address1TextField.addStyleName("mc_selected");
         }
-        if (isEmpty(zipcodeTextBox)) {
-            zipcodeTextBox.removeStyleName("mc_selected");
+        if (isEmpty(zipcodeTextField)) {
+            zipcodeTextField.removeStyleName("mc_selected");
         } else {
-            zipcodeTextBox.addStyleName("mc_selected");
+            zipcodeTextField.addStyleName("mc_selected");
         }
         if (isEmpty(nameTextBox)) {
             nameTextBox.removeStyleName("mc_selected");
@@ -265,23 +265,23 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
             initZipCodeTextBox();
 
 
-            zipcodeTextBox.setTabIndex(9);
+            zipcodeTextField.setTabIndex(9);
 
-            zipcodeTextBox.setValue(contestHolder.getZip());
-            zipcodeTextBox.addValueChangeHandler(vch);
+            zipcodeTextField.setValue(contestHolder.getZip());
+            zipcodeTextField.addValueChangeHandler(vch);
 
 
 
 
             initAddress1TextBox();
 
-            address1TextBox.setTabIndex(8);
-            address1TextBox.addValueChangeHandler(vch);
-            address1TextBox.setValue(contestHolder.getAddressLine1());
+            address1TextField.setTabIndex(8);
+            address1TextField.addValueChangeHandler(vch);
+            address1TextField.setValue(contestHolder.getAddressLine1());
 
             SuggestBox tagSearchTextBox = getTagSuggestBox(contestHolder.getTagHolders());
             tagSearchTextBox.getElement().setId("mc_tags_inp");
-            tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
+
             tagSearchTextBox.setTabIndex(11);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
@@ -327,7 +327,7 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
                 contestImagePanel.setWidget(mainImage);
             }
             this.cfc = new ContestFormComposite(nameTextBox, contentTextArea, numberOfStarsTextBox, iconStyleTextBox, startDatePicker, endDatePicker,
-                    countryTextBox, stateTextBox, citySuggestBox, zipcodeTextBox, address1TextBox, tagSearchTextBox, selectedTagsPanel, appliesToListBox, saveButton,
+                    countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField, tagSearchTextBox, selectedTagsPanel, appliesToListBox, saveButton,
                     sliderBarSimpleHorizontal, defaultUploader, contestImagePanel, mywebapp, contestHolder,suggestionsPanel);
             add(cfc);
             return;
@@ -366,10 +366,10 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
         ContestRequest contestRequest = new ContestRequest();
         populate();
         contestRequest.setContestHolder(contestHolder);
-        contestHolder.setAddressLine1(address1TextBox.getValue());
+        contestHolder.setAddressLine1(address1TextField.getValue());
         contestHolder.setCity(citySuggestBox.getValue());
         contestHolder.setState(stateTextBox.getValue());
-        contestHolder.setZip(zipcodeTextBox.getValue());
+        contestHolder.setZip(zipcodeTextField.getValue());
         contestHolder.setCountryCode(countryTextBox.getText());
         contestHolder.setShareOnFacebook(shareOnFacebookCheckbox.getValue());
         contestHolder.setGeoGlobal(geoGlobalCheckbox.getValue());

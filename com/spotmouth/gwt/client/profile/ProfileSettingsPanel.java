@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.UserHolder;
 import com.spotmouth.gwt.client.dto.UserRequest;
@@ -77,8 +78,8 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         countryTextBox = getCountrySuggestBox(user.getCountryCode());
         stateTextBox = getStateSuggestBox(user.getState());
         citySuggestBox = getCitySuggestBox(user.getCity());
-        zipcodeTextBox = new TextBox();
-        zipcodeTextBox.setValue(user.getZip());
+        zipcodeTextField = new TextField();
+        zipcodeTextField.setValue(user.getZip());
         contentTextArea.setValue(user.getAboutMe());
         //add(saveButton());
         Button saveButton = new Button("Save");
@@ -195,8 +196,8 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         if (stateTextBox != null) {
             userHolder.setState(stateTextBox.getValue());
         }
-        if (zipcodeTextBox != null) {
-            userHolder.setZip(zipcodeTextBox.getValue());
+        if (zipcodeTextField != null) {
+            userHolder.setZip(zipcodeTextField.getValue());
         }
         if (countryTextBox != null) {
             userHolder.setCountryCode(countryTextBox.getValue());
