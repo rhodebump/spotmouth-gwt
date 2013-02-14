@@ -57,8 +57,7 @@ public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
             searchButton.addClickHandler(searchHandler);
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
             //tagSearchTextBox.getElement().setId("mc_tags_inp");
-            tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
-            // tagSearchTextBox.setTabIndex(11);
+            //tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
 
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
