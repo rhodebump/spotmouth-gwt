@@ -42,7 +42,7 @@
                       <!--
       				<input type="text" placeholder="Enter your friend's phone number" required="true" tabindex="3"/>
       				-->
-                      <smc:TextField ui:field="smsPhoneNumberBox" placeholder="Enter your friend's phone number" />
+                      <smc:TextField ui:field="smsPhoneNumberBox" tabIndex="3" placeholder="Enter your friend's phone number" />
       				<p>Divide numbers by comma</p>
       			</label>
       		</div>

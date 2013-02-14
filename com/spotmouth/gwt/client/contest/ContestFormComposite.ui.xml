@@ -110,17 +110,12 @@
      			<h2 class="mc_title">Address</h2>
 
      			<span class="mc_inp_loc">
-                     <g:TextBox ui:field="address1TextBox"/>
-                         <!--
-     				<input type="text" placeholder="Address"  tabindex="8" onblur="inpValidate(this, this.value);mcShowRadius(this.value);"/>
-     				-->
+                     <g:TextBox tabIndex="8" ui:field="address1TextBox"/>
+
      			</span>
 
                  <span class="mc_inp_loc">
-                     <smc:TextField tabindex="9" maxlength="6" placeholder="ZIP code" ui:field="zipcodeTextField"/>
-                     <!--
-     				<input type="text" placeholder="Zip Code" maxlength="6" tabindex="9" onblur="inpValidate(this, this.value);mcShowRadius(this.value);"/>
-     				-->
+                     <smc:TextField tabIndex="9" maxLength="6" placeholder="ZIP code" ui:field="zipcodeTextField"/>
      			</span>
 
      			<ul id="mc_adrs_done" class="mc_loc_list mc_adrs_list">
