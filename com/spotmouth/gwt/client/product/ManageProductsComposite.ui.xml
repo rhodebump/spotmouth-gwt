@@ -1,0 +1,63 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:mu='urn:import:gwtupload.client'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'    xmlns:sm='urn:import:com.spotmouth.gwt.client'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:gwt="urn:import:com.google.gwt.user.client.ui">
+
+
+
+
+
+  <g:HTMLPanel>
+
+      <div id="manage_product" class="manage_product _page" >
+      	<div class="content">
+      		<h1>Products</h1>
+      		<h2><span ui:field='nameSpan'/></h2>
+      		<h5 style="display: none;"><span ui:field='locationSpan'/></h5>
+      		<div class="mp_tabs">
+      			<input type="checkbox" id="mp_sw"/>
+      			<ul class="mp_switch">
+      				<li>Available</li>
+      				<li>Installed</li>
+      			</ul>
+
+      		<div class="mp_av">
+
+                  <sm:ULPanel addStyleNames="mp_list" ui:field="availableProductsULPanel"/>
+
+                  <!--
+      			<ul class="mp_list">
+      				<li><b class="_poll"></b><span>Create Poll</span></li>
+      				<li><b class="_acc"></b><span>Front Accounting</span></li>
+      				<li><b class="_lime"></b><span>LimeSurvei</span></li>
+      				<li><b class="_wiki"></b><span>Mediawiki</span></li>
+      				<li><b class="_wordpress"></b><span>WordPress</span></li>
+      				<li><b class="_html"></b><span>Static HTML</span></li>
+      				<li><b class="_sphider"></b><span>Sphider</span></li>
+      				<li><b class="_phplist"></b><span>phpList</span></li>
+      				<li><b class="_emails"></b><span>Emails</span></li>
+      			</ul>
+      			-->
+      			<p></p>
+      		</div>
+
+      		<div class="mp_ins">
+                  <sm:ULPanel addStyleNames="mp_list" ui:field="installedProductsULPanel"/>
+                  <!--
+      			<ul class="mp_list">
+      				<li><b class="_emails"></b><span>Emails</span></li>
+      				<li class="_waiting" title="Installing product, please wait..."><b class="_acc"></b><span>Front Accounting</span></li>
+      			</ul>
+      			-->
+
+      			<p>There are no installed products</p>
+      		</div>
+
+      		</div>
+      	</div>
+      </div>
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

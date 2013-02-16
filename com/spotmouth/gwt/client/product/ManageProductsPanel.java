@@ -50,9 +50,100 @@ public class ManageProductsPanel  extends SpotBasePanel implements SpotMouthPane
         return HelpResources.INSTANCE.getPlaceForm();
     }
 
+    private ULPanel getInstalledProductsULPanel(SpotHolder spotHolder) {
+        ULPanel ulPanel = new ULPanel();
+        for (ProductInstallHolder productInstallHolder : spotHolder.getProductInstallHolders()) {
+            ListItem listItem = new ListItem();
+
+            /*
+                  				<li><b class="_emails"></b><span>Emails</span></li>
+      				<li class="_waiting" title="Installing product, please wait..."><b class="_acc"></b><span>Front Accounting</span></li>
+             */
+
+            ProductHolder productHolder = productInstallHolder.getProductHolder();
+
+
+            if (! productInstallHolder.isInstalled()) {
+
+                listItem.addStyleName("_waiting");
+                listItem.setTitle("Installing product, please wait...");
+            }
+
+
+            InlineLabel inlineLabel1 = new InlineLabel();
+            inlineLabel1.setStyleName("_" + productHolder.getHostSuffix());
+
+            listItem.add(inlineLabel1);
+
+            InlineLabel inlineLabel = new InlineLabel(productHolder.getName());
+
+            listItem.add(inlineLabel);
+
+
+            productInstallClickMap.put(listItem, productInstallHolder);
+            listItem.addClickHandler(pickProductInstallHandler);
+
+
+
+        }
+
+        return ulPanel;
+    }
+    private  ULPanel getAvailableProductsULPanel() {
+        ULPanel ulPanel = new ULPanel();
+        for (ProductHolder productHolder : mywebapp.getProductHolders()) {
+            ListItem listItem = new ListItem();
+           /*
+                  				<li><b class="_poll"></b><span>Create Poll</span></li>
+      				<li><b class="_acc"></b><span>Front Accounting</span></li>
+      				<li><b class="_lime"></b><span>LimeSurvei</span></li>
+      				<li><b class="_wiki"></b><span>Mediawiki</span></li>
+      				<li><b class="_wordpress"></b><span>WordPress</span></li>
+      				<li><b class="_html"></b><span>Static HTML</span></li>
+      				<li><b class="_sphider"></b><span>Sphider</span></li>
+      				<li><b class="_phplist"></b><span>phpList</span></li>
+      				<li><b class="_emails"></b><span>Emails</span></li>
+             */
+            InlineLabel inlineLabel1 = new InlineLabel();
+            inlineLabel1.setStyleName("_" + productHolder.getHostSuffix());
+
+            listItem.add(inlineLabel1);
+
+            InlineLabel inlineLabel = new InlineLabel(productHolder.getName());
+
+            listItem.add(inlineLabel);
+            productClickMap.put(listItem, productHolder);
+
+
+            listItem.addClickHandler(pickProductHandler);
+
+            ulPanel.add(listItem);
+        }
+
+        return ulPanel;
+
+
+    }
+
     public ManageProductsPanel(MyWebApp mywebapp, SpotHolder spotHolder) {
             super(mywebapp);
             this.spotHolder = spotHolder;
+
+        if (MyWebApp.isDesktop()) {
+            ULPanel availableProductsULPanel = getAvailableProductsULPanel();
+
+
+
+            ULPanel installedProductsULPanel = getInstalledProductsULPanel(spotHolder);
+
+            ManageProductsComposite mpc = new ManageProductsComposite(availableProductsULPanel,installedProductsULPanel);
+            mpc.setName(spotHolder.getName());
+            mpc.setLocation(spotHolder.getAddressLabel());
+
+            add(mpc);
+            return;
+        }
+
 
                 //list product installs
         addHeader("Installed Products");

@@ -105,6 +105,8 @@ public class EventForm extends SpotBasePanel implements SpotMouthPanel {
             initControls(eventItemHolder);
             EventFormComposite cfc = new EventFormComposite(cancelButton, imageUploaderImagePanel, defaultUploader, startDatePicker, endDatePicker, titleTextBox,
                     contentTextArea, saveButton, suggestionsPanel, tagSearchTextBox, selectedTagsPanel);
+            cfc.setName(spotHolder.getName());
+            cfc.setLocation(spotHolder.getAddressLabel());
             add(cfc);
             return;
         }
