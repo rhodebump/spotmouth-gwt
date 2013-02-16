@@ -37,7 +37,7 @@
       		</div>
 
       		<label>
-      			<h3>Coupon Title</h3>
+      			<h3>Event Title</h3>
                   <smc:TextField ui:field="titleTextField"  tabIndex="1" placeholder="Title"/>
       		</label>
       		<label>
