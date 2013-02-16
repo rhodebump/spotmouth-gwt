@@ -2036,7 +2036,7 @@ public class MyWebApp implements EntryPoint {
         vp.add(splashImage);
         simplePanel.add(vp);
         fetchInitData();
-       // checkForExistingLoginSession();
+        checkForExistingLoginSession();
 //
         if (initToken == null || initToken.length() == 0) {
             //want to show results/not a splash at this point
