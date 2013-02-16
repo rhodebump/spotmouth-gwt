@@ -10,8 +10,10 @@ import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.coupon.CouponForm;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.help.HelpResources;
+import com.spotmouth.gwt.client.product.ManageProductsPanel;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploader;
@@ -152,7 +154,8 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     public void createCoupon() {
-        CouponForm placeForm = new CouponForm(mywebapp, spotHolder);
+        ItemHolder itemHolder = new ItemHolder();
+        CouponForm placeForm = new CouponForm(mywebapp, spotHolder,itemHolder);
         mywebapp.swapCenter(placeForm);
     }
 

@@ -29,7 +29,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle.MultiWordSuggestion;
-import com.google.gwt.user.datepicker.client.DateBox;
 import com.phonegap.gwt.camera.client.Camera;
 import com.phonegap.gwt.camera.client.CameraCallback;
 import com.phonegap.gwt.capture.client.Capture;
@@ -51,7 +50,7 @@ import com.spotmouth.gwt.client.icons.SpotImageResource;
 import com.spotmouth.gwt.client.messaging.ViewMessagePanel;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.spotmouth.gwt.client.search.SearchForm;
-import com.spotmouth.gwt.client.spot.ProductInstallPanel;
+import com.spotmouth.gwt.client.product.ProductInstallPanel;
 import gwtupload.client.IUploadStatus.Status;
 import gwtupload.client.IUploader;
 import gwtupload.client.IUploader.UploadedInfo;
@@ -4732,11 +4731,11 @@ public abstract class SpotBasePanel extends FlowPanel {
     protected TextField zipcodeTextField = null;
     protected TextField emailTextField = null;
     protected TextField websiteTextField = new TextField();
-    protected TextBox titleTextBox = null;
+    protected TextField titleTextBox = null;
     protected TextField factualIdTextField = null;
     protected TextField voicePhoneTextField = new TextField();
-    protected DateBox startDatePicker = new DateBox();
-    protected DateBox endDatePicker = new DateBox();
+    protected DateTextField startDatePicker = new DateTextField();
+    protected DateTextField endDatePicker = new DateTextField();
 
     protected void addDateRange() {
         //final Label startDateLabel = new Label("Start Date");

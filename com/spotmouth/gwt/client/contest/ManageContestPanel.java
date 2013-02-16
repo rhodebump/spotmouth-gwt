@@ -280,11 +280,13 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
             address1TextField.setValue(contestHolder.getAddressLine1());
 
             SuggestBox tagSearchTextBox = getTagSuggestBox(contestHolder.getTagHolders());
+            FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
+            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+
             tagSearchTextBox.getElement().setId("mc_tags_inp");
 
             tagSearchTextBox.setTabIndex(11);
-            FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
-            FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+
 
             appliesToListBox.addItem("This contest applies to...", "0");
             appliesToListBox.setStyleName("mc_select");

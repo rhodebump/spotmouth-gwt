@@ -27,6 +27,11 @@ public class Page extends Composite {
         body.getElement().setId(id2);
     }
 
+    @UiField(provided = true)
+    Button searchButton;
+
+
+
     @UiField
     SimplePanel messages;
     @UiField
@@ -66,7 +71,7 @@ public class Page extends Composite {
 
     //simplePanel,popularPanel,latestPanel,mp,tagCloudPanel,locationPanel,tagCloudPanel2,googleMapPanel
     public Page(Panel bodyPanel, Panel messagePanel, Panel searchBoxPanel, TextBox keywordsTextBox, TextBox locationTextBox, SimplePanel profilePicPanel,ULPanel previousLocationsULPanel,
-                SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,ListBox sortingListBox) {
+                SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,ListBox sortingListBox,Button searchButton) {
         this.keywordsTextBox = keywordsTextBox;
 
         this.markSpotButton = markSpotButton;
@@ -89,5 +94,6 @@ public class Page extends Composite {
        // googleMap.setWidget(googleMapPanel);
         searchBox.setWidget(searchBoxPanel);
         // sidebar.setWidget(sidebarPanel);
+        this.searchButton = searchButton;
     }
 }

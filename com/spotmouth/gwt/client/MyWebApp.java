@@ -5,6 +5,7 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.dom.client.*;
+import com.spotmouth.gwt.client.coupon.CouponForm;
 import com.spotmouth.gwt.client.spot.*;
 import com.spotmouth.gwt.client.chat.ChatsPanel;
 import com.spotmouth.gwt.client.chat.*;
@@ -67,7 +68,7 @@ import com.spotmouth.gwt.client.profile.ViewProfilePanel;
 import com.spotmouth.gwt.client.rpc.ApiService;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.spotmouth.gwt.client.search.SearchForm;
-import com.spotmouth.gwt.client.spot.ManageProductsPanel;
+import com.spotmouth.gwt.client.product.ManageProductsPanel;
 import com.spotmouth.gwt.client.spot.ManageSpotPanel;
 import com.spotmouth.gwt.client.usergroups.ManageUserGroupPanel;
 import com.spotmouth.gwt.client.usergroups.ViewUserGroupsPanel;
@@ -82,6 +83,16 @@ import java.util.logging.Logger;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class MyWebApp implements EntryPoint {
+
+    private ClickHandler searchHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+
+            performSearch();
+        }
+    };
+
+
+
     public ClickHandler showResultsOnMapHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             GWT.log("showResultsOnMapHandler " + toggleMapMode.getValue());
@@ -2788,7 +2799,10 @@ public class MyWebApp implements EntryPoint {
 
     private void doDefaultPage() {
         if (pageModeDisplayed == 1) return;
-        this.page = new Page(simplePanel, messagePanel, searchBoxPanel, keywordsTextBox, locationTextBox, profilePicPanel, previousLocationsULPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton, tagListBox, sortingListBox);
+        Button searchButton = new Button();
+
+        searchButton.addClickHandler(searchHandler);
+        this.page = new Page(simplePanel, messagePanel, searchBoxPanel, keywordsTextBox, locationTextBox, profilePicPanel, previousLocationsULPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton, tagListBox, sortingListBox,searchButton);
         RootPanel.get().clear();
         RootPanel.get().add(page);
         this.pageModeDisplayed = 1;
@@ -2807,16 +2821,7 @@ public class MyWebApp implements EntryPoint {
         }
     }
 
-    /*
-   <div id="wrapper">
-   <form id="search">
-   <label><input type="text" placeholder="Search..."><br>Search for (e.g. chinese, jim's, kabob)</label>
-   <label><input type="text" placeholder="Input pointer..."><br>Near (Address, Neighborhood, City, State or Zip)</label>
-   <input type="submit"><br><a>Advanced Search</a>
-   </form>
-   </div>
 
-    */
     private void initSearchBoxDesktop() {
         rebuildLocationListBox();
         //final String k2 = "Search for (e.g. chinese, jim's, kabob)";
@@ -3538,7 +3543,9 @@ public class MyWebApp implements EntryPoint {
         this.getMessagePanel().clear();
         // need to clear out keyword search if one was done
         String html = MyHtmlResources.INSTANCE.getFeatures().getText();
-        AboutPanel aboutPanel = new AboutPanel(this, html);
+        //FeaturesPanel featuresPanel = new FeaturesPanel();
+
+            AboutPanel aboutPanel = new AboutPanel(this, html);
         swapCenter(aboutPanel);
     }
 
@@ -3636,7 +3643,8 @@ public class MyWebApp implements EntryPoint {
 
        public void onSuccess(Object response) {
            SpotHolder spotHolder = (SpotHolder) response;
-           CouponForm eventForm = new CouponForm(MyWebApp.this, spotHolder);
+           ItemHolder itemHolder = new ItemHolder();
+           CouponForm eventForm = new CouponForm(MyWebApp.this, spotHolder,itemHolder);
            swapCenter(eventForm);
        }
    };

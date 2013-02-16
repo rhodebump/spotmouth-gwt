@@ -47,9 +47,11 @@
                  </label>
                 </div>
 
-
-
+                <g:Button ui:field="searchButton"/>
+            <!--
                 <input type="submit"/>
+                -->
+
                 <br/>
                 <a href="#!search/">Advanced Search</a>
             </form>
