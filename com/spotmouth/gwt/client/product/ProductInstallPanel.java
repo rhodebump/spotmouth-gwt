@@ -1,4 +1,4 @@
-package com.spotmouth.gwt.client.spot;
+package com.spotmouth.gwt.client.product;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -97,6 +97,8 @@ public class ProductInstallPanel extends SpotBasePanel implements SpotMouthPanel
     public ProductInstallPanel(MyWebApp myWebApp, ProductInstallHolder productInstallHolder) {
         super(myWebApp);
         this.productInstallHolder = productInstallHolder;
+
+
         //product info
         ProductHolder productHolder = productInstallHolder.getProductHolder();
         Label nameLabel = new HTML(productHolder.getName());

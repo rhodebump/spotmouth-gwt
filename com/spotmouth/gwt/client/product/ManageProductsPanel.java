@@ -1,4 +1,4 @@
-package com.spotmouth.gwt.client.spot;
+package com.spotmouth.gwt.client.product;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

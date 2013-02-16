@@ -1,6 +1,5 @@
-package com.spotmouth.gwt.client.spot;
+package com.spotmouth.gwt.client.product;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.History;
@@ -10,9 +9,9 @@ import com.spotmouth.gwt.client.MyHtmlResources;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import sun.nio.cs.HistoricallyNamedCharset;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,8 +22,8 @@ import sun.nio.cs.HistoricallyNamedCharset;
  */
 //user picked product, this will allow them to request it
 public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
-    TextBox domainNameTextBox = null;
-    TextBox hostNameTextBox = null;
+    TextField domainNameTextBox = new TextField();
+    TextField hostNameTextBox = new TextField();
 
     protected boolean isValid() {
         checkRequired(domainNameTextBox, "Domain is required");
@@ -44,7 +43,7 @@ public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
 
-    CheckBox acceptTerms = null;
+    SimpleCheckBox acceptTerms = new SimpleCheckBox();
     private SpotHolder spotHolder = null;
     private ProductHolder productHolder = null;
 
@@ -52,6 +51,25 @@ public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
         super(myWebApp);
         this.spotHolder = spotHolder;
         this.productHolder = productHolder;
+
+
+        if (MyWebApp.isDesktop()) {
+
+            Button activateButton = new Button();
+
+            activateButton.addClickHandler(saveHandler);
+
+            ProductComposite pic = new ProductComposite(hostNameTextBox,domainNameTextBox,activateButton,acceptTerms);
+            pic.setProductDescription(productHolder.getDescription());
+            pic.setSpotName(spotHolder.getName());
+            add(pic);
+
+
+            return;
+        }
+
+
+
         Label nameLabel = new HTML(productHolder.getName());
         addFieldset(nameLabel, "Product", "desc");
 
@@ -76,7 +94,7 @@ public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
 
-        this.acceptTerms = new CheckBox("By checking this box, I accept the above terms and conditions.");
+        //this.acceptTerms = new CheckBox("By checking this box, I accept the above terms and conditions.");
         acceptTerms.setName("acceptTerms");
         //add(acceptTerms);
         addFieldset(acceptTerms, "", "Na");

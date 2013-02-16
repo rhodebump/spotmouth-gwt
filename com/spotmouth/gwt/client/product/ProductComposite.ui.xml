@@ -1,0 +1,80 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:mu='urn:import:gwtupload.client'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:gwt="urn:import:com.google.gwt.user.client.ui">
+
+
+
+
+
+  <g:HTMLPanel>
+
+      <div id="manage_product" class="manage_product _page" >
+      	<div class="content">
+      		<h1>Products</h1>
+      		<h2><span ui:field='spotName'/></h2>
+      		<div class="mp_product">
+      			<p>&nbsp;<span ui:field='productDescription'/></p>
+      			<b class="mp_ava _wiki"></b>
+      			<input type="checkbox" class="_show_settings"/>
+      			<button class="button">Settings</button>
+      			<div class="mp_settings">
+      				<p class="_hint">The following is a recommended hostname and domain that will be used for your product. Don't change this value unless you know what you are doing</p>
+      				<label>
+      					<p>Hostname</p>
+                          <smc:TextField ui:field="hostNameTextBox"  tabIndex="1"/>
+      				</label>
+      				<label>
+      					<p>Domain</p>
+                          <smc:TextField ui:field="domainNameTextBox"  tabIndex="2"/>
+      				</label>
+      			</div>
+      		</div>
+
+      		<input type="radio" class="_show_terms"/>
+
+      		<div class="_terms">
+      			<h2 class="_title">Terms &amp; Conditions</h2>
+      			<ul>
+      				<li>
+      					<h3>1. No Other Warranty</h3>
+
+      					<p>&nbsp; The services are provided on an "as is" basis, and account holder's use of the services is at its own risk. SPOTMOUTH LLC does not make, and hereby disclaims, any and all other express and/or implied warranties, including, but not limited to, warranties of merchantability, fitness for a particular purpose, noninfringement and title, and any warranties arising from a course of dealing, usage, or trade practice. SPOTMOUTH LLC does not warrant that the services will be uninterrupted, error-free, or completely secure. SPOTMOUTH LLC does not warrant that the software, including security software, operates without error or will prevent third party hacking or access to account holder's networks.</p>
+
+      					<h3>Limitation of Liability</h3>
+      					<h4>&nbsp; Service Interruption</h4>
+
+      					<p>&nbsp; SPOTMOUTH LLC will use its best efforts to maintain a full time Internet presence for the Account Holder. The Account Holder hereby acknowledges that the network may, at various time intervals, be down due, but not limited to, utility interruption, equipment failure, natural disaster, acts of God, or human error. In no event shall SPOTMOUTH LLC be liable to the Account Holder for any damages resulting from or related to any failure or delay of SPOTMOUTH LLC in providing access to the Internet under this Agreement. SPOTMOUTH LLC liability is limited to the value of the Account Holder's contract. </p>
+      				</li>
+
+      				<li>
+      					<h3>2. Disclaimer of Actions Caused by and/or Under the Control of Third Parties</h3>
+      					<p>&nbsp;SPOTMOUTH LLC does not and cannot control the flow of data to or from SPOTMOUTH LLC network and other portions of the internet. such flow depends in large part on the performance of internet services provided or controlled by third parties. at times, actions or inactions of such third parties can impair or disrupt account holder's connections to the internet (or portions thereof). Although SPOTMOUTH LLC will use commercially reasonable efforts to take all actions it deems appropriate to remedy and avoid such events, SPOTMOUTH LLC cannot guarantee that such events will not occur. Accordingly, SPOTMOUTH LLC disclaims any and all liability resulting from or related to such events.</p>
+      				</li>
+
+      				<li>
+      					<h3>3. Disclaimer of Actions Caused by and/or Under the Control of Account Holder</h3>
+      					<p>&nbsp; SPOTMOUTH LLC shall not be responsible for any failures, repairs or modifications necessitated by the account holder's alteration of the operating system, including any and all operational issues which may arise as a result of the addition of software by account holder.SPOTMOUTH LLC shall not be liable for any delay in providing or any failure to provide services if such delay is caused by forces beyond the reasonable control of SPOTMOUTH LLC. </p>
+      				</li>
+
+      				<li>
+      					<h3>4. CONSEQUENTIAL DAMAGES WAIVER</h3>
+      					<p>&nbsp; In no event shall SPOTMOUTH LLC be liable to the account holder for any indirect, punitive, special or consequential damages or lost profits arising out of or related to this agreement or the performance or breach thereof. The aggregate, total liability of SPOTMOUTH LLC under this agreement, if any, shall in no event or circumstance exceed the total amount actually paid by the account holder hereunder. The terms of this section will survive any termination of this agreemen</p>
+      				</li>
+      			</ul>
+
+      		</div>
+      		<fieldset>
+      			<label>
+                      <g:SimpleCheckBox ui:field="acceptTerms"/>
+      				<p>By checking this box, I accept the above <span class="_link">terms and conditions</span></p>
+      			</label>
+      		</fieldset>
+      		<g:Button addStyleNames="btn_blue" ui:field="activateButton">Activate</g:Button>
+      	</div>
+      </div>
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>
