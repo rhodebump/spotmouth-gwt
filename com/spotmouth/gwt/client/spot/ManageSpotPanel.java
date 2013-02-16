@@ -12,6 +12,7 @@ import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.coupon.CouponForm;
 import com.spotmouth.gwt.client.dto.*;
+import com.spotmouth.gwt.client.event.EventForm;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.product.ManageProductsPanel;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
@@ -167,7 +168,9 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
     public void createEvent() {
         String token = MyWebApp.CREATE_EVENT + spotHolder.getId();
         History.newItem(token, false);
-        EventForm eventForm = new EventForm(mywebapp, spotHolder);
+        ItemHolder itemHolder = new ItemHolder();
+
+        EventForm eventForm = new EventForm(mywebapp, spotHolder,itemHolder);
         mywebapp.swapCenter(eventForm);
     }
 

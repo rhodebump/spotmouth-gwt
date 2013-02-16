@@ -51,6 +51,7 @@ import com.spotmouth.gwt.client.messaging.ViewMessagePanel;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.spotmouth.gwt.client.search.SearchForm;
 import com.spotmouth.gwt.client.product.ProductInstallPanel;
+import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploadStatus.Status;
 import gwtupload.client.IUploader;
 import gwtupload.client.IUploader.UploadedInfo;
@@ -73,7 +74,36 @@ import java.util.*;
 public abstract class SpotBasePanel extends FlowPanel {
 
 
-                      //used by map
+    protected SimplePanel imageUploaderImagePanel = new SimplePanel();
+
+
+    protected IUploader.OnFinishUploaderHandler onFinishUploaderHandler2 = new IUploader.OnFinishUploaderHandler() {
+        public void onFinish(IUploader uploader) {
+            if (uploader.getStatus() == IUploadStatus.Status.SUCCESS) {
+                new PreloadedImage(uploader.fileUrl(), showImage2);
+                // The server sends useful information to the client by default
+                IUploader.UploadedInfo info = uploader.getServerInfo();
+                System.out.println("File name " + info.name);
+                System.out.println("File content-type " + info.ctype);
+                System.out.println("File size " + info.size);
+                // You can send any customized message and parse it
+                System.out.println("Server message " + info.message);
+                //okay, we don't have a final "URL" for this image, and we need one to be able to insert into
+                //a wysiwyg editor
+                //let's call the server and sweep through the session files and convert these to content
+                //saveSessionContents();
+            }
+        }
+    };
+    // Attach an image to the pictures viewer
+    private PreloadedImage.OnLoadPreloadedImageHandler showImage2 = new PreloadedImage.OnLoadPreloadedImageHandler() {
+        public void onLoad(PreloadedImage image) {
+            imageUploaderImagePanel.setWidget(image);
+        }
+    };
+
+
+                       //used by map
     protected Geocoder geocoder;
 
 
@@ -382,6 +412,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     protected TextBox newPasswordTextBox = new TextBox();
 
     protected void saveAccountSettings() {
+        getMessagePanel().clear();
         GWT.log("saveAccountSettings");
         UserRequest userRequest = new UserRequest();
         userRequest.setUserHolder(mywebapp.getAuthenticatedUser());

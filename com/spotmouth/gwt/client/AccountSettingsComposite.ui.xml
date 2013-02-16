@@ -22,7 +22,7 @@
 <!--
 <input type="text" value="Dima" class="pcheck"/>
 -->
-    <g:TextBox ui:field="usernameTextBox"/>
+    <g:TextBox addStyleNames="pcheck" ui:field="usernameTextBox"/>
 </label>
 
 <label>
@@ -30,7 +30,7 @@
     <!--
 <input type="text" value="test-email@sm.com" class="pcheck">
         -->
-        <g:TextBox ui:field="emailAddressTextBox"/>
+        <g:TextBox addStyleNames="pcheck" ui:field="emailAddressTextBox"/>
 </label><br/>
 
 <label>
@@ -45,9 +45,9 @@
 
 <label>
 <p>SMS Phone Number</p>
-    <g:TextBox ui:field="smsPhoneNumberTextBox"/>
+    <g:TextBox addStyleNames="pcheck" ui:field="smsPhoneNumberTextBox"/>
 </label>
-    <g:Button ui:field="saveAccountSettingsButton"/>
+    <g:Button ui:field="saveAccountSettingsButton">Save</g:Button>
 </div>
 </div>
 </div>

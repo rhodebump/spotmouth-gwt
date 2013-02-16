@@ -188,10 +188,10 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         smsPhoneNumberTextBox.setValue(user.getSmsPhoneNumber());
         if (MyWebApp.isDesktop()) {
             //it's not registration, just profile
-            usernameTextBox.setStyleName("pcheck");
-            emailTextField.setStyleName("pcheck");
-            smsPhoneNumberTextBox.setStyleName("pcheck");
-            Button saveAccountSettingsButton = new Button("Save");
+            //usernameTextBox.setStyleName("pcheck");
+           // emailTextField.setStyleName("pcheck");
+           // smsPhoneNumberTextBox.setStyleName("pcheck");
+            Button saveAccountSettingsButton = new Button();
             saveAccountSettingsButton.addClickHandler(saveAccountSettingsHandler);
             //<a href="remove-profile.html" title="Remove Profile">x</a>
             Anchor removeProfileAnchor = new Anchor("x");

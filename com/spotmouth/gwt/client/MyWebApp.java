@@ -6,7 +6,7 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.dom.client.*;
 import com.spotmouth.gwt.client.coupon.CouponForm;
-import com.spotmouth.gwt.client.spot.*;
+import com.spotmouth.gwt.client.event.EventForm;
 import com.spotmouth.gwt.client.chat.ChatsPanel;
 import com.spotmouth.gwt.client.chat.*;
 import com.spotmouth.gwt.client.common.ListItem;
@@ -3658,7 +3658,9 @@ public class MyWebApp implements EntryPoint {
 
         public void onSuccess(Object response) {
             SpotHolder spotHolder = (SpotHolder) response;
-            EventForm eventForm = new EventForm(MyWebApp.this, spotHolder);
+            ItemHolder itemHolder = new ItemHolder();
+
+            EventForm eventForm = new EventForm(MyWebApp.this, spotHolder,itemHolder);
             swapCenter(eventForm);
         }
     };
