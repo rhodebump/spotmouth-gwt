@@ -2036,7 +2036,7 @@ public class MyWebApp implements EntryPoint {
         vp.add(splashImage);
         simplePanel.add(vp);
         fetchInitData();
-        checkForExistingLoginSession();
+       // checkForExistingLoginSession();
 //
         if (initToken == null || initToken.length() == 0) {
             //want to show results/not a splash at this point
@@ -4187,12 +4187,15 @@ public class MyWebApp implements EntryPoint {
     when app is restarted, let's try to restore the login
      */
     private void checkForExistingLoginSession() {
-        ApiServiceAsync myService = getApiServiceAsync();
         String spotmouth_session_id = Cookies.getCookie("spotmouth_session_id");
         if (spotmouth_session_id == null) {
             //no login already
             return;
         }
+
+        ApiServiceAsync myService = getApiServiceAsync();
+
+
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setLoginToken(spotmouth_session_id);
         myService.confirmLoginByCookieValue(loginRequest, new AsyncCallback() {
