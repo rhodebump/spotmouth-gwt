@@ -2036,6 +2036,7 @@ public class MyWebApp implements EntryPoint {
         vp.add(splashImage);
         simplePanel.add(vp);
         fetchInitData();
+        checkForExistingLoginSession();
 //
         if (initToken == null || initToken.length() == 0) {
             //want to show results/not a splash at this point
@@ -4180,34 +4181,59 @@ public class MyWebApp implements EntryPoint {
         }
     }
 
+    /*
+    when app is restarted, let's try to restore the login
+     */
+    private void checkForExistingLoginSession() {
+        ApiServiceAsync myService = getApiServiceAsync();
+        String spotmouth_session_id = Cookies.getCookie("spotmouth_session_id");
+        if (spotmouth_session_id == null) {
+            //no login already
+            return;
+        }
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setLoginToken(spotmouth_session_id);
+        myService.confirmLoginByCookieValue(loginRequest, new AsyncCallback() {
+            public void onFailure(Throwable caught) {
+                getMessagePanel().displayError("Login init error: " + caught.getMessage());
+            }
+
+            public void onSuccess(Object result) {
+                MobileResponse mobileResponse = (MobileResponse) result;
+                if (mobileResponse.getStatus() == 1) {
+                    setLoginMobileResponse(mobileResponse);
+                }
+            }
+        });
+    }
     public boolean isLoggedIn(final AsyncCallback loginCallback) {
         GWT.log("isLoggedIn");
         if (getAuthenticatedUser() == null) {
-            //do we have a cookie that contains a loginid?
-            String spotmouth_session_id = Cookies.getCookie("spotmouth_session_id");
-            if (spotmouth_session_id != null) {
-                ApiServiceAsync myService = getApiServiceAsync();
-                LoginRequest loginRequest = new LoginRequest();
-                loginRequest.setLoginToken(spotmouth_session_id);
-                myService.confirmLoginByCookieValue(loginRequest, new AsyncCallback() {
-                    public void onFailure(Throwable caught) {
-                        getMessagePanel().displayError("Login init error: " + caught.getMessage());
-                    }
-
-                    public void onSuccess(Object result) {
-                        MobileResponse mobileResponse = (MobileResponse) result;
-                        if (mobileResponse.getStatus() == 1) {
-                            setLoginMobileResponse(mobileResponse);
-                            loginCallback.onSuccess(null);
-                        } else {
-                            //getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
-                            //let's login
-                            showLogin(loginCallback);
-                        }
-                    }
-                });
-                return false;
-            }
+//            //do we have a cookie that contains a loginid?
+//            String spotmouth_session_id = Cookies.getCookie("spotmouth_session_id");
+//            if (spotmouth_session_id != null) {
+//                ApiServiceAsync myService = getApiServiceAsync();
+//                LoginRequest loginRequest = new LoginRequest();
+//                loginRequest.setLoginToken(spotmouth_session_id);
+//                myService.confirmLoginByCookieValue(loginRequest, new AsyncCallback() {
+//                    public void onFailure(Throwable caught) {
+//                        getMessagePanel().displayError("Login init error: " + caught.getMessage());
+//                    }
+//
+//                    public void onSuccess(Object result) {
+//                        MobileResponse mobileResponse = (MobileResponse) result;
+//                        if (mobileResponse.getStatus() == 1) {
+//                            setLoginMobileResponse(mobileResponse);
+//                            loginCallback.onSuccess(null);
+//                        } else {
+//                            //getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+//                            //let's login
+                           // showLogin(loginCallback);
+//                        }
+//                    }
+//                });
+//                return false;
+//            }
             showLogin(loginCallback);
             return false;
         } else {

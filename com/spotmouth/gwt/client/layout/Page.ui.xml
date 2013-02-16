@@ -47,7 +47,7 @@
                  </label>
                 </div>
 
-                <g:Button ui:field="searchButton"/>
+                <g:Button ui:field="searchButton">Search</g:Button>
             <!--
                 <input type="submit"/>
                 -->

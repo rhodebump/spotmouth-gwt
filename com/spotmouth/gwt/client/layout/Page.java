@@ -83,6 +83,7 @@ public class Page extends Composite {
        this.sortingListBox = sortingListBox;
 
         this.profilePicPanel = profilePicPanel;
+        this.searchButton = searchButton;
         initWidget(uiBinder.createAndBindUi(this));
 
         body.setWidget(bodyPanel);
@@ -94,6 +95,6 @@ public class Page extends Composite {
        // googleMap.setWidget(googleMapPanel);
         searchBox.setWidget(searchBoxPanel);
         // sidebar.setWidget(sidebarPanel);
-        this.searchButton = searchButton;
+
     }
 }

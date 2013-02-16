@@ -19,9 +19,7 @@ import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
 
 public class CouponForm extends SpotBasePanel implements SpotMouthPanel {
-
     private SimplePanel imageUploaderImagePanel = new SimplePanel();
-
     protected IUploader.OnFinishUploaderHandler onFinishUploaderHandler2 = new IUploader.OnFinishUploaderHandler() {
         public void onFinish(IUploader uploader) {
             if (uploader.getStatus() == IUploadStatus.Status.SUCCESS) {
@@ -46,9 +44,6 @@ public class CouponForm extends SpotBasePanel implements SpotMouthPanel {
             imageUploaderImagePanel.setWidget(image);
         }
     };
-
-
-
 
     public ImageResource getImageResource() {
         return MyWebApp.resources.coupon();
@@ -99,26 +94,22 @@ public class CouponForm extends SpotBasePanel implements SpotMouthPanel {
         return "Coupon";
     }
 
-
     public String getPageTitle() {
         return getTitle();
     }
 
     private SpotHolder spotHolder = null;
 
-    public CouponForm(MyWebApp mywebapp, SpotHolder spotHolder,ItemHolder couponItemHolder) {
+    public CouponForm(MyWebApp mywebapp, SpotHolder spotHolder, ItemHolder couponItemHolder) {
         super(mywebapp);
         this.spotHolder = spotHolder;
+        setItemHolder(couponItemHolder);
         if (MyWebApp.isDesktop()) {
             Button saveButton = new Button();
             saveButton.addClickHandler(saveHandler);
-
             Button cancelButton = new Button();
             saveButton.addClickHandler(cancelHandler);
-
-
-             titleTextBox = new TextField();
-
+            titleTextBox = new TextField();
             defaultUploader = new MultiUploader();
             defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler2);
             //do we have an iamge
@@ -127,22 +118,15 @@ public class CouponForm extends SpotBasePanel implements SpotMouthPanel {
             if (mainImage != null) {
                 imageUploaderImagePanel.setWidget(mainImage);
             }
-
             SuggestBox tagSearchTextBox = getTagSuggestBox(couponItemHolder.getTagHolders());
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
-
-
             initControls(couponItemHolder);
-
-            CouponFormComposite cfc = new CouponFormComposite( cancelButton,  imageUploaderImagePanel,  defaultUploader,  startDatePicker,  endDatePicker,  titleTextBox,
-                                 contentTextArea,  saveButton,  suggestionsPanel,  tagSearchTextBox,  selectedTagsPanel);
+            CouponFormComposite cfc = new CouponFormComposite(cancelButton, imageUploaderImagePanel, defaultUploader, startDatePicker, endDatePicker, titleTextBox,
+                    contentTextArea, saveButton, suggestionsPanel, tagSearchTextBox, selectedTagsPanel);
             add(cfc);
-
             return;
         }
-
-
         addSpotHeader(spotHolder);
         titleTextBox = addTextBox("Coupon Title", "title", "");
         contentTextArea = addTextArea("Description", "textData", "", false);
@@ -157,16 +141,12 @@ public class CouponForm extends SpotBasePanel implements SpotMouthPanel {
         contentTextArea.setValue(itemHolder.getTextData());
         if (itemHolder.getStartDate() != null) {
             startDatePicker.setValue(itemHolder.getStartDate());
-
-
         }
-
         if (itemHolder.getEndDate() != null) {
             endDatePicker.setValue(itemHolder.getEndDate());
-
-
         }
     }
+
     public void toggleFirst() {
         titleTextBox.setFocus(true);
     }
