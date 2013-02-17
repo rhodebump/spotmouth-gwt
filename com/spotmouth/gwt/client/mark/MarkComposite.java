@@ -169,19 +169,9 @@ public class MarkComposite extends Composite {
                     if (readQueue.size() > 0) {
                         File file = readQueue.get(0);
                         try {
-                            //panelImages.clear();
-//                            Element placeholders = DOM.getElementById("placeholders");
-//                            placeholders.setAttribute("style","display: none !important;");
-
                             uploadFile(file);
                             Image image = createBitmapImage(file);
                             image.setStyleName("ddplaceholedr");
-                            //profileImagePanel.setWidget(image);
-                           // image.setVisible(true);
-                           // InlineLabel span = new InlineLabel();
-                           //span.setStyleName("ddplaceholedr");
-                           //span.getElement().appendChild(image.getElement());
-                            //<span class="ddplaceholedr"></span>
                             panelImages.setVisible(true);
                             panelImages.add(image);
                         } finally {

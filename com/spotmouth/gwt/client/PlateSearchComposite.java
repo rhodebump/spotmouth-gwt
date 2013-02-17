@@ -150,11 +150,9 @@ public class PlateSearchComposite extends Composite {
                     if (readQueue.size() > 0) {
                         File file = readQueue.get(0);
                         try {
-                            //panelImages.clear();
                             uploadFile(file);
                             Image image = createBitmapImage(file);
                             image.setStyleName("ddplaceholedr");
-                            //profileImagePanel.setWidget(image);
                             panelImages.setVisible(true);
                             panelImages.add(image);
                         } finally {
