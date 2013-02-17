@@ -105,11 +105,6 @@
 
                                     <dnd:DropPanel ui:field="dropPanel"/>
 
-                                    <span class="ddplaceholedr"></span>
-                                    <span class="ddplaceholedr"></span>
-                                    <!--
-                                        <span class="ddplaceholedr"></span>
-                                        -->
                                 </div>
                                 <div id="submitbutton">
                                     <button type="submit">Upload Files</button>
@@ -118,7 +113,7 @@
 
 
                         </div>
-                        <label>
+                        <label style="float:right">
                             <p>Secret Key</p>
                             <g:TextBox ui:field="secretKeyTextBox"/>
                         </label>
