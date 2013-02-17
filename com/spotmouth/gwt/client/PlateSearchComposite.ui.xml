@@ -107,7 +107,9 @@
 
                                     <span class="ddplaceholedr"></span>
                                     <span class="ddplaceholedr"></span>
-                                    <span class="ddplaceholedr"></span>
+                                    <!--
+                                        <span class="ddplaceholedr"></span>
+                                        -->
                                 </div>
                                 <div id="submitbutton">
                                     <button type="submit">Upload Files</button>
