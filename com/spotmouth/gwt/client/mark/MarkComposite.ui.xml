@@ -38,7 +38,7 @@
                     <fieldset>
 
                         <div>
-                            <g:FlowPanel ui:field="panelImages"/>
+                            <g:FlowPanel ui:field="panelImages" addStyleNames="imageUploadDisplay"/>
                             <span id="ddselect">
                                 <mu:MultiUploader ui:field="multiUploader"/>
                                 <p>Select New Photo</p>
