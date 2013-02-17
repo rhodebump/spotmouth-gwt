@@ -10,10 +10,17 @@ import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.mark.MarkComposite;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
+import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
+import gwtupload.client.PreloadedImage;
 
 public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
+
+
+
+
+
     public LeaveMarkForm() {}
     public TextResource getHelpTextResource() {
         return HelpResources.INSTANCE.getLeaveMarkForm();
@@ -73,8 +80,8 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
         if (MyWebApp.isDesktop()) {
             MultiUploader multiUploader = new MultiUploader();
-            IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
-            multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+            //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
+            multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             MarkData markData = new MarkData();
             markData.expandData = new ExpandData();
             markData.spotHolder = spotHolder;

@@ -58,9 +58,10 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
 
 
             MultiUploader multiUploader = new MultiUploader();
-            FlowPanel panelImages3 = new FlowPanel();
-            IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages3);
-            multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+            //FlowPanel panelImages3 = new FlowPanel();
+            multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
+            //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages3);
+           // multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
 
             ULPanel pickSpotListBox = getPickSpotULPanel();
 
@@ -76,7 +77,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
 
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox,plateNameTextBox,keywordsTextBox,manufacturersListBox,stateTextBox,
                     vehicleTypeListBox,plateSearchButton,markData.tagSearchTextBox , markData.secretKeyTextBox,markData.saySomethingTextArea,
-                    selectedTagsPanel,leaveMarkButton,multiUploader,panelImages3,pickSpotListBox,mywebapp,shareOnFacebookButton,addTagButton,suggestionsPanel);
+                    selectedTagsPanel,leaveMarkButton,multiUploader,panelImages,pickSpotListBox,mywebapp,shareOnFacebookButton,addTagButton,suggestionsPanel);
             plateSearchComposite.tab1.setValue(true);
             add(plateSearchComposite);
 

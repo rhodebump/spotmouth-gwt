@@ -38,35 +38,20 @@
                     <fieldset>
 
                         <div>
-                            <!--
-                            <span id="ddselect">
-                                <input type="file" id="fileselect" multiple="multiple" name="fileselect[]"/>
-                                <p>Select File</p>
-                            </span>
-
-                            <div id="messages"></div>
-                            <div id="filedrag">
-                                <p id="ddabout">drop your photo here</p>
-                            </div>
-                            -->
-
+                            <g:FlowPanel ui:field="panelImages"/>
                             <span id="ddselect">
                                 <mu:MultiUploader ui:field="multiUploader"/>
-
                                 <p>Select New Photo</p>
                             </span>
                             <dnd:DropPanel ui:field="dropPanel"/>
 
 
+                                <span class="ddplaceholedr"></span>
+                                <span class="ddplaceholedr"></span>
+                                <span class="ddplaceholedr"></span>
 
-                            <g:FlowPanel  ui:field="panelImages"/>
-                            <div id="placeholders"><span class="ddplaceholedr"></span>
-                                                  <span class="ddplaceholedr"></span>
-                                                  <span class="ddplaceholedr"></span></div>
 
                         </div>
-
-
                         <div id="submitbutton">
                             <button type="submit">Upload Files</button>
                         </div>

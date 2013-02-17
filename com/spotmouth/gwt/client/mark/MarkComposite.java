@@ -170,8 +170,8 @@ public class MarkComposite extends Composite {
                         File file = readQueue.get(0);
                         try {
                             //panelImages.clear();
-                            Element placeholders = DOM.getElementById("placeholders");
-                            placeholders.setAttribute("style","display: none !important;");
+//                            Element placeholders = DOM.getElementById("placeholders");
+//                            placeholders.setAttribute("style","display: none !important;");
 
                             uploadFile(file);
                             Image image = createBitmapImage(file);

@@ -96,31 +96,22 @@
 
 
                             <fieldset>
-
                                 <div>
-
-
-
+                                    <g:FlowPanel ui:field="panelImages"/>
                                     <span id="ddselect">
                                         <mu:MultiUploader ui:field="multiUploader"/>
-                                        <g:FlowPanel ui:field="panelImages"/>
                                         <p>Select New Photo</p>
                                     </span>
+
                                     <dnd:DropPanel ui:field="dropPanel"/>
-
-
-
 
                                     <span class="ddplaceholedr"></span>
                                     <span class="ddplaceholedr"></span>
                                     <span class="ddplaceholedr"></span>
                                 </div>
-
-
                                 <div id="submitbutton">
                                     <button type="submit">Upload Files</button>
                                 </div>
-
                             </fieldset>
 
 
