@@ -22,6 +22,11 @@ import com.spotmouth.gwt.client.help.HelpResources;
  * To change this template use File | Settings | File Templates.
  */
 public class ManageProductsPanel  extends SpotBasePanel implements SpotMouthPanel {
+    public String getPageTitle() {
+        return getTitle();
+    }
+
+
     public String getTitle() {
         return "Manage Products";
     }

@@ -8,9 +8,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.SearchParameters;
+import com.spotmouth.gwt.client.dto.TagHolder;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //this is used for places and plates
 public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
@@ -65,11 +69,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
 
             Button shareOnFacebookButton =   getFacebookButton(markData);
 
-//            Button shareOnFacebookButton = new Button();
-//            shareOnFacebookButton.addClickHandler(saveHandlerFacebook);
-//            widgetMarkDataMap.put(shareOnFacebookButton,markData);
-
-            Button addTagButton = new Button("Add");
+            Button addTagButton = new Button();
             //addTagAnchor.getElement().setId("addTag");
             addTagButton.addClickHandler(addTagHandler);
 

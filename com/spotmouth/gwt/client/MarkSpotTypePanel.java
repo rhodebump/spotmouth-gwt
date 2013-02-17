@@ -1,19 +1,19 @@
 package com.spotmouth.gwt.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.*;
-import com.google.gwt.user.client.ui.*;
-import com.spotmouth.gwt.client.common.ListItem;
+import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.dto.ItemHolder;
-import com.spotmouth.gwt.client.dto.LocationResult;
+import com.spotmouth.gwt.client.dto.TagHolder;
 import com.spotmouth.gwt.client.help.HelpResources;
-import com.spotmouth.gwt.client.dto.Location;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //3 buttons to choose type of spot to mark
 public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
@@ -64,6 +64,8 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
             IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages3);
             multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
             ULPanel pickSpotULPanel = getPickSpotULPanel();
+
+
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
             Button leaveMarkButton = new Button();
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
@@ -81,7 +83,7 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
             setupRootPanelForm(myFormPanel, markData);
 
             Button shareOnFacebookButton =   getFacebookButton(markData);
-            Button addTagButton = new Button("Add");
+            Button addTagButton = new Button();
             addTagButton.addClickHandler(addTagHandler);
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(plateSearchPanel.colorsListBox, plateSearchPanel.plateNameTextBox,
                     plateSearchPanel.keywordsTextBox, plateSearchPanel.manufacturersListBox, plateSearchPanel.stateTextBox, plateSearchPanel.vehicleTypeListBox,
@@ -91,47 +93,11 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
             // flowPanel.add(plateSearchComposite);
             myFormPanel.setWidget(plateSearchComposite);
             add(myFormPanel);
-            return;
         }
-        ULPanel ulPanel = new ULPanel();
-        ulPanel.setStyleName("hint");
-        add(ulPanel);
-        {
-            ListItem listItem = new ListItem();
-            listItem.add(new Label("Choose Mark Address for places like restaurants, stores and places that have street addresses"));
-            ulPanel.add(listItem);
-        }
-        {
-            ListItem listItem = new ListItem();
-            listItem.add(new Label("Choose Mark Plate for vehicles, cars, trucks."));
-            ulPanel.add(listItem);
-        }
-        {
-            ListItem listItem = new ListItem();
-            listItem.add(new Label("Choose Mark Location for places without a mailing address, like a park bench, a beach, or if you are just stuck in traffic."));
-            ulPanel.add(listItem);
-        }
-        //add(ulPanel);
-        FlowPanel fp = new FlowPanel();
-        fp.setStyleName("menugrouping");
-        fp.addStyleName("clearing");
-        //Label Personal = new Label("Personal");
-        //Personal.setStyleName("h2");
-        add(fp);
-        addImageIcon(markPlaceHandler, new MarkSpotPanel(), fp);
-        addImageIcon(MyWebApp.MARK_PLATE, new PlateSearchPanel(), fp);
-        //   addImageIcon(markCurrentLocationHandler, new UserProfileForm(), fp);
-        //link.getElement().getFirstChild().appendChild(image.getElement());
-        //Hyperlink markLocationHyperLink = new Hyperlink("Mark Location",MyWebApp.MARK_LOCATION);
-        addImageIcon(MyWebApp.MARK_LOCATION, new MarkLocationForm(), fp);
-        addFieldset(ulPanel, "Hint", "na");
+
     }
 
-    ClickHandler markPlaceHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            mywebapp.toggleMarkPlace();
-        }
-    };
+;
 
     public void toggleFirst() {
     }

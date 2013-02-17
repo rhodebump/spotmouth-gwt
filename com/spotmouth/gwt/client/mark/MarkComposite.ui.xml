@@ -78,7 +78,7 @@
                 </label>
                 <label>
                     <p>Add Tags</p>
-                    <g:SuggestBox ui:field="tagSearchTextBox"/>          <g:Button ui:field="addTagButton"/>
+                    <g:SuggestBox ui:field="tagSearchTextBox"/>          <g:Button ui:field="addTagButton">Add</g:Button>
                     <p class="msdescription">maximum five tags</p>
                 </label>
                 <g:FlowPanel ui:field="selectedTagsPanel"/>

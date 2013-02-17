@@ -1686,6 +1686,9 @@ public abstract class SpotBasePanel extends FlowPanel {
     }
 
     protected SuggestBox getTagSuggestBox(List<TagHolder> tagHolders) {
+        if (tagHolders == null) {
+            tagHolders = new ArrayList<TagHolder>();
+        }
         SuggestBox suggestBox = initTagHolderForm(tagHolders);
         return suggestBox;
     }

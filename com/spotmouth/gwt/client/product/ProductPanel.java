@@ -22,6 +22,18 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
  */
 //user picked product, this will allow them to request it
 public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
+
+    public String getPageTitle() {
+        return getTitle();
+    }
+
+
+    public String getTitle() {
+        return "Product Install";
+    }
+
+
+
     TextField domainNameTextBox = new TextField();
     TextField hostNameTextBox = new TextField();
 

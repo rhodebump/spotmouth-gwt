@@ -268,6 +268,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             cancelButton.getElement().setId("md_cancel_btn");
             cancelButton.addClickHandler(cancelHandler);
 
+
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
 
