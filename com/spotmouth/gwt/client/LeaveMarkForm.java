@@ -72,61 +72,35 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
 
         if (MyWebApp.isDesktop()) {
-
             MultiUploader multiUploader = new MultiUploader();
-            //FlowPanel panelImages = new FlowPanel();
             IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
             multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-
             MarkData markData = new MarkData();
-
             markData.expandData = new ExpandData();
             markData.spotHolder = spotHolder;
-
-
-
             markData.saySomethingTextArea = contentTextArea;
             markData.formPanel = formPanel;
-            widgetMarkDataMap.put(leaveMarkButton,markData);
-
-
+            widgetMarkDataMap.put(leaveMarkButton, markData);
             leaveMarkButton.addClickHandler(saveHandler2);
-            //MarkComposite markComposite = new MarkComposite(leaveMarkButton, advancedMarkData.saySomethingTextArea, multiUploader, panelImages, mywebapp);
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
-            Button addTagButton = new Button("Add");
-            //addTagAnchor.getElement().setId("addTag");
+            Button addTagButton = new Button();
             addTagButton.addClickHandler(addTagHandler);
-
             markData.tagSearchTextBox = tagSearchTextBox;
-
-            //SimpleCheckBox shareOnFacebookCheckbox = new SimpleCheckBox();
-            //markData.shareOnFacebookCheckbox = shareOnFacebookCheckbox;
-
-
-            Button shareOnFacebookButton =   getFacebookButton(markData);
-
-
-
+            Button shareOnFacebookButton = getFacebookButton(markData);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
-
-
-            MarkComposite markComposite = new MarkComposite(leaveMarkButton,contentTextArea,multiUploader,panelImages,mywebapp,markData.tagSearchTextBox,selectedTagsPanel,
-                    addTagButton,markData.secretKeyTextBox,shareOnFacebookButton,suggestionsPanel);
+            MarkComposite markComposite = new MarkComposite(leaveMarkButton, contentTextArea, multiUploader, panelImages, mywebapp, markData.tagSearchTextBox, selectedTagsPanel,
+                    addTagButton, markData.secretKeyTextBox, shareOnFacebookButton, suggestionsPanel);
             markComposite.setLocationName(spotHolder.getName());
             markComposite.setFullAddress(spotHolder.getAddressLabel());
             markComposite.setPhoneNumber(spotHolder.getVoicephone());
-
             FormPanel myFormPanel = new FormPanel();
             setupRootPanelForm(myFormPanel, markData);
-            //add(markComposite);
-
             myFormPanel.setWidget(markComposite);
             add(myFormPanel);
-
             return;
 
-            //leaveMarkButton.addClickHandler(saveHandler);
+
         }
         if (spotHolder.getLicensePlate()) {
             doPlate(spotHolder, spotreadonly);

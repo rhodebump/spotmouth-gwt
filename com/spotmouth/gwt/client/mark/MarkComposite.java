@@ -1,20 +1,19 @@
 package com.spotmouth.gwt.client.mark;
 
-import com.google.gwt.dom.client.*;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.*;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
-import com.spotmouth.gwt.client.common.AutoGrowTextArea;
 import com.spotmouth.gwt.client.dto.MobileResponse;
-import com.spotmouth.gwt.client.dto.UserHolder;
-import com.spotmouth.gwt.client.dto.UserRequest;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.MultiUploader;
 import org.vectomatic.dnd.DataTransferExt;
@@ -115,7 +114,7 @@ public class MarkComposite extends Composite {
             public void onLoad(LoadEvent event) {
                 int width = image.getWidth();
                 int height = image.getHeight();
-                GWT.log("size=" + width + "x" + height);
+                GWT.log("MarkComposite.createBitmapImage size=" + width + "x" + height);
                 image.setVisible(true);
             }
         });
@@ -140,11 +139,20 @@ public class MarkComposite extends Composite {
         this.secretKeyTextBox = secretKeyTextBox;
         this.shareOnFacebookButton = shareOnFacebookButton;
 
-        leaveMarkButton.setStyleName("btn_blue");
+        //leaveMarkButton.setStyleName("btn_blue");
+
+        /*
+                                  <span class="ddplaceholedr"></span>
+                            <span class="ddplaceholedr"></span>
+                            <span class="ddplaceholedr"></span>
+
+         */
+
+        //panelImages1.add(new InlineLabel());
 
 
         this.addTagButton = addTagButton;
-        addTagButton.setStyleName("btn_blue");
+        //addTagButton.setStyleName("btn_blue");
 
         initWidget(uiBinder.createAndBindUi(this));
         dropPanel.getElement().setId("filedrag");
@@ -162,10 +170,18 @@ public class MarkComposite extends Composite {
                         File file = readQueue.get(0);
                         try {
                             //panelImages.clear();
+                            Element placeholders = DOM.getElementById("placeholders");
+                            placeholders.setAttribute("style","display: none !important;");
+
                             uploadFile(file);
                             Image image = createBitmapImage(file);
                             image.setStyleName("ddplaceholedr");
                             //profileImagePanel.setWidget(image);
+                           // image.setVisible(true);
+                           // InlineLabel span = new InlineLabel();
+                           //span.setStyleName("ddplaceholedr");
+                           //span.getElement().appendChild(image.getElement());
+                            //<span class="ddplaceholedr"></span>
                             panelImages.setVisible(true);
                             panelImages.add(image);
                         } finally {

@@ -56,11 +56,14 @@
                                 <p>Select New Photo</p>
                             </span>
                             <dnd:DropPanel ui:field="dropPanel"/>
-                            <g:FlowPanel ui:field="panelImages"/>
 
-                            <span class="ddplaceholedr"></span>
-                            <span class="ddplaceholedr"></span>
-                            <span class="ddplaceholedr"></span>
+
+
+                            <g:FlowPanel  ui:field="panelImages"/>
+                            <div id="placeholders"><span class="ddplaceholedr"></span>
+                                                  <span class="ddplaceholedr"></span>
+                                                  <span class="ddplaceholedr"></span></div>
+
                         </div>
 
 
@@ -78,7 +81,7 @@
                 </label>
                 <label>
                     <p>Add Tags</p>
-                    <g:SuggestBox ui:field="tagSearchTextBox"/>          <g:Button ui:field="addTagButton">Add</g:Button>
+                    <g:SuggestBox ui:field="tagSearchTextBox"/>          <g:Button addStyleNames="btn_blue" ui:field="addTagButton">Add</g:Button>
                     <p class="msdescription">maximum five tags</p>
                 </label>
                 <g:FlowPanel ui:field="selectedTagsPanel"/>
@@ -87,7 +90,7 @@
 
                 <span class="h_leave_mark">
 
-                    <g:Button ui:field="leaveMarkButton">Submit</g:Button>
+                    <g:Button addStyleNames="btn_blue"  ui:field="leaveMarkButton">Submit</g:Button>
                     <g:Button ui:field="shareOnFacebookButton">Share on facebook</g:Button>
                 </span>
 

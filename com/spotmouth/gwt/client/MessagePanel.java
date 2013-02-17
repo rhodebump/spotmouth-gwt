@@ -2,17 +2,29 @@ package com.spotmouth.gwt.client;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import com.google.gwt.user.client.ui.Anchor;
+import com.spotmouth.gwt.client.dto.TagHolder;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //used to display error messages and such
 public class MessagePanel extends FlowPanel {
+
+
+    protected ClickHandler killNotificationHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            setVisible(false);
+        }
+    };
+
 
     private Logger log = Logger.getLogger(getClass().getName());
 
@@ -44,6 +56,7 @@ public class MessagePanel extends FlowPanel {
         kill_notification.getElement().setId("kill_notification");
         //<a id="kill_notification">x</a>
         add(kill_notification);
+        kill_notification.addClickHandler(killNotificationHandler);
 
 
 
