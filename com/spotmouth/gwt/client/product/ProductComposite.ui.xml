@@ -14,8 +14,9 @@
       		<h1>Products</h1>
       		<h2><span ui:field='spotName'/></h2>
       		<div class="mp_product">
+                  <span ui:field='productSpan'/>
       			<p>&nbsp;<span ui:field='productDescription'/></p>
-      			<b class="mp_ava _wiki"></b>
+
       			<input type="checkbox" class="_show_settings"/>
       			<button class="button">Settings</button>
       			<div class="mp_settings">

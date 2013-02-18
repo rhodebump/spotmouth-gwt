@@ -72,6 +72,8 @@ public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
             activateButton.addClickHandler(saveHandler);
 
             ProductComposite pic = new ProductComposite(hostNameTextBox,domainNameTextBox,activateButton,acceptTerms);
+            pic.setProductClass("_" + productHolder.getHostSuffix());
+
             pic.setProductDescription(productHolder.getDescription());
             pic.setSpotName(spotHolder.getName());
             add(pic);

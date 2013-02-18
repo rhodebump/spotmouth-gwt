@@ -21,9 +21,20 @@ public class ProductComposite extends Composite {
 
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
+  //<b class="mp_ava _wiki"></b>
+    //productSpan
 
     @UiField
-        SpanElement productDescription;
+    SpanElement productSpan;
+
+    public void setProductClass(String x) {
+        productSpan.setClassName("mp_ava");
+        productSpan.addClassName(x);
+    }
+
+
+    @UiField
+    SpanElement productDescription;
 
     public void setProductDescription(String desc) {
         productDescription.setInnerText(desc);
