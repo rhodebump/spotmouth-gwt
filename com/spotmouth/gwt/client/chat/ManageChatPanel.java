@@ -3,6 +3,8 @@ package com.spotmouth.gwt.client.chat;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.ImageResource;
@@ -54,7 +56,7 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
                 //okay, we don't have a final "URL" for this image, and we need one to be able to insert into
                 //a wysiwyg editor
                 //let's call the server and sweep through the session files and convert these to content
-                //saveSessionContents();
+                saveSessionContents();
             }
         }
     };
@@ -119,10 +121,10 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
     public ManageChatPanel() {
     }
 
-   // private CheckBox geoGlobalCheckbox = new CheckBox("GEO Global");
 
-    protected TextBox address1TextBox = null;
-    protected TextBox zipcodeTextBox = null;
+
+//    protected TextBox address1TextBox = null;
+//    protected TextBox zipcodeTextBox = null;
     private SimplePanel chatImagePanel = new SimplePanel();
 
 
@@ -130,7 +132,7 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
 
     private ChatFormComposite cfc = null;
 
-    //TextBox contestName
+
     public ManageChatPanel(MyWebApp mywebapp, final ItemHolder itemHolder) {
         super(mywebapp, false, true, false);
        setItemHolder(itemHolder);
@@ -155,7 +157,6 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
             SuggestBox tagSearchTextBox = getTagSuggestBox(itemHolder.getTagHolders());
             tagSearchTextBox.getElement().setId("mc_tags_inp");
             tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
-            //tagSearchTextBox.setTabIndex(11);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
 
@@ -170,8 +171,11 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
             if (mainImage != null) {
                 chatImagePanel.setWidget(mainImage);
             }
+
+            Button cancelButton  = new Button();
+            cancelButton.addClickHandler(cancelChatHandler);
             this.cfc = new ChatFormComposite(nameTextBox, contentTextArea, startDatePicker, endDatePicker,
-                 tagSearchTextBox, selectedTagsPanel, saveButton,
+                 tagSearchTextBox, selectedTagsPanel, saveButton, cancelButton,
                      defaultUploader, chatImagePanel, mywebapp, itemHolder,suggestionsPanel);
             add(cfc);
         }
@@ -182,15 +186,19 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
 
         getItemHolder().setStartDate(startDatePicker.getValue());
         getItemHolder().setEndDate(endDatePicker.getValue());
-        //this is set directly via the iconStyleTextBox event in contestFormComposite
-
-
         getItemHolder().setTitle(nameTextBox.getValue());
         getItemHolder().setTextData(contentTextArea.getValue());
 
 
 
     }
+
+    protected ClickHandler cancelChatHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            History.newItem(MyWebApp.CHATS);
+        }
+    };
+
 
     AsyncCallback saveLocationAsSpotCallback2 = new AsyncCallback() {
         public void onFailure(Throwable throwable) {
@@ -242,11 +250,10 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
 
-                    com.spotmouth.gwt.client.dto.SolrDocument solrDocument = mobileResponse.getSearchQueryResponse().getResults().get(0);
-                    Long itemId = solrDocument.getFirstLong("georepoitemid_l");
-                    ViewChatPanel viewChatPanel = new ViewChatPanel(mywebapp, solrDocument);
+                    ItemHolder itemHolder = mobileResponse.getItemHolder();
+                    ViewChatPanel viewChatPanel = new ViewChatPanel(mywebapp, itemHolder);
                     mywebapp.swapCenter(viewChatPanel);
-                    History.newItem(MyWebApp.CHAT_DETAIL + itemId, false);
+                    History.newItem(MyWebApp.CHAT_DETAIL + itemHolder.getId(), false);
                     getMessagePanel().displayMessage("Chat saved");
                 } else {
                     getMessagePanel().displayErrors(mobileResponse.getErrorMessages());

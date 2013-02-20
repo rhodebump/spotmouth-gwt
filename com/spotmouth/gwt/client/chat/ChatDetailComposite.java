@@ -100,16 +100,16 @@ public class ChatDetailComposite  extends Composite {
         initWidget(uiBinder.createAndBindUi(this));
             //button class="button">Winners</button>
 
-        joinButton.setStyleName("button");
-        joinButton.setText("Winners");
+        //joinButton.setStyleName("button");
+       // joinButton.setText("");
 
 
 
-        editButton.setText("Edit");
-        editButton.setStyleName("button");
-        editButton.addStyleName("ac_edit");
+      //  editButton.setText("Edit");
+      //  editButton.setStyleName("button");
+        //editButton.addStyleName("ac_edit");
 
-        photoSpan.setStyleName("ac_photo");
+        //photoSpan.setStyleName("ac_photo");
     }
 
 

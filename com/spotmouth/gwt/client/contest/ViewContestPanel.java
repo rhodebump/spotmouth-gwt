@@ -51,16 +51,14 @@ public class ViewContestPanel extends SpotBasePanel implements SpotMouthPanel {
         this.solrDocument = solrDocument;
         String imgUrl = solrDocument.getFirstString("image_thumbnail_320x320_url_s");
         String desc = solrDocument.getFirstString("description_s");
-       this.name = solrDocument.getFirstString("name");
+        this.name = solrDocument.getFirstString("name");
         String startdate_dt = solrDocument.getFirstString("startdate_dt");
         String enddate_dt = solrDocument.getFirstString("enddate_dt");
         Long contestId = solrDocument.getFirstLong("contestid_l");
         String radius = solrDocument.getFirstString("radius_s");
         String location = solrDocument.getFirstString("location_s");
         Integer numberofstars_i = solrDocument.getFirstInteger("numberofstars_i");
-
         if (MyWebApp.isDesktop()) {
-
             ContestDetailComposite cdc = new ContestDetailComposite();
             cdc.setName(name);
             cdc.setRadius(radius);
@@ -72,11 +70,7 @@ public class ViewContestPanel extends SpotBasePanel implements SpotMouthPanel {
             cdc.setStarCount(numberofstars_i);
             //image
             cdc.setImageUrl(imgUrl);
-
             add(cdc);
-
-
-
             return;
         }
 

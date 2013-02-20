@@ -60,20 +60,26 @@ import java.util.logging.Logger;
  * Time: 9:31 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
+public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
+    public String getPageTitle() {
+        return getTitle();
+    }
 
+    public String getTitle() {
+        return name;
+    }
 
-    public ChatPanel(MyWebApp mywebapp,String chatRoom) {
+    private String name = null;
+
+    private String chatId  = null;
+
+    public ChatPanel(MyWebApp mywebapp, String chatId) {
         super(mywebapp);
-
-
-
-
-
+        this.chatId = chatId;
+        this.name = "Chat";
         label = new Label(LABEL_ENTER_ROOM);
-       // RootPanel.get("label").add(label);
+        // RootPanel.get("label").add(label);
         add(label);
-
         input = new TextBox();
         input.addKeyDownHandler(new KeyDownHandler() {
             @Override
@@ -84,9 +90,7 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
                 }
             }
         });
-
         add(input);
-
         Button send = new Button("Send");
         send.addClickHandler(new ClickHandler() {
             @Override
@@ -95,10 +99,7 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
                 input.setText("");
             }
         });
-
-
         add(send);
-
         HTMLPanel logPanel = new HTMLPanel("") {
             @Override
             public void add(Widget widget) {
@@ -106,15 +107,13 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
                 widget.getElement().scrollIntoView();
             }
         };
-
-
-
-
-            joinChat(chatRoom);
-
+        add(logPanel);
+        //joinChat(chatRoom);
     }
 
-
+    public void addedToDom() {
+        joinChat(chatId);
+    }
 
     public void toggleFirst() {
         //To change body of implemented methods use File | Settings | File Templates.
@@ -123,10 +122,6 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
     public boolean isLoginRequired() {
         return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
-
-
-
-
 
     static final Logger logger = Logger.getLogger(ChatsPanel.class.getName());
     static final String LABEL_ENTER_ROOM = "Type your name to enter the room";
@@ -139,23 +134,20 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
     static final String COLOR_SYSTEM_MESSAGE = "grey";
     static final String COLOR_MESSAGE_SELF = "green";
     static final String COLOR_MESSAGE_OTHERS = "red";
-
     int count = 0;
-
     AtmosphereClient client;
     MyCometListener cometListener = new MyCometListener();
     AtmosphereGWTSerializer serializer = GWT.create(EventSerializer.class);
     String author;
-
     Label label;
     TextBox input;
     Element chat;
-    String room="room1";
-
+    //String room = "room1";
 
     void sendMessage(String message) {
+        GWT.log("sendMessage " + message);
         if (author == null) {
-            author = message;
+            author = "anonymous";
             client.broadcast(new Event(author, MESSAGE_JOINED_ROOM));
             label.setText(LABEL_TYPE_MESSAGE);
         } else {
@@ -167,8 +159,10 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
         return GWT.getModuleBaseURL() + "gwtComet/" + room;
     }
 
-   public void joinChat(final String newRoom) {
+    public void joinChat(final String newRoom) {
+        GWT.log("joinChat " + newRoom);
         if (client != null) {
+            GWT.log("client not null");
             if (author != null) {
                 client.broadcast(new Event(author, MESSAGE_LEFT_ROOM));
             }
@@ -179,11 +173,15 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
         Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
             @Override
             public void execute() {
+                GWT.log("scheduleDeferred, new AtmosphereClient");
                 //room = newRoom;
                 client = new AtmosphereClient(getUrl(newRoom), serializer, cometListener);
+                GWT.log("clearChat");
                 clearChat();
                 label.setText(LABEL_ENTER_ROOM);
+                GWT.log("client start");
                 client.start();
+                GWT.log("client start");
             }
         });
     }
@@ -193,18 +191,14 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
     }
 
     void addChatLine(String line, String color) {
+        GWT.log("addChatLine " + line);
         HTML newLine = new HTML(line);
         newLine.getElement().getStyle().setColor(color);
         chat.appendChild(newLine.getElement());
         newLine.getElement().scrollIntoView();
     }
 
-
-
-
-
     private class MyCometListener implements AtmosphereListener {
-
         DateTimeFormat timeFormat = DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.TIME_MEDIUM);
 
         @Override
@@ -256,7 +250,7 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
         public void onMessage(List<?> messages) {
             for (Object obj : messages) {
                 if (obj instanceof Event) {
-                    Event e = (Event)obj;
+                    Event e = (Event) obj;
                     String line = timeFormat.format(e.getTime())
                             + " <b>" + e.getAuthor() + "</b> " + e.getMessage();
                     if (e.getAuthor().equals(author)) {
@@ -268,7 +262,4 @@ public class ChatPanel  extends SpotBasePanel implements SpotMouthPanel {
             }
         }
     }
-
-
-
 }

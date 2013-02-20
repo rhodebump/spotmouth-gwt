@@ -16,7 +16,7 @@
    			<p><span ui:field='descriptionSpan'/></p>
    		</div>
    		<span class="cl_btns">
-             <g:Button ui:field="joinChatButton"/>
+             <g:Button ui:field="joinChatButton">Join Chat</g:Button>
 
    		</span>
 

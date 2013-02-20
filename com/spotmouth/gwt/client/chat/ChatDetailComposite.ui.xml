@@ -10,17 +10,17 @@
 <div class="add_contest" id="add_contest">
        	<div class="content">
 
-               <g:InlineLabel ui:field="photoSpan"/>
+               <g:InlineLabel addStyleNames="ac_photo" ui:field="photoSpan"/>
 
        		<h1 class="ac_title"><span ui:field='nameSpan'/></h1>
-       		<h2 class="ac_title"><span ui:field='locationSpan'/><span class="ac_radius" title="Radius"><span ui:field='radiusSpan'/></span></h2>
+       		<h2 class="ac_title"><span ui:field='locationSpan'/></h2>
        		<p class="ac_description"><span ui:field='descriptionSpan'/></p>
        		<div class="ac_date_block">
        			<span class="ac_date ac_date_from"><img src="css/date.png"/><span ui:field='startDateSpan'/></span>
        			<span class="ac_date ac_date_to"><img src="css/enddate.png"/><span ui:field='endDateSpan'/></span>
        		</div>
-               <g:Button ui:field="joinButton"/>
-               <g:Button ui:field="editButton"/>
+               <g:Button addStyleNames="button" ui:field="joinButton">Join Chat</g:Button>
+               <g:Button addStyleNames="button ac_edit" ui:field="editButton">Edit</g:Button>
 
 
        	</div>

@@ -862,7 +862,7 @@ public class MyWebApp implements EntryPoint {
                 itemDetailDialog.hide();
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
-                    ChatDetailPanel spd = new ChatDetailPanel(MyWebApp.this, mobileResponse);
+                    ViewChatPanel spd = new ViewChatPanel(MyWebApp.this, mobileResponse.getItemHolder());
                     swapCenter(spd);
                 } else {
                     verifyDisplay();
@@ -899,7 +899,7 @@ public class MyWebApp implements EntryPoint {
                 itemDetailDialog.hide();
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
-                    ChatDetailPanel spd = new ChatDetailPanel(MyWebApp.this, mobileResponse);
+                    ManageChatPanel spd = new ManageChatPanel(MyWebApp.this, mobileResponse.getItemHolder());
                     swapCenter(spd);
                 } else {
                     verifyDisplay();
@@ -1577,8 +1577,7 @@ public class MyWebApp implements EntryPoint {
     }
 
     protected TextBox locationTextBox = new TextBox();
-    //"yyyy.MM.dd G 'at' HH:mm:ss
-    // private static  SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 
     //need to reset the results panel and add this style
     public ResultsPanel getResultsPanel(String styleName) {

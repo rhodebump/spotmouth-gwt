@@ -232,7 +232,6 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         resultsViewLabel.addStyleName("linky");
         sortingLabel.setStyleName("sortingLabel");
         sortingLabel.addStyleName("linky");
-       // sortingLabel.addClickHandler(showSortingHandler);
 
 
         toggleKiloMilesLabel.setStyleName("sortingLabel");
@@ -245,10 +244,6 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
             toggleKiloMilesLabel.setText(SHOW_KM);
         }
 
-       // sortingPanel.add(sortingListBox);
-        //sortingPanel.setVisible(false);
-        //tagHandler2.setWidth("100%");
-        //sortingPanel.add(tagListBox);
     }
 
     ClickHandler tagsHandler = new ClickHandler() {
@@ -510,33 +505,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     private Icon baseIcon;
-//    public ClickHandler showSortingHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            if (sortingPanel.isVisible()) {
-//                sortingLabel.setText(SHOW_SORTING);
-//                sortingPanel.setVisible(false);
-//            } else {
-//                sortingLabel.setText("Hide Sorting/Tags");
-//                sortingPanel.setVisible(true);
-//            }
-//        }
-//    };
-//    public ClickHandler showResultsOnMapHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            //let's use this to toggle between the map view and the list view
-//            clear();
-//            commonInit(mobileResponse);
-//            if (resultsViewLabel.getText().equals(MAP_VIEW)) {
-//                //History.newItem("ignore-map");
-//                mywebapp.fixPage(2);
-//                History.newItem(MyWebApp.RESULTS_MAP);
-//
-//            } else {
-//                mywebapp.fixPage(1);
-//                History.newItem(MyWebApp.HOME);
-//            }
-//        }
-//    };
+
 
     //we need to keep this around so we can add the results to a list, or a map
     private MobileResponse mobileResponse = null;
@@ -615,13 +584,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
             }
             handleResult(ul, locationResult);
         }
-        //pagination is very problematic in that we have so many sources, yelp, instagram, etc...  can't
-        //do a good algorithm to do it
 
-//        PaginationPanel paginationPanel = new PaginationPanel(
-//                previousResultsHandler, nextResultsHandler, searchParameters,
-//                mobileResponse.getLocationResults().size());
-//        add(paginationPanel);
     }
 
     public void resetSearchParameters() {

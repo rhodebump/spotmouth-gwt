@@ -37,6 +37,16 @@ import java.util.Map;
  */
 public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
 
+    public String getPageTitle() {
+        return getTitle();
+    }
+
+    public String getTitle() {
+        return "Chats";
+    }
+
+
+
     Map<Widget, Long> widgetChatIdMap = new HashMap<Widget, Long>();
 
     private ClickHandler createChatHandler = new ClickHandler() {
@@ -66,18 +76,19 @@ public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
         ulPanel.setStyleName("_cl");
         for (SolrDocument solrDocument : queryResponse.getResults()) {
             Image chatImage = new Image();
-            String imgUrl = solrDocument.getFirstString("image_thumbnail_130x130_url_s");
+            String imgUrl = solrDocument.getFirstString("latest_mark_thumbnail_320x320_url_s");
             if (imgUrl != null) {
                 chatImage.setUrl(imgUrl);
             }
             String name = solrDocument.getFirstString("title_s");
-            String desc = solrDocument.getFirstString("description_s");
+            //post_s is the safe item full text
+            String desc = solrDocument.getFirstString("post_s");
             Long georepoitemid_l = solrDocument.getFirstLong("georepoitemid_l");
-            Button joinChatButton = new Button("Join Chat");
+            Button joinChatButton = new Button();
             joinChatButton.addClickHandler(joinChatHandler);
             widgetChatIdMap.put(joinChatButton, georepoitemid_l);
-           Button winnersButton = new Button("Winners");
-            winnersButton.setVisible(false);
+//           Button winnersButton = new Button("Winners");
+//            winnersButton.setVisible(false);
             ChatResultComposite crc = new ChatResultComposite(chatImage, joinChatButton);
             crc.setChatName(name);
             crc.setDescription(desc);

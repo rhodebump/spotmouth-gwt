@@ -24,65 +24,47 @@ import com.spotmouth.gwt.client.common.TextField;
 public class ChatFormComposite extends Composite {
     interface MyUiBinder extends UiBinder<Widget, ChatFormComposite> {
     }
+
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
-
-
-
-
     @UiField(provided = true)
     final TextField nameTextBox;
     @UiField(provided = true)
     final TextArea descriptionTextArea;
-//    @UiField(provided = true)
-//    final DateBox startDatePicker;
-//    @UiField(provided = true)
-//    final DateBox endDatePicker;
-
     @UiField(provided = true)
     final FlowPanel selectedTagsPanel;
-
     @UiField(provided = true)
     final FlowPanel suggestionsPanel;
-
-
     @UiField(provided = true)
     final SuggestBox tagSearchTextBox;
     @UiField(provided = true)
     final Button saveButton;
-
+    @UiField(provided = true)
+    final Button cancelButton;
     @UiField
     DropPanel dropPanel;
     @UiField(provided = true)
     final MultiUploader multiUploader;
     @UiField(provided = true)
     final SimplePanel imagePanel;
-
-
     private MyWebApp mywebapp = null;
     private ItemHolder itemHolder = null;
 
-
-    public ChatFormComposite(TextField nameTextBox, TextArea descriptionTextArea,  DateBox startDatePicker, DateBox endDatePicker,
-                                    SuggestBox tagSearchTextBox,
-                                    FlowPanel selectedTagsPanel, Button saveButton,
-                                 MultiUploader multiUploader, final SimplePanel imagePanel,
-                                    MyWebApp mywebapp,ItemHolder itemHolder,FlowPanel suggestionsPanel) {
-
-         this.suggestionsPanel = suggestionsPanel;
+    public ChatFormComposite(TextField nameTextBox, TextArea descriptionTextArea, DateBox startDatePicker, DateBox endDatePicker,
+                             SuggestBox tagSearchTextBox,
+                             FlowPanel selectedTagsPanel, Button saveButton, Button cancelButton,
+                             MultiUploader multiUploader, final SimplePanel imagePanel,
+                             MyWebApp mywebapp, ItemHolder itemHolder, FlowPanel suggestionsPanel) {
+        this.suggestionsPanel = suggestionsPanel;
         this.nameTextBox = nameTextBox;
         this.descriptionTextArea = descriptionTextArea;
-//        this.startDatePicker = startDatePicker;
-//        this.endDatePicker = endDatePicker;
+        this.cancelButton = cancelButton;
         this.tagSearchTextBox = tagSearchTextBox;
         this.selectedTagsPanel = selectedTagsPanel;
-                this.saveButton = saveButton;
+        this.saveButton = saveButton;
         this.multiUploader = multiUploader;
         this.imagePanel = imagePanel;
         this.mywebapp = mywebapp;
         this.itemHolder = itemHolder;
-
         initWidget(uiBinder.createAndBindUi(this));
-
     }
-
 }

@@ -834,33 +834,7 @@ public abstract class SpotBasePanel extends FlowPanel {
             }
         }
     };
-//    ClickHandler mostVotesHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            GWT.log("mostVotesHandler onClick");
-//            Object sender = event.getSource();
-//            if (sender instanceof Widget) {
-//                Widget b = (Widget) sender;
-//                SolrDocument solrDocument = contestsClickMap.get(b);
-//                Long contestId = solrDocument.getFirstLong("contestid_l");
-//                mywebapp.toggleContestTotalVotes(contestId);
-//
-//
-//            }
-//        }
-//    };
-//    ClickHandler viewAverageVoteHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            GWT.log("viewAverageVoteHandler onClick");
-//            Object sender = event.getSource();
-//            if (sender instanceof Widget) {
-//                Widget b = (Widget) sender;
-//                SolrDocument solrDocument = contestsClickMap.get(b);
-//                Long contestId = solrDocument.getFirstLong("contestid_l");
-//                //String sortKey = "contestAverageVote_" + contestId + "_d";
-//                mywebapp.toggleContestAverageVotes(contestId);
-//            }
-//        }
-//    };
+
 
     protected void addViewVotingResults(Panel panel, SolrDocument solrDocument) {
         Long contestId = solrDocument.getFirstLong("contestid_l");
@@ -882,23 +856,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         //flowPanel.add(panel);
         panel.add(flowPanel);
     }
-    //   protected Map<Widget, SolrDocument> contestsClickMap = new HashMap<Widget, SolrDocument>();
-//
-//    protected void addContestLink(Widget widget, SolrDocument solrDocument) {
-//        widget.addStyleName("linky");
-//        contestsClickMap.put(widget, solrDocument);
-//    }
-//    public ClickHandler viewContest = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            Object sender = event.getSource();
-//            if (sender instanceof Widget) {
-//                Widget b = (Widget) sender;
-//                SolrDocument solrDocument = contestsClickMap.get(b);
-//                ViewContestPanel viewContestPanel = new ViewContestPanel(mywebapp, solrDocument);
-//                mywebapp.swapCenter(viewContestPanel);
-//            }
-//        }
-//    };
+
 
     protected void addButtons() {
         HorizontalPanel hp = new HorizontalPanel();
@@ -4701,7 +4659,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     };
     Map<PreloadedImage, FlowPanel> preloadedImagePanelMap = new HashMap<PreloadedImage, FlowPanel>();
 
-    private void saveSessionContents() {
+    protected void saveSessionContents() {
         ApiServiceAsync myService = mywebapp.getApiServiceAsync();
         ContentRequest contentRequest = new ContentRequest();
         myService.saveSessionContents(contentRequest, new AsyncCallback() {

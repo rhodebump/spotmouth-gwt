@@ -10,7 +10,7 @@
 
 <div class="manage_contents" id="manage_contents">
      	<div class="content">
-     		<h1 class="mc_title">Manage Chat<button class="button">Cancel</button></h1>
+     		<h1 class="mc_title">Manage Chat<g:Button ui:field="cancelButton" addStyleNames="button">Cancel</g:Button></h1>
 
 
              <div>
