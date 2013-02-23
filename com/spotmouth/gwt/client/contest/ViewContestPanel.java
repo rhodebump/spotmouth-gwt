@@ -31,9 +31,7 @@ public class ViewContestPanel extends SpotBasePanel implements SpotMouthPanel {
 
     private String name = null;
 
-    public ImageResource getImageResource() {
-        return mywebapp.resources.contests();
-    }
+
 
     public void toggleFirst() {
         //To change body of implemented methods use File | Settings | File Templates.

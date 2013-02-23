@@ -31,9 +31,6 @@ public class ViewChatPanel extends SpotBasePanel implements SpotMouthPanel {
 
     private String name = null;
 
-    public ImageResource getImageResource() {
-        return mywebapp.resources.contests();
-    }
     DateTimeFormat fmt = DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_LONG);
 
     public void toggleFirst() {

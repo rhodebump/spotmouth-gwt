@@ -61,13 +61,7 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
     };
 
     // private List<TagHolder> tagHolders = new ArrayList<TagHolder>();
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.contestsMobile();
-        } else {
-            return MyWebApp.resources.contests();
-        }
-    }
+
 
 
 

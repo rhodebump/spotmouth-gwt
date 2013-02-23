@@ -26,7 +26,7 @@ public class ChatResultComposite extends Composite {
 
 
         this.chatImage = chatImage;
-        this.chatImage.setStyleName("cl_item_photo");
+        this.chatImage.setStyleName("chat_item_photo");
         this.joinChatButton = joinChatButton;
         this.joinChatButton.setStyleName("button");
         initWidget(uiBinder.createAndBindUi(this));

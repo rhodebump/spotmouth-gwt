@@ -25,13 +25,7 @@ import java.util.Map;
 public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
     Map<Widget, Long> widgetContestIdMap = new HashMap<Widget, Long>();
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.contestsMobile();
-        } else {
-            return MyWebApp.resources.contests();
-        }
-    }
+
 
     public String getTitle() {
         return "Contests";

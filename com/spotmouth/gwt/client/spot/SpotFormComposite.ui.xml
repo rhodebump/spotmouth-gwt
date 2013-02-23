@@ -84,7 +84,7 @@
 
       		</label>
 
-      		<div class="ma_tags">
+      		<div>
                   <g:FlowPanel ui:field="selectedTagsPanel" />
                   <g:FlowPanel ui:field="suggestionsPanel" />
 

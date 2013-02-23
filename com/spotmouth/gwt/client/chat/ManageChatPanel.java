@@ -67,13 +67,7 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
         }
     };
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.contestsMobile();
-        } else {
-            return MyWebApp.resources.contests();
-        }
-    }
+
 
     /*
     called to push photo to contest

@@ -157,14 +157,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
     public SetLocationManuallyPanel() {
     }
 
-    private Label setLocationFromDeviceButton() {
-        Label setLocationFromDevice = new Label("Set Location From Device");
-        setLocationFromDevice.addClickHandler(setLocationFromDeviceHandler);
-        fixButton(setLocationFromDevice);
-        //add(setLocationFromDevice);
-        addImageToButton(setLocationFromDevice, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
-        return setLocationFromDevice;
-    }
+
 
     private ULPanel getPreviousLocations() {
         ULPanel ulPanel = new ULPanel();
@@ -236,20 +229,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
 
             return;
         }
-        this.addStyleName("SetLocationManuallyPanel");
-        add(setLocationFromDeviceButton());
-        previousLocationsPanel.setWidth("100%");
-        //if there are no locations to display, let's not show this has an option
-        Map<String, Location> locations = mywebapp.getLocationsFromLocalStorage();
-        GWT.log("THere are " + locations.size() + " locations in local storage");
-        if (!locations.isEmpty()) {
-            previousLocationsPanel.add(showPreviousLocationsButton());
-        }
-        add(previousLocationsPanel);
-        add(useMapButton());
-        addressFormPanel.setWidth("100%");
-        addressFormPanel.add(showAddressFormButton());
-        add(addressFormPanel);
+
     }
 
     Label hidePreviousLocationsButton() {
@@ -330,24 +310,24 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
     Label hideAddressFormButton() {
         Label btn = new Label("Hide Address Entry Form");
         btn.addClickHandler(hideAddressFormHandler);
-        addImageToButton(btn, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
+       // addImageToButton(btn, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
         fixButton(btn);
         return btn;
     }
 
-    Label showAddressFormButton() {
-        Label btn = new Label("Show Address Entry Form");
-        btn.addClickHandler(showAddressFormHandler);
-        addImageToButton(btn, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
-        fixButton(btn);
-        return btn;
-    }
+//    Label showAddressFormButton() {
+//        Label btn = new Label("Show Address Entry Form");
+//        btn.addClickHandler(showAddressFormHandler);
+//        addImageToButton(btn, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
+//        fixButton(btn);
+//        return btn;
+//    }
 
     ClickHandler hideAddressFormHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             // com.google.gwt.user.client.Window.scrollTo(0, 0);
             addressFormPanel.clear();
-            addressFormPanel.add(showAddressFormButton());
+          //  addressFormPanel.add(showAddressFormButton());
         }
     };
     ClickHandler showAddressFormHandler = new ClickHandler() {

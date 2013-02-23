@@ -59,19 +59,19 @@ public interface SpotImageResource extends ClientBundle {
     ImageResource yelp();
 
 
-
-    @Source("phone_transfer.png")
-    @ImageOptions(width = 72)
-    ImageResource locationDevice();
-
-
-    @Source("phone_transfer.png")
-    @ImageOptions(width = buttonSize)
-    ImageResource locationDeviceButton();
-
-    @Source("phone_transfer.png")
-    @ImageOptions(width = buttonSizeMobile)
-    ImageResource locationDeviceButtonMobile();
+//
+//    @Source("phone_transfer.png")
+//    @ImageOptions(width = 72)
+//    ImageResource locationDevice();
+//
+//
+//    @Source("phone_transfer.png")
+//    @ImageOptions(width = buttonSize)
+//    ImageResource locationDeviceButton();
+//
+//    @Source("phone_transfer.png")
+//    @ImageOptions(width = buttonSizeMobile)
+//    ImageResource locationDeviceButtonMobile();
 
 
 
@@ -96,14 +96,14 @@ public interface SpotImageResource extends ClientBundle {
     @Source("thumbs_up_deselected.png")
     @ImageOptions(width = 28)
     ImageResource thumbsUpDeselected16();
-
-    @Source("medal.png")
-    @ImageOptions(width = 72)
-    ImageResource contests();
-
-    @Source("medal.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource contestsMobile();
+//
+//    @Source("medal.png")
+//    @ImageOptions(width = 72)
+//    ImageResource contests();
+//
+//    @Source("medal.png")
+//    @ImageOptions(width = mobileSize)
+//    ImageResource contestsMobile();
 
 
 

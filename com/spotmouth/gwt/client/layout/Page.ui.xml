@@ -83,7 +83,7 @@
 
 
             <div id="usmenu" class="hideme">
-            <input type="checkbox"/>
+            <input type="text"/>
             <span id="usava"><!-- <img src="ava.jpg"></img>-->
                 <!--
                 <g:Image ui:field="profilePicImage"/>

@@ -139,7 +139,7 @@ public class ApplicationMenuPanel extends SpotBasePanel implements SpotMouthPane
         add(tools);
         add(bottomPanel);
         addImageIcon(MyWebApp.SET_LOCATION, new SetLocationManuallyPanel(mywebapp), bottomPanel);
-        addImageIcon(setLocationFromDeviceHandler, "Location From Device", mywebapp.resources.locationDevice(), mywebapp.resources.locationDeviceMobile(), bottomPanel, null);
+        //addImageIcon(setLocationFromDeviceHandler, "Location From Device", mywebapp.resources.locationDevice(), mywebapp.resources.locationDeviceMobile(), bottomPanel, null);
         addImageIcon(settingsHandler, new SettingsPanel(), bottomPanel);
         addImageIcon(MyWebApp.CONTACT, new ContactPanel(), bottomPanel);
 

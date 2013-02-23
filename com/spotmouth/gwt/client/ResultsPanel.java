@@ -397,7 +397,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         //addImageContent(bigImageDisplayPanel, ch, "320x320");
         ImageScaleHolder imageScaleHolder = getImageScaleHolder(contestHolder.getContentHolder(), "130x130");
         if (imageScaleHolder == null) {
-            this.setImageResources(mywebapp.resources.contests(), mywebapp.resources.contestsMobile());
+          //  this.setImageResources(mywebapp.resources.contests(), mywebapp.resources.contestsMobile());
         } else {
             GWT.log("url is " + imageScaleHolder.getWebServerAssetHolder().getUrl());
             Image image = new Image();

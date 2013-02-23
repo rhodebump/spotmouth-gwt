@@ -125,6 +125,8 @@ public class MyWebApp implements EntryPoint {
     String devkey = "ABQIAAAAM9fymNs8HkMYUXmwm3vULhS-Lxx7NiGUwfjIB8UxIofDVocgYRSqughddUxwyzJQHGi7LPalDi6hNw";
 
     public String getGoogleMapKey() {
+        Exception e = new Exception();
+        GWT.log("getGoogleMapKey", e);
         if (getHost().startsWith("http://dev")) {
             return devkey;
         } else if (getHost().startsWith("http://m.")) {
@@ -1349,14 +1351,10 @@ public class MyWebApp implements EntryPoint {
     //called by the reverse geocoder
     private void setCurrentLocation2(Location clocation) {
         log("setCurrentLocation2");
-        if (clocation == null) {
-            //  log("setCurrentLocation2 clocation is null ");
-        }
         if (clocation == null) return;
         log("setting location to " + clocation.toString());
         DateTimeFormat fmt = DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss");
         // prints Monday, December 17, 2007 in the default locale
-        //GWT.log(fmt.format(today), null);
         String lastUsedDate = fmt.format(new Date());
         clocation.setLastUsedDate(lastUsedDate);
         this.currentLocation = clocation;
@@ -1991,22 +1989,7 @@ public class MyWebApp implements EntryPoint {
     private List<StateProvinceHolder> stateProvinceHolders = new ArrayList<StateProvinceHolder>();
 
     public void runApp() {
-        if (isDesktop()) {
-            //my crawler filter will add this to query filter if it's a robot
-            this.robot = Window.Location.getQueryString().indexOf("robot=true") >= 0;
-//            DesktopResource.INSTANCE.reset().ensureInjected();
-//            DesktopResource.INSTANCE.style().ensureInjected();
-//            DesktopResource.INSTANCE.pagenavi().ensureInjected();
-//            DesktopResource.INSTANCE.spotmouth().ensureInjected();
-//            DesktopResource.INSTANCE.default1().ensureInjected();
-//            DesktopResource.INSTANCE.catmenu().ensureInjected();
-//            DesktopResource.INSTANCE.topNav().ensureInjected();
-//            DesktopResource.INSTANCE.newSearchCss().ensureInjected();
-        } else {
-//            DesktopResource.INSTANCE.MyWebApp().ensureInjected();
-//            DesktopResource.INSTANCE.iui().ensureInjected();
-//            DesktopResource.INSTANCE.defaultTheme().ensureInjected();
-        }
+
         //common css for tag and upload controls
         //DesktopResource.INSTANCE.upload().ensureInjected();
         log("runApp");
@@ -2217,24 +2200,6 @@ public class MyWebApp implements EntryPoint {
             }
         }
     };
-//    AsyncCallback markSpotCallback = new AsyncCallback() {
-//        public void onFailure(Throwable throwable) {
-//            getMessagePanel().displayError(throwable.getMessage());
-//        }
-//
-//        public void onSuccess(Object response) {
-//            MobileResponse mobileResponse = (MobileResponse) response;
-//            if (mobileResponse.getStatus() == 1) {
-//                toggleLeaveMark(mobileResponse.getSpotHolder());
-////                SpotDetailPanel spotDetailPanel = new SpotDetailPanel(MyWebApp.this, mobileResponse);
-////                swapCenter(spotDetailPanel);
-//            } else {
-//                verifyDisplay();
-//                getMessagePanel().clear();
-//                getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
-//            }
-//        }
-//    };
 
     //we clicked on a factual location, but for ui consistency, we need to
     //show the spot detail screen
@@ -2701,6 +2666,8 @@ public class MyWebApp implements EntryPoint {
      * This is the entry point method.
      */
     public void onModuleLoad() {
+
+
         GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
             @Override
             public void onUncaughtException(Throwable throwable) {
@@ -2736,6 +2703,10 @@ public class MyWebApp implements EntryPoint {
                 });
             }
         });
+
+        this.robot = Window.Location.getQueryString().indexOf("robot=true") >= 0;
+
+
         initAuth();
         //phonegap uses the following to init, which will error out in IE
         //$doc.addEventListener($intern_1704, $entry(f), false);
@@ -2783,6 +2754,8 @@ public class MyWebApp implements EntryPoint {
     private ListBox sortingListBox = new ListBox();
 
     public void doMapPage() {
+
+
         if (pageModeDisplayed == 2) return;
         MapPage page = new MapPage(simplePanel, popularULPanel, latestULPanel, messagePanel, tagCloudPanel, searchBoxPanel, mapPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton, tagListBox, sortingListBox);
         RootPanel.get().clear();
@@ -2834,50 +2807,10 @@ public class MyWebApp implements EntryPoint {
             }
         });
         keywordsTextBox.setStyleName("keywordsTextBox");
-        // searchBoxPanel.setStyleName("wrapper");
-//        TabPanel tp1 = new TabPanel();
-//        tp1.add(keywordsTextBox, k2);
-//        tp1.selectTab(0);
-        //searchBoxPanel.setWidth("100%");
-        // searchBoxPanel.add(tp1);
-        // TabPanel tp = new TabPanel();
-        //    tp.add(locationTextBox, "Near (Address, Neighborhood, City, State or Zip)");
-        //   tp.add(locationsListBox, "Previous Locations");
-        //    tp.selectTab(0);
-        //   searchBoxPanel.add(tp);
-        //     Label searchLabel = new Label("Search");
-        //    searchLabel.addClickHandler(clickLocationSearch);
-        //    searchLabel.setStyleName("whiteButton");
-        //   searchBoxPanel.add(searchLabel);
+
     }
 
-    private void initSearchBoxDesktop2() {
-        rebuildLocationListBox();
-        //final String k2 = "Search for (e.g. chinese, jim's, kabob)";
-        keywordsTextBox.addKeyDownHandler(new KeyDownHandler() {
-            @Override
-            public void onKeyDown(KeyDownEvent event) {
-                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                    performSearch();
-                }
-            }
-        });
-        keywordsTextBox.setStyleName("keywordsTextBox");
-        TabPanel tp1 = new TabPanel();
-        tp1.add(keywordsTextBox, k2);
-        tp1.selectTab(0);
-        //searchBoxPanel.setWidth("100%");
-        searchBoxPanel.add(tp1);
-        TabPanel tp = new TabPanel();
-        tp.add(locationTextBox, "Near (Address, Neighborhood, City, State or Zip)");
-        tp.add(locationsListBox, "Previous Locations");
-        tp.selectTab(0);
-        searchBoxPanel.add(tp);
-        Label searchLabel = new Label("Search");
-        searchLabel.addClickHandler(clickLocationSearch);
-        searchLabel.setStyleName("whiteButton");
-        searchBoxPanel.add(searchLabel);
-    }
+
 
     final String k2 = "Search for (e.g. chinese, jim's, kabob)";
 
@@ -3165,6 +3098,8 @@ public class MyWebApp implements EntryPoint {
 
     private void initMapPanel() {
         //trying to speed up and not do unncessary things
+        if (true) return;
+
         if (!isDesktop()) {
             return;
         }
@@ -3210,39 +3145,8 @@ public class MyWebApp implements EntryPoint {
         simplePanel.add(map);
     }
 
-    private void initTagCloudPanel() {
-        this.tagCloudPanel = new SimplePanel();
-        this.tagCloud = new TagCloud();
-        tagCloudPanel.add(tagCloud);
-    }
 
-    private void initLatestPanel() {
-        //get things with the most number of marks
-        GWT.log("getLatesPanel");
-        this.latestULPanel = new ULPanel();
-        SearchParameters searchParameters = new SearchParameters();
-        addCurrentLocation(searchParameters);
-        searchParameters.setSpots(true);
-        searchParameters.setSortKey("updatedate_dt");
-        searchParameters.setSortOrder("desc");
-        searchParameters.setExcludeFactual(true);
-        ApiServiceAsync myService = getApiServiceAsync();
-        myService.search(searchParameters, new AsyncCallback() {
-            public void onFailure(Throwable caught) {
-                GWT.log("getPopularPanel onFailure");
-            }
 
-            public void onSuccess(Object result) {
-                GWT.log("getPopularPanel onSuccess");
-                MobileResponse response = (MobileResponse) result;
-                if (response.getStatus() == 1) {
-                    populateResults(response, latestULPanel);
-                } else {
-                    getMessagePanel().displayErrors(response.getErrorMessages());
-                }
-            }
-        });
-    }
 
     private void populateResults(MobileResponse mobileResponse, ULPanel ulPanel) {
         GWT.log("populateResults");
@@ -3895,7 +3799,7 @@ public class MyWebApp implements EntryPoint {
         resultsPanel.getSearchParameters().setSortOrder("desc");
         resultsPanel.getSearchParameters().setExcludeFactual(true);
         resultsPanel.setTitle("Most Recently Voted");
-        getResultsPanel().setImageResources(resources.contests(), resources.contestsMobile());
+       // getResultsPanel().setImageResources(resources.contests(), resources.contestsMobile());
         resultsPanel.performSearch();
     }
 
