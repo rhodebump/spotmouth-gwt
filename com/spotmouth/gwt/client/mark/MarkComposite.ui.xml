@@ -61,7 +61,7 @@
 
 
                 </div>
-                <label>
+                <label style="float:right;">
                     <p>Secret Key</p>
                     <g:TextBox ui:field="secretKeyTextBox"/>
                 </label>
