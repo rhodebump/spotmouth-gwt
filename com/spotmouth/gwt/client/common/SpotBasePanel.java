@@ -261,8 +261,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         shareOnFacebookButton.addClickHandler(saveHandlerFacebook);
         widgetMarkDataMap.put(shareOnFacebookButton,markData);
         if (! mywebapp.isFacebookUser()) {
-            //shareOnFacebookButton.setVisible(false);
-            //shareOnFacebookButton.setStyleName("hideme");
             //need to do directly on this element
 
             hideElement(shareOnFacebookButton.getElement());
@@ -362,6 +360,14 @@ public abstract class SpotBasePanel extends FlowPanel {
     };
     Map<Widget, LocationResult> pickLocationMap = new HashMap<Widget, LocationResult>();
 
+    private ListItem addSpotNotHere() {
+        ListItem listItem = new ListItem();
+         Anchor newSpotAnchor = new Anchor("My Spot is not listed here.","#" + MyWebApp.CREATE_SPOT);
+        listItem.add(newSpotAnchor);
+
+        return listItem;
+    }
+
     protected ULPanel getPickSpotULPanel() {
         final ULPanel ulPanel = new ULPanel();
         SearchParameters searchParameters = new SearchParameters();
@@ -376,8 +382,8 @@ public abstract class SpotBasePanel extends FlowPanel {
 
             public void onSuccess(Object result) {
                 MobileResponse mobileResponse = (MobileResponse) result;
-                Anchor newSpotAnchor = new Anchor("My Spot is not listed here.");
-                ulPanel.add(newSpotAnchor);
+
+                ulPanel.add(addSpotNotHere());
                 for (LocationResult locationResult : mobileResponse.getLocationResults()) {
                     ListItem listItem = new ListItem();
                     Anchor anchor = new Anchor(locationResult.getLabel());
@@ -392,8 +398,8 @@ public abstract class SpotBasePanel extends FlowPanel {
                         anchor.setHref(targetHistoryToken);
                     }
                 }
-                Anchor newSpotAnchor2 = new Anchor("My Spot is not listed here.");
-                ulPanel.add(newSpotAnchor2);
+
+                ulPanel.add(addSpotNotHere());
             }
         });
         return ulPanel;
@@ -1425,16 +1431,28 @@ public abstract class SpotBasePanel extends FlowPanel {
             }
         }
         //todo, check out if we should ever have a null tagHolders
-        if (tagHolders != null) {
-            //once we get to five tags, shut down ui
-            if (tagHolders.size() >= 5) {
-                hideElement(suggestBox.getElement());
+//        if (tagHolders != null) {
+//            //once we get to five tags, shut down ui
+//            if (tagHolders.size() >= 5) {
+//                hideElement(suggestBox.getElement());
+//            } else {
+//                suggestBox.getElement().removeAttribute("style");
+//            }
+//        }
+        //<label id="tagslabel">
+        Element tagslabel = DOM.getElementById("tagslabel");
+        if (tagslabel != null) {
+            if (tagHolders == null) {
+                tagslabel.removeClassName("tagslabel");
+            } else if (tagHolders.size() < 5) {
+                tagslabel.removeClassName("fiveTags");
             } else {
-                suggestBox.getElement().removeAttribute("style");
+                tagslabel.addClassName("fiveTags");
             }
+
+
+
         }
-
-
 
     }
 
@@ -1692,7 +1710,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         //autocomplete="off"
         tagSearchTextBox.getElement().setPropertyString("autocomplete","off");
         tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
-
+        //<label id="tagslabel">
 
         tagSearchTextBox.addSelectionHandler(tagSelectionHandler);
         FlowPanel selectedTagsPanel = new FlowPanel();
@@ -1725,11 +1743,13 @@ public abstract class SpotBasePanel extends FlowPanel {
         //add(tagSearchTextBox);
         if ((cityName != null) && (cityName.length() > 0)) {
             cityTextBox.setText(cityName);
-        } else if (mywebapp.getCurrentLocation() != null) {
-            cityTextBox.setText(mywebapp.getCurrentLocation().getCity());
+      //  } else if (mywebapp.getCurrentLocation() != null) {
+     //       cityTextBox.setText(mywebapp.getCurrentLocation().getCity());
         } else {
             // cityTextBox.setText("US");
         }
+
+        cityTextBox.getTextBox().getElement().setAttribute("placeholder","Select City");
 
         cityTextBox.getTextBox().addFocusHandler(focusHandler);
 
@@ -1764,11 +1784,12 @@ public abstract class SpotBasePanel extends FlowPanel {
         stateSuggestBox.getTextBox().addFocusHandler(focusHandler);
         if ((state != null) && (state.length() > 0)) {
             stateSuggestBox.setText(state);
-        } else if (mywebapp.getCurrentLocation() != null) {
-            stateSuggestBox.setText(mywebapp.getCurrentLocation().getState());
+       // } else if (mywebapp.getCurrentLocation() != null) {
+      //      stateSuggestBox.setText(mywebapp.getCurrentLocation().getState());
         } else {
             //stateSuggestBox.setText("US");
         }
+        stateSuggestBox.getTextBox().getElement().setAttribute("placeholder","Select State/Province");
         stateSuggestBox.getTextBox().addFocusHandler(focusHandler);
         return stateSuggestBox;
     }
@@ -2714,13 +2735,7 @@ public abstract class SpotBasePanel extends FlowPanel {
             return MyWebApp.resources.spot_image_placeholder130x130();
         }
     }
-//    private Label getLabel(String labeltext, ClickHandler handler, LocationResult locationResult) {
-//        Label lbl = new Label(labeltext);
-//        clickMapLocation.put(lbl, locationResult);
-//        lbl.addClickHandler(handler);
-//        lbl.addStyleName("linky");
-//        return lbl;
-//    }
+
 
     public static Image addImageContent(Panel panel, ContentHolder contentHolder, String attrName) {
         if (contentHolder == null) {
@@ -2807,6 +2822,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     }
 
     protected void saveIt() {
+        GWT.log("saveItk");
         // let's do the file uploads for the media files
         //temp, let's see if we do not clear
         getMessagePanel().clear();
@@ -2833,7 +2849,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     public ClickHandler saveHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-            mywebapp.log("saveit");
+          GWT.log("saveHandler.onClick");
             saveIt();
         }
     };

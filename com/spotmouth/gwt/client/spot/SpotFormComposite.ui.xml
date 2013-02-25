@@ -19,18 +19,7 @@
                   <smc:TextField ui:field="spotNameTextField"  tabIndex="1" placeholder="Name..."/>
       		</label>
 
-              <!--
-              not sure going to expose this on this form
-      		<label class="_label_small">
-      			<h3>Time</h3>
-      			<input type="text" tabindex="2" placeholder="From..."/>
-      		</label>
-      		<label class="_label_small" style='float: right; margin-top: 33px; margin-right:0;'>
-      			<input type="text" tabindex="3" placeholder="To..."/>
-      			rows="4" tabindex="4"
-      		</label>
 
--->
 
       		<label>
       			<h3>Description</h3>

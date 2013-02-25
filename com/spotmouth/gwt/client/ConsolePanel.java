@@ -56,10 +56,6 @@ public class ConsolePanel extends SpotBasePanel implements SpotMouthPanel {
         // TODO Auto-generated method stub
     }
 
-    @Override
-    public boolean isLoginRequired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+
 
 }

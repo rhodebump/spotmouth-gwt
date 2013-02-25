@@ -115,14 +115,6 @@ public class SettingsPanel extends SpotBasePanel implements SpotMouthPanel {
         // TODO Auto-generated method stub
     }
 
-    @Override
-    public boolean isLoginRequired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-//    @Override
-//    public boolean isRootPanel() {
-//        // TODO Auto-generated method stub
-//        return false;
-//    }
+
+
 }

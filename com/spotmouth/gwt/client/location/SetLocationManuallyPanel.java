@@ -205,7 +205,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
             mapPanel.setWidth("100%");
 
 
-           // <input type="radio" name="sl_switch" class="sl_switch" id="sl_use_map"/>
+
             final SimpleRadioButton mapRadioButton = new SimpleRadioButton("sl_switch");
 
             mapRadioButton.setStyleName("sl_switch");
@@ -213,24 +213,36 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
             mapRadioButton.addClickHandler(resizeMapHandler);
 
 
+            if (Maps.isLoaded()) {
 
-            Maps.loadMapsApi(mywebapp.getGoogleMapKey(), "2", false, new Runnable() {
-                            public void run() {
-                                geocoder = new Geocoder();
-                                initMap(mywebapp.getCurrentLocation(),mapPanel);
-                                SetLocationComposite slc = new SetLocationComposite(previousLocations, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField,
-                                        updateButton,fromDeviceButton,mapPanel,mapRadioButton);
-                                add(slc);
+                geocoder = new Geocoder();
+                initMap(mywebapp.getCurrentLocation(),mapPanel);
+                SetLocationComposite slc = new SetLocationComposite(previousLocations, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField,
+                        updateButton,fromDeviceButton,mapPanel,mapRadioButton);
+                add(slc);
+            } else {
+                Maps.loadMapsApi(mywebapp.getGoogleMapKey(), "2", false, new Runnable() {
+                                public void run() {
+                                    geocoder = new Geocoder();
+                                    initMap(mywebapp.getCurrentLocation(),mapPanel);
+                                    SetLocationComposite slc = new SetLocationComposite(previousLocations, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField,
+                                            updateButton,fromDeviceButton,mapPanel,mapRadioButton);
+                                    add(slc);
 
-                            }
-                        });
+                                }
+                            });
+
+
+            }
 
 
 
-            return;
+
+
         }
 
     }
+
 
     Label hidePreviousLocationsButton() {
         Label btn = new Label("Hide Previous Locations");

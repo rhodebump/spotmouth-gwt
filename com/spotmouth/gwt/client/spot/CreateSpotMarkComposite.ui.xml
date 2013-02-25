@@ -1,0 +1,60 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:mu='urn:import:gwtupload.client'
+             xmlns:smc="urn:import:com.spotmouth.gwt.client.common"
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:gwt="urn:import:com.google.gwt.user.client.ui">
+
+
+
+
+
+  <g:HTMLPanel>
+
+
+      <div id="listing_info" class="create_coupon">
+      		<h1>Leave Mark<g:Button addStyleNames="button"  tabIndex="8" ui:field="cancelButton">Cancel</g:Button></h1>
+      	<div class="content">
+
+      		<label>
+      			<h3>Name</h3>
+                  <smc:TextField ui:field="spotNameTextField"  tabIndex="1" placeholder="Name..."/>
+      		</label>
+
+      <fieldset >
+      			<h3>Location</h3>
+      		<label>
+      			<!-- Note: if text input or select is filled(selected) it should have "_done" class-->
+                  <g:SuggestBox  tabIndex="2"  ui:field="countryTextBox"/>
+      		</label>
+      		<label>
+                  <g:SuggestBox  tabIndex="3"  ui:field="stateTextBox"/>
+      		</label>
+      		<label>
+                  <g:SuggestBox  tabIndex="4"  ui:field="cityTextBox"/>
+      		</label>
+
+      </fieldset>
+
+      <fieldset>
+      		<label>
+      			<h3>Address</h3>
+                  <smc:TextField  tabIndex="5"  ui:field="address1TextBox"  placeholder="Address"/>
+      		</label>
+      		<label>
+                  <smc:TextField tabIndex="6" maxLength="6" placeholder="ZIP code" ui:field="zipcodeTextField"/>
+
+      		</label>
+      </fieldset>
+
+
+
+
+              <g:Button  tabIndex="7"  ui:field="saveButton" addStyleNames="btn_blue">Continue</g:Button>
+      	</div>
+      </div>
+
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

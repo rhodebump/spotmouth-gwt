@@ -17,7 +17,7 @@
       		</div>
 
       		<div class="ms_right">
-      			<h1><span ui:field='nameSpan'/></h1> <!-- This header will be used as "go to this spot" button -->
+      			<h1><g:Anchor ui:field="spotDetailsAnchor"><span ui:field='nameSpan'/></g:Anchor></h1> <!-- This header will be used as "go to this spot" button -->
 
       			<ul class="ms_func">
       				<li class="ug_item">
@@ -49,12 +49,6 @@
                   				<li><g:Anchor addStyleNames="ms_lock" ui:field="lockThisSpot" title="Lock this spot"></g:Anchor></li>
                   				<li><g:Anchor addStyleNames="ms_rem" ui:field="deleteSpot" title="Delete this spot"></g:Anchor></li>
 
-
-                      <!--
-      				<li><a href="#" class="ms_add_f" title="Add to favorite"></a></li>
-      				<li><a href="#" class="ms_lock" title="Lock this spot"></a></li>
-      				<li><a href="#" class="ms_rem" title="Delete this spot"></a></li>
-      				-->
 
       			</ul>
       		</div>

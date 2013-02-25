@@ -69,6 +69,8 @@ import com.spotmouth.gwt.client.rpc.ApiService;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.spotmouth.gwt.client.search.SearchForm;
 import com.spotmouth.gwt.client.product.ManageProductsPanel;
+import com.spotmouth.gwt.client.spot.CreateSpotMarkComposite;
+import com.spotmouth.gwt.client.spot.CreateSpotMarkPanel;
 import com.spotmouth.gwt.client.spot.ManageSpotPanel;
 import com.spotmouth.gwt.client.usergroups.ManageUserGroupPanel;
 import com.spotmouth.gwt.client.usergroups.ViewUserGroupsPanel;
@@ -1600,16 +1602,7 @@ public class MyWebApp implements EntryPoint {
         return resultsPanel;
     }
 
-    public void toggleMarkPlace() {
-        //no need to check for location set since markspotpanel does this
-        if (isDesktop()) {
-            markSpotPanel = new DesktopMarkSpotPanel(this);
-        } else {
-            markSpotPanel = new MarkSpotPanel(this);
-        }
-        markSpotPanel.activate(false);
-        swapCenter(markSpotPanel);
-    }
+
 
     NotificationsPanel notificationsPanel = null;
     MessagingPanel messagingPanel = null;
@@ -2491,6 +2484,8 @@ public class MyWebApp implements EntryPoint {
             toggleAddContest();
         } else if (historyToken.startsWith(CREATE_CHAT)) {
             toggleCreateChat();
+        }else if (historyToken.startsWith(CREATE_SPOT)) {
+            toggleCreateSpot();
         } else if (historyToken.startsWith(MANAGE_FRIENDS)) {
             toggleManageFriends();
         } else if (historyToken.startsWith(STATE)) {
@@ -2635,6 +2630,11 @@ public class MyWebApp implements EntryPoint {
     public static String SET_LOCATION = "!setlocation/";
     public static String ADD_CONTEST = "!add-contest";
     public static String CREATE_CHAT = "!create-chat";
+
+    public static String CREATE_SPOT = "!create-spot";
+
+
+
     public static String LOGOUT = "logout";
     public static String SEARCH = "!search/";
     public static String FACEBOOK_APPID = "106261966064641";
@@ -2757,12 +2757,32 @@ public class MyWebApp implements EntryPoint {
 
 
         if (pageModeDisplayed == 2) return;
+
+        //need to do a loadMapsApi at least once
+        if (Maps.isLoaded()) {
+            doMap();
+        } else {
+
+            Maps.loadMapsApi(getGoogleMapKey(), "2", false, new Runnable() {
+                       public void run() {
+                           doMap();
+                       }
+                   });
+
+        }
+
+
+
+    }
+    //private boolean mapInit = false;
+
+    private void doMap() {
         MapPage page = new MapPage(simplePanel, popularULPanel, latestULPanel, messagePanel, tagCloudPanel, searchBoxPanel, mapPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton, tagListBox, sortingListBox);
         RootPanel.get().clear();
         RootPanel.get().add(page);
         this.pageModeDisplayed = 2;
-    }
 
+    }
     SimpleCheckBox toggleMilesCheckBox = new SimpleCheckBox();
     SimpleCheckBox toggleMapMode = new SimpleCheckBox();
 
@@ -4230,9 +4250,15 @@ public class MyWebApp implements EntryPoint {
             this.homeCallback = null;
         }
     }
-    //
+    private void toggleCreateSpot() {
 
-    public void toggleCreateChat() {
+        CreateSpotMarkPanel createSpotMarkPanel = new CreateSpotMarkPanel(this);
+
+        swapCenter(createSpotMarkPanel);
+
+    }
+
+    private void toggleCreateChat() {
         ItemHolder itemHolder = new ItemHolder();
         itemHolder.setStartDate(new Date());
         Date endDate = new Date();

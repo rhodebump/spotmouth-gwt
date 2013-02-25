@@ -59,6 +59,10 @@ public class ManageSpotComposite  extends Composite {
     Anchor createEvent;
 
 
+    @UiField
+    Anchor spotDetailsAnchor;
+
+
 
 
 
@@ -85,26 +89,31 @@ public class ManageSpotComposite  extends Composite {
     }
 
     @UiHandler("createEvent")
-    public void onClick3(ClickEvent event) {
+    public void onClickEvent(ClickEvent event) {
         manageSpotPanel.createEvent();
     }
 
-
     @UiHandler("createCoupon")
-    public void onClick4(ClickEvent event) {
+    public void onClickCoupon(ClickEvent event) {
         manageSpotPanel.createCoupon();
     }
 
 
+    @UiHandler("spotDetailsAnchor")
+    public void onClickDetails(ClickEvent event) {
+        manageSpotPanel.doDetails();
+    }
+
+
     @UiHandler("addToFavorites")
-    public void onClick5(ClickEvent event) {
+    public void onClickFavs(ClickEvent event) {
 
         manageSpotPanel.addToFavorites();
 
     }
 
     @UiHandler("lockThisSpot")
-    public void onClick6(ClickEvent event) {
+    public void onClickLock(ClickEvent event) {
 
         manageSpotPanel.lockSpot();
 

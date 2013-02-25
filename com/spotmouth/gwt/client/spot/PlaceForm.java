@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client.spot;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.TextResource;
@@ -87,6 +88,7 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
     CheckBox shareImageCheckBox = new CheckBox();
 
     protected void doSave() {
+        GWT.log("doSave");
         SaveSpotRequest saveSpotRequest = new SaveSpotRequest();
         saveSpotRequest.setSpotHolder(spotHolder);
         spotHolder.setName(nameTextBox.getValue());
@@ -97,7 +99,11 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
         spotHolder.setEmail(emailTextField.getValue());
         spotHolder.setWebsite(websiteTextField.getValue());
         spotHolder.setHours(hoursTextArea.getValue());
+
         spotHolder.setDescription(contentTextArea.getValue());
+        GWT.log("Set spotholder description to "  + spotHolder.getDescription());
+
+
         spotHolder.setLodging(lodgingCheckBox.getValue());
         spotHolder.setDining(diningCheckBox.getValue());
         spotHolder.setFun(funCheckBox.getValue());

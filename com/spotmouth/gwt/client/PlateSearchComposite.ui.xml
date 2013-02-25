@@ -117,7 +117,7 @@
                             <p>Secret Key</p>
                             <g:TextBox ui:field="secretKeyTextBox"/>
                         </label>
-                        <label>
+                        <label id="tagslabel">
                             <p>Add Tags</p>
                             <g:SuggestBox ui:field="tagSearchTextBox"/>     <g:Button ui:field="addTagButton">Add</g:Button>
                             <p class="msdescription">maximum five</p>

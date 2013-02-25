@@ -11,33 +11,17 @@
         <div class="mark_advanced">
 
 
-
-
-
-
-
      			<span class="ma_add_file"><mu:MultiUploader ui:field="multiUploader"/><img src="css/at_icn.png"/></span>
      			<span class="ma_inputs">
      				<label class="ma_add_key">  <g:TextBox ui:field="secretKeyTextBox"/><span class="ma_inp_det">Secret Key</span></label>
-     				<label class="ma_add_tag">  <g:SuggestBox ui:field="tagSearchTextBox"/><span class="ma_inp_det">Select Tags</span></label>
+     				<label id="tagslabel" class="ma_add_tag">  <g:SuggestBox ui:field="tagSearchTextBox"/><span class="ma_inp_det">Select Tags</span></label>
      			</span>
-            <!--
-     			<div class="ma_files">
-     			</div>
-                -->
+
             <g:FlowPanel ui:field="imagesPanel"/>
             <g:FlowPanel ui:field="selectedTagsPanel"/>
             <g:FlowPanel ui:field="suggestionsPanel"/>
 
-            <!--
-     			<div class="ma_tags">
-     				<span class="ma_sel_tag">Tag1</span>
-     				<span class="ma_sel_tag">Tag2</span>
-     				<span class="ma_sel_tag">Tag3</span>
-     				<span class="ma_sel_tag">Tag4</span>
-     				<span class="ma_sel_tag">Tag5</span>
-     			</div>
-     			-->
+
      		</div>
 
     </g:HTMLPanel>

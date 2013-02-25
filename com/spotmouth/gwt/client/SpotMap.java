@@ -31,32 +31,27 @@ public class SpotMap extends SpotBasePanel implements SpotMouthPanel {
         return false;
     }
 
+    Location location = null;
 
-
-
-
-
-    public SpotMap(MyWebApp mywebapp, final Location location) {
+    public SpotMap(MyWebApp mywebapp, Location location) {
         super(mywebapp);
         this.addStyleName("SpotMap");
-
-        final SimplePanel mapPanel = new SimplePanel();
-
-        Maps.loadMapsApi(mywebapp.getGoogleMapKey(), "2", false, new Runnable() {
-            public void run() {
-                geocoder = new Geocoder();
-                initMap(location,mapPanel);
-            }
-        });
-
-//        LatLng latLng = LatLng.newInstance(location.getLatitude(), location.getLongitude());
-//        mapWidget.setCenter(latLng);
-        add(mapPanel);
-
+        this.location = location;
+        if (Maps.isLoaded()) {
+            doMap();
+        } else {
+            Maps.loadMapsApi(mywebapp.getGoogleMapKey(), "2", false, new Runnable() {
+                public void run() {
+                    doMap();
+                }
+            });
+        }
     }
 
-
-
-
-
+    private void doMap() {
+        final SimplePanel mapPanel = new SimplePanel();
+        geocoder = new Geocoder();
+        initMap(location, mapPanel);
+        add(mapPanel);
+    }
 }

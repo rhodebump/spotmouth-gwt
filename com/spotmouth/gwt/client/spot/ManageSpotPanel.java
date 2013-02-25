@@ -8,6 +8,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
+import com.spotmouth.gwt.client.SpotDetailPanel;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.coupon.CouponForm;
@@ -158,6 +159,15 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
         ItemHolder itemHolder = new ItemHolder();
         CouponForm placeForm = new CouponForm(mywebapp, spotHolder,itemHolder);
         mywebapp.swapCenter(placeForm);
+    }
+    public void doDetails() {
+
+        String token = MyWebApp.SPOT_DETAIL + spotHolder.getId();
+
+
+        History.newItem(token);
+//        SpotDetailPanel spotDetailPanel = new SpotDetailPanel(mywebapp, mobileResponse);
+//        mywebapp.swapCenter(spotDetailPanel);
     }
 
     public void addToFavorites() {

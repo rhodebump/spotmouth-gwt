@@ -60,9 +60,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 
     private String title = "Results";
 
@@ -419,9 +417,6 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         htmlPanel.setStyleName("aboutdrivers");
         addFieldset(htmlPanel, "","na1",this);
 
-        //addFieldset("", html);
-        //addFieldset()
-        //add(htmlPanel);
         Hyperlink reportDriver = new Hyperlink("Report Driver", MyWebApp.MARK_PLATE);
         reportDriver.addStyleName("whiteButton");
         add(reportDriver);
