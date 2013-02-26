@@ -99,6 +99,11 @@ public class ManageSpotComposite  extends Composite {
     }
 
 
+    @UiHandler("deleteSpotAnchor")
+    public void onClickDeleteSpot(ClickEvent event) {
+        manageSpotPanel.deleteSpot();
+    }
+
     @UiHandler("spotDetailsAnchor")
     public void onClickDetails(ClickEvent event) {
         manageSpotPanel.doDetails();

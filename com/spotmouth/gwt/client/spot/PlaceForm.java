@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import  com.spotmouth.gwt.client.common.TextField;
 import com.google.gwt.user.client.ui.*;
@@ -151,6 +152,13 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
 
     private SpotHolder spotHolder = null;
 
+    protected ClickHandler cancelHandler2 = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            History.newItem(MyWebApp.MANAGE_SPOT + spotHolder.getId());
+        }
+    };
+
+
     public PlaceForm(MyWebApp mywebapp, SpotHolder spotHolder) {
         super(mywebapp);
         this.spotHolder = spotHolder;
@@ -160,6 +168,8 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
             Button saveButton = new Button();
             saveButton.addClickHandler(saveHandler);
 
+            Button cancelButton = new Button();
+            cancelButton.addClickHandler(cancelHandler2);
             SuggestBox tagSearchTextBox = getTagSuggestBox(spotHolder.getTagHolders());
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
@@ -174,7 +184,7 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
             initZipCodeTextBox();
             initForm(spotHolder);
 
-            SpotFormComposite sfc = new SpotFormComposite( nameTextBox, voicePhoneTextField, websiteTextField,  emailTextField,
+            SpotFormComposite sfc = new SpotFormComposite(cancelButton, nameTextBox, voicePhoneTextField, websiteTextField,  emailTextField,
                                           contentTextArea, saveButton,
                                           lodgingCheckBox, funCheckBox, drinkingCheckBox, diningCheckBox,
                                           countryTextBox,  stateTextBox,  citySuggestBox,  zipcodeTextField,  address1TextField,

@@ -47,7 +47,7 @@
 
                       <li><g:Anchor addStyleNames="ms_add_f"  ui:field="addToFavorites" title="Add to favorite"></g:Anchor></li>
                   				<li><g:Anchor addStyleNames="ms_lock" ui:field="lockThisSpot" title="Lock this spot"></g:Anchor></li>
-                  				<li><g:Anchor addStyleNames="ms_rem" ui:field="deleteSpot" title="Delete this spot"></g:Anchor></li>
+                  				<li><g:Anchor addStyleNames="ms_rem" ui:field="deleteSpotAnchor" title="Delete this spot"></g:Anchor></li>
 
 
       			</ul>

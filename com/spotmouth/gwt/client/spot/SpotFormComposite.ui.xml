@@ -10,7 +10,7 @@
   <g:HTMLPanel>
 
       <div id="listing_info" class="create_coupon">
-      		<h1>Listing Info<button class="button">Cancel</button></h1>
+      		<h1>Listing Info<g:Button  ui:field="cancelButton" addStyleNames="button">Cancel</g:Button></h1>
       	<div class="content">
 
 

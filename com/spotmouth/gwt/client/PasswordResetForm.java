@@ -30,7 +30,11 @@ public class PasswordResetForm extends SpotBasePanel implements SpotMouthPanel {
         return "Reset Password";
     }
 
-
+    protected ClickHandler cancelHandler2 = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            mywebapp.toggleHome();
+        }
+    };
 
     private TextBox usernameTextBox = new TextBox();
 
@@ -41,7 +45,12 @@ public class PasswordResetForm extends SpotBasePanel implements SpotMouthPanel {
         usernameTextBox = addTextBox("Username", "username", "");
         usernameTextBox.setFocus(true);
         add(resetPasswordButton());
-        add(cancelButton());
+        Button btn = new Button("Cancel");
+
+        btn.addClickHandler(cancelHandler2);
+        //addImageToButton(btn, MyWebApp.resources.cancelButton(), MyWebApp.resources.cancelButtonMobile());
+        //fixButton(btn);
+        btn.setStyleName("btn_blue");
     }
 
 

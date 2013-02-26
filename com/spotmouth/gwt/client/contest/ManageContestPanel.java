@@ -3,11 +3,14 @@ package com.spotmouth.gwt.client.contest;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
+import com.googlecode.mgwt.mvp.client.history.HistoryObserver;
 import com.kiouri.sliderbar.client.event.*;
 import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -322,7 +325,9 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
             if (mainImage != null) {
                 contestImagePanel.setWidget(mainImage);
             }
-            this.cfc = new ContestFormComposite(nameTextBox, contentTextArea, numberOfStarsTextBox, iconStyleTextBox, startDatePicker, endDatePicker,
+            Button cancelButton  = new Button();
+            cancelButton.addClickHandler(cancelHandler2);
+            this.cfc = new ContestFormComposite(cancelButton,nameTextBox, contentTextArea, numberOfStarsTextBox, iconStyleTextBox, startDatePicker, endDatePicker,
                     countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField, tagSearchTextBox, selectedTagsPanel, appliesToListBox, saveButton,
                     sliderBarSimpleHorizontal, defaultUploader, contestImagePanel, mywebapp, contestHolder,suggestionsPanel);
             add(cfc);
@@ -330,6 +335,13 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
         }
 
     }
+
+    protected ClickHandler cancelHandler2 = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            //go back to all contests
+            History.newItem(MyWebApp.CONTESTS);
+        }
+    };
 
     private void populate() {
 

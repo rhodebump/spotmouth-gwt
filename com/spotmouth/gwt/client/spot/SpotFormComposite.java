@@ -40,7 +40,12 @@ public class SpotFormComposite   extends Composite {
     final TextField voicePhoneTextField;
 
     @UiField(provided = true)
+    final Button cancelButton;
+
+
+    @UiField(provided = true)
     final Button saveButton;
+
 
     @UiField(provided = true)
     final SimpleCheckBox lodgingCheckBox;
@@ -91,13 +96,14 @@ public class SpotFormComposite   extends Composite {
     final TextField emailTextField;
 
 
-    public SpotFormComposite(TextField spotNameTextField,TextField voicePhoneTextField,TextField websiteTextField,   TextField emailTextField,
+    public SpotFormComposite(Button cancelButton,TextField spotNameTextField,TextField voicePhoneTextField,TextField websiteTextField,   TextField emailTextField,
                              TextArea spotDescriptionTextArea,Button saveButton,
                              SimpleCheckBox lodgingCheckBox,SimpleCheckBox funCheckBox,SimpleCheckBox drinkingCheckBox,SimpleCheckBox diningCheckBox,
                              SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, TextField zipcodeTextField, TextField address1TextBox,
                              SuggestBox tagSearchTextBox,
                                                             FlowPanel selectedTagsPanel,FlowPanel suggestionsPanel,
                                                             TextField factualTextField,TextField woeIDTextField,TextField yelpIDTextField) {
+        this.cancelButton = cancelButton;
         this.spotNameTextField = spotNameTextField;
         this.voicePhoneTextField = voicePhoneTextField;
         this.websiteTextField = websiteTextField;

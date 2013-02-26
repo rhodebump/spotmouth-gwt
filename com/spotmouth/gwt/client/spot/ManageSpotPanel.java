@@ -189,13 +189,13 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
             createEvent();
         }
     };
-    ClickHandler deleteSpotHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            deleteSpot();
-        }
-    };
+//    ClickHandler deleteSpotHandler = new ClickHandler() {
+//        public void onClick(ClickEvent event) {
+//            deleteSpot();
+//        }
+//    };
 
-    private void deleteSpot() {
+    public void deleteSpot() {
         SaveSpotRequest ssr = new SaveSpotRequest();
         ssr.setSpotHolder(spotHolder);
         ssr.setAuthToken(mywebapp.getAuthToken());
@@ -267,16 +267,10 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
         addSpotLink(spotHolder);
         //add to favorites
         addToFavorites(spotHolder);
-        addDeleteButton();
+        //addDeleteButton();
     }
 
-    protected void addDeleteButton() {
-        Label deleteMarkLabel = new Label("Delete Spot");
-        fixButton(deleteMarkLabel);
-        deleteMarkLabel.addClickHandler(deleteSpotHandler);
-        addImageToButton(deleteMarkLabel, MyWebApp.resources.deleteX(), MyWebApp.resources.deleteX());
-        add(deleteMarkLabel);
-    }
+
 
     Label manageProductsButton() {
         Label btn = new Label("Manage Products");
