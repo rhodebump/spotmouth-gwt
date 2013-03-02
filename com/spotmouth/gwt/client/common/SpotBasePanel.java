@@ -244,12 +244,21 @@ public abstract class SpotBasePanel extends FlowPanel {
         zipcodeTextField = new TextField();
        // zipcodeTextBox.getElement().setAttribute("placeholder", "Zip Code");
        // zipcodeTextBox.setMaxLength(6);
+        zipcodeTextField.addKeyPressHandler(new KeyPressHandler() {
+
+          public void onKeyPress(KeyPressEvent event) {
+            if (!Character.isDigit(event.getCharCode())) {
+              ((TextBox) event.getSource()).cancelKey();
+            }
+          }
+        });
+
 
     }
 
     protected void initAddress1TextBox() {
         address1TextField = new TextField();
-        address1TextField.getElement().setAttribute("placeholder", "Address");
+        //address1TextField.getElement().setAttribute("placeholder", "Address");
 
 
     }
@@ -440,7 +449,7 @@ public abstract class SpotBasePanel extends FlowPanel {
                 GroupHolder groupHolder = groupMap.get(b);
                 if (groupHolder != null) {
                     History.newItem(MyWebApp.GROUP + groupHolder.getId());
-                    History.fireCurrentHistoryState();
+                  //  History.fireCurrentHistoryState();
                 }
             }
         }
@@ -618,7 +627,6 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     public ClickHandler setLocationFromDeviceHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-            //   mywebapp.setLocationFromDevice();
             History.newItem(MyWebApp.SET_LOCATION_FROM_DEVICE);
         }
     };
@@ -637,8 +645,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         } else {
             addImageIcon(logoutHandler, "Logout", MyWebApp.resources.logout(), MyWebApp.resources.logoutMobile(), topPanel, null);
         }
-        //  addImageIcon("Dining",MyWebApp.DINING,  mywebapp.resources.dining(), mywebapp.resources.diningMobile(), linksPanel, null);
-        //String markSpotToken = MyWebApp.MARK_SPOT
         addImageIcon(MyWebApp.MARK_SPOT, new MarkSpotTypePanel(), topPanel);
         addImageIcon(MyWebApp.SEARCH, new SearchForm(), topPanel);
         addImageIcon(MyWebApp.CONTESTS, new ContestsPanel(), topPanel);

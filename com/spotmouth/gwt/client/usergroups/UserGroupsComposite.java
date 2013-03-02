@@ -29,13 +29,18 @@ public class UserGroupsComposite extends Composite {
 
 
     @UiField(provided = true)
+    final ULPanel spotGroupsULPanel;
+
+
+    @UiField(provided = true)
     final Button addGroupButton;
 
 
 
-    public UserGroupsComposite(ULPanel userGroupsULPanel,Button addGroupButton) {
+    public UserGroupsComposite(ULPanel userGroupsULPanel,Button addGroupButton,ULPanel spotGroupsULPanel) {
         this.userGroupsULPanel = userGroupsULPanel;
         this.addGroupButton = addGroupButton;
+        this.spotGroupsULPanel = spotGroupsULPanel;
         initWidget(uiBinder.createAndBindUi(this));
     }
 }

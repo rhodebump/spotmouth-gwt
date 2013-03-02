@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client.location;
 
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -48,7 +49,6 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
                 Location location = locationMap.get(b);
                 if (location != null) {
                     mywebapp.setCurrentLocation(location);
-
                     mywebapp.toggleHome(mywebapp.locationUpdateCallback);
                 }
             }
@@ -110,10 +110,9 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
 
     ClickHandler resizeMapHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-                mapWidget.checkResize();
-
-
-        }} ;
+            mapWidget.checkResize();
+        }
+    };
     ClickHandler removeLocationHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             GWT.log("selected location");
@@ -157,8 +156,6 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
     public SetLocationManuallyPanel() {
     }
 
-
-
     private ULPanel getPreviousLocations() {
         ULPanel ulPanel = new ULPanel();
         ulPanel.setStyleName("sl_previous_list");
@@ -180,69 +177,47 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
         }
         return ulPanel;
     }
+
     public SetLocationManuallyPanel(final MyWebApp mywebapp) {
         super(mywebapp, false);
         if (MyWebApp.isDesktop()) {
-            final ULPanel previousLocations =   getPreviousLocations();
+            final ULPanel previousLocations = getPreviousLocations();
             countryTextBox = getCountrySuggestBox("");
             stateTextBox = getStateSuggestBox("");
             citySuggestBox = getCitySuggestBox("");
-
             initZipCodeTextBox();
             initAddress1TextBox();
-            final Button updateButton= new Button("Update");
-            updateButton.setStyleName("btn_blue");
+            final Button updateButton = new Button();
+            //updateButton.setStyleName("btn_blue");
             updateButton.addClickHandler(setLocationHandler);
-
-
-
-            final Button fromDeviceButton= new Button("From Device");
-            fromDeviceButton.setStyleName("btn_blue");
+            final Button fromDeviceButton = new Button();
             fromDeviceButton.addClickHandler(setLocationFromDeviceHandler);
-
             //hold the map Panel
             final SimplePanel mapPanel = new SimplePanel();
             mapPanel.setWidth("100%");
-
-
-
             final SimpleRadioButton mapRadioButton = new SimpleRadioButton("sl_switch");
-
-            mapRadioButton.setStyleName("sl_switch");
+            //   mapRadioButton.setStyleName("sl_switch");
             mapRadioButton.getElement().setId("sl_use_map");
             mapRadioButton.addClickHandler(resizeMapHandler);
-
-
             if (Maps.isLoaded()) {
-
                 geocoder = new Geocoder();
-                initMap(mywebapp.getCurrentLocation(),mapPanel);
+                initMap(mywebapp.getCurrentLocation(), mapPanel);
                 SetLocationComposite slc = new SetLocationComposite(previousLocations, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField,
-                        updateButton,fromDeviceButton,mapPanel,mapRadioButton);
+                        updateButton, fromDeviceButton, mapPanel, mapRadioButton);
                 add(slc);
             } else {
                 Maps.loadMapsApi(mywebapp.getGoogleMapKey(), "2", false, new Runnable() {
-                                public void run() {
-                                    geocoder = new Geocoder();
-                                    initMap(mywebapp.getCurrentLocation(),mapPanel);
-                                    SetLocationComposite slc = new SetLocationComposite(previousLocations, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField,
-                                            updateButton,fromDeviceButton,mapPanel,mapRadioButton);
-                                    add(slc);
-
-                                }
-                            });
-
-
+                    public void run() {
+                        geocoder = new Geocoder();
+                        initMap(mywebapp.getCurrentLocation(), mapPanel);
+                        SetLocationComposite slc = new SetLocationComposite(previousLocations, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField,
+                                updateButton, fromDeviceButton, mapPanel, mapRadioButton);
+                        add(slc);
+                    }
+                });
             }
-
-
-
-
-
         }
-
     }
-
 
     Label hidePreviousLocationsButton() {
         Label btn = new Label("Hide Previous Locations");
@@ -267,17 +242,31 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
         return btn;
     }
 
-    protected Label useMapButton() {
-        Label mapLabel = new Label("Use Map to set your location");
-        addImageToButton(mapLabel, MyWebApp.resources.mapButton(), MyWebApp.resources.mapButtonMobile());
-        mapLabel.addClickHandler(viewMapHandler);
-        mapLabel.setStyleName("whiteButton");
-        return mapLabel;
+    //    protected Label useMapButton() {
+//        Label mapLabel = new Label("Use Map to set your location");
+//        addImageToButton(mapLabel, MyWebApp.resources.mapButton(), MyWebApp.resources.mapButtonMobile());
+//        mapLabel.addClickHandler(viewMapHandler);
+//        mapLabel.setStyleName("whiteButton");
+//        return mapLabel;
+//    }
+    public static boolean isNumeric(String str) {
+        try {
+            double d = Double.parseDouble(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     ClickHandler setLocationHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             mywebapp.getMessagePanel().clear();
+            if (!isEmpty(zipcodeTextField)) {
+                if (!isNumeric(zipcodeTextField.getValue())) {
+                    mywebapp.getMessagePanel().displayError("Zipcode must be numeric");
+                    return;
+                }
+            }
             mywebapp.setAutoGps(false);
             GeocodeRequest geocodeRequest = new GeocodeRequest();
             Location location = new Location();
@@ -285,6 +274,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
             location.setAddress1(address1TextField.getValue());
             location.setCity(citySuggestBox.getValue());
             location.setState(stateTextBox.getValue());
+            //need to be number only for zipcode
             location.setZipcode(zipcodeTextField.getValue());
             ApiServiceAsync myService = mywebapp.getApiServiceAsync();
             myService.geocode(geocodeRequest, new AsyncCallback() {
@@ -298,11 +288,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
                         //we need to turn off the auto gps since we have set this
                         mywebapp.setCurrentLocation(mobileResponse
                                 .getGeocodedLocation());
-//                        if (callback != null) {
-//                            callback.onSuccess(null);
-//                        } else {
                         mywebapp.toggleHome(mywebapp.locationUpdateCallback);
-                        //  }
                         mywebapp.getMessagePanel().clear();
                     } else {
                         getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
@@ -322,11 +308,10 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
     Label hideAddressFormButton() {
         Label btn = new Label("Hide Address Entry Form");
         btn.addClickHandler(hideAddressFormHandler);
-       // addImageToButton(btn, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
+        // addImageToButton(btn, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
         fixButton(btn);
         return btn;
     }
-
 //    Label showAddressFormButton() {
 //        Label btn = new Label("Show Address Entry Form");
 //        btn.addClickHandler(showAddressFormHandler);
@@ -334,23 +319,22 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
 //        fixButton(btn);
 //        return btn;
 //    }
-
     ClickHandler hideAddressFormHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             // com.google.gwt.user.client.Window.scrollTo(0, 0);
             addressFormPanel.clear();
-          //  addressFormPanel.add(showAddressFormButton());
+            //  addressFormPanel.add(showAddressFormButton());
         }
     };
-    ClickHandler showAddressFormHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            //com.google.gwt.user.client.Window.scrollTo(0, 0);
-            CaptionPanel captionPanel = getAddressFormPanel();
-            addressFormPanel.clear();
-            addressFormPanel.add(hideAddressFormButton());
-            addressFormPanel.add(captionPanel);
-        }
-    };
+//    ClickHandler showAddressFormHandler = new ClickHandler() {
+//        public void onClick(ClickEvent event) {
+//            //com.google.gwt.user.client.Window.scrollTo(0, 0);
+//            CaptionPanel captionPanel = getAddressFormPanel();
+//            addressFormPanel.clear();
+//            addressFormPanel.add(hideAddressFormButton());
+//            addressFormPanel.add(captionPanel);
+//        }
+//    };
 
     private CaptionPanel getAddressFormPanel() {
         CaptionPanel captionPanel = new CaptionPanel("Set Location Form");

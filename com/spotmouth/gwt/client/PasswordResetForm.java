@@ -45,12 +45,13 @@ public class PasswordResetForm extends SpotBasePanel implements SpotMouthPanel {
         usernameTextBox = addTextBox("Username", "username", "");
         usernameTextBox.setFocus(true);
         add(resetPasswordButton());
-        Button btn = new Button("Cancel");
+        Button cancelButton = new Button("Cancel");
 
-        btn.addClickHandler(cancelHandler2);
+        cancelButton.addClickHandler(cancelHandler2);
         //addImageToButton(btn, MyWebApp.resources.cancelButton(), MyWebApp.resources.cancelButtonMobile());
         //fixButton(btn);
-        btn.setStyleName("btn_blue");
+        cancelButton.setStyleName("btn_blue");
+        add(cancelButton);
     }
 
 

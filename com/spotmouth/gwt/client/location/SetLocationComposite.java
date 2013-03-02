@@ -6,6 +6,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.common.TextField;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,9 +32,9 @@ public class SetLocationComposite extends Composite {
     @UiField(provided = true)
     final SuggestBox cityTextBox;
     @UiField(provided = true)
-    final TextBox zipcodeTextBox;
+    final TextField zipcodeTextBox;
     @UiField(provided = true)
-    final TextBox address1TextBox;
+    final TextField address1TextBox;
 
     @UiField(provided = true)
     final Button updateButton;
@@ -53,7 +54,8 @@ public class SetLocationComposite extends Composite {
 
 
     public SetLocationComposite(ULPanel previousLocations,SuggestBox countryTextBox,
-                                SuggestBox stateTextBox,SuggestBox cityTextBox,TextBox zipcodeTextBox,TextBox address1TextBox,Button updateButton,Button fromDeviceButton,SimplePanel mapPanel,
+                                SuggestBox stateTextBox,SuggestBox cityTextBox,
+                                TextField zipcodeTextBox,TextField address1TextBox,Button updateButton,Button fromDeviceButton,SimplePanel mapPanel,
                                 SimpleRadioButton mapRadioButton) {
         this.previousLocations = previousLocations;
         this.countryTextBox = countryTextBox;

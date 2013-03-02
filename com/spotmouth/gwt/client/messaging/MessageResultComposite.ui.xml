@@ -4,19 +4,19 @@
              xmlns:x2='urn:import:com.spotmouth.gwt.client.common'>
 
 
-    <g:HTMLPanel tag="li">
+    <g:HTMLPanel tag="li" addStyleNames="mp_message">
         <!--
 <li class="mp_message">
 <img src="y_e4525243.jpg" class="mp_msg_ava"/>
 -->
 	 <g:Image ui:field="userImage"/>
-	<span class="mp_msg_con"><h3><g:Anchor ui:field="usernameAnchor"/>  <span ui:field='timeReceivedSpan'/></h3><p class="msg_text"><span ui:field='messageTextSpan'/></p></span>
+	<span class="mp_msg_con"><h3><g:Anchor ui:field="usernameAnchor"/>  <span class="mp_time" ui:field='timeReceivedSpan'/></h3><p class="msg_text"><span ui:field='messageTextSpan'/></p></span>
 	<span class="mp_msg_more"><input class="mp_msg_dd" type="text" name="more"/>
-        <g:Button ui:field="moreButton"/>
+        <g:Button addStyleNames="_btn" ui:field="moreButton">...</g:Button>
 
 		<ul class="mp_more_list">
-			<li class="mp_more_item mp_msg_kill">  <g:Anchor ui:field="deleteMessageAnchor"/> </li>
-			<li class="mp_more_item mp_msg_spam"><g:Anchor ui:field="reportSpamAnchor"/></li>
+			<li class="mp_more_item mp_msg_kill">  <g:Anchor ui:field="deleteMessageAnchor">Delete message</g:Anchor> </li>
+			<li class="mp_more_item mp_msg_spam"><g:Anchor ui:field="reportSpamAnchor">Report spam</g:Anchor></li>
 		</ul>
 	</span>
 	<span class="mp_message_delete">

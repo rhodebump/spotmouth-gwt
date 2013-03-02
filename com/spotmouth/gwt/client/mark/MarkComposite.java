@@ -9,6 +9,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
@@ -99,6 +100,8 @@ public class MarkComposite extends Composite {
     final Button shareOnFacebookButton;
 
 
+    @UiField(provided = false)
+     Button cancelButton;
 
 
 
@@ -209,7 +212,14 @@ public class MarkComposite extends Composite {
 
     }
 
+   //cancelButton
 
+    @UiHandler("cancelButton")
+    public void onClickCancel(ClickEvent event) {
+       String token =  MyWebApp.SPOT_DETAIL + spotId;
+
+        History.newItem(token);
+    }
 
     public void doSaveImage(String name,String data) {
         mywebapp.getMessagePanel().clear();
@@ -265,8 +275,11 @@ public class MarkComposite extends Composite {
         event.preventDefault();
     }
 
+    private Long spotId  = null;
 
-
+   public void setSpotId(Long spotId) {
+       this.spotId = spotId;
+   }
 
 
     protected FileReader reader;

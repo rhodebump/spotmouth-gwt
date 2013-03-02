@@ -46,7 +46,11 @@
       			<ul class="btm-bar">
 
                       <li><g:Anchor addStyleNames="ms_add_f"  ui:field="addToFavorites" title="Add to favorite"></g:Anchor></li>
-                  				<li><g:Anchor addStyleNames="ms_lock" ui:field="lockThisSpot" title="Lock this spot"></g:Anchor></li>
+                  				<li>
+                                      <g:Anchor addStyleNames="ms_lock" ui:field="lockSpotAnchor" title="Lock this spot"></g:Anchor>
+                                      <g:Anchor addStyleNames="ms_lock" ui:field="unlockSpotAnchor" title="Un-lock this spot"></g:Anchor>
+
+                                  </li>
                   				<li><g:Anchor addStyleNames="ms_rem" ui:field="deleteSpotAnchor" title="Delete this spot"></g:Anchor></li>
 
 

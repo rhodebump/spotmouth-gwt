@@ -101,6 +101,8 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
             markComposite.setLocationName(spotHolder.getName());
             markComposite.setFullAddress(spotHolder.getAddressLabel());
             markComposite.setPhoneNumber(spotHolder.getVoicephone());
+            markComposite.setSpotId(spotHolder.getId());
+
             FormPanel myFormPanel = new FormPanel();
             setupRootPanelForm(myFormPanel, markData);
             myFormPanel.setWidget(markComposite);

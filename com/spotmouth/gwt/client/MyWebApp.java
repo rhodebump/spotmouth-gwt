@@ -2707,6 +2707,8 @@ public class MyWebApp implements EntryPoint {
         this.robot = Window.Location.getQueryString().indexOf("robot=true") >= 0;
 
 
+        //if we do have cookies, let's fail?
+
         initAuth();
         //phonegap uses the following to init, which will error out in IE
         //$doc.addEventListener($intern_1704, $entry(f), false);
@@ -2999,7 +3001,7 @@ public class MyWebApp implements EntryPoint {
         initSetLocationManuallyPanel();
         swapCenter(setLocationManuallyPanel);
         getMessagePanel().displayMessage(SetLocationManuallyPanel.WHERE_ARE_YOU);
-        getMessagePanel().displayMessage("Please use the form below to set your location.  The HELP button can give you more assistance.");
+        //getMessagePanel().displayMessage("Please use the form below to set your location.  The HELP button can give you more assistance.");
     }
 
     public void addCurrentLocation() {

@@ -127,12 +127,33 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
             createCoupon();
         }
     };
-    ClickHandler lockSpotHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            lockSpot();
-        }
-    };
+//    ClickHandler lockSpotHandler = new ClickHandler() {
+//        public void onClick(ClickEvent event) {
+//            lockSpot();
+//        }
+//    };
 
+    public void unlockSpot() {
+        getMessagePanel().clear();
+        ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+        SaveSpotRequest spotRequest = new SaveSpotRequest();
+        spotRequest.setSpotHolder(spotHolder);
+        spotRequest.setAuthToken(mywebapp.getAuthToken());
+        myService.lockSpot(spotRequest, new AsyncCallback() {
+            public void onFailure(Throwable caught) {
+                getMessagePanel().displayError(caught.getMessage());
+            }
+
+            public void onSuccess(Object result) {
+                MobileResponse mobileResponse = (MobileResponse) result;
+                if (mobileResponse.getStatus() == 1) {
+                    getMessagePanel().displayMessage("Spot is now  un-locked");
+                } else {
+                    getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                }
+            }
+        });
+    }
     public void lockSpot() {
         getMessagePanel().clear();
         ApiServiceAsync myService = mywebapp.getApiServiceAsync();
@@ -238,7 +259,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
             spotImagePanel.setWidget(mainImage);
             defaultUploader = new MultiUploader();
             defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-            ManageSpotComposite msc = new ManageSpotComposite(this, spotImagePanel, defaultUploader);
+            ManageSpotComposite msc = new ManageSpotComposite(this, spotImagePanel, defaultUploader,spotHolder);
             msc.setName(spotHolder.getName());
             add(msc);
             return;
@@ -260,7 +281,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
         GWT.log("spotHolder.isLockedForEdit() " + spotHolder.isLockedForEdit());
         if (!spotHolder.isLockedForEdit()) {
             //spot  is always locked now
-            addImageIcon(lockSpotHandler, "Lock Spot", new Image(MyWebApp.resources.lockSpot()), topPanel, "Lock Spot");
+            //addImageIcon(lockSpotHandler, "Lock Spot", new Image(MyWebApp.resources.lockSpot()), topPanel, "Lock Spot");
         } else {
         }
         //spot detail page

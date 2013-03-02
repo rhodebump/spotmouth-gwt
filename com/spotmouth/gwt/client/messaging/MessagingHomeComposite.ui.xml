@@ -33,14 +33,14 @@
 
 
 
-            <g:Button ui:field="newMessageButton"/>
+            <g:Button addStyleNames="btn_blue" ui:field="newMessageButton">New Message</g:Button>
 		</div>
 		<div id="mp_msgs">
 
             <x1:ULPanel ui:field="inUL"/>
             <x1:ULPanel ui:field="sentUL"/>
             <x1:ULPanel ui:field="draftUL"/>
-            <x1:ULPanel ui:field="resultsUL"/>
+            <x1:ULPanel ui:field="resultsUL"   addStyleNames="mp_messages" />
 
 
 

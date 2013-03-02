@@ -20,7 +20,7 @@
 
       			<label class="f_inp f_inv_name">
 
-                      <smc:TextField ui:field="friendNameTextBox" placeholder="Enter your friend's name"/>
+                      <smc:TextField ui:field="friendNameTextBox" tabIndex="1" placeholder="Enter your friend's name"/>
       				<p>Optional</p>
       			</label>
 
@@ -34,7 +34,7 @@
 
       			<label class="f_inp f_inp_inv_email">
 
-                      <smc:TextField ui:field="emailAddressTextBox" type="email" placeholder="Enter your friend's e-mail"/>
+                      <smc:TextField ui:field="emailAddressTextBox" tabIndex="3" type="email" placeholder="Enter your friend's e-mail"/>
       				<p>Divide e-mails by comma</p>
       			</label>
 
@@ -42,15 +42,15 @@
                       <!--
       				<input type="text" placeholder="Enter your friend's phone number" required="true" tabindex="3"/>
       				-->
-                      <smc:TextField ui:field="smsPhoneNumberBox" tabIndex="3" placeholder="Enter your friend's phone number" />
+                      <smc:TextField ui:field="smsPhoneNumberBox" tabIndex="4" placeholder="Enter your friend's phone number" />
       				<p>Divide numbers by comma</p>
       			</label>
       		</div>
 
       			<h3 class="f_s_title">Attach Message<p>optional</p></h3>
 
-                  <g:TextArea ui:field="friendJoinMessageTextArea"/>
-      			<g:Button ui:field="inviteFriendButton"/>
+                  <g:TextArea addStyleNames="f_inp_text" visibleLines="3" tabIndex="5" ui:field="friendJoinMessageTextArea"/>
+      			<g:Button addStyleNames="btn_blue" ui:field="inviteFriendButton">Invite</g:Button>
 
       		</div>
       	</div>

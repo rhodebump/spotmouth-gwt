@@ -77,7 +77,8 @@ public class MessagingHomeComposite  extends Composite {
     private MessagingPanel messagingPanel = null;
     private MyWebApp mywebapp = null;
 
-    public MessagingHomeComposite(MyWebApp mywebapp,ULPanel inUL,ULPanel sentUL,ULPanel draftUL,MessageComposite messageComposite,MessagingPanel messagingPanel,TextField messageSearchTextBox,Button searchButton,ULPanel resultsUL) {
+    public MessagingHomeComposite(MyWebApp mywebapp,ULPanel inUL,ULPanel sentUL,ULPanel draftUL,MessageComposite messageComposite,MessagingPanel messagingPanel,TextField messageSearchTextBox,
+                                  Button searchButton,ULPanel resultsUL) {
         this.inUL = inUL;
         this.mywebapp = mywebapp;
         this.sentUL = sentUL;
@@ -90,9 +91,9 @@ public class MessagingHomeComposite  extends Composite {
         //this.newMessageButton = newMessageButton;
         initWidget(uiBinder.createAndBindUi(this));
 
-        this.newMessageButton.setText("New Message");
+       // this.newMessageButton.setText("New Message");
         //Button newMessageButton = new Button("New Message");
-        this.newMessageButton.setStyleName("btn_blue");
+      //  this.newMessageButton.setStyleName("btn_blue");
         this.messagingPanel = messagingPanel;
 
         // <input type="text" placeholder="Find Message"

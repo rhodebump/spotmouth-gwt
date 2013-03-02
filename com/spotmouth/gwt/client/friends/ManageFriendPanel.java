@@ -30,7 +30,6 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         } else {
             return MyWebApp.resources.friends();
         }
-
     }
 
     protected boolean isValid() {
@@ -39,13 +38,13 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
                 getMessagePanel().displayError("The SMS phone number must be at least 11 numbers.");
                 getMessagePanel().displayError("Begin with a 1 + the area code + the number");
                 getMessagePanel().displayError("Example: 1-412-123-4567");
-
             }
         } else if (isEmpty(emailTextField)) {
             getMessagePanel().displayError("A valid phone number or email address is required");
         }
         return (!getMessagePanel().isHaveMessages());
     }
+
     public String getTitle() {
         return "Friend";
     }
@@ -57,52 +56,16 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
     //spotholder could be null, if it is not null, then the friend would be for the spot
     public ManageFriendPanel(MyWebApp mywebapp, FriendHolder friendHolder, AsyncCallback friendCreatedCallback) {
         super(mywebapp);
-
-
-
-
         this.friendHolder = friendHolder;
         this.friendCreatedCallback = friendCreatedCallback;
-
-
-
         if (MyWebApp.isDesktop()) {
-            //	<input type="text" placeholder="Enter your friend's e-mail" required="true" tabindex="3"/>
-
             emailTextField = new TextField();
-//            emailTextBox.getElement().setAttribute("placeholder","Enter your friend's e-mail");
-//            emailTextBox.getElement().setAttribute("required","required");
-
-            emailTextField.setTabIndex(3);
-          //  emailTextBox.getElement().setAttribute("placeholder","Enter your friend's e-mail");
-
-            //	<input type="text" placeholder="Enter your friend's phone number" required="true" tabindex="3"/>
-
-           // smsPhoneNumberBox.getElement().setAttribute("placeholder","Enter your friend's phone number");
-         //   smsPhoneNumberBox.getElement().setAttribute("required","required");
-
-            smsPhoneNumberBox.setTabIndex(3);
-
-
-            Button inviteFriendButton = new Button("Invite");
-            inviteFriendButton.setStyleName("btn_blue");
+            Button inviteFriendButton = new Button();
             inviteFriendButton.addClickHandler(saveHandler);
-
-            friendJoinMessageTextArea.setStyleName("f_inp_text");
-            friendJoinMessageTextArea.setVisibleLines(3);
-            friendJoinMessageTextArea.setTabIndex(4);
-
-            //<input type="text" placeholder="Enter your friend's name" tabindex="1"/>
-
-            //friendNameTextBox.getElement().setAttribute("placeholder","Enter your friend's name");
-
-            friendNameTextBox.setTabIndex(1);
-            FriendFormComposite ffc = new FriendFormComposite(emailTextField,smsPhoneNumberBox,inviteFriendButton,friendNameTextBox,friendJoinMessageTextArea);
+            FriendFormComposite ffc = new FriendFormComposite(emailTextField, smsPhoneNumberBox, inviteFriendButton, friendNameTextBox, friendJoinMessageTextArea);
             add(ffc);
             return;
         }
-
-        //this.spotHolder = spotHolder;
         boolean readonly = false;
         if (friendHolder.getId() != null) {
             readonly = true;
@@ -119,7 +82,6 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         emailTextField.setReadOnly(readonly);
         smsPhoneNumberBox = addTextBox("SMS Phone Number", "smsPhoneNumber", friendHolder.getSmsPhoneNumber());
         smsPhoneNumberBox.setReadOnly(readonly);
-
         if (friendHolder.getFriendUserHolder() != null) {
             addTextBox("Username", "username", friendHolder.getUserHolder().getUsername(), true);
         }
@@ -131,7 +93,6 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         Label smsAcceptStatusLabel = new Label("SMS Acceptance Status:  " + friendHolder.getSmsAccountValidated());
         smsVP.add(smsAcceptStatusLabel);
         add(smsFS);
-
         Fieldset smsFS2 = new Fieldset();
         VerticalPanel smsVP2 = new VerticalPanel();
         smsFS2.add(smsVP2);
@@ -151,44 +112,25 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         add(cancelButton());
     }
 
-    //Label btn = new Label("Save");
+
     Label deletebtn = new Label("Delete");
-//    ClickHandler saveFriendHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//
-//            // btn.setEnabled(false);
-//            saveFriend();
-//        }
-//    };
+
     ClickHandler deleteFriendHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             boolean delete = Window.confirm("Delete your friend?");
             if (delete) {
-                //deletebtn.setEnabled(false);
                 deleteFriend(friendHolder);
             }
         }
     };
-    //private TextBox emailAddressTextBox = new TextBox();
     private TextField smsPhoneNumberBox = new TextField();
     private TextField friendNameTextBox = new TextField();
-
     private TextArea friendJoinMessageTextArea = new TextArea();
 
 
-    /*
-            friendHolder.setFriendName(friendNameTextBox.getValue());
-        friendHolder.setFriendInviteMessage(friendJoinMessageTextarea.getValue());
-     */
     public void toggleFirst() {
         emailTextField.setFocus(true);
     }
-
-
-
-
-
-
 
     AsyncCallback messageCallback = new AsyncCallback() {
         public void onFailure(Throwable throwable) {
@@ -202,9 +144,7 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         }
     };
 
-
     protected void doSave() {
-
         FriendRequest friendRequest = new FriendRequest();
         friendRequest.setFriendHolder(friendHolder);
         friendRequest.setAuthToken(mywebapp.getAuthToken());
@@ -212,7 +152,6 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         friendHolder.setSmsPhoneNumber(smsPhoneNumberBox.getValue());
         friendHolder.setFriendName(friendNameTextBox.getValue());
         friendHolder.setFriendInviteMessage(friendJoinMessageTextArea.getValue());
-
         ApiServiceAsync myService = mywebapp.getApiServiceAsync();
         myService.saveFriend(friendRequest, new AsyncCallback() {
             public void onFailure(Throwable caught) {
@@ -229,12 +168,9 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
                 if (mobileResponse.getStatus() == 1) {
                     mywebapp.fetchFriendsAndGroups(null);
                     if (friendCreatedCallback == null) {
-
                         mywebapp.setFriendsAndGroups(null);
-                       // m//ywebapp.toggleManageFriends(messageCallback);
                         mywebapp.setHomeCallback(messageCallback);
                         History.newItem(MyWebApp.MANAGE_FRIENDS);
-
                     } else {
                         friendCreatedCallback.onSuccess(mobileResponse.getFriendHolder());
                     }

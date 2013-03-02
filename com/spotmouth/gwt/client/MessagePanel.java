@@ -21,7 +21,7 @@ public class MessagePanel extends FlowPanel {
 
     protected ClickHandler killNotificationHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-            setVisible(false);
+            clear();
         }
     };
 

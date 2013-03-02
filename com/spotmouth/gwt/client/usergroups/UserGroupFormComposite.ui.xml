@@ -14,7 +14,7 @@
      			<span ui:field='memberCountSpan'/>
      		</div>
 
-             <g:Button ui:field="inviteButton"/>
+             <g:Button addStyleNames="button vug_invite" ui:field="inviteButton">Invite</g:Button>
 
      		<label class="vug_lb vug_group_name"><smc:TextField ui:field="groupNameTextBox" placeholder="Group Name..." /> </label>
      		<label class="vug_lb vug_select_friends"><input type="text" placeholder="Find a friend..."/></label>
@@ -25,7 +25,7 @@
      		</div>
      		<div id="f_list" class="_add_scroll">
 
-                 <x:ULPanel ui:field="availableULPanel"/>
+                 <x:ULPanel addStyleNames="vug_f_list" ui:field="availableULPanel"/>
                  <!--
      			<ul class="vug_f_list" id="f_list_c">
 
