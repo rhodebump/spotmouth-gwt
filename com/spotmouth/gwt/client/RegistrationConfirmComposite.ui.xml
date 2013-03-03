@@ -96,7 +96,7 @@ background: white;
 <g:TextBox ui:field="usernameTextBox"/>
 </label>
 
-<input type="checkbox" id="pwd_sw">
+<input type="checkbox" id="pwd_sw"/>
 
 <label>
 <p>Input your password</p>
