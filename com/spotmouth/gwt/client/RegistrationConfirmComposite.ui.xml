@@ -50,26 +50,6 @@ border-radius: 3px;
 -moz-border-radius: 3px;
 }
 
-#conf  label{
-display: block;
-width: 502px;
-border-radius: 3px;
--moz-border-radius: 3px;
-padding: 5px 0 0;
-margin: 10px auto;
-border: solid 1px silver;
-box-sizing: border-box;
--moz-box-sizing: border-box;
-background: #F9F9F9;
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y5ZjlmOSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkZGRkZGQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(top, rgba(249, 249, 249, 1) 0%, rgba(221, 221, 221, 1) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(249, 249, 249, 1)), color-stop(100%,rgba(221, 221, 221, 1)));
-background: -webkit-linear-gradient(top, rgba(249, 249, 249, 1) 0%,rgba(221, 221, 221, 1) 100%);
-background: -o-linear-gradient(top, rgba(249, 249, 249, 1) 0%,rgba(221, 221, 221, 1) 100%);
-background: -ms-linear-gradient(top, rgba(249, 249, 249, 1) 0%,rgba(221, 221, 221, 1) 100%);
-background: linear-gradient(to bottom, rgba(249, 249, 249, 1) 0%,rgba(221, 221, 221, 1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#dddddd',GradientType=0 );
-}
 
 #conf  label > p {
 font: 12pt calibri, sans-serif;
@@ -101,69 +81,32 @@ background: #EEE;
 background: white;
 }
 
-#conf button {
-padding: 5px 25px;
-font: 14pt calibri;
-box-shadow: 0 3px 5px silver;
-color: black;
-border: solid 1px silver;
-text-shadow: 0 1px 1px silver;
-border-radius: 3px;
-cursor: pointer;
-background: #00CBFF;
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwY2JmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM0ZDg0Y2MiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(top, rgba(0, 203, 255, 1) 0%, rgba(77, 132, 204, 1) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0, 203, 255, 1)), color-stop(100%,rgba(77, 132, 204, 1)));
-background: -webkit-linear-gradient(top, rgba(0, 203, 255, 1) 0%,rgba(77, 132, 204, 1) 100%);
-background: -o-linear-gradient(top, rgba(0, 203, 255, 1) 0%,rgba(77, 132, 204, 1) 100%);
-background: -ms-linear-gradient(top, rgba(0, 203, 255, 1) 0%,rgba(77, 132, 204, 1) 100%);
-background: linear-gradient(to bottom, rgba(0, 203, 255, 1) 0%,rgba(77, 132, 204, 1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00cbff', endColorstr='#4d84cc',GradientType=0 );
-display: block;
-margin-top: 18px;
-margin-right: 73px;
-width: 121px;
-float: right;
-}
-
-#conf button:hover {
-text-shadow: none;
-background: #00D2FF;
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwZDJmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQ1JSIgc3RvcC1jb2xvcj0iIzAwZDJmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMGJhZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(top, rgba(0, 210, 255, 1) 0%, rgba(0, 210, 255, 1) 45%, rgba(0, 186, 255, 1) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0, 210, 255, 1)), color-stop(45%,rgba(0, 210, 255, 1)), color-stop(100%,rgba(0, 186, 255, 1)));
-background: -webkit-linear-gradient(top, rgba(0, 210, 255, 1) 0%,rgba(0, 210, 255, 1) 45%,rgba(0, 186, 255, 1) 100%);
-background: -o-linear-gradient(top, rgba(0, 210, 255, 1) 0%,rgba(0, 210, 255, 1) 45%,rgba(0, 186, 255, 1) 100%);
-background: -ms-linear-gradient(top, rgba(0, 210, 255, 1) 0%,rgba(0, 210, 255, 1) 45%,rgba(0, 186, 255, 1) 100%);
-background: linear-gradient(to bottom, rgba(0, 210, 255, 1) 0%,rgba(0, 210, 255, 1) 45%,rgba(0, 186, 255, 1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00d2ff', endColorstr='#00baff',GradientType=0 );
-}
-
-#conf button:active {
-box-shadow: inset 0 0 10px #00428A;
-}
 </style>
 
 
 
 
 <div id="conf">
-
+<div class="conf_content">
 <h1>Registration</h1>
 <h2>Your email was successfully confirmed!</h2>
-
 
 <label>
 <p>Username</p>
 <g:TextBox ui:field="usernameTextBox"/>
 </label>
 
+<input type="checkbox" id="pwd_sw">
+
 <label>
 <p>Input your password</p>
+<span></span>
 <g:TextBox ui:field="passwordTextBox"/>
+<g:TextBox  ui:field='maskedPasswordTextBox' />
 </label>
 
 <g:Button ui:field="saveButton"/>
+</div>
 </div>
 
 
