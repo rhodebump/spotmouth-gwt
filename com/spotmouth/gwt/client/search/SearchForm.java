@@ -53,13 +53,9 @@ public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
             contestFilterCheckbox.setName("filtering");
 
             Button searchButton = new Button();
-            searchButton.setStyleName("btn_blue");
             searchButton.addClickHandler(searchHandler);
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
-            //tagSearchTextBox.getElement().setId("mc_tags_inp");
-            //tagSearchTextBox.getElement().setAttribute("placeholder", "Start typing");
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
-
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
 
             initVehicleType("");
@@ -129,8 +125,5 @@ public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
         keywordsTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+
 }

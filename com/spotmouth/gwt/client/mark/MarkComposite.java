@@ -164,38 +164,42 @@ public class MarkComposite extends Composite {
         p.setId("ddabout");
         p.appendChild(document.createTextNode("drop your photo here"));
         dropPanel.getElement().appendChild(p);
-        reader = new FileReader();
-        reader.addLoadEndHandler(new LoadEndHandler() {
-            @Override
-            public void onLoadEnd(LoadEndEvent event) {
-                if (reader.getError() == null) {
-                    if (readQueue.size() > 0) {
-                        File file = readQueue.get(0);
-                        try {
-                            uploadFile(file);
-                            Image image = createBitmapImage(file);
-                            image.setStyleName("ddplaceholedr");
-                            panelImages.setVisible(true);
-                            panelImages.add(image);
-                        } finally {
-                            readQueue.remove(0);
-                            readNext();
+        try {
+            reader = new FileReader();
+            reader.addLoadEndHandler(new LoadEndHandler() {
+                @Override
+                public void onLoadEnd(LoadEndEvent event) {
+                    if (reader.getError() == null) {
+                        if (readQueue.size() > 0) {
+                            File file = readQueue.get(0);
+                            try {
+                                uploadFile(file);
+                                Image image = createBitmapImage(file);
+                                image.setStyleName("ddplaceholedr");
+                                panelImages.setVisible(true);
+                                panelImages.add(image);
+                            } finally {
+                                readQueue.remove(0);
+                                readNext();
+                            }
                         }
                     }
                 }
-            }
-        });
-        reader.addErrorHandler(new ErrorHandler() {
-            @Override
-            public void onError(ErrorEvent event) {
-                if (readQueue.size() > 0) {
-                    File file = readQueue.get(0);
-                    handleError(file);
-                    readQueue.remove(0);
-                    readNext();
+            });
+            reader.addErrorHandler(new ErrorHandler() {
+                @Override
+                public void onError(ErrorEvent event) {
+                    if (readQueue.size() > 0) {
+                        File file = readQueue.get(0);
+                        handleError(file);
+                        readQueue.remove(0);
+                        readNext();
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception e) {
+            GWT.log("Caugh filereader init error",e);
+        }
         readQueue = new ArrayList<File>();
 
     }

@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.ULPanel;
-import com.spotmouth.gwt.client.common.BaseComposite;
+
 
 /**
  * Created with IntelliJ IDEA.

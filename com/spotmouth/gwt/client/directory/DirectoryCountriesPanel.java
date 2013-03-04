@@ -1,7 +1,10 @@
-package com.spotmouth.gwt.client;
+package com.spotmouth.gwt.client.directory;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Hyperlink;
+import com.spotmouth.gwt.client.MyWebApp;
+import com.spotmouth.gwt.client.SpotMouthPanel;
+import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.CountryHolder;
@@ -20,20 +23,7 @@ public class DirectoryCountriesPanel extends SpotBasePanel implements SpotMouthP
     }
 
 
-//    ClickHandler countryHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            Object sender = event.getSource();
-//            if (sender instanceof Widget) {
-//                GWT.log("Got a Label");
-//                Widget b = (Widget) sender;
-//                CountryHolder countryHolder = countryHolderClickMap.get(b);
-//                if (countryHolder != null) {
-//                        mywebapp.toggleCountry(true,countryHolder.getId());
-//                }
-//            }
-//        }
-//    };
-    //Map<Widget, CountryHolder> countryHolderClickMap = new HashMap<Widget, CountryHolder>();
+
 
 
     public ImageResource getImageResource() {
@@ -50,13 +40,13 @@ public class DirectoryCountriesPanel extends SpotBasePanel implements SpotMouthP
 
     public DirectoryCountriesPanel(MyWebApp mywebapp) {
         super(mywebapp);
+        this.setStyleName("directory");
         ULPanel ul = new ULPanel();
         ul.setStyleName("results");
         add(ul);
         for (CountryHolder countryHolder : mywebapp.getCountryHolders()) {
 
             ListItem li = new ListItem();
-            //li.setStyleName("clearing");
             String token = MyWebApp.COUNTRY  + countryHolder.getId();
             Hyperlink countryLabel = new Hyperlink(countryHolder.getFullName(),token);
 

@@ -91,7 +91,7 @@ public abstract class SpotBasePanel extends FlowPanel {
                 System.out.println("File content-type " + info.ctype);
                 System.out.println("File size " + info.size);
                 // You can send any customized message and parse it
-                System.out.println("Server message " + info.message);
+                GWT.log("Server message " + info.message);
                 //okay, we don't have a final "URL" for this image, and we need one to be able to insert into
                 //a wysiwyg editor
                 //let's call the server and sweep through the session files and convert these to content

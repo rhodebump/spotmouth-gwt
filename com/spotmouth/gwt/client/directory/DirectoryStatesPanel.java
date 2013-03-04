@@ -1,7 +1,10 @@
-package com.spotmouth.gwt.client;
+package com.spotmouth.gwt.client.directory;
 
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
+import com.spotmouth.gwt.client.MyWebApp;
+import com.spotmouth.gwt.client.SpotMouthPanel;
+import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.MobileResponse;
@@ -22,28 +25,16 @@ public class DirectoryStatesPanel extends SpotBasePanel implements SpotMouthPane
         return "States/Provinces";
     }
 
-//    ClickHandler stateHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            Object sender = event.getSource();
-//            if (sender instanceof Widget) {
-//                GWT.log("Got a Label");
-//                Widget b = (Widget) sender;
-//                StateProvinceHolder sph = stateOrProvinceHolderClickMap.get(b);
-//                if (sph != null) {
-//                    mywebapp.toggleState(true, sph.getId());
-//                }
-//            }
-//        }
-//    };
 
     public DirectoryStatesPanel(MyWebApp mywebapp, MobileResponse mobileResponse) {
         super(mywebapp);
+        this.setStyleName("directory");
         //fetchStates(countryId);
         //need to fetch the states for the given country
         displayStates(mobileResponse);
     }
 
-    Map<Widget, StateProvinceHolder> stateOrProvinceHolderClickMap = new HashMap<Widget, StateProvinceHolder>();
+    //Map<Widget, StateProvinceHolder> stateOrProvinceHolderClickMap = new HashMap<Widget, StateProvinceHolder>();
 
     private void displayStates(MobileResponse mobileResponse) {
         ULPanel ul = new ULPanel();
@@ -55,7 +46,7 @@ public class DirectoryStatesPanel extends SpotBasePanel implements SpotMouthPane
             String token = MyWebApp.STATE  + stateProvinceHolder.getId();
             Hyperlink label = new Hyperlink(stateProvinceHolder.getFullName(),token);
 
-            stateOrProvinceHolderClickMap.put(label, stateProvinceHolder);
+          //  stateOrProvinceHolderClickMap.put(label, stateProvinceHolder);
             li.add(label);
             ul.add(li);
         }

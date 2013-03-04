@@ -216,6 +216,28 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
 //        }
 //    };
 
+
+    AsyncCallback spotDeletedCallback = new AsyncCallback() {
+        public void onFailure(Throwable throwable) {
+            getMessagePanel().displayMessage("This spot has been deleted");
+            getMessagePanel().displayMessage(throwable.getMessage());
+        }
+
+        public void onSuccess(Object response) {
+            getMessagePanel().displayMessage("This spot has been deleted");
+        }
+    };
+
+
+    AsyncCallback profileDeletedMessage = new AsyncCallback() {
+        public void onFailure(Throwable throwable) {
+            getMessagePanel().displayMessage("Could not delete profile.");
+        }
+
+        public void onSuccess(Object response) {
+            getMessagePanel().displayMessage("Your profile has been deleted");
+        }
+    };
     public void deleteSpot() {
         SaveSpotRequest ssr = new SaveSpotRequest();
         ssr.setSpotHolder(spotHolder);
@@ -230,8 +252,10 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
                     //need to toggle back and display success message
-                    mywebapp.toggleMenu();
-                    getMessagePanel().displayMessage("This spot has been deleted");
+                    //mywebapp.toggleMenu();
+                    mywebapp.toggleSearch(spotDeletedCallback);
+                    //History.newItem(MyWebApp.RE);
+
                 } else {
                     getMessagePanel().clear();
                     getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
@@ -244,13 +268,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
 
     public ManageSpotPanel(MyWebApp mywebapp, SpotHolder spotHolder) {
         super(mywebapp);
-        //we are here, in a management screen,
-        //if this isn't locked, let's lock it now
         this.spotHolder = spotHolder;
-        //june 2012, let's not automatically lock it, but allow users to lock it
-//        if (!spotHolder.isLockedForEdit()) {
-//             lockSpot();
-//        }
         if (MyWebApp.isDesktop()) {
             Image mainImage = getImage(spotHolder.getContentHolder(), "320x320");
             if (mainImage == null) {
@@ -279,12 +297,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
         //let's display all groups for this spot, clicking on the group takes one to manage the group
         //wait... lets
         GWT.log("spotHolder.isLockedForEdit() " + spotHolder.isLockedForEdit());
-        if (!spotHolder.isLockedForEdit()) {
-            //spot  is always locked now
-            //addImageIcon(lockSpotHandler, "Lock Spot", new Image(MyWebApp.resources.lockSpot()), topPanel, "Lock Spot");
-        } else {
-        }
-        //spot detail page
+
         addSpotLink(spotHolder);
         //add to favorites
         addToFavorites(spotHolder);
@@ -323,6 +336,10 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     public void changeListingInfo() {
+        //we need to update the URL, so if we need to, we can go back to manage spot panel
+        String token = MyWebApp.LISTING_INFO + spotHolder.getId();
+
+        History.newItem(token,false );
         PlaceForm placeForm = new PlaceForm(mywebapp, spotHolder);
         mywebapp.swapCenter(placeForm);
     }

@@ -1,6 +1,9 @@
-package com.spotmouth.gwt.client;
+package com.spotmouth.gwt.client.directory;
 
 import com.google.gwt.user.client.ui.Hyperlink;
+import com.spotmouth.gwt.client.MyWebApp;
+import com.spotmouth.gwt.client.SpotMouthPanel;
+import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.MobileResponse;
@@ -21,24 +24,11 @@ public class DirectoryPostalCodesPanel extends SpotBasePanel implements SpotMout
 
 
 
-//    ClickHandler postalCodeHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            Object sender = event.getSource();
-//            if (sender instanceof Widget) {
-//                GWT.log("Got a Label");
-//                Widget b = (Widget) sender;
-//                PostalCodeHolder sph = postalCodeHolderClickMap.get(b);
-//                if (sph != null) {
-//                    mywebapp.togglePostalCode(sph.getId());
-//
-//                }
-//            }
-//        }
-//    };
 
     //list all zips for a state
     public DirectoryPostalCodesPanel(MyWebApp mywebapp, MobileResponse mobileResponse) {
         super(mywebapp);
+        this.setStyleName("directory");
         //fetchPostalCodes(stateId);
         //need to fetch the states for the given country
         displayResults(mobileResponse);
@@ -54,7 +44,6 @@ public class DirectoryPostalCodesPanel extends SpotBasePanel implements SpotMout
         add(ul);
         for (PostalCodeHolder postalCodeHolder : mobileResponse.getPostalCodeHolders()) {
             ListItem li = new ListItem();
-            //li.setStyleName("clearing");
             String token =   MyWebApp.POSTALCODE + postalCodeHolder.getId();
             Hyperlink label = new Hyperlink(postalCodeHolder.getCityName() + ", " + postalCodeHolder.getPostalCode(),token);
 

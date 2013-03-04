@@ -12,6 +12,7 @@ import com.spotmouth.gwt.client.dto.TagHolder;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
+import org.vectomatic.dnd.DropPanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,9 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             Button addTagButton = new Button();
             //addTagAnchor.getElement().setId("addTag");
             addTagButton.addClickHandler(addTagHandler);
+
+
+
 
 
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox,plateNameTextBox,keywordsTextBox,manufacturersListBox,stateTextBox,

@@ -41,7 +41,7 @@
 
         	</fieldset>
 
-                <g:Button ui:field="searchButton"/>
+                <g:Button addStyleNames="btn_blue" ui:field="searchButton">Search</g:Button>
         	</div>
         </div>
 

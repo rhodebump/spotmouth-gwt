@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.Button;
@@ -11,6 +12,7 @@ import com.spotmouth.gwt.client.dto.TagHolder;
 import com.spotmouth.gwt.client.help.HelpResources;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
+import org.vectomatic.dnd.DropPanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +62,6 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
         if (MyWebApp.isDesktop()) {
             PlateSearchPanel plateSearchPanel = new PlateSearchPanel(mywebapp);
             MultiUploader multiUploader = new MultiUploader();
-            //FlowPanel panelImages3 = new FlowPanel();
-            //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages3);
             multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             ULPanel pickSpotULPanel = getPickSpotULPanel();
 
@@ -78,9 +78,10 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
             markData.expandData = expandData;
             widgetMarkDataMap.put(leaveMarkButton, markData);
             leaveMarkButton.addClickHandler(saveHandler2);
-            //FlowPanel flowPanel = new FlowPanel();
             FormPanel myFormPanel = new FormPanel();
             setupRootPanelForm(myFormPanel, markData);
+
+
 
             Button shareOnFacebookButton =   getFacebookButton(markData);
             Button addTagButton = new Button();
@@ -88,9 +89,9 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(plateSearchPanel.colorsListBox, plateSearchPanel.plateNameTextBox,
                     plateSearchPanel.keywordsTextBox, plateSearchPanel.manufacturersListBox, plateSearchPanel.stateTextBox, plateSearchPanel.vehicleTypeListBox,
                     plateSearchPanel.plateSearchButton, markData.tagSearchTextBox,
-                    markData.secretKeyTextBox, markData.saySomethingTextArea, selectedTagsPanel, leaveMarkButton, multiUploader, panelImages, pickSpotULPanel, mywebapp, shareOnFacebookButton, addTagButton,suggestionsPanel);
+                    markData.secretKeyTextBox, markData.saySomethingTextArea, selectedTagsPanel, leaveMarkButton, multiUploader, panelImages,
+                    pickSpotULPanel, mywebapp, shareOnFacebookButton, addTagButton,suggestionsPanel);
             plateSearchComposite.tab2.setValue(true);
-            // flowPanel.add(plateSearchComposite);
             myFormPanel.setWidget(plateSearchComposite);
             add(myFormPanel);
         }

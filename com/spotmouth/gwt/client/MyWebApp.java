@@ -6,6 +6,9 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.dom.client.*;
 import com.spotmouth.gwt.client.coupon.CouponForm;
+import com.spotmouth.gwt.client.directory.DirectoryCountriesPanel;
+import com.spotmouth.gwt.client.directory.DirectoryPostalCodesPanel;
+import com.spotmouth.gwt.client.directory.DirectoryStatesPanel;
 import com.spotmouth.gwt.client.event.EventForm;
 import com.spotmouth.gwt.client.chat.ChatsPanel;
 import com.spotmouth.gwt.client.chat.*;
@@ -69,7 +72,6 @@ import com.spotmouth.gwt.client.rpc.ApiService;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.spotmouth.gwt.client.search.SearchForm;
 import com.spotmouth.gwt.client.product.ManageProductsPanel;
-import com.spotmouth.gwt.client.spot.CreateSpotMarkComposite;
 import com.spotmouth.gwt.client.spot.CreateSpotMarkPanel;
 import com.spotmouth.gwt.client.spot.ManageSpotPanel;
 import com.spotmouth.gwt.client.usergroups.ManageUserGroupPanel;
@@ -2963,6 +2965,7 @@ public class MyWebApp implements EntryPoint {
     public static String DINING = "!dining/";
     public static String FUN = "!fun/";
 
+
     public void toggleFun() {
         getResultsPanel().resetSearchParameters();
         resultsPanel.getSearchParameters().setFun(true);
@@ -3084,35 +3087,7 @@ public class MyWebApp implements EntryPoint {
     private ULPanel popularULPanel = null;
     private ULPanel latestULPanel = null;
 
-    //this method will kick off a method to get most popular
-    //results
-    private void initPopularPanel() {
-        //get things with the most number of marks
-        GWT.log("getPopularPanel");
-        this.popularULPanel = new ULPanel();
-        SearchParameters searchParameters = new SearchParameters();
-        addCurrentLocation(searchParameters);
-        searchParameters.setSpots(true);
-        //searchParameters.setLicensePlate(true);
-        searchParameters.setSortKey("markcount_i");
-        searchParameters.setExcludeFactual(true);
-        ApiServiceAsync myService = getApiServiceAsync();
-        myService.search(searchParameters, new AsyncCallback() {
-            public void onFailure(Throwable caught) {
-                GWT.log("getPopularPanel onFailure");
-            }
 
-            public void onSuccess(Object result) {
-                GWT.log("getPopularPanel onSuccess");
-                MobileResponse response = (MobileResponse) result;
-                if (response.getStatus() == 1) {
-                    populateResults(response, popularULPanel);
-                } else {
-                    getMessagePanel().displayErrors(response.getErrorMessages());
-                }
-            }
-        });
-    }
 
     Panel tagCloudPanel = null;
     TagCloud tagCloud = null;
@@ -3434,10 +3409,7 @@ public class MyWebApp implements EntryPoint {
     private static String POLICY = "!policy/";
 
     private void togglePolicy() {
-//        if (newItem) {
-//            History.newItem(POLICY);
-//            return;
-//        }
+
         this.getMessagePanel().clear();
         // need to clear out keyword search if one was done
         UGRPanel aboutPanel = new UGRPanel(this);
@@ -3492,6 +3464,9 @@ public class MyWebApp implements EntryPoint {
         LeaveMarkForm leaveMarkForm = new LeaveMarkForm(this, null, false, itemHolder);
         swapCenter(leaveMarkForm);
     }
+    public static String LISTING_INFO = "listinginfo/";
+
+
 
     public static String LEAVE_SPOT_MARK = "!leavemarkspot/";
     /*
@@ -3881,6 +3856,9 @@ public class MyWebApp implements EntryPoint {
     }
 
     public void toggleMarkPlate() {
+
+        //need to have currentLocation set
+
         PlateSearchPanel plateSearchPanel = new PlateSearchPanel(this);
         //markSpotPanel.activate(true);
         swapCenter(plateSearchPanel);
@@ -4025,6 +4003,15 @@ public class MyWebApp implements EntryPoint {
         resultsPanel.setImageResources(resources.drinking(), resources.drinkingMobile());
         resultsPanel.performSearch();
     }
+
+    /*
+    we call this when we want to re-execute the existing search
+     */
+    public void toggleSearch(final AsyncCallback messageCallback) {
+        History.newItem(MyWebApp.SEARCH_RESULTS);
+        getResultsPanel().performSearch(messageCallback);
+    }
+
     /*
    there are 2 toggleSpotGroups, one is called when it is deleted and will not update the menu
     */

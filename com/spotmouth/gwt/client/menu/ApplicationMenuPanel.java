@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.spotmouth.gwt.client.*;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.coupon.Coupons8Panel;
+import com.spotmouth.gwt.client.directory.DirectoryCountriesPanel;
 import com.spotmouth.gwt.client.friends.ManageFriendsPanel;
 import com.spotmouth.gwt.client.location.SetLocationManuallyPanel;
 import com.spotmouth.gwt.client.messaging.MessagingPanel;
