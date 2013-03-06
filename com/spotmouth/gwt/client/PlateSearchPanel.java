@@ -50,6 +50,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
 
             MarkData markData = new MarkData();
             markData.saySomethingTextArea = contentTextArea;
+            markData.spotDescriptionTextArea = spotDescriptionTextArea;
 
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
             markData.tagSearchTextBox = tagSearchTextBox;
@@ -81,7 +82,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
 
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox,plateNameTextBox,keywordsTextBox,manufacturersListBox,stateTextBox,
                     vehicleTypeListBox,plateSearchButton,markData.tagSearchTextBox , markData.secretKeyTextBox,markData.saySomethingTextArea,
-                    selectedTagsPanel,leaveMarkButton,multiUploader,panelImages,pickSpotListBox,mywebapp,shareOnFacebookButton,addTagButton,suggestionsPanel);
+                    selectedTagsPanel,leaveMarkButton,multiUploader,panelImages,pickSpotListBox,mywebapp,shareOnFacebookButton,addTagButton,suggestionsPanel,markData.spotDescriptionTextArea);
             plateSearchComposite.tab1.setValue(true);
             add(plateSearchComposite);
 

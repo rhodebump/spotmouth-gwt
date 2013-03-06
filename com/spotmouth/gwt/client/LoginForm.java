@@ -117,10 +117,9 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
             //DOM.setElementAttribute(usernameTextBox.getElement(), "type", "email");
             DOM.setElementAttribute(maskedPasswordTextBox.getElement(), "placeholder", "Password...");
             addRequired(maskedPasswordTextBox);
-            Button signUp = new Button("Sign Up");
-            signUp.setStyleName("signUp");
+            Button signUp = new Button();
             signUp.addClickHandler(registerHandler);
-            Button loginButton = new Button("Log in");
+            Button loginButton = new Button();
             loginButton.setStyleName("loginButton");
             loginButton.addClickHandler(loginHandler);
             showTypingCheckbox.addClickHandler(new ClickHandler() {
@@ -147,11 +146,7 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
             Anchor resetAnchor = new Anchor("reset");
             DOM.setElementAttribute(resetAnchor.getElement(), "id", "reset");
             resetAnchor.addClickHandler(resetPasswordHandler);
-            //        HTML label = new HTML();
-//
-//                    label.addStyleName("gwtl");
-//                    label.setHTML("<label for='" + name + "'>" + labelText + "</label>");
-//                    fs.add(label);
+
             Anchor googleAnchor = new Anchor();
             DOM.setElementAttribute(googleAnchor.getElement(), "id", "gp");
             googleAnchor.addClickHandler(goggleSignin);
@@ -363,7 +358,7 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
         }
         //add(loginButton2());
         // need an OR
-        if (Storage.isLocalStorageSupported()) {
+        if (mywebapp.isLocalStorageSupported()) {
             Storage localStorage = Storage.getLocalStorageIfSupported();
             String username = localStorage.getItem("username");
             usernameTextBox.setValue(username);
@@ -561,12 +556,14 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
             }
         }
         //user wants to save the login and this is a successful login, let's save it
-        if (rememberMeCheckbox.getValue()) {
-            mywebapp.pushLocalStorage("username", usernameTextBox.getValue());
-            mywebapp.pushLocalStorage("password", passwordTextBox.getValue());
-        } else {
-            mywebapp.pushLocalStorage("username", "");
-            mywebapp.pushLocalStorage("password", "");
+        if (mywebapp.isLocalStorageSupported()) {
+            if (rememberMeCheckbox.getValue()) {
+                mywebapp.pushLocalStorage("username", usernameTextBox.getValue());
+                mywebapp.pushLocalStorage("password", passwordTextBox.getValue());
+            } else {
+                mywebapp.pushLocalStorage("username", "");
+                mywebapp.pushLocalStorage("password", "");
+            }
         }
         //let's clear out old messages.  How can we do this uniformly everywhere??
         getMessagePanel().clear();

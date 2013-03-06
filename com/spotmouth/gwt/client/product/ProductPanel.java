@@ -22,17 +22,13 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
  */
 //user picked product, this will allow them to request it
 public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
-
     public String getPageTitle() {
         return getTitle();
     }
 
-
     public String getTitle() {
         return "Product Install";
     }
-
-
 
     TextField domainNameTextBox = new TextField();
     TextField hostNameTextBox = new TextField();
@@ -52,9 +48,6 @@ public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
         return hostname + "-" + productHolder.getHostSuffix();
     }
 
-
-
-
     SimpleCheckBox acceptTerms = new SimpleCheckBox();
     private SpotHolder spotHolder = null;
     private ProductHolder productHolder = null;
@@ -63,125 +56,20 @@ public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
         super(myWebApp);
         this.spotHolder = spotHolder;
         this.productHolder = productHolder;
-
-
-        if (MyWebApp.isDesktop()) {
-
-            Button activateButton = new Button();
-
-            activateButton.addClickHandler(saveHandler);
-
-            ProductComposite pic = new ProductComposite(hostNameTextBox,domainNameTextBox,activateButton,acceptTerms);
-            pic.setProductClass("_" + productHolder.getHostSuffix());
-
-            pic.setProductDescription(productHolder.getDescription());
-            pic.setSpotName(spotHolder.getName());
-            add(pic);
-
-
-            return;
-        }
-
-
-
-        Label nameLabel = new HTML(productHolder.getName());
-        addFieldset(nameLabel, "Product", "desc");
-
-        if (! isEmpty(productHolder.getDescription())) {
-            HTML description = new HTML(productHolder.getDescription());
-            addFieldset(description, "Description", "desc");
-
-        }
-
-
-
-
-        ScrollPanel sp = new ScrollPanel();
-        sp.setHeight("200px");
-        String html = MyHtmlResources.INSTANCE.getTermsHtml().getText();
-        Label myLabel = new Label("Terms & Conditions");
-        myLabel.setStyleName("h1");
-        sp.setWidget(new HTML(html));
-        add(myLabel);
-        add(sp);
-
-
-
-
-        //this.acceptTerms = new CheckBox("By checking this box, I accept the above terms and conditions.");
-        acceptTerms.setName("acceptTerms");
-        //add(acceptTerms);
-        addFieldset(acceptTerms, "", "Na");
-
-
-         advancedSettingsPanel = new VerticalPanel();
-
-         settingsPanel = new VerticalPanel();
-        settingsPanel.setWidth("100%");
-
-        advancedSettingsPanel.add(hideAdvancedButton());
-        Label help = new Label("The following is a recommended hostname and domain that will be used for your product.  Don't change this value unless you know what you are doing.");
-        advancedSettingsPanel.add(help);
         String hostName = generateHostname();
-        this.hostNameTextBox = addTextBox("Hostname", "na", hostName,false,advancedSettingsPanel);
-        this.domainNameTextBox = addTextBox("Domain", "na", "spotmouth.com",false,advancedSettingsPanel);
-
-        settingsPanel.add(showAdvancedButton());
-
-        add(settingsPanel);
-
-        //if this is a zipfile, need to provide a file upload
-        if (productHolder.isUpload()) {
-            addMediaFields("Upload zipfile");
-        }
-        add(createButton());
-        add(cancelButton());
+        hostNameTextBox.setValue(hostName);
+        domainNameTextBox.setValue("spotmouth.com");
+        Button activateButton = new Button();
+        activateButton.addClickHandler(saveHandler);
+        ProductComposite pic = new ProductComposite(hostNameTextBox, domainNameTextBox, activateButton, acceptTerms);
+        pic.setProductClass("_" + productHolder.getHostSuffix());
+        pic.setProductDescription(productHolder.getDescription());
+        pic.setSpotName(spotHolder.getName());
+        add(pic);
     }
-
-    VerticalPanel settingsPanel = null;
-    VerticalPanel advancedSettingsPanel  = null;
-
-    protected Label showAdvancedButton() {
-        Label btn = new Label("Show Advanced Settings");
-        addImageToButton(btn,MyWebApp.resources.advancedOptionsButton(),MyWebApp.resources.advancedOptionsButtonMobile());
-        btn.addClickHandler(showAdvancedHandler);
-        fixButton(btn);
-        return btn;
-    }
-
-    protected Label hideAdvancedButton() {
-        Label btn = new Label("Hide Advanced Settings");
-        addImageToButton(btn,MyWebApp.resources.advancedOptionsButton(),MyWebApp.resources.advancedOptionsButtonMobile());
-        btn.addClickHandler(hideAdvancedHandler);
-        fixButton(btn);
-        return btn;
-    }
-
-
-
-    ClickHandler hideAdvancedHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            settingsPanel.clear();
-            settingsPanel.add(showAdvancedButton());
-
-        }
-    };
-
-
-    ClickHandler showAdvancedHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            settingsPanel.clear();
-            settingsPanel.add(advancedSettingsPanel);
-
-        }
-    };
-
 
     AsyncCallback productInstalledCallback = new AsyncCallback<MobileResponse>() {
         public void onFailure(Throwable throwable) {
-
-
-
         }
 
         public void onSuccess(MobileResponse response) {
@@ -208,12 +96,8 @@ public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
                 postDialog.hide();
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
-
-                     mywebapp.setHomeCallback(productInstalledCallback);
-                        History.newItem(MyWebApp.MANAGE_SPOT + spotHolder.getId());
-
-
-
+                    mywebapp.setHomeCallback(productInstalledCallback);
+                    History.newItem(MyWebApp.MANAGE_SPOT + spotHolder.getId());
                 } else {
                     getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
                 }
@@ -222,17 +106,5 @@ public class ProductPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     public void toggleFirst() {
-    }
-
-    public boolean isLoginRequired() {
-        return false;
-    }
-
-    public Label createButton() {
-        Label btn = new Label("Activate Product");
-        btn.addClickHandler(saveHandler);
-        fixButton(btn);
-        addImageToButton(btn,MyWebApp.resources.saveButton(),MyWebApp.resources.saveButtonMobile());
-        return btn;
     }
 }

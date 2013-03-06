@@ -244,14 +244,17 @@ public abstract class SpotBasePanel extends FlowPanel {
         zipcodeTextField = new TextField();
        // zipcodeTextBox.getElement().setAttribute("placeholder", "Zip Code");
        // zipcodeTextBox.setMaxLength(6);
-        zipcodeTextField.addKeyPressHandler(new KeyPressHandler() {
 
-          public void onKeyPress(KeyPressEvent event) {
-            if (!Character.isDigit(event.getCharCode())) {
-              ((TextBox) event.getSource()).cancelKey();
-            }
-          }
-        });
+        //can't do the following since this interferes with delete key
+
+//        zipcodeTextField.addKeyPressHandler(new KeyPressHandler() {
+//
+//          public void onKeyPress(KeyPressEvent event) {
+//            if (!Character.isDigit(event.getCharCode())) {
+//              ((TextBox) event.getSource()).cancelKey();
+//            }
+//          }
+//        });
 
 
     }
@@ -364,7 +367,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         public void onClick(ClickEvent event) {
             Widget widget = (Widget) event.getSource();
             LocationResult locationResult = pickLocationMap.get(widget);
-            mywebapp.saveLocationAsSpot(locationResult, saveLocationAsSpotGoToLeaveMarkCallback);
+            mywebapp.saveLocationAsSpot(locationResult,"", saveLocationAsSpotGoToLeaveMarkCallback);
         }
     };
     Map<Widget, LocationResult> pickLocationMap = new HashMap<Widget, LocationResult>();
@@ -2115,7 +2118,7 @@ public abstract class SpotBasePanel extends FlowPanel {
                 LocationResult locationResult = clickMapLocation.get(widget);
                 postDialog = new DataOperationDialog("Fetching...");
                 postDialog.show();
-                mywebapp.saveLocationAsSpot(locationResult, saveSpotCallback);
+                mywebapp.saveLocationAsSpot(locationResult, "",saveSpotCallback);
             }
         }
     };
@@ -3707,6 +3710,8 @@ public abstract class SpotBasePanel extends FlowPanel {
         public ItemHolder itemHolder = null;
         public FormPanel formPanel = null;
         public TextArea saySomethingTextArea = null;
+        //optional field allows user to specify a spot description
+        public TextArea spotDescriptionTextArea = null;
         public SuggestBox tagSearchTextBox = null;
         public TextBox secretKeyTextBox = new TextBox();
         public SimpleCheckBox shareOnFacebookCheckbox = new SimpleCheckBox();
@@ -3892,11 +3897,14 @@ public abstract class SpotBasePanel extends FlowPanel {
             currentLocationResult.setLocation(mywebapp.getCurrentLocation());
             //let's set to type of 3, a location
             currentLocationResult.getLocation().setSpotType(3);
+            String spotDescription = markData.spotDescriptionTextArea.getValue();
+
             AsyncCallback callback = getSaveLocationAsSpotCallback(markData);
-            mywebapp.saveLocationAsSpot(currentLocationResult, callback);
+            mywebapp.saveLocationAsSpot(currentLocationResult,spotDescription, callback);
         } else if (locationResult.getLocation() != null) {
+            //this happens when we leave a mark on a factual item that isn't a spot yet
             AsyncCallback callback = getSaveLocationAsSpotCallback(markData);
-            mywebapp.saveLocationAsSpot(locationResult, callback);
+            mywebapp.saveLocationAsSpot(locationResult,"", callback);
         } else if (locationResult.getSolrDocument() != null) {
             Long spotId = locationResult.getSolrDocument().getFirstLong("spotid_l");
             leavemark(spotId, markData);
@@ -3959,6 +3967,15 @@ public abstract class SpotBasePanel extends FlowPanel {
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
                     getMessagePanel().displayMessage("Your mark has been saved");
+
+                    //we need to reset the "search results cache" so that if they go back to search results, we still whatever our new updates are
+                    //SearchParameters searchParameters = mywebapp.getResultsPanel().getSearchParameters();
+
+                    mywebapp.getResultsPanel().setDirty(true);
+                   // mywebapp.setResultsPanel(null);
+                   // mywebapp.getResultsPanel().setSearchParameters(searchParameters);
+
+
                     if (markData.expandData.resultPanel == null) {
                         //we are doing the full screen
                         ItemHolder itemHolder = mobileResponse.getItemHolder();
@@ -3992,14 +4009,14 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     }
 
-    AsyncCallback markSaved = new AsyncCallback() {
-        public void onFailure(Throwable throwable) {
-        }
-
-        public void onSuccess(Object response) {
-            getMessagePanel().displayMessage("Your mark has been saved");
-        }
-    };
+//    AsyncCallback markSaved = new AsyncCallback() {
+//        public void onFailure(Throwable throwable) {
+//        }
+//
+//        public void onSuccess(Object response) {
+//            getMessagePanel().displayMessage("Your mark has been saved");
+//        }
+//    };
 
     protected void setupRootPanelForm(FormPanel myform, final MarkData markData) {
         markData.formPanel = myform;
@@ -4082,11 +4099,11 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     };
     protected Map<Widget, ItemHolder> clickMapItemHolder = new HashMap<Widget, ItemHolder>();
-
-    protected void addItems2(List<ItemHolder> items, String label,
-                             ClickHandler messageHandler) {
-        addItems(items, label, messageHandler);
-    }
+//
+//    protected void addItems2(List<ItemHolder> items, String label,
+//                             ClickHandler messageHandler) {
+//        addItems(items, label, messageHandler);
+//    }
 
     protected void addItems(List<ItemHolder> items, String label,
                             ClickHandler messageHandler) {
@@ -4761,6 +4778,8 @@ public abstract class SpotBasePanel extends FlowPanel {
         Capture.captureVideo(captureCallback, new CaptureOptions().limit(1).duration(
                 10));
     }
+    public TextArea spotDescriptionTextArea = new TextArea();
+
 
     public TextArea contentTextArea = new TextArea();
     protected MyWebApp mywebapp = null;

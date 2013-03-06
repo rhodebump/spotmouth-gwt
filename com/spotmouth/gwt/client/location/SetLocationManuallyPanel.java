@@ -137,20 +137,13 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
             }
         }
     };
-    ClickHandler viewMapHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            GWT.log("selected location");
-            // mywebapp.toggleMap(true);
-            History.newItem(MyWebApp.MAP);
-        }
-    };
+
 
     public String getTitle() {
         return "Set Location";
     }
 
-    //TextBox streetAddress1TextBox = null;
-    //TextBox zipcodeTextBox = null;
+
     Map<Widget, Location> locationMap = new HashMap<Widget, Location>();
 
     public SetLocationManuallyPanel() {
@@ -235,20 +228,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
         return btn;
     }
 
-    Label setLocationButton() {
-        Label btn = new Label("Set Location");
-        btn.addClickHandler(setLocationHandler);
-        btn.setStyleName("whiteButton");
-        return btn;
-    }
 
-    //    protected Label useMapButton() {
-//        Label mapLabel = new Label("Use Map to set your location");
-//        addImageToButton(mapLabel, MyWebApp.resources.mapButton(), MyWebApp.resources.mapButtonMobile());
-//        mapLabel.addClickHandler(viewMapHandler);
-//        mapLabel.setStyleName("whiteButton");
-//        return mapLabel;
-//    }
     public static boolean isNumeric(String str) {
         try {
             double d = Double.parseDouble(str);
@@ -301,57 +281,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
     public void toggleFirst() {
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
 
-    Label hideAddressFormButton() {
-        Label btn = new Label("Hide Address Entry Form");
-        btn.addClickHandler(hideAddressFormHandler);
-        // addImageToButton(btn, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
-        fixButton(btn);
-        return btn;
-    }
-//    Label showAddressFormButton() {
-//        Label btn = new Label("Show Address Entry Form");
-//        btn.addClickHandler(showAddressFormHandler);
-//        addImageToButton(btn, MyWebApp.resources.locationDeviceButton(), MyWebApp.resources.locationDeviceButtonMobile());
-//        fixButton(btn);
-//        return btn;
-//    }
-    ClickHandler hideAddressFormHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            // com.google.gwt.user.client.Window.scrollTo(0, 0);
-            addressFormPanel.clear();
-            //  addressFormPanel.add(showAddressFormButton());
-        }
-    };
-//    ClickHandler showAddressFormHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            //com.google.gwt.user.client.Window.scrollTo(0, 0);
-//            CaptionPanel captionPanel = getAddressFormPanel();
-//            addressFormPanel.clear();
-//            addressFormPanel.add(hideAddressFormButton());
-//            addressFormPanel.add(captionPanel);
-//        }
-//    };
 
-    private CaptionPanel getAddressFormPanel() {
-        CaptionPanel captionPanel = new CaptionPanel("Set Location Form");
-        captionPanel.setWidth("100%");
-        VerticalPanel formPanel = new VerticalPanel();
-        formPanel.setWidth("100%");
-        Label help = new Label("You do not have to provide values for everything below, for example, you could just enter in your city and state, but the more accurate that you are, the better we can refine what is around you.");
-        help.addStyleName("smallhelp");
-        formPanel.add(help);
-        countryTextBox = addCountry("", formPanel);
-        stateTextBox = addState("", formPanel);
-        citySuggestBox = addCity("", formPanel);
-        zipcodeTextField = addTextBox("Postal Code", "na3", "", false, formPanel);
-        //String labelText, String name, String value, boolean spotreadonly,Panel pane
-        address1TextField = addTextBox("Address Line #1 *", "address1", "", false, formPanel);
-        formPanel.add(setLocationButton());
-        captionPanel.add(formPanel);
-        return captionPanel;
-    }
+
 }

@@ -225,14 +225,14 @@ public class MyWebApp implements EntryPoint {
 
     Button markSpotButton = new Button("Mark Spot");
     List<String> logList = new ArrayList<String>();
-
-    public boolean isAdmin() {
-        if (getAuthenticatedUser() == null) {
-            return false;
-        } else {
-            return getAuthenticatedUser().isAdmin();
-        }
-    }
+//
+//    public boolean isAdmin() {
+//        if (getAuthenticatedUser() == null) {
+//            return false;
+//        } else {
+//            return getAuthenticatedUser().isAdmin();
+//        }
+//    }
 
     private Logger log = Logger.getLogger(getClass().getName());
 
@@ -346,9 +346,11 @@ public class MyWebApp implements EntryPoint {
                 MyWebApp.this.stateProvinceHolders = mobileResponse.getStateProvinceHolders();
                 MyWebApp.this.productHolders = mobileResponse.getProductHolders();
                 MyWebApp.this.manufacturerHolders = mobileResponse.getManufacturerHolders();
-                Storage localStorage = Storage.getLocalStorageIfSupported();
+
+                //
                 // let's get the locationKeys
-                if (localStorage != null) {
+                if (isLocalStorageSupported()) {
+                    Storage localStorage = Storage.getLocalStorageIfSupported();
                     log("localStorage is not null");
                     String lastLocationKey = localStorage.getItem(LAST_LOCATION);
                     Map<String, Location> locationMap = getLocationsFromLocalStorage();
@@ -1060,9 +1062,20 @@ public class MyWebApp implements EntryPoint {
     //for IE, we don't have access to the local storage so, this will be our local variable we keep
     Map<String, Location> sessionAddressesMap = new HashMap<String, Location>();
 
+
+
+    //this can throw errors if cookies are disabled
+    public boolean isLocalStorageSupported() {
+        try {
+            return Storage.isLocalStorageSupported();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public Map<String, Location> getLocationsFromLocalStorage() {
         //log("getLocationsFromLocalStorage enter");
-        if (!Storage.isSupported()) {
+        if (!isLocalStorageSupported()) {
             // log("storage is not supported, returning empty list");
             return sessionAddressesMap;
         }
@@ -1105,14 +1118,13 @@ public class MyWebApp implements EntryPoint {
     private String key = "locationkey22xy";
 
     public void saveLocationToLocalStorage() {
-        // log("saveLocationToLocalStorage 1");
-        if (!Storage.isLocalStorageSupported()) {
+        if (!isLocalStorageSupported()) {
             sessionAddressesMap.put(currentLocation.getKey(), currentLocation);
             return;
         }
         Storage localStorage = Storage.getLocalStorageIfSupported();
         if (localStorage == null) {
-            // log("localStorage is null 5");
+            return;
         }
         Map<String, Location> list = getLocationsFromLocalStorage();
         //before we add the new location, not just the location key, but compare the full address also
@@ -1159,6 +1171,9 @@ public class MyWebApp implements EntryPoint {
             };
 
     private void saveLocationKeys(Map<String, Location> locations) {
+        if (!isLocalStorageSupported()) {
+            return;
+        }
         //can we sort by date used?
         //Map<String, Location> locations = getLocationsFromLocalStorage();
         //  log("saveLocationKeys begin");
@@ -1374,10 +1389,19 @@ public class MyWebApp implements EntryPoint {
     public void toggleBackToSearchResults() {
         //what if we went direct to detail page, there won't be results to go back to, so
         //in this case let's go to home page
+
+        //the search results panel may be dirty, so if so, let's refresh
+
+
         if (resultsPanel == null) {
             //let's go home
             toggleHome();
             return;
+        }  else if (resultsPanel.isDirty()){
+
+            toggleSearch(null);
+
+
         }
         swapCenter(getResultsPanel());
         //if we are in map mode, let' indicate this so that we can toggle between these two modes
@@ -1553,6 +1577,7 @@ public class MyWebApp implements EntryPoint {
     //we need to do a search, we may call
     //performLocationSearch if location is changed, or just performKeyword search if it hasn't changed
     private void performSearch() {
+        getMessagePanel().clear();
         if (getCurrentLocation() == null) {
             performLocationSearch(locationTextBox.getValue());
         } else if (locationTextBox.getValue().equals(getCurrentLocation().getFullAddress())) {
@@ -1581,25 +1606,25 @@ public class MyWebApp implements EntryPoint {
     protected TextBox locationTextBox = new TextBox();
 
 
-    //need to reset the results panel and add this style
-    public ResultsPanel getResultsPanel(String styleName) {
-        this.resultsPanel = null;
-        this.resultsPanel = getResultsPanel();
-        resultsPanel.addStyleName(styleName);
-        return this.resultsPanel;
-    }
+//    //need to reset the results panel and add this style
+//    public ResultsPanel getResultsPanel(String styleName) {
+//        this.resultsPanel = null;
+//        this.resultsPanel = getResultsPanel();
+//        resultsPanel.addStyleName(styleName);
+//        return this.resultsPanel;
+//    }
 
     public void setResultsPanel(ResultsPanel resultsPanel) {
         this.resultsPanel = resultsPanel;
     }
 
-    public ResultsPanel getResultsPanel() {
-        return getResultsPanel(false);
-    }
+//    public ResultsPanel getResultsPanel() {
+//        return getResultsPanel(false);
+//    }
 
-    public ResultsPanel getResultsPanel(boolean displaySearchForm) {
+    public ResultsPanel getResultsPanel() {
         if (resultsPanel == null) {
-            resultsPanel = new ResultsPanel(this, displaySearchForm);
+            resultsPanel = new ResultsPanel(this, false);
         }
         return resultsPanel;
     }
@@ -1618,7 +1643,7 @@ public class MyWebApp implements EntryPoint {
     //this list just stores the titles of the page
     //i think it will be more memory efficient than holding
     //references to panels we never will reuse
-    LinkedList<String> backList = new LinkedList<String>();
+    //LinkedList<String> backList = new LinkedList<String>();
     // private boolean backPushed = false;
 
     public void toggleBack() {
@@ -1777,15 +1802,7 @@ public class MyWebApp implements EntryPoint {
         }
     }
 
-    private void debugBackList(String begin) {
-        GWT.log(begin);
-        GWT.log("backList.size " + backList.size());
-        int i = 0;
-        for (String title : backList) {
-            GWT.log("" + i + " " + title);
-            i++;
-        }
-    }
+
 
     public void toggleOptions() {
         OptionsPanel optionsPanel = new OptionsPanel(this);
@@ -1869,7 +1886,7 @@ public class MyWebApp implements EntryPoint {
     //return true if we show a splash message
     private boolean displaySplash() {
         log("displaySplash");
-        if (!Storage.isLocalStorageSupported()) {
+        if (!isLocalStorageSupported()) {
             return false;
         }
         //only do splash for mobile
@@ -2202,14 +2219,14 @@ public class MyWebApp implements EntryPoint {
     public void showSpot(LocationResult locationResult) {
         Location location = locationResult.getLocation();
         //History.newItem(MyWebApp.IGNORE + location.getFactualId());
-        saveLocationAsSpot(locationResult, saveSpotCallback);
+        saveLocationAsSpot(locationResult, "",saveSpotCallback);
     }
 
     //    public void markFactualLocation(LocationResult locationResult) {
 //        saveLocationAsSpot(locationResult, markSpotCallback);
 //    }
     //sometimes we need to change the url, but not do anything with it
-    public static String IGNORE = "ignore/";
+   // public static String IGNORE = "ignore/";
 
     public static void convert(LocationResult locationResult, SpotHolder spotHolder) {
         Location location = locationResult.getLocation();
@@ -2244,10 +2261,11 @@ public class MyWebApp implements EntryPoint {
         }
     }
 
-    public void saveLocationAsSpot(LocationResult locationResult, final AsyncCallback callback) {
+    public void saveLocationAsSpot(LocationResult locationResult, String spotDescription,final AsyncCallback callback) {
         GWT.log("showSpot factual");
         SpotHolder spotHolder = new SpotHolder();
         convert(locationResult, spotHolder);
+        spotHolder.setDescription(spotDescription);
         SaveSpotRequest saveSpotRequest = new SaveSpotRequest();
         saveSpotRequest.setIgnoreUploads(true);
         saveSpotRequest.setSpotHolder(spotHolder);
@@ -2365,7 +2383,7 @@ public class MyWebApp implements EntryPoint {
     private void showResultsMap() {
         //we may not have results, if we do, resuse them
         if (getResultsPanel().getMobileResponse() == null) {
-            getResultsPanel("home");
+            getResultsPanel();
             getResultsPanel().resetSearchParameters();
             addCurrentLocation();
             getResultsPanel().getSearchParameters().setSpots(true);
@@ -2649,18 +2667,30 @@ public class MyWebApp implements EntryPoint {
     }
 
     private void initAuth() {
-        if (!Storage.isLocalStorageSupported()) {
-            return;
-        }
+
         try {
+            if (!Storage.isLocalStorageSupported()) {
+                return;
+            }
+        } catch (Exception e) {
+            log("isLocalStorageSupported throws error , probably shut down");
+            return;
+
+        }
+
+        try {
+
+
             Auth.export();
         } catch (Exception e) {
             log("Auth export failure, probably ie");
+            return;
         }
         try {
             auth = Auth.get();
         } catch (Exception e) {
             log("Auth get failure, probably ie");
+            return;
         }
     }
 
@@ -3049,7 +3079,7 @@ public class MyWebApp implements EntryPoint {
         if (!checkValidToToggle()) {
             return;
         }
-        getResultsPanel("home");
+        getResultsPanel();
         getResultsPanel().resetSearchParameters();
         addCurrentLocation();
         getResultsPanel().getSearchParameters().setSpots(true);
@@ -4008,7 +4038,7 @@ public class MyWebApp implements EntryPoint {
     we call this when we want to re-execute the existing search
      */
     public void toggleSearch(final AsyncCallback messageCallback) {
-        History.newItem(MyWebApp.SEARCH_RESULTS);
+        History.newItem(MyWebApp.SEARCH_RESULTS,false);
         getResultsPanel().performSearch(messageCallback);
     }
 

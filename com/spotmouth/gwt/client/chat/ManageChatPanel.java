@@ -220,7 +220,7 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
         currentLocationResult.setLocation(mywebapp.getCurrentLocation());
         //let's set to type of 3, a location
         currentLocationResult.getLocation().setSpotType(3);
-        mywebapp.saveLocationAsSpot(currentLocationResult, saveLocationAsSpotCallback2);
+        mywebapp.saveLocationAsSpot(currentLocationResult,"", saveLocationAsSpotCallback2);
 
 
     }

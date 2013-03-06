@@ -156,9 +156,11 @@ public class TextField extends TextBox {
    *
    * @param placeholder the placeholder text
    */
-  public void setType(String text) {
-      type = (text != null ? text : "");
-      getElement().setPropertyString("type", type);
+  public void setType(String type) {
+     // type = (text != null ? text : "");
+     // getElement().setPropertyString("type", type);
+      getElement().setAttribute("type", type);
+
   }
 
 

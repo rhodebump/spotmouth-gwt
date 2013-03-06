@@ -89,6 +89,11 @@
                     <div class="content">
 
                         <label class="msname">
+                            <p>Spot Description</p>
+                            <g:TextArea ui:field="spotDescriptionTextArea"/>
+                        </label>
+
+                        <label class="msname">
                             <p>Your Mark</p>
                             <g:TextArea ui:field="contentTextArea"/>
                         </label>

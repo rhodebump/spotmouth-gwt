@@ -215,7 +215,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
 
     public ResultsPanel(MyWebApp mywebapp) {
         this(mywebapp, true);
-        //setWidth("50%");
+
     }
 
     public ResultsPanel(MyWebApp mywebapp, boolean displaySearchForm) {
@@ -363,6 +363,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
             public void onSuccess(Object result) {
                 GWT.log("search onSuccess");
                 GWT.log("result=" + result.toString());
+                ResultsPanel.this.setDirty(false);
                 gettingResultsDialog.hide();
                 MobileResponse mobileResponse = (MobileResponse) result;
                 displayResultsCallback.onSuccess(mobileResponse);
@@ -585,6 +586,17 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
     public void resetSearchParameters() {
         this.searchParameters = new SearchParameters();
     }
+
+    public boolean isDirty() {
+        return dirty;
+    }
+
+    public void setDirty(boolean dirty) {
+        this.dirty = dirty;
+    }
+
+    private boolean dirty = false;
+
 
     protected void handleResult(ULPanel ul, LocationResult locationResult) {
     }

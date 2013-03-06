@@ -40,12 +40,12 @@
 		</span><br/>
         <g:Anchor ui:field="resetAnchor"></g:Anchor> <br />
 		<span class="sub-log">
-            <g:Button  ui:field='signUp' />
+            <g:Button addStyleNames="signUp" ui:field='signUp' >Sign Up</g:Button>
             <!--
 			<input type="button" value="Sign Up"/>
 						<input type="submit" value="Log in"/>
 			-->
-            <g:Button  ui:field='loginButton' />
+            <g:Button addStyleNames="loginButton"  ui:field='loginButton'>Log in</g:Button>
 
 		</span>
 	</form>

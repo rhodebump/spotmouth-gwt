@@ -253,6 +253,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
                 if (mobileResponse.getStatus() == 1) {
                     //need to toggle back and display success message
                     //mywebapp.toggleMenu();
+                    mywebapp.getResultsPanel().setDirty(true);
                     mywebapp.toggleSearch(spotDeletedCallback);
                     //History.newItem(MyWebApp.RE);
 

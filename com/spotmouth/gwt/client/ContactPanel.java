@@ -50,7 +50,7 @@ public class ContactPanel extends SpotBasePanel implements SpotMouthPanel {
     public ContactPanel(MyWebApp mywebapp) {
         super(mywebapp);
 
-        if (MyWebApp.isDesktop()) {
+
             addRequired(yourName);
 
             //placeholder="example@mail.com"
@@ -63,21 +63,7 @@ public class ContactPanel extends SpotBasePanel implements SpotMouthPanel {
             ContactComposite contactComposite = new ContactComposite(yourName,email,messageSubject,sendButton,contentTextArea);
             add(contactComposite);
 
-            return;
-        }
 
-        addFieldset("Contact Us", "We would really love to hear from you.");
-
-
-        yourName = addTextBox("Your Name*", "name", "");
-        email = addTextBox("Your Email Address*", "email", "");
-        messageSubject = addTextBox("Message Subject*", "es", "");
-        contentTextArea = addTextArea("Your Message*", "message", "", false);
-        Label btn = new Label("Send Message");
-        btn.addClickHandler(saveHandler);
-        fixButton(btn);
-        add(btn);
-        add(cancelButton());
     }
 
     protected boolean isValid() {
