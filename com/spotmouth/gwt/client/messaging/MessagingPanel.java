@@ -79,9 +79,7 @@ public class MessagingPanel extends SpotBasePanel implements SpotMouthPanel {
         }
     }
 
-    public boolean showBackToResults() {
-        return false;
-    }
+
 
     public ImageResource getImageResource() {
         if (MyWebApp.isSmallFormat()) {

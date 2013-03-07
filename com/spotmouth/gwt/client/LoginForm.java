@@ -36,9 +36,7 @@ import com.spotmouth.gwt.client.common.TextField;
 public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
     private String historyToken = null;
 
-    public boolean showBackToResults() {
-        return false;
-    }
+
 
     public ImageResource getImageResource() {
         if (MyWebApp.isSmallFormat()) {
@@ -153,6 +151,33 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
             Anchor twitterAnchor = new Anchor();
             DOM.setElementAttribute(twitterAnchor.getElement(), "id", "twit");
             twitterAnchor.addClickHandler(twitterHandler);
+
+            passwordTextBox.addFocusHandler(new FocusHandler() {
+                @Override
+                public void onFocus(com.google.gwt.event.dom.client.FocusEvent focusEvent){
+                    if (showTypingCheckbox.getValue()) {
+                        //no need to do anything
+                    } else {
+                        maskedPasswordTextBox.setVisible(true);
+                        passwordTextBox.setVisible(false);
+                        maskedPasswordTextBox.setFocus(true);
+                    }
+                }
+            });
+
+
+            maskedPasswordTextBox.addBlurHandler(new BlurHandler() {
+                @Override
+                public void onBlur(BlurEvent event) {
+                    if (maskedPasswordTextBox.getValue().isEmpty()) {
+                        maskedPasswordTextBox.setVisible(false);
+                        passwordTextBox.setVisible(true);
+                    }
+                }
+            });
+
+
+
             passwordTextBox.addKeyDownHandler(new KeyDownHandler() {
                 @Override
                 public void onKeyDown(KeyDownEvent event) {
@@ -171,6 +196,10 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
             });
             makeNoMessing(usernameTextBox);
             makeNoMessing(passwordTextBox);
+
+            //be default, maskedPasswordTextBox is going to be the default, but we make passwordTextBox become invisible when it gets focus
+            maskedPasswordTextBox.setVisible(false);
+            passwordTextBox.setVisible(true);
             Login login = new Login(usernameTextBox, passwordTextBox, maskedPasswordTextBox, signUp, loginButton, showTypingCheckbox, rememberMeCheckbox, facebookAnchor, resetAnchor, googleAnchor, twitterAnchor);
             add(login);
         } else {

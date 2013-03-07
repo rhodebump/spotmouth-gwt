@@ -242,19 +242,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     protected void initZipCodeTextBox() {
         zipcodeTextField = new TextField();
-       // zipcodeTextBox.getElement().setAttribute("placeholder", "Zip Code");
-       // zipcodeTextBox.setMaxLength(6);
 
-        //can't do the following since this interferes with delete key
-
-//        zipcodeTextField.addKeyPressHandler(new KeyPressHandler() {
-//
-//          public void onKeyPress(KeyPressEvent event) {
-//            if (!Character.isDigit(event.getCharCode())) {
-//              ((TextBox) event.getSource()).cancelKey();
-//            }
-//          }
-//        });
 
 
     }
@@ -513,18 +501,8 @@ public abstract class SpotBasePanel extends FlowPanel {
         DOM.setElementAttribute(textBox.getElement(), "required", "required");
     }
 
-    public boolean displayLocationForm() {
-        if (MyWebApp.isSmallFormat()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
-    //override if you do not want this to be displayed
-    public boolean showBackToResults() {
-        return true;
-    }
+
 
     protected void addSpotLink(SpotHolder spotHolder) {
         Hyperlink spotNameButton = getSpotLink("Go to this spot", spotHolder.getId());

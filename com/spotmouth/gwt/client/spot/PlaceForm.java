@@ -24,11 +24,6 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
         return getTitle();
     }
 
-    public boolean showBackToResults() {
-        return false;
-    }
-
-
 
     ClickHandler syncFactualHandler = new ClickHandler() {
         public void onClick(ClickEvent clickEvent) {

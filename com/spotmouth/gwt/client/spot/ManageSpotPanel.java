@@ -98,9 +98,6 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
         });
     }
 
-    public boolean showBackToResults() {
-        return false;
-    }
 
     public TextResource getHelpTextResource() {
         return HelpResources.INSTANCE.getManageSpotPanel();

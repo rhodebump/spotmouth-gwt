@@ -33,9 +33,6 @@ public class MediaForm extends SpotBasePanel implements SpotMouthPanel {
         return getTitle();
     }
 
-    public boolean showBackToResults() {
-        return false;
-    }
 
 
     protected ClickHandler cancelHandler2 = new ClickHandler() {

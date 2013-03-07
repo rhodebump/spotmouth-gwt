@@ -35,14 +35,6 @@ import java.util.Map;
 public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
-    public boolean displayLocationForm() {
-
-        return true;
-    }
-
-
-
-
 
 
     public ResultsPanel() {
@@ -559,9 +551,55 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
 
     String resultsLabel = null;
 
+
+    AsyncCallback tagRemovedMessageCallback = new AsyncCallback() {
+        public void onFailure(Throwable throwable) {
+            getMessagePanel().displayMessage("Tag remove failure");
+            getMessagePanel().displayMessage(throwable.getMessage());
+        }
+
+        public void onSuccess(Object response) {
+            getMessagePanel().displayMessage("Tag removed.  Search Results updated.");
+        }
+    };
+
+
+    ClickHandler removeTagThenSearchHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Object sender = event.getSource();
+            if (sender instanceof Widget) {
+                Widget widget = (Widget) sender;
+                TagHolder tagHolder = clickMapTagHolder.get(widget);
+                searchParameters.getTags().remove(tagHolder);
+                mywebapp.toggleSearch(tagRemovedMessageCallback);
+            }
+        }
+    };
+
+
     public void displayLocationResults(MobileResponse mobileResponse, String resultsLabel, int mode) {
         this.resultsLabel = resultsLabel;
         this.mobileResponse = mobileResponse;
+
+        //clickMapTagHolder.clear();
+
+        //this will be a panel that will list all application tags for the search and if you click the the tag, you remove it from your search parameters and re-execute your search
+        FlowPanel selectedTagsPanel = new FlowPanel();
+        selectedTagsPanel.setStyleName("ma_tags");
+        for (TagHolder tagHolder : searchParameters.getTags()) {
+            InlineLabel tagLabel = new InlineLabel(tagHolder.getName());
+            tagLabel.setStyleName("ma_sel_tag");
+            selectedTagsPanel.add(tagLabel);
+            InlineLabel deleteInlineLabel = new InlineLabel("x");
+            deleteInlineLabel.setStyleName("kill-tag");
+            deleteInlineLabel.addClickHandler(removeTagThenSearchHandler);
+            selectedTagsPanel.add(deleteInlineLabel);
+            clickMapTagHolder.put(deleteInlineLabel, tagHolder);
+            //widgetTagHoldersMap2.put(deleteInlineLabel,suggestBox);
+        }
+
+        add(selectedTagsPanel);
+
         ULPanel ul = new ULPanel();
         ul.setStyleName("results");
         add(ul);

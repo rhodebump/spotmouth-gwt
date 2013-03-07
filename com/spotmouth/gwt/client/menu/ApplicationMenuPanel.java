@@ -26,10 +26,6 @@ public class ApplicationMenuPanel extends SpotBasePanel implements SpotMouthPane
 
 
 
-    public boolean showBackToResults() {
-        return false;
-    }
-
 
 
     //Grid grid = null;

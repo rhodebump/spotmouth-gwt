@@ -105,7 +105,8 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     public void toggleFirst() {
-        nameTextBox.setFocus(true);
+        //this wipes out the placeholder
+       // nameTextBox.setFocus(true);
     }
 
     public boolean isLoginRequired() {
@@ -216,6 +217,10 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
     protected void doSave(){
         LocationResult currentLocationResult = new LocationResult();
         Location currentLocation = mywebapp.getCurrentLocation();
+        if (currentLocation == null) {
+            getMessagePanel().displayError("Need to set location first before saving chat");
+            return;
+        }
         currentLocation.setName("Location");
         currentLocationResult.setLocation(mywebapp.getCurrentLocation());
         //let's set to type of 3, a location

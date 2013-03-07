@@ -10,9 +10,7 @@ import com.spotmouth.gwt.client.dto.ItemHolder;
 //extending message panel since both share a lot of code regarding addresses of friends and groups
 //part 2, not extending, was getting too tricky
 public class AddressPicker extends SpotBasePanel {
-    public boolean showBackToResults() {
-        return false;
-    }
+
 
 
     public boolean isRootPanel() {

@@ -24,9 +24,7 @@ public class MessagePanel extends SpotBasePanel implements SpotMouthPanel {
         return true;
     }
 
-    public boolean showBackToResults() {
-        return false;
-    }
+
 
     public String getTitle() {
         return "Message";

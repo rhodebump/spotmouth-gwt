@@ -41,10 +41,6 @@ public class ManageGroupPanel extends SpotBasePanel implements SpotMouthPanel {
 
     }
 
-    public boolean showBackToResults() {
-        return false;
-    }
-
 
 
     public String getTitle() {

@@ -1672,25 +1672,25 @@ public class MyWebApp implements EntryPoint {
         return true;
     }
 
-    private void addBackToResults(SpotBasePanel spotBasePanel, ComplexPanel parentPanel) {
-        if (MyWebApp.isDesktop()) {
-            return;
-        }
-        if (!spotBasePanel.showBackToResults()) {
-            return;
-        }
-        if (resultsPanel == null) {
-            return;
-        }
-        if (currentSpotBasePanel instanceof ResultsPanel) {
-            //don't want to show if this is results page!
-            return;
-        }
-        Label backToResults = new Label("<< Back To Results");
-        backToResults.addClickHandler(backToResultsHandler);
-        backToResults.setStyleName("whiteButton");
-        parentPanel.add(backToResults);
-    }
+//    private void addBackToResults(SpotBasePanel spotBasePanel, ComplexPanel parentPanel) {
+//        if (MyWebApp.isDesktop()) {
+//            return;
+//        }
+//        if (!spotBasePanel.showBackToResults()) {
+//            return;
+//        }
+//        if (resultsPanel == null) {
+//            return;
+//        }
+//        if (currentSpotBasePanel instanceof ResultsPanel) {
+//            //don't want to show if this is results page!
+//            return;
+//        }
+//        Label backToResults = new Label("<< Back To Results");
+//        backToResults.addClickHandler(backToResultsHandler);
+//        backToResults.setStyleName("whiteButton");
+//        parentPanel.add(backToResults);
+//    }
 
     SimplePanel simplePanel = new SimplePanel();
     //for some reason, if we are not connected to network, we cannot use the form panel
@@ -1729,7 +1729,7 @@ public class MyWebApp implements EntryPoint {
         if (!isDesktop()) {
             vp.add(this.topPanel);
         }
-        addBackToResults(spotBasePanel, vp);
+        //addBackToResults(spotBasePanel, vp);
         if (isFormSupported()) {
             vp.add(spotBasePanel.getFormPanel());
             simplePanel.setWidget(vp);
@@ -1741,7 +1741,7 @@ public class MyWebApp implements EntryPoint {
             vp.add(spotBasePanel);
             simplePanel.setWidget(vp);
         }
-        addBackToResults(spotBasePanel, vp);
+        //addBackToResults(spotBasePanel, vp);
         if (isSmallFormat()) {
             simplePanel.addStyleName("smallFormat");
         }
@@ -2497,7 +2497,7 @@ public class MyWebApp implements EntryPoint {
         } else if (historyToken.startsWith(LODGING)) {
             toggleLodging();
         } else if (historyToken.startsWith(SEARCH)) {
-            toggleSearch();
+            toggleSearchForm();
         } else if (historyToken.startsWith(MAP)) {
             toggleMap();
         } else if (historyToken.startsWith(ADD_CONTEST)) {
@@ -3235,13 +3235,7 @@ public class MyWebApp implements EntryPoint {
         hp.setCellWidth(image, "1%");
         VerticalPanel verticalPanel2 = new VerticalPanel();
         verticalPanel2.setWidth("100%");
-        if (!isDesktop()) {
-            //ANDROID
-            if (spotBasePanel.displayLocationForm()) {
-                //searchBoxPanel
-                verticalPanel.add(searchBoxPanel);
-            }
-        }
+
         hp.add(verticalPanel2);
         hp.setCellWidth(verticalPanel2, "100%");
         //dont' add message panel here if we are on desktop layout
@@ -3860,7 +3854,7 @@ public class MyWebApp implements EntryPoint {
 
     SearchForm searchForm = null;
 
-    public void toggleSearch() {
+    public void toggleSearchForm() {
         if (searchForm == null) {
             //we are doing a lazy init so manufacturers are retrieved
             searchForm = new SearchForm(this);
