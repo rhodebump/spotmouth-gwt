@@ -107,7 +107,7 @@
                           <div id="msfile"></div>
                           
                           <div class="_small_tabs">
-                                       <input type="radio" name="small-sw" id="sm-sw-one"/>
+                                       <input type="radio" name="small-sw" id="sm-sw-one" checked/>
                                        <input type="radio" name="small-sw" id="sm-sw-two"/>
                                        <ul>
                                                     <li>Your Mark</li>
