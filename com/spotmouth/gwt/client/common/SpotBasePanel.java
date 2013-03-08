@@ -1324,7 +1324,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     }
 
     protected boolean isEmpty(ListBox listBox) {
-        if (listBox.getSelectedIndex() == -1) {
+        if (listBox.getSelectedIndex() == 0) {
             return true;
         }
         return false;
@@ -1895,7 +1895,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     protected void initVehicleType(String vehicleType) {
         List<String> types = getVehicleTypes();
-        vehicleTypeListBox.addItem("Please choose...", "");
+        vehicleTypeListBox.addItem("Please choose...", "-1");
         for (String c : types) {
             vehicleTypeListBox.addItem(c);
         }
@@ -1912,7 +1912,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     protected void initManufacturersListBox(ManufacturerHolder mh) {
         //this.manufacturersListBox = new ListBox();
-        manufacturersListBox.addItem("Please choose...", "");
+        manufacturersListBox.addItem("Please choose...", "-1");
         int index = 1;
         for (ManufacturerHolder manuHolder : mywebapp.getManufacturerHolders()) {
             manufacturersListBox.addItem(manuHolder.getName(), manuHolder.getId().toString());
@@ -1948,7 +1948,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     protected void initColorListBox(String color) {
         List<String> colorList = getColorList();
-        colorsListBox.addItem("Please choose...", "");
+        colorsListBox.addItem("Please choose...", "-1");
         for (String c : colorList) {
             colorsListBox.addItem(c);
         }

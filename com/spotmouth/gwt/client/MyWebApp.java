@@ -95,7 +95,7 @@ public class MyWebApp implements EntryPoint {
         }
     };
 
-
+    public static final String findx = "Near (Address, Neighborhood, City, State or Zip)";
 
     public ClickHandler showResultsOnMapHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -221,6 +221,44 @@ public class MyWebApp implements EntryPoint {
         sortingListBox.addItem("Distance", "geodist()");
         sortingListBox.addChangeHandler(changeSortHandler);
         tagListBox.addChangeHandler(clickTagHandler);
+
+
+
+        locationTextBox.addBlurHandler(new BlurHandler() {
+            @Override
+            public void onBlur(BlurEvent event) {
+                if (locationTextBox.getValue().isEmpty()) {
+                    if (getCurrentLocation() == null) {
+                        locationTextBox.setValue(findx);
+                    } else {
+                        locationTextBox.setValue(getCurrentLocation().getFullAddress());
+                    }
+                }
+            }
+        });
+        locationTextBox.addFocusHandler(new FocusHandler() {
+            @Override
+            public void onFocus(FocusEvent event) {
+                if (locationTextBox.getValue().equals(findx)) {
+                    locationTextBox.setValue("");
+                } else if (getCurrentLocation() != null) {
+                    if (locationTextBox.getValue().equals(getCurrentLocation().getFullAddress())) {
+                        locationTextBox.setValue("");
+                    }
+                }
+            }
+        });
+        locationTextBox.addKeyDownHandler(new KeyDownHandler() {
+            @Override
+            public void onKeyDown(KeyDownEvent event) {
+                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+                    performSearch();
+                }
+            }
+        });
+
+
+
     }
 
     Button markSpotButton = new Button("Mark Spot");
@@ -1414,7 +1452,7 @@ public class MyWebApp implements EntryPoint {
 
     ClickHandler backToResultsHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-            //swapCenter(spotBasePanel,true);
+
             toggleBackToSearchResults();
         }
     };
@@ -1423,11 +1461,7 @@ public class MyWebApp implements EntryPoint {
             performSearch();
         }
     };
-//    public ClickHandler setLocationFromDeviceHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            setLocationFromDevice();
-//        }
-//    };
+
 
     private void addToUL(String text, String key) {
         ListItem listItem = new ListItem();
@@ -1492,44 +1526,13 @@ public class MyWebApp implements EntryPoint {
         locationPanel.add(notHereLabel);
         //12 try at something
         // hp.add(locationTextBox);
-        final String findx = "Near (Address, Neighborhood, City, State or Zip)";
+
         if (getCurrentLocation() == null) {
             locationTextBox.setValue(findx);
         } else {
             locationTextBox.setValue(getCurrentLocation().getFullAddress());
         }
-        locationTextBox.addBlurHandler(new BlurHandler() {
-            @Override
-            public void onBlur(BlurEvent event) {
-                if (locationTextBox.getValue().isEmpty()) {
-                    if (getCurrentLocation() == null) {
-                        locationTextBox.setValue(findx);
-                    } else {
-                        locationTextBox.setValue(getCurrentLocation().getFullAddress());
-                    }
-                }
-            }
-        });
-        locationTextBox.addFocusHandler(new FocusHandler() {
-            @Override
-            public void onFocus(FocusEvent event) {
-                if (locationTextBox.getValue().equals(findx)) {
-                    locationTextBox.setValue("");
-                } else if (getCurrentLocation() != null) {
-                    if (locationTextBox.getValue().equals(getCurrentLocation().getFullAddress())) {
-                        locationTextBox.setValue("");
-                    }
-                }
-            }
-        });
-        locationTextBox.addKeyDownHandler(new KeyDownHandler() {
-            @Override
-            public void onKeyDown(KeyDownEvent event) {
-                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                    performSearch();
-                }
-            }
-        });
+
         //add a search button
         Label searchLabel = new Label("Search");
         searchLabel.addClickHandler(clickLocationSearch);
@@ -1538,6 +1541,18 @@ public class MyWebApp implements EntryPoint {
     }
 
     private void performLocationSearch(String locationSearchString) {
+
+
+
+                    //we can't do any wildcards in the location search, so let's check on client side(easy enough)
+          //  String locationSearchString = locationTextBox.getValue();
+            if (locationSearchString.indexOf("*") != -1) {
+                getMessagePanel().displayError("Sorry, but the wildcard '*' character is not valid for location search.");
+              //  return;
+            }
+
+
+
         //String locationSearchString = locationTextBox.getValue();
         //need to reverse geocode search and set location
         final DataOperationDialog searchingDialog = new DataOperationDialog("Searching for your spot...");
@@ -1606,21 +1621,11 @@ public class MyWebApp implements EntryPoint {
     protected TextBox locationTextBox = new TextBox();
 
 
-//    //need to reset the results panel and add this style
-//    public ResultsPanel getResultsPanel(String styleName) {
-//        this.resultsPanel = null;
-//        this.resultsPanel = getResultsPanel();
-//        resultsPanel.addStyleName(styleName);
-//        return this.resultsPanel;
-//    }
 
     public void setResultsPanel(ResultsPanel resultsPanel) {
         this.resultsPanel = resultsPanel;
     }
 
-//    public ResultsPanel getResultsPanel() {
-//        return getResultsPanel(false);
-//    }
 
     public ResultsPanel getResultsPanel() {
         if (resultsPanel == null) {
@@ -1640,11 +1645,7 @@ public class MyWebApp implements EntryPoint {
     VerticalPanel centerPanel = new VerticalPanel();
     MarkSpotPanel markSpotPanel = new MarkSpotPanel(this);
     MarkSpotTypePanel markSpotTypePanel = null;
-    //this list just stores the titles of the page
-    //i think it will be more memory efficient than holding
-    //references to panels we never will reuse
-    //LinkedList<String> backList = new LinkedList<String>();
-    // private boolean backPushed = false;
+
 
     public void toggleBack() {
         GWT.log("toggleBack");
@@ -1779,15 +1780,7 @@ public class MyWebApp implements EntryPoint {
         }
         return true;
     }
-    //    public void fixPage(int desiredPageMode) {
-    //        if (desiredPageMode != currentPageMode) {
-    //            if (desiredPageMode == 1) {
-    //                doDefaultPage();
-    //            } else if (desiredPageMode == 2) {
-    //                doMapPage();
-    //            }
-    //        }
-    //    }
+
 
     private void updatePageDescription(String newDescription) {
         if (newDescription == null) {

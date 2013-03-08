@@ -104,7 +104,5 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
     public void toggleFirst() {
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 }

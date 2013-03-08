@@ -4,11 +4,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import com.spotmouth.gwt.client.dto.MobileResponse;
-import com.spotmouth.gwt.client.dto.SearchParameters;
-import com.spotmouth.gwt.client.dto.TagHolder;
+import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
@@ -35,8 +34,8 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
     public PlateSearchPanel() {
     }
 
-
     public Button plateSearchButton = new Button("Submit");
+
     public PlateSearchPanel(MyWebApp mywebapp) {
         super(mywebapp);
         if (MyWebApp.isDesktop()) {
@@ -46,62 +45,46 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             initManufacturersListBox(null);
             stateTextBox = initState("");
             initVehicleType("");
-
-
             MarkData markData = new MarkData();
             markData.saySomethingTextArea = contentTextArea;
             markData.spotDescriptionTextArea = spotDescriptionTextArea;
-
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
             markData.tagSearchTextBox = tagSearchTextBox;
-
             Button leaveMarkButton = new Button();
             leaveMarkButton.addClickHandler(saveHandler);
-
-
             MultiUploader multiUploader = new MultiUploader();
             //FlowPanel panelImages3 = new FlowPanel();
             multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages3);
-           // multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-
+            // multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
             ULPanel pickSpotListBox = getPickSpotULPanel();
-
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
-
-            Button shareOnFacebookButton =   getFacebookButton(markData);
-
+            Button shareOnFacebookButton = getFacebookButton(markData);
             Button addTagButton = new Button();
             //addTagAnchor.getElement().setId("addTag");
             addTagButton.addClickHandler(addTagHandler);
-
-
-
-
-
-            PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox,plateNameTextBox,keywordsTextBox,manufacturersListBox,stateTextBox,
-                    vehicleTypeListBox,plateSearchButton,markData.tagSearchTextBox , markData.secretKeyTextBox,markData.saySomethingTextArea,
-                    selectedTagsPanel,leaveMarkButton,multiUploader,panelImages,pickSpotListBox,mywebapp,shareOnFacebookButton,addTagButton,suggestionsPanel,markData.spotDescriptionTextArea);
+            PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox, plateNameTextBox, keywordsTextBox, manufacturersListBox, stateTextBox,
+                    vehicleTypeListBox, plateSearchButton, markData.tagSearchTextBox, markData.secretKeyTextBox, markData.saySomethingTextArea,
+                    selectedTagsPanel, leaveMarkButton, multiUploader, panelImages, pickSpotListBox, mywebapp, shareOnFacebookButton, addTagButton, suggestionsPanel, markData.spotDescriptionTextArea);
             plateSearchComposite.tab1.setValue(true);
             add(plateSearchComposite);
-
             return;
         }
-        this.licensePlate = true;
-        String helpText = "While you can always add a new plate, it's best for everyone to try to see if the plate you want to mark is already in spotmouth.  Try putting in keywords that may describe the vehicle (e.g. red ford blond driver";
-
-
-        addFieldset("Plate Search",helpText);
-        plateNameTextBox = addTextBox("Plate: (You can put in wild cards if you can't remember the whole plate, i.e. x1c*)", "plateNameTextBox", "");
-        keywordsTextBox = addTextBox("Keywords", "keywords", "");
-        //addState2("");
-        stateTextBox = addState("", this);
-        addColorListBox("");
-        addManufacturersListBox(null);
-        addVehicleType("");
-        add(plateSearchButton());
-        add(cancelButton());
+//        this.licensePlate = true;
+//        String helpText = "While you can always add a new plate, it's best for everyone to try to see if the plate you want to mark is already in spotmouth.  Try putting in keywords that may describe the vehicle (e.g. red ford blond driver";
+//
+//
+//        addFieldset("Plate Search",helpText);
+//        plateNameTextBox = addTextBox("Plate: (You can put in wild cards if you can't remember the whole plate, i.e. x1c*)", "plateNameTextBox", "");
+//        keywordsTextBox = addTextBox("Keywords", "keywords", "");
+//        //addState2("");
+//        stateTextBox = addState("", this);
+//        addColorListBox("");
+//        addManufacturersListBox(null);
+//        addVehicleType("");
+//        add(plateSearchButton());
+//        add(cancelButton());
     }
 
     protected Label plateSearchButton() {
@@ -111,9 +94,28 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
         return btn;
     }
 
-
-
     public void performPlateSearch() {
+        getMessagePanel().clear();
+        if (isEmpty(plateNameTextBox)) {
+            getMessagePanel().displayError("Plate is required.");
+        }
+        if (isEmpty(stateTextBox.getTextBox())) {
+            getMessagePanel().displayError("State is required.");
+        }
+        if (isEmpty(colorsListBox)) {
+            getMessagePanel().displayError("Color is required.");
+        } else {
+           // getMessagePanel().displayError("Color is " + colorsListBox.getSelectedIndex());
+        }
+        if (isEmpty(manufacturersListBox)) {
+            getMessagePanel().displayError("Manufacturer is required.");
+        }
+        if (isEmpty(vehicleTypeListBox)) {
+            getMessagePanel().displayError("Vehicle Type is required.");
+        }
+        if (getMessagePanel().isHaveMessages()) {
+            return;
+        }
         SearchParameters searchParameters = new SearchParameters();
         searchParameters.setLicensePlate(true);
         searchParameters.setSpots(true);
@@ -124,12 +126,8 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             String val = getValue(colorsListBox);
             searchParameters.setColor(val);
         }
-
-
-                Long manufacturerId = getManufacturerId();
-                searchParameters.setManufacturerId(manufacturerId);
-
-
+        Long manufacturerId = getManufacturerId();
+        searchParameters.setManufacturerId(manufacturerId);
         {
             String val = getValue(vehicleTypeListBox);
             searchParameters.setVehicleType(val);
@@ -150,14 +148,47 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
                 if (mobileResponse.getStatus() == 1) {
                     //if no plates were found, let's just go to the new plate form
                     if (mobileResponse.getLocationResults().isEmpty()) {
-                        setupNewForm();
-                        GWT.log("addin problem message");
-                        getMessagePanel().displayMessage("No matching plates could be found.");
-                        getMessagePanel().displayMessage("Please enter the license plate details along with your mark.");
+                        savePlateSearchAsSpot();
                     } else {
                         displayLicensePlates(mobileResponse.getLocationResults(), 1);
                     }
-                    //displayLocationResults(mobileResponse.getLocationResults(), String label)
+                } else {
+                    getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                }
+            }
+        });
+    }
+
+    public void savePlateSearchAsSpot() {
+        GWT.log("showSpot factual");
+        SpotHolder spotHolder = new SpotHolder();
+        spotHolder.setName(plateNameTextBox.getValue());
+        spotHolder.setState(stateTextBox.getValue());
+        String color = getValue(colorsListBox);
+        spotHolder.setColor(color);
+        Long manufacturerId = getManufacturerId();
+        spotHolder.getManufacturerHolder().setId(manufacturerId);
+        String vehicleType = getValue(vehicleTypeListBox);
+        spotHolder.setVehicleType(vehicleType);
+        spotHolder.setDescription(keywordsTextBox.getValue());
+        spotHolder.setSpotType(2);
+        SaveSpotRequest saveSpotRequest = new SaveSpotRequest();
+        saveSpotRequest.setIgnoreUploads(true);
+        saveSpotRequest.setSpotHolder(spotHolder);
+        ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+        myService.saveSpot(saveSpotRequest, new AsyncCallback() {
+            public void onFailure(Throwable caught) {
+                // callback.onFailure(caught);
+                getMessagePanel().displayError("Could not save plate:" + caught.toString());
+            }
+
+            public void onSuccess(Object result) {
+                // callback.onSuccess(result);
+                MobileResponse mobileResponse = (MobileResponse) result;
+                if (mobileResponse.getStatus() == 1) {
+                    SpotHolder spotHolder1 = mobileResponse.getSpotHolder();
+                    String token = MyWebApp.LEAVE_SPOT_MARK + spotHolder1.getId();
+                    History.newItem(token);
                 } else {
                     getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
                 }
