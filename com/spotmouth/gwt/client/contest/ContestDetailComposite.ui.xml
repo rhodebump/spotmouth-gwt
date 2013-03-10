@@ -19,8 +19,10 @@
        			<span class="ac_date ac_date_from"><img src="css/date.png"/><span ui:field='startDateSpan'/></span>
        			<span class="ac_date ac_date_to"><img src="css/enddate.png"/><span ui:field='endDateSpan'/></span>
        		</div>
-               <g:Button ui:field="winnersButton"/>
-               <g:Button ui:field="mostVotedButton"/>
+                          <div class="_btns_wrap">
+                                       <g:Button ui:field="winnersButton"/>
+                                       <g:Button ui:field="mostVotedButton"/>
+                          </div>
                <g:Button ui:field="editButton"/>
 
 
