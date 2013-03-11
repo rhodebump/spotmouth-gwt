@@ -39,9 +39,7 @@ public class Invited extends SpotBasePanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 
     public Invited() {
     }

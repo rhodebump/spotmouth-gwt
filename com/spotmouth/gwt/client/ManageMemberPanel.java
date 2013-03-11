@@ -156,7 +156,5 @@ public class ManageMemberPanel extends SpotBasePanel implements SpotMouthPanel {
         emailTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 }

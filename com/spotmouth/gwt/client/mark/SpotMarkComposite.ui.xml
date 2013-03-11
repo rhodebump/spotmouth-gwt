@@ -5,17 +5,14 @@
     <g:HTMLPanel>
 
 <div class="marks yelp">
-	<div class="marks_ava"><!--<img src=""></img>-->  <g:Anchor ui:field="markImageAnchor"/> </div>
+	<div class="marks_ava"> <g:Anchor ui:field="userImageAnchor"/> </div>
 	<div class="marks_center_block">
 	<h2><span ui:field='usernameSpan'/></h2><img class="marks_rate_yelp" src="http://s3-media2.ak.yelpcdn.com/assets/2/www/img/f62a5be2f902/ico/stars/stars_small_4.png"></img>
-        <!--
-	<p>V v impressed with the philosophy of this company of discovering the outdoors.
-	True to that philosophy the range of their activities is such that a novice... <a href="#" class="marks_more">Read more</a></p>
-	-->
-        <p><span ui:field='markContentSpan'/> <g:Anchor ui:field="readMoreAnchor"/> </p>
+        <p><span ui:field='markContentSpan'/> <g:Anchor addStyleNames="marks_more" ui:field="readMoreAnchor">Read more</g:Anchor> </p>
 
 
 	</div>
+    <g:FlowPanel ui:field="markContentPanel"/>
 </div>
 
 

@@ -257,9 +257,7 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         passwordTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 
     protected void doSave() {
         GWT.log("do save");

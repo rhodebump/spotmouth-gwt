@@ -135,7 +135,5 @@ You may need to copy the link into a browser for it to function.
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return true;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 }

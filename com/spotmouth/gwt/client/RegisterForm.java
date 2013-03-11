@@ -179,7 +179,4 @@ public class RegisterForm extends SpotBasePanel implements SpotMouthPanel {
         usernameTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
 }

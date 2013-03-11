@@ -270,7 +270,4 @@ public class ManageFriendsPanel extends SpotBasePanel implements SpotMouthPanel 
 
 
 
-    public boolean isLoginRequired() {
-        return true;
-    }
 }

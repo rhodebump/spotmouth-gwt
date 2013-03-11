@@ -28,7 +28,7 @@
               <div id="messages">
                   <span class="ddphoto">
                       <g:SimplePanel ui:field="profileImagePanel"/>
-                      <g:Anchor ui:field="removeProfileImageAnchor"/>
+                      <g:Anchor ui:field="removeProfileImageAnchor" addStyleNames="ddkill"/>
                   </span>
               </div>
               <div id="drop-area">
@@ -65,12 +65,7 @@
 <g:TextArea ui:field="aboutMeTextArea" />
       </label><br/>
 
-          <!--
-      <label>
-      <p>Your Business</p>
-      <input type="text">
-      </label>
-      -->
+
 
       <label>
       <p>Tag Search</p>
@@ -83,9 +78,6 @@
 
       <label>
       <p>Selected Tags</p>
-          <!--
-      <div id="seltags"></div>
-                -->
           <gwt:FlowPanel ui:field="selectedTagsPanel"/>
           <gwt:FlowPanel ui:field="suggestionsPanel"/>
 
@@ -94,7 +86,7 @@
 
 
 
-        <g:Button ui:field="saveButton"/>
+        <g:Button ui:field="saveButton">Save</g:Button>
       </div>
       </div>
       </div>

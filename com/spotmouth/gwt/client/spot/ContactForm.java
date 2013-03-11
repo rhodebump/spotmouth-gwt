@@ -46,9 +46,7 @@ public class ContactForm extends SpotBasePanel implements SpotMouthPanel {
     public void toggleFirst() {
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 
     protected void doSave() {
         //if we are here, the big files were posted, now we do the actual mark rpc

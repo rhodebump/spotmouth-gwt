@@ -32,6 +32,10 @@ public class Detail extends Composite {
     final Anchor addtoFavoriteAnchor;
 
     @UiField(provided=true)
+    final Anchor websiteAnchor;
+
+
+    @UiField(provided=true)
     final Anchor adminSpotAnchor;
 
     @UiField(provided=true)
@@ -84,7 +88,7 @@ public class Detail extends Composite {
 //    @UiField
 //    SimplePanel googleMap;
     public Detail(Anchor backToSearchResultsAnchor,Anchor addMyBizAnchor,Anchor addtoFavoriteAnchor,Anchor adminSpotAnchor,Anchor phoneAnchor, Anchor groupsAnchor,Anchor mapAnchor,Image mainImage,
-                  Anchor markSpotAnchor,FlowPanel groupsPanel,Button addGroupButton,HTML hoursHTML) {
+                  Anchor markSpotAnchor,FlowPanel groupsPanel,Button addGroupButton,HTML hoursHTML,Anchor websiteAnchor) {
 
         this.backToSearchResultsAnchor      = backToSearchResultsAnchor;
         this.addMyBizAnchor = addMyBizAnchor;
@@ -98,6 +102,7 @@ public class Detail extends Composite {
         this.groupsPanel = groupsPanel;
         this.addGroupButton = addGroupButton;
         this.hoursHTML = hoursHTML;
+        this.websiteAnchor = websiteAnchor;
         initWidget(uiBinder.createAndBindUi(this));
 
     }

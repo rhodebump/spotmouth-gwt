@@ -40,15 +40,18 @@ public class SpotMarkComposite  extends Composite {
 
 
     @UiField(provided = true)
-    final Anchor markImageAnchor;
+    final Anchor userImageAnchor;
+
+    @UiField(provided = true)
+    final FlowPanel markContentPanel;
 
 
-
-    public SpotMarkComposite(Anchor markImageAnchor,Anchor readMoreAnchor ) {
-             this.markImageAnchor  = markImageAnchor;
+    public SpotMarkComposite(Anchor userImageAnchor,Anchor readMoreAnchor,FlowPanel markContentPanel ) {
+             this.userImageAnchor  = userImageAnchor;
         this.readMoreAnchor = readMoreAnchor;
-        this.readMoreAnchor.setStyleName("marks_more");
-        this.readMoreAnchor.setText("Read more");
+        this.markContentPanel = markContentPanel;
+        //this.readMoreAnchor.setStyleName("marks_more");
+       // this.readMoreAnchor.setText("Read more");
 
         //"marks_more">Read more
 initWidget(uiBinder.createAndBindUi(this));

@@ -131,9 +131,7 @@ public class FavoritesPanel extends ResultsPanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 //
 //    ClickHandler manageSpotFriendHandler = new ClickHandler() {
 //        public void onClick(ClickEvent event) {

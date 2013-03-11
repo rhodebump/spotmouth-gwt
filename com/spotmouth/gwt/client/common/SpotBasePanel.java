@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client.common;
 
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.geocode.Geocoder;
@@ -59,6 +60,7 @@ import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
 import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
 import org.cobogw.gwt.user.client.ui.Rating;
+import org.vectomatic.dnd.DropPanel;
 
 import java.util.*;
 //import de.kurka.phonegap.showcase.client.
@@ -72,6 +74,40 @@ import java.util.*;
 
 //BIG, used to extend verticalpanel
 public abstract class SpotBasePanel extends FlowPanel {
+    protected Image bigImage = new Image();
+
+    protected DropPanel getDropPanel() {
+        DropPanel dropPanel = new DropPanel();
+
+        dropPanel.getElement().setId("filedrag");
+               Document document = Document.get();
+               com.google.gwt.dom.client.ParagraphElement p = document.createPElement();
+               p.setId("ddabout");
+               p.appendChild(document.createTextNode("drop your photo here"));
+               dropPanel.getElement().appendChild(p);
+
+        return dropPanel;
+
+    }
+
+    protected ClickHandler imageClickHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Image image = (Image) event.getSource();
+            ContentHolder contentHolder = imageMap.get(image);
+            Image  myimage= getImage(contentHolder, "320x320");
+            bigImage.setUrl(myimage.getUrl());
+
+            com.google.gwt.dom.client.Element element = DOM.getElementById("md_photo_view");
+            element.setClassName("md_vis");
+            //need to add "md_photo_view" class="md_hid"
+
+
+        }
+    };
+
+
+    protected Map<Image,ContentHolder> imageMap = new HashMap<Image,ContentHolder>();
+
 
 
     protected SimplePanel imageUploaderImagePanel = new SimplePanel();
@@ -1417,29 +1453,33 @@ public abstract class SpotBasePanel extends FlowPanel {
                 widgetTagHoldersMap2.put(deleteInlineLabel,suggestBox);
             }
         }
-        //todo, check out if we should ever have a null tagHolders
-//        if (tagHolders != null) {
-//            //once we get to five tags, shut down ui
-//            if (tagHolders.size() >= 5) {
-//                hideElement(suggestBox.getElement());
-//            } else {
-//                suggestBox.getElement().removeAttribute("style");
-//            }
-//        }
-        //<label id="tagslabel">
+
         Element tagslabel = DOM.getElementById("tagslabel");
         if (tagslabel != null) {
             if (tagHolders == null) {
-                tagslabel.removeClassName("tagslabel");
+                GWT.log("tablslabel1");
+                //tagslabel.removeClassName("tagslabel");
             } else if (tagHolders.size() < 5) {
-                tagslabel.removeClassName("fiveTags");
+                GWT.log("tablslabel2");
+                //tagslabel.removeClassName("fiveTags");
+                showElement(tagslabel);
             } else {
-                tagslabel.addClassName("fiveTags");
+                GWT.log("tablslabel3");
+                //tagslabel.addClassName("fiveTags");
+                hideElement(tagslabel);
             }
 
-
-
+        } else {
+            GWT.log("tablslabel is null");
         }
+
+
+//                    //want to hide input once we have five tags
+//            if (tagHolders.size() == 5) {
+//               // suggestBox.setVisible(false);
+//            }else {
+//               // suggestBox.setVisible(true);
+//            }
 
     }
 
@@ -1706,11 +1746,6 @@ public abstract class SpotBasePanel extends FlowPanel {
 
         widgetSelectedTagsPanelMap2.put(tagSearchTextBox, suggestionsPanel);
 
-
-
-
-        //why are we creating a new object of tagHolders here?
-        //tagHolders = new ArrayList<TagHolder>();
         widgetTagHoldersMap.put(tagSearchTextBox, tagHolders);
         resetTagBox(tagSearchTextBox);
         return tagSearchTextBox;
@@ -1796,21 +1831,20 @@ public abstract class SpotBasePanel extends FlowPanel {
         GWT.log("getCountrySuggestBox " + country);
         MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
         for (CountryHolder countryHolder : mywebapp.getCountryHolders()) {
-            GWT.log("adding country " + countryHolder.getShortName());
             oracle.add(countryHolder.getShortName());
         }
         SuggestBox countrySuggestBox = new SuggestBox(oracle);
         countrySuggestBox.getTextBox().addFocusHandler(focusHandler);
         if ((country != null) && (country.length() > 0)) {
-            countrySuggestBox.setText(country);
-     //   } else if (mywebapp.getCurrentLocation() != null) {
-     //       GWT.log("mywebapp.getCurrentLocation().getCountryCode()=" + mywebapp.getCurrentLocation().getCountryCode());
-     //       countrySuggestBox.setText(mywebapp.getCurrentLocation().getCountryCode());
+            countrySuggestBox.setValue(country);
         } else {
-            // GWT.log("mywebapp.getCurrentLocation().getCountryCode()=" + mywebapp.getCurrentLocation().getCountryCode());
-            //countrySuggestBox.setText("US");
-            countrySuggestBox.setText("Select Country");
+           // countrySuggestBox.setValue("Select Country");
         }
+
+
+        countrySuggestBox.getTextBox().getElement().setAttribute("placeholder","Select Country");
+
+
         return countrySuggestBox;
     }
 
@@ -1975,7 +2009,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         addFieldset(addressLabel, spotHolder.getName(), "x");
         if (!isEmpty(spotHolder.getVoicephone())) {
             Fieldset fieldset = new Fieldset();
-            addPhone(spotHolder.getVoicephone(), fieldset);
+            //addPhone(spotHolder.getVoicephone(), fieldset);
             add(fieldset);
         }
     }
@@ -2050,17 +2084,12 @@ public abstract class SpotBasePanel extends FlowPanel {
             MultiWordSuggestion mws = (MultiWordSuggestion) selectionEvent.getSelectedItem();
             SuggestBox suggestBox = (SuggestBox) selectionEvent.getSource();
             TagHolder tagHolder = new TagHolder(mws.getDisplayString());
-            //GWT.log("adding tag " + tagHolder.getName());
             List<TagHolder> tagHolders = widgetTagHoldersMap.get(suggestBox);
 
             tagHolders.add(tagHolder);
             resetTagBox(suggestBox);
-            //want to remove what the user has typed in
             suggestBox.setValue("");
-            //selectedTagsListBox.addItem(mws.getDisplayString());
-//            if (hideTagsOnFive()) {
-//                suggestBox.setVisible(false);
-//            }
+
 
 
         }
@@ -2528,20 +2557,27 @@ public abstract class SpotBasePanel extends FlowPanel {
         return leaveMarkButton;
     }
 
-    protected void addPhone(String phone, ComplexPanel complexPanel) {
-        //let's show the phone
-        //<a href="callto:0123456789">call me</a>         will work for desktop, (/^callto:/, "tel:
-        if (phone == null) {
-            return;
-        }
-        Anchor phoneAnchor = getPhone(phone);
-        complexPanel.add(phoneAnchor);
-    }
+//    protected void addPhone(String phone, ComplexPanel complexPanel) {
+//        //let's show the phone
+//        //<a href="callto:0123456789">call me</a>         will work for desktop, (/^callto:/, "tel:
+//        if (phone == null) {
+//            return;
+//        }
+//        Anchor phoneAnchor = getPhone(phone);
+//        complexPanel.add(phoneAnchor);
+//    }
 
     protected Anchor getPhone(String phone) {
         if (MyWebApp.isDesktop()) {
-            Anchor anchor = new Anchor(phone, "callto:" + phone);
-            return anchor;
+            if (phone == null) {
+                //we need an anchor still, but don't want a call url
+                Anchor anchor = new Anchor();
+                return anchor;
+            } else {
+                Anchor anchor = new Anchor(phone, "callto:" + phone);
+                return anchor;
+            }
+
         } else {
             Anchor anchor = new Anchor(phone, "tel:" + phone);
             return anchor;
@@ -3552,8 +3588,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         if (locationResult.getItemHolders() == null) {
             GWT.log("itemholders is null");
             return ulPanel;
-        } else {
-            GWT.log("itemholders is not null");
         }
         /*
          ...<ul class="ex_comments">
@@ -3650,6 +3684,15 @@ public abstract class SpotBasePanel extends FlowPanel {
         replyData.expandData = expandData;
         listItem.add(replyGoesHerePanel);
         replyMap.put(usernameReplyAnchor, replyData);
+
+        addImages(itemHolder,listItem);
+
+
+
+        middleTable.add(listItem);
+    }
+
+    protected void addImages(ItemHolder itemHolder,ComplexPanel listItem) {
         ContentHolder itemContentHolder = itemHolder.getContentHolder();
         if (itemContentHolder != null) {
             for (ContentHolder contentHolder : itemContentHolder.getContentHolders()) {
@@ -3669,16 +3712,8 @@ public abstract class SpotBasePanel extends FlowPanel {
                 }
             }
         }
-//        if (MyWebApp.isDesktop()) {
-//            Image markImage = getImage(itemHolder.getContentHolder(), "130x130");
-//            if (markImage != null) {
-//                Anchor markImageAnchor = new Anchor();
-//                markImageAnchor.setHref(targetHistoryToken2);
-//                markImageAnchor.getElement().appendChild(markImage.getElement());
-//                listItem.add(markImageAnchor);
-//            }
-//        }
-        middleTable.add(listItem);
+
+
     }
 
     public static class MarkData {

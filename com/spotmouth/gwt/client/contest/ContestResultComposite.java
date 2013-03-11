@@ -22,8 +22,8 @@ public class ContestResultComposite extends Composite {
 
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
-    public ContestResultComposite(Image contestImage,Button mostVotedButton,Button winnersButton) {
 
+    public ContestResultComposite(Image contestImage,Button mostVotedButton,Button winnersButton) {
 
         this.contestImage = contestImage;
         this.contestImage.setStyleName("cl_item_photo");
@@ -35,6 +35,12 @@ public class ContestResultComposite extends Composite {
         setStyleName("cl_item");
 
     }
+
+
+    @UiField
+    Anchor nameAnchor;
+
+
 
 
     @UiField(provided=true)

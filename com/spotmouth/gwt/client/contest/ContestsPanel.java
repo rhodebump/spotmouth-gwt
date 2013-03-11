@@ -34,9 +34,6 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
     public void toggleFirst() {
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
 
     public ContestsPanel() {
     }
@@ -70,6 +67,15 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
             History.newItem(token);
         }
     };
+    private ClickHandler contestDetailHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Widget button = (Widget) event.getSource();
+            Long contestId = widgetContestIdMap.get(button);
+            String token = MyWebApp.CONTEST_DETAIL + contestId;
+            History.newItem(token);
+        }
+    };
+
 
     ULPanel ulPanel = new ULPanel();
 
@@ -82,16 +88,24 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
             if (imgUrl != null) {
                 contestImage.setUrl(imgUrl);
             }
+            Long contestId = solrDocument.getFirstLong("contestid_l");
+            contestImage.addClickHandler(contestDetailHandler);
+            widgetContestIdMap.put(contestImage,contestId);
+            //CONTEST_DETAIL
             String name = solrDocument.getFirstString("name");
             String desc = solrDocument.getFirstString("description_s");
-            Long contestId = solrDocument.getFirstLong("contestid_l");
-            Button mostVotedButton = new Button("Most Voted");
+
+            Button mostVotedButton = new Button();
             mostVotedButton.addClickHandler(mostVotedHandler);
             widgetContestIdMap.put(mostVotedButton, contestId);
-            Button winnersButton = new Button("Winners");
+            Button winnersButton = new Button();
             winnersButton.addClickHandler(winnersHandler);
             widgetContestIdMap.put(winnersButton, contestId);
             ContestResultComposite crc = new ContestResultComposite(contestImage, mostVotedButton, winnersButton);
+
+            crc.nameAnchor.addClickHandler(contestDetailHandler);
+            widgetContestIdMap.put(crc.nameAnchor,contestId);
+
             crc.setContestName(name);
             crc.setDescription(desc);
             ulPanel.add(crc);

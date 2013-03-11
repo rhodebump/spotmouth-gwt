@@ -14,6 +14,7 @@ import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
+import org.vectomatic.dnd.DropPanel;
 
 public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
@@ -96,8 +97,9 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
             Button shareOnFacebookButton = getFacebookButton(markData);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
+            DropPanel dropPanel = getDropPanel();
             MarkComposite markComposite = new MarkComposite(leaveMarkButton, contentTextArea, multiUploader, panelImages, mywebapp, markData.tagSearchTextBox, selectedTagsPanel,
-                    addTagButton, markData.secretKeyTextBox, shareOnFacebookButton, suggestionsPanel);
+                    addTagButton, markData.secretKeyTextBox, shareOnFacebookButton, suggestionsPanel,dropPanel);
             markComposite.setLocationName(spotHolder.getName());
             markComposite.setFullAddress(spotHolder.getAddressLabel());
             markComposite.setPhoneNumber(spotHolder.getVoicephone());
@@ -268,7 +270,4 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
         }
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
 }

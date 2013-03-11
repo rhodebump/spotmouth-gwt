@@ -252,7 +252,6 @@ public class ApplicationMenuPanel extends SpotBasePanel implements SpotMouthPane
     };
     ClickHandler manageFriendsHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-            //mywebapp.toggleManageFriends(null);
             History.newItem(MyWebApp.MANAGE_FRIENDS);
         }
     };
@@ -277,9 +276,6 @@ public class ApplicationMenuPanel extends SpotBasePanel implements SpotMouthPane
 //    };
 
 
-    public boolean isLoginRequired() {
-        return false;
-    }
 
     public void toggleFirst() {
     }

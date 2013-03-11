@@ -190,7 +190,7 @@ public class ContestFormComposite extends Composite {
                                 SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, TextField zipcodeTextField, TextBox address1TextBox, SuggestBox tagSearchTextBox,
                                 FlowPanel selectedTagsPanel, ListBox appliesToListBox, Button saveButton,
                                 SliderBarSimpleHorizontal radiusSlider, MultiUploader multiUploader, final SimplePanel imagePanel,
-                                MyWebApp mywebapp, ContestHolder contestHolder,FlowPanel suggestionsPanel) {
+                                MyWebApp mywebapp, ContestHolder contestHolder,FlowPanel suggestionsPanel,DropPanel dropPanel) {
         //super(mywebapp,imagePanel);
         this.imagePanel = imagePanel;
         this.cancelButton = cancelButton;
@@ -213,7 +213,7 @@ public class ContestFormComposite extends Composite {
         this.appliesToListBox = appliesToListBox;
         this.saveButton = saveButton;
         this.multiUploader = multiUploader;
-        // this.panelImages = panelImages;
+        this.dropPanel = dropPanel;
         initWidget(uiBinder.createAndBindUi(this));
         init();
 
@@ -249,14 +249,14 @@ public class ContestFormComposite extends Composite {
 
 
 
-    @UiField
+    @UiField(provided = true)
     public DropPanel dropPanel;
     @UiField(provided = true)
     public final SimplePanel imagePanel;
 
 
     protected void init() {
-        dropPanel.getElement().setId("filedrag");
+        //dropPanel.getElement().setId("filedrag");
         try  {
         reader = new FileReader();
         reader.addLoadEndHandler(new LoadEndHandler() {

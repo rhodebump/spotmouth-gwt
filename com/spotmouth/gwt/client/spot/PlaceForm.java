@@ -288,7 +288,5 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
         nameTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 }

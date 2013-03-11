@@ -122,7 +122,5 @@ public class MediaForm extends SpotBasePanel implements SpotMouthPanel {
 
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 }

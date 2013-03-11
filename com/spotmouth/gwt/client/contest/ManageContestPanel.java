@@ -25,6 +25,7 @@ import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
+import org.vectomatic.dnd.DropPanel;
 
 import java.util.Date;
 
@@ -38,7 +39,7 @@ import java.util.Date;
 public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel {
     //https://github.com/laaglu/lib-gwt-file-test/blob/master/src/main/java/org/vectomatic/file/client/TestAppMain.java
     // Load the image in the document and in the case of success attach it to the viewer
-    protected IUploader.OnFinishUploaderHandler onFinishUploaderHandler2 = new IUploader.OnFinishUploaderHandler() {
+    private IUploader.OnFinishUploaderHandler onFinishUploaderHandler2 = new IUploader.OnFinishUploaderHandler() {
         public void onFinish(IUploader uploader) {
             if (uploader.getStatus() == IUploadStatus.Status.SUCCESS) {
                 new PreloadedImage(uploader.fileUrl(), showImage2);
@@ -59,12 +60,10 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
     // Attach an image to the pictures viewer
     private PreloadedImage.OnLoadPreloadedImageHandler showImage2 = new PreloadedImage.OnLoadPreloadedImageHandler() {
         public void onLoad(PreloadedImage image) {
+            GWT.log("ManageContestPanel, showImage2");
             contestImagePanel.setWidget(image);
         }
     };
-
-    // private List<TagHolder> tagHolders = new ArrayList<TagHolder>();
-
 
 
 
@@ -124,9 +123,7 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
         nameTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 
     public ManageContestPanel() {
     }
@@ -327,9 +324,10 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
             }
             Button cancelButton  = new Button();
             cancelButton.addClickHandler(cancelHandler2);
+            DropPanel dropPanel = getDropPanel();
             this.cfc = new ContestFormComposite(cancelButton,nameTextBox, contentTextArea, numberOfStarsTextBox, iconStyleTextBox, startDatePicker, endDatePicker,
                     countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField, tagSearchTextBox, selectedTagsPanel, appliesToListBox, saveButton,
-                    sliderBarSimpleHorizontal, defaultUploader, contestImagePanel, mywebapp, contestHolder,suggestionsPanel);
+                    sliderBarSimpleHorizontal, defaultUploader, contestImagePanel, mywebapp, contestHolder,suggestionsPanel,dropPanel);
             add(cfc);
             return;
         }

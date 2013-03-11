@@ -84,9 +84,6 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
 
     static final Logger logger = Logger.getLogger(ChatsPanel.class.getName());
     static final String LABEL_ENTER_ROOM = "Type your name to enter the room";

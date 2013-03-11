@@ -41,22 +41,7 @@
 
     <div id="md_photo_view" class="md_hid"><g:InlineLabel ui:field="killPhoto"/><g:Image ui:field="bigImage"/> </div>
 
-    <!--
 
-
-    <div id="md_photo_view" class="md_hid"><span id="kill_photo">x</span><img class="md_el_big" id="md_img_big" src=""/></div>
-
-
-    <div id="md_photo_view" class="md_hid"><span id="kill_photo">x</span><g:Image ui:field="profileImage"/> </div>
-    -->
-
-
-    <!--
-	<div id="md_photo_view" class="md_hid"><span id="kill_photo">x</span><img class="md_el_big" id="md_img_big" src=""/></div>
-	-->
-     <!--
-	<h3 class="md_us_name">User Name</h3>
-	-->
     <h3 class="md_us_name"><g:Anchor ui:field="usernameAnchor"/> </h3>
 
 	<div class="md_us_photo"><img src="y_e4525243.jpg"/></div>

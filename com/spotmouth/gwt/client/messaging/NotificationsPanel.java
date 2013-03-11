@@ -37,9 +37,7 @@ public class NotificationsPanel extends SpotBasePanel implements SpotMouthPanel 
     public void toggleFirst() {
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 
     public boolean isRootPanel() {
         return false;

@@ -40,8 +40,8 @@ public class ChatFormComposite extends Composite {
     final Button saveButton;
     @UiField(provided = true)
     final Button cancelButton;
-    @UiField
-    DropPanel dropPanel;
+    @UiField(provided = true)
+    final DropPanel dropPanel;
     @UiField(provided = true)
     final MultiUploader multiUploader;
     @UiField(provided = true)
@@ -53,7 +53,7 @@ public class ChatFormComposite extends Composite {
                              SuggestBox tagSearchTextBox,
                              FlowPanel selectedTagsPanel, Button saveButton, Button cancelButton,
                              MultiUploader multiUploader, final SimplePanel imagePanel,
-                             MyWebApp mywebapp, ItemHolder itemHolder, FlowPanel suggestionsPanel) {
+                             MyWebApp mywebapp, ItemHolder itemHolder, FlowPanel suggestionsPanel, DropPanel dropPanel) {
         this.suggestionsPanel = suggestionsPanel;
         this.nameTextBox = nameTextBox;
         this.descriptionTextArea = descriptionTextArea;
@@ -65,6 +65,7 @@ public class ChatFormComposite extends Composite {
         this.imagePanel = imagePanel;
         this.mywebapp = mywebapp;
         this.itemHolder = itemHolder;
+        this.dropPanel = dropPanel;
         initWidget(uiBinder.createAndBindUi(this));
     }
 }

@@ -14,11 +14,11 @@
 </div></div>
 
 <div id="pp_left_side">
-	<span id="pp_ava"></span>
+	<g:InlineLabel ui:field="photoSpan"></g:InlineLabel>
 	<button class="pp_add_msg" id="pp_add_msg_h">Cancel Message</button>
 	<button class="pp_add_msg">Send Message</button>
 
-    <g:Button ui:field="addToFriendsButton"/>
+    <g:Button addStyleNames="pp_add_friends" ui:field="addToFriendsButton">Add to Friends</g:Button>
 
 	<div id="pp_is_friend" class="hideme">
 	<p>You are friends!</p>

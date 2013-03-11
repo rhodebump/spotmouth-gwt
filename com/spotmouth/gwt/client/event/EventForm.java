@@ -125,7 +125,5 @@ public class EventForm extends SpotBasePanel implements SpotMouthPanel {
         titleTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 }

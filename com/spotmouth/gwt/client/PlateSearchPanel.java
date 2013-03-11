@@ -64,9 +64,10 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             Button addTagButton = new Button();
             //addTagAnchor.getElement().setId("addTag");
             addTagButton.addClickHandler(addTagHandler);
+            DropPanel dropPanel = getDropPanel();
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox, plateNameTextBox, keywordsTextBox, manufacturersListBox, stateTextBox,
                     vehicleTypeListBox, plateSearchButton, markData.tagSearchTextBox, markData.secretKeyTextBox, markData.saySomethingTextArea,
-                    selectedTagsPanel, leaveMarkButton, multiUploader, panelImages, pickSpotListBox, mywebapp, shareOnFacebookButton, addTagButton, suggestionsPanel, markData.spotDescriptionTextArea);
+                    selectedTagsPanel, leaveMarkButton, multiUploader, panelImages, pickSpotListBox, mywebapp, shareOnFacebookButton, addTagButton, suggestionsPanel, markData.spotDescriptionTextArea,dropPanel);
             plateSearchComposite.tab1.setValue(true);
             add(plateSearchComposite);
             return;
@@ -209,8 +210,5 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
         }
     }
 
-    @Override
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 }

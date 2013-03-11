@@ -84,7 +84,7 @@ public class PlateSearchComposite extends Composite {
     SimpleRadioButton tab2 = null;
     @UiField(provided = true)
     SimpleRadioButton tab3 = null;
-    @UiField
+    @UiField(provided = true)
     DropPanel dropPanel;
     @UiField(provided = true)
     final MultiUploader multiUploader;
@@ -111,8 +111,9 @@ public class PlateSearchComposite extends Composite {
     public PlateSearchComposite(ListBox colorsListBox, TextBox plateNameTextBox, TextBox keywordsTextBox, ListBox manufacturersListBox, SuggestBox stateTextBox, ListBox vehicleTypeListBox,
                                 Button plateSearchButton, SuggestBox tagSearchTextBox, TextBox secretKeyTextBox, TextArea contentTextArea, FlowPanel selectedTagsPanel,
                                 Button leaveMarkButton, MultiUploader multiUploader, FlowPanel panelImages1, ULPanel pickSpotUL,MyWebApp mywebapp,Button shareOnFacebookButton,Button addTagButton,
-                                FlowPanel suggestionsPanel,TextArea spotDescriptionTextArea
+                                FlowPanel suggestionsPanel,TextArea spotDescriptionTextArea,DropPanel dropPanel
     ) {
+        this.dropPanel = dropPanel;
         this.spotDescriptionTextArea = spotDescriptionTextArea;
         this.suggestionsPanel = suggestionsPanel;
         this.addTagButton = addTagButton;
@@ -144,12 +145,7 @@ public class PlateSearchComposite extends Composite {
         tab2.getElement().setId("tab-2");
         tab3.getElement().setId("tab-3");
         initWidget(uiBinder.createAndBindUi(this));
-        dropPanel.getElement().setId("filedrag");
-        Document document = Document.get();
-        com.google.gwt.dom.client.ParagraphElement p = document.createPElement();
-        p.setId("ddabout");
-        p.appendChild(document.createTextNode("drop your photo here"));
-        dropPanel.getElement().appendChild(p);
+
         try {
             reader = new FileReader();
             reader.addLoadEndHandler(new LoadEndHandler() {

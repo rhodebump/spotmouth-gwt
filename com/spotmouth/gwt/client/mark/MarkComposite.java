@@ -79,7 +79,7 @@ public class MarkComposite extends Composite {
     @UiField(provided=true)
     final TextBox secretKeyTextBox;
 
-    @UiField
+    @UiField(provided = true)
     DropPanel dropPanel;
 
     @UiField(provided=true)
@@ -129,7 +129,8 @@ public class MarkComposite extends Composite {
 
 
     public MarkComposite(Button leaveMarkButton,TextArea contentTextArea,MultiUploader multiUploader,FlowPanel panelImages1,MyWebApp mywebapp,SuggestBox tagSearchTextBox,FlowPanel selectedTagsPanel,Button addTagButton,
-                         TextBox secretKeyTextBox, Button shareOnFacebookButton,FlowPanel suggestionsPanel) {
+                         TextBox secretKeyTextBox, Button shareOnFacebookButton,FlowPanel suggestionsPanel,DropPanel dropPanel) {
+        this.dropPanel = dropPanel;
         this.suggestionsPanel = suggestionsPanel;
 
         this.leaveMarkButton = leaveMarkButton;
@@ -158,12 +159,7 @@ public class MarkComposite extends Composite {
         //addTagButton.setStyleName("btn_blue");
 
         initWidget(uiBinder.createAndBindUi(this));
-        dropPanel.getElement().setId("filedrag");
-        Document document = Document.get();
-        com.google.gwt.dom.client.ParagraphElement p = document.createPElement();
-        p.setId("ddabout");
-        p.appendChild(document.createTextNode("drop your photo here"));
-        dropPanel.getElement().appendChild(p);
+
         try {
             reader = new FileReader();
             reader.addLoadEndHandler(new LoadEndHandler() {

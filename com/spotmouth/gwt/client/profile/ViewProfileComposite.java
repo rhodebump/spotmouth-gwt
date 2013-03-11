@@ -19,6 +19,23 @@ public class ViewProfileComposite extends Composite {
 
     private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
+
+
+
+    @UiField
+    InlineLabel photoSpan;
+
+    public void setImageUrl(String url) {
+        String style= "background: url('" + url + "') no-repeat center center";
+
+        photoSpan.getElement().setAttribute("style",style);
+
+    }
+
+
+
+
+
     @UiField
     SpanElement aboutSpan;
 
@@ -82,6 +99,6 @@ public class ViewProfileComposite extends Composite {
 //        this.usernameTextBox = usernameTextBox;
 //        this.emailAddressTextBox = emailAddressTextBox;
         initWidget(uiBinder.createAndBindUi(this));
-
+       photoSpan.getElement().setId("pp_ava");
     }
 }

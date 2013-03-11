@@ -64,31 +64,27 @@
      <li class="mark">
          <g:Anchor title="Mark This Spot" ui:field="markSpotAnchor"></g:Anchor>
 
-         <!--
-         <a title="Mark This Spot" href="#"></a>
-         -->
      </li>
      <li class="biz">
-         <!--
-         <a title="This is my biz" href="#"></a><
-             -->
          <g:Anchor title="This is my biz" ui:field="addMyBizAnchor"></g:Anchor>
 
          </li>
      <li class="admin">
-
          <g:Anchor title="Administer Spot" ui:field="adminSpotAnchor"></g:Anchor>
-         <!--
-         <a title ="Administer Spot" href="#"></a>
-         -->
          </li>
      <li class="addf">
-         <!--
-         <a title ="Add to Favorite" href="#"></a>
-         -->
+
          <g:Anchor title="Add to Favorite" ui:field="addtoFavoriteAnchor"></g:Anchor>
 
      </li>
+
+     <li class="website">
+
+         <g:Anchor title="Website" ui:field="websiteAnchor" target="_blank"></g:Anchor>
+
+        </li>
+
+
      </ul>
      </div>
      </div>

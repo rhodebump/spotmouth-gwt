@@ -221,16 +221,14 @@ public class ViewUserGroupsPanel extends SpotBasePanel implements SpotMouthPanel
     public void toggleFirst() {
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
 
-    Button addGroupButton() {
-        Button btn = new Button("Add New Group");
-        btn.addClickHandler(addUserGroupHandler);
-        btn.setStyleName("btn_blue");
-        return btn;
-    }
+//
+//    Button addGroupButton() {
+//        Button btn = new Button("Add New Group");
+//        btn.addClickHandler(addUserGroupHandler);
+//        btn.setStyleName("btn_blue");
+//        return btn;
+//    }
 
     protected void toggleAddUserGroup() {
         GWT.log("toggleAddGroup");

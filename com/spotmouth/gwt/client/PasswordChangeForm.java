@@ -111,7 +111,5 @@ public class PasswordChangeForm extends SpotBasePanel implements SpotMouthPanel 
         newPasswordTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 }

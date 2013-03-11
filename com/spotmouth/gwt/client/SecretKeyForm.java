@@ -116,9 +116,7 @@ public class SecretKeyForm extends SpotBasePanel implements SpotMouthPanel {
         keywordsTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 //    @Override
 //    public boolean isRootPanel() {
 //        return false;

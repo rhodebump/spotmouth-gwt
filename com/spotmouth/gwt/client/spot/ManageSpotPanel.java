@@ -329,9 +329,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 
     public void changeListingInfo() {
         //we need to update the URL, so if we need to, we can go back to manage spot panel

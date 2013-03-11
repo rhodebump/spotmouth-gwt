@@ -19,6 +19,7 @@ import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
 import com.spotmouth.gwt.client.dto.ContentHolder;
 import com.spotmouth.gwt.client.profile.*;
+import org.vectomatic.dnd.DropPanel;
 
 /**
  * Created with IntelliJ IDEA.
@@ -82,7 +83,7 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         zipcodeTextField.setValue(user.getZip());
         contentTextArea.setValue(user.getAboutMe());
         //add(saveButton());
-        Button saveButton = new Button("Save");
+        Button saveButton = new Button();
         saveButton.addClickHandler(saveHandler);
 
         SuggestBox  tagSearchTextBox = getTagSuggestBox(user.getTagHolders());
@@ -92,7 +93,6 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         addTagAnchor.addClickHandler(addTagHandler);
         doProfilePic();
         Anchor removeProfileImageAnchor = new Anchor();
-        removeProfileImageAnchor.setStyleName("ddkill");
         removeProfileImageAnchor.addClickHandler(removeProfileImageHandler);
 
         defaultUploader = new MultiUploader();
@@ -102,11 +102,10 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         selectedTagsPanel.getElement().setAttribute("id", "seltags");
 
         FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
-
-
+        DropPanel dropPanel = getDropPanel();
         ProfileSettingsComposite profileSettingsComposite = new ProfileSettingsComposite(countryTextBox, citySuggestBox,
                 stateTextBox, contentTextArea, saveButton, selectedTagsPanel, tagSearchTextBox, addTagAnchor,
-                removeProfileImageAnchor, defaultUploader, panelImages, profileImagePanel, mywebapp,this,suggestionsPanel);
+                removeProfileImageAnchor, defaultUploader, panelImages, profileImagePanel, mywebapp,this,suggestionsPanel,dropPanel);
         add(profileSettingsComposite);
     }
 
@@ -142,9 +141,7 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 
     public void doSaveImage() {
         doSaveImage(null,null);
@@ -215,7 +212,6 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
                     UserHolder uh = mobileResponse.getUserHolder();
-                    GWT.log("uh.city is " + uh.getCity());
                     mywebapp.setAuthenticatedUser(mobileResponse.getUserHolder());
                     //do they have a profile picture?
                     //if they don't let's stay here and give them a nudge

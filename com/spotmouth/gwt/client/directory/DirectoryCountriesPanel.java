@@ -63,7 +63,4 @@ public class DirectoryCountriesPanel extends SpotBasePanel implements SpotMouthP
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
 }

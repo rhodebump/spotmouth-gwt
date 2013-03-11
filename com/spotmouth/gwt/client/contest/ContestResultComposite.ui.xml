@@ -7,17 +7,16 @@
 
 <g:HTMLPanel tag="li">
 
+    <g:Image ui:field="contestImage"/>
 
 
-
-        <g:Image ui:field="contestImage"/>
    		<div class="cl_item_center">
-   			<h3><span ui:field='nameSpan'/></h3>
+   			<h3><g:Anchor ui:field="nameAnchor"> <span ui:field='nameSpan'/></g:Anchor></h3>
    			<p><span ui:field='descriptionSpan'/></p>
    		</div>
    		<span class="cl_btns">
-             <g:Button ui:field="mostVotedButton"/>
-               <g:Button ui:field="winnersButton"/>
+             <g:Button ui:field="mostVotedButton">Most Voted</g:Button>
+               <g:Button ui:field="winnersButton">Winners</g:Button>
 
    		</span>
 

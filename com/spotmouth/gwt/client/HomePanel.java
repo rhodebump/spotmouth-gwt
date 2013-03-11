@@ -102,9 +102,6 @@ public class HomePanel extends SpotBasePanel implements SpotMouthPanel {
         // TODO Auto-generated method stub
     }
 
-    public boolean isLoginRequired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+
 
 }

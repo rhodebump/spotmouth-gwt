@@ -11,6 +11,5 @@ public interface SpotMouthPanel {
 
     public void toggleFirst();
 
-   // public boolean isLoginRequired();
-    //public boolean checkBeforeLeave();
+
 }

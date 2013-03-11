@@ -361,7 +361,4 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
         });
     }
 
-    public boolean isLoginRequired() {
-        return true;
-    }
 }

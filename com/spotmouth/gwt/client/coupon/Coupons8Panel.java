@@ -74,9 +74,7 @@ public class Coupons8Panel extends SpotBasePanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 
     public  Coupons8Panel(MyWebApp mywebapp,MobileResponse couponResponse) {
         super(mywebapp, false);

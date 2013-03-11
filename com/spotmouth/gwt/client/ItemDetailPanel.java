@@ -27,7 +27,7 @@ import java.util.*;
 
 public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
-    private Image bigImage = new Image();
+
 
 
     protected ClickHandler replyHandler = new ClickHandler() {
@@ -113,23 +113,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
     };
 
 
-    protected ClickHandler imageClickHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Image image = (Image) event.getSource();
-            ContentHolder contentHolder = imageMap.get(image);
-            Image  myimage= getImage(contentHolder, "320x320");
-            bigImage.setUrl(myimage.getUrl());
 
-            com.google.gwt.dom.client.Element element = DOM.getElementById("md_photo_view");
-            element.setClassName("md_vis");
-            //need to add "md_photo_view" class="md_hid"
-
-
-        }
-    };
-
-
-    private Map<Image,ContentHolder> imageMap = new HashMap<Image,ContentHolder>();
 
     private String title = "Mark";
 
@@ -518,9 +502,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
     public void toggleFirst() {
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 
     protected void addDeleteButton() {
         Label deleteMarkLabel = new Label("Delete Item");

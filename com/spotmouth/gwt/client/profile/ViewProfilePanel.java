@@ -75,10 +75,17 @@ public class ViewProfilePanel extends SpotBasePanel implements SpotMouthPanel {
     public ViewProfilePanel(MyWebApp mywebapp, MobileResponse mobileResponse) {
         super(mywebapp);
         this.userHolder = mobileResponse.getUserHolder();
-        if (MyWebApp.isDesktop()) {
-            //<button class="pp_add_friends">Add to Friends</button>
-            Button addToFriendsButton = new Button("Add to Friends");
-            addToFriendsButton.setStyleName("pp_add_friends");
+
+        Image profileImage = getImage(userHolder.getContentHolder(), "320x320");
+
+        if (profileImage == null) {
+            profileImage = new Image(MyWebApp.resources.spot_image_placeholder320x320());
+        }
+
+
+
+            Button addToFriendsButton = new Button();
+            //addToFriendsButton.setStyleName("pp_add_friends");
             addToFriendsButton.getElement().setId("pp_add_friends");
             addToFriendsButton.addClickHandler(addToFriendsHandler);
             ViewProfileComposite viewProfileComposite = new ViewProfileComposite(addToFriendsButton);
@@ -88,35 +95,9 @@ public class ViewProfilePanel extends SpotBasePanel implements SpotMouthPanel {
             viewProfileComposite.setCity(userHolder.getCity());
             viewProfileComposite.setState(userHolder.getState());
             viewProfileComposite.setCountryCode(userHolder.getCountryCode());
+        viewProfileComposite.setImageUrl(profileImage.getUrl());
             add(viewProfileComposite);
 
-            return;
-        }
-        this.addStyleName("ViewProfile");
-        if (userHolder != null) {
-            ContentHolder contentHolder = userHolder.getContentHolder();
-            addImageContent(this, contentHolder, "320x320");
-        } else {
-            GWT.log("image is null in spot detail panel");
-        }
-        HTML aboutMe = new HTML(mobileResponse.getUserHolder().getAboutMe());
-        addFieldset(aboutMe, "About Me", "na1");
-        //VerticalPanel vp = new VerticalPanel();
-        //add(vp);
-        //add(ul);
-        HTML username = new HTML(mobileResponse.getUserHolder().getUsername());
-        addFieldset(username, "Username", "na1");
-        //vp.add(new Label("Username:" + mobileResponse.getUserHolder().getUsername()));
-        //add member since
-        //vp.add(new Label("Member Since:" + mobileResponse.getUserHolder().getCreateDateDisplay()));
-        HTML memberSince = new HTML(mobileResponse.getUserHolder().getCreateDateDisplay());
-        addFieldset(memberSince, "Member Since", "na1");
-        ContestVotingPanel cvp = new ContestVotingPanel(mywebapp, mobileResponse.getContestQueryResponse(), userHolder.getId());
-        add(cvp);
-        ResultsPanel resultsPanel1 = new ResultsPanel(mywebapp, false);
-        resultsPanel1.displayQueryResponse(mobileResponse.getUserSpotsQueryResponse(), null, 1);
-        resultsPanel1.displayQueryResponse(mobileResponse.getUserMarksQueryResponse(), null, 1);
-        add(resultsPanel1);
     }
 
     @Override
@@ -157,8 +138,6 @@ public class ViewProfilePanel extends SpotBasePanel implements SpotMouthPanel {
     public void toggleFirst() {
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 
 }

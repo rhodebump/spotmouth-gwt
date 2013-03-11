@@ -26,7 +26,6 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
     FlowPanel mapHolderPanel = new FlowPanel();
     private Anchor hideMapAnchor = new Anchor("Show Information");
-
     protected ClickHandler addNewGroupHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             //we need to be logged in
@@ -132,7 +131,16 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             hoursHTML.setVisible(false);
         }
         Button addGroupButton = getAddGroupButton();
-        this.detail = new Detail(backToSearchResultsAnchor, addMyBizAnchor, addtoFavoriteAnchor, adminSpotAnchor, phoneAnchor, groupsAnchor, mapAnchor, mainImage, markSpotAnchor, groupsPanel, addGroupButton, hoursHTML);
+        Anchor websiteAnchor = new Anchor();
+        if (spotHolder.getWebsite() != null && spotHolder.getWebsite().length() > 0) {
+            // Anchor anchor = new Anchor(spotHolder.getWebsite(), false, spotHolder.getWebsite());
+            websiteAnchor.setHref(spotHolder.getWebsite());
+            //addFieldset(anchor, "Website", "na",bottomPanel);
+        } else {
+            websiteAnchor.setVisible(false);
+        }
+        this.detail = new Detail(backToSearchResultsAnchor, addMyBizAnchor, addtoFavoriteAnchor, adminSpotAnchor, phoneAnchor, groupsAnchor, mapAnchor, mainImage, markSpotAnchor, groupsPanel,
+                addGroupButton, hoursHTML, websiteAnchor);
         detail.setName(spotHolder.getName());
         detail.setAddress(spotHolder.getGeocodeInput());
         if (isEmpty(spotHolder.getDescription())) {
@@ -147,7 +155,6 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         add(hideMapAnchor);
         add(mapHolderPanel);
     }
-
 
     private Detail detail = null;
 
@@ -196,7 +203,6 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             }
         }
     };
-    //id="goback"
 
     public SpotDetailPanel(MyWebApp mywebapp, MobileResponse mobileResponse) {
         super(mywebapp, false);
@@ -205,8 +211,6 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             this.spotHolder = mobileResponse.getSpotHolder();
             this.title = spotHolder.getName();
             this.pageTitle = spotHolder.getName() + ", " + spotHolder.getGeocodeInput();
-            GWT.log("spotholder groups=" + spotHolder.getGroupHolders().size());
-            //Phillip, could you move "hours" in ".info" div, after <h1></h1> tag?
             doDetail();
             doBottom();
         } else {
@@ -276,15 +280,12 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     FlowPanel bottomPanel = new FlowPanel();
+
     private void doBottom() {
         add(bottomPanel);
         bottomPanel.add(contentsPanel);
         if (spotHolder.getContentHolder() != null) {
             addContentHolder(spotHolder.getContentHolder(), false, true);
-        }
-        if (spotHolder.getWebsite() != null && spotHolder.getWebsite().length() > 0) {
-            Anchor anchor = new Anchor(spotHolder.getWebsite(), false, spotHolder.getWebsite());
-            addFieldset(anchor, "Website", "na",bottomPanel);
         }
         addYelpDetails(bottomPanel, mobileResponse.getYelpDetails());
         addYahooUpcoming(bottomPanel, mobileResponse.getEvents());
@@ -341,104 +342,103 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         FlowPanel marksPanel = new FlowPanel();
         marksPanel.getElement().setId("marks_panel");
         // spotMarks.add(marksPanel);
-        addResults(mobileResponse.getEventsQueryResponse(), spotMarks);
-        addResults(mobileResponse.getCouponsQueryResponse(), spotMarks);
-        addResults(mobileResponse.getItemsQueryResponse(), spotMarks);
+        addResults(mobileResponse.getEventLocationResults(), spotMarks);
+        addResults(mobileResponse.getCouponLocationResults(), spotMarks);
+        addResults(mobileResponse.getItemLocationResults(), spotMarks);
         if (spotHolder.getContactEnabled()) {
             bottomPanel.add(contactButton());
         }
     }
 
-    protected void addResults(QueryResponse queryResponse, FlowPanel spotMarks) {
-        for (SolrDocument solrDocument : queryResponse.getResults()) {
+    protected void addResults(List<LocationResult> locationResults, FlowPanel spotMarks) {
+        for (LocationResult locationResult : locationResults) {
             LocationResult lr = new LocationResult();
-            lr.setSolrDocument(solrDocument);
-            addSpotDetailPageResult(lr, spotMarks);
+           // lr.setSolrDocument(solrDocument);
+            addSpotDetailPageResult(locationResult, spotMarks);
         }
+    }
+
+    private void debug(SolrDocument solrDocument) {
+        GWT.log("Begin");
+        for (String key : solrDocument.getMap().keySet()) {
+            GWT.log(key + ":" + solrDocument.getFirstString(key));
+        }
+        GWT.log("End");
     }
 
     //mode 2, always a mark item to go to
     protected void addSpotDetailPageResult(LocationResult locationResult, FlowPanel spotMarks) {
-        //ListItem li = new ListItem();
         SolrDocument solrDocument = locationResult.getSolrDocument();
-        Long itemId = solrDocument.getFirstLong("georepoitemid_l");
+        ItemHolder itemHolder = locationResult.getItemHolder();
+        //debug(solrDocument);
+        Long itemId = itemHolder.getId();
+        //solrDocument.getFirstLong("georepoitemid_l");
         String targetHistoryToken = "#" + MyWebApp.ITEM_DETAIL + itemId;
-        if (MyWebApp.isDesktop()) {
-            Image image = getMarkPhoto(solrDocument);
-            Anchor markImageAnchor = new Anchor();
-            markImageAnchor.setHref(targetHistoryToken);
-            markImageAnchor.getElement().appendChild(image.getElement());
-            String latest_mark_escapedjavascriptsnippet_s = solrDocument.getFirstString("latest_mark_escapedjavascriptsnippet_s");
-            Anchor readMoreAnchor = new Anchor(targetHistoryToken);
-            readMoreAnchor.setHref(targetHistoryToken);
-            SpotMarkComposite smc = new SpotMarkComposite(markImageAnchor, readMoreAnchor);
-            smc.setMarkContent(latest_mark_escapedjavascriptsnippet_s);
-            String username = solrDocument.getFirstString("username_s");
-            if (username == null) {
-                username = "Anonymous";
-            }
-            smc.setUsername(username);
-            //li.add(smc);
-            spotMarks.add(smc);
-            //ul.add(li);
-            return;
-        }
-        /*
-        // vertical panel, 2 rows into each li
-        // one label on top row
-        // hp goes into 2nd row
-
-
-        VerticalPanel vp = new VerticalPanel();
-        vp.setStyleName("marktable");
-        HorizontalPanel hp = new HorizontalPanel();
-        vp.add(hp);
-
-        //li.setStyleName("clearing");
-        li.add(vp);
-        ul.add(li);
-        if (MyWebApp.isSmallFormat()) {
-            addMarkPhoto(solrDocument, targetHistoryToken, hp);
+        Image userMarkImage = null;
+        String userImagePath = solrDocument.getFirstString("user_thumbnail_130x130_url_s");
+        if (userImagePath != null) {
+            userMarkImage = new Image();
+            userMarkImage.setUrl(userImagePath);
         } else {
-            //user_thumbnail_130x130_url_s
-            Long latestMarkUserId = solrDocument.getFirstLong("latest_mark_userid_l");
-            com.google.gwt.core.client.GWT.log("latestMarkUserId=" + latestMarkUserId);
-            String userTarget = targetHistoryToken;
-            //go to profile page
-            if (latestMarkUserId != null) {
-                userTarget = MyWebApp.VIEW_USER_PROFILE + latestMarkUserId;
-            }
-            Image userimage = addImage(solrDocument, hp, "latest_mark_user_thumbnail_130x130_url_s", resources.anon130x130(), resources.anon130x130Mobile(), "userimage", userTarget);
-            // Hyperlink userHyperLink = new Hyperlink();
-            /// userHyperLink.setTargetHistoryToken(MyWebApp.VIEW_USER_PROFILE + latestMarkUserId);
-//            Image userimage = addImage(solrDocument, hp, "latest_mark_user_thumbnail_130x130_url_s",
-//                    userHyperLink, resources.anon130x130(), resources.anon130x130Mobile(), "userimage");
-//            if (latestMarkUserId == null) {
-//                userimage.addStyleName("nolinky");
+            userMarkImage = new Image(MyWebApp.resources.anon130x130());
+        }
+        String userHistoryToken = null;
+        Long userId = solrDocument.getFirstLong("userid_");
+        if (userId != null) {
+            userHistoryToken = MyWebApp.VIEW_USER_PROFILE + userId;
+        }
+        Anchor userImageAnchor = new Anchor();
+        if (userHistoryToken != null) {
+            userImageAnchor.setHref(userHistoryToken);
+        }
+        userImageAnchor.getElement().appendChild(userMarkImage.getElement());
+        Anchor markImageAnchor = new Anchor();
+        markImageAnchor.setHref(targetHistoryToken);
+        markImageAnchor.getElement().appendChild(userMarkImage.getElement());
+        String escapedjavascriptsnippet_s = solrDocument.getFirstString("escapedjavascriptsnippet_s");
+        Anchor readMoreAnchor = new Anchor(targetHistoryToken);
+        readMoreAnchor.setHref(targetHistoryToken);
+
+        FlowPanel markContentPanel = new FlowPanel();
+        markContentPanel.getElement().setId("md_mark_photo");
+
+
+
+        addImages(itemHolder,markContentPanel);
+
+   //     if (itemHolder.getContentHolder() != null) {
+//            for (ContentHolder contentHolder : itemHolder.getContentHolder().getContentHolders()) {
+//
+//
+//                Image image = getImage(contentHolder, "320x320");
+//                image.setStyleName("md_pop");
+//                SpotSpan spotSpan = new SpotSpan();
+//                spotSpan.setStyleName("md_photo_thumb");
+//                spotSpan.add(image);
+//                markContentPanel.add(spotSpan);
+//
+//                //we need to add handler to each image so when clicked we bring it up big
+//                imageMap.put(image,contentHolder);
+//                image.addClickHandler(imageClickHandler);
 //            }
-            hp.setCellWidth(userimage, "1%");
+//        }
+
+
+
+        SpotMarkComposite smc = new SpotMarkComposite(markImageAnchor, readMoreAnchor,markContentPanel);
+        smc.setMarkContent(escapedjavascriptsnippet_s);
+        String username = solrDocument.getFirstString("username_s");
+        if (username == null) {
+            username = "Anonymous";
         }
-        VerticalPanel middleTable = new VerticalPanel();
-        hp.add(middleTable);
-        hp.setCellWidth(middleTable, "100%");
-        middleTable.setStyleName("middletable");
-        Hyperlink latest_mark_escapedjavascriptsnippet_s = addHtml2(solrDocument, middleTable, "latest_mark_escapedjavascriptsnippet_s", targetHistoryToken);
-        if (latest_mark_escapedjavascriptsnippet_s != null) {
-            latest_mark_escapedjavascriptsnippet_s.addStyleName("latestMarkEscapedJavascriptSnippet");
-        }
-        ComplexPanel cats = addCategories(solrDocument);
-        middleTable.add(cats);
-        Hyperlink html2 = addHtml2(solrDocument, middleTable, "spot_geoRepoItemescapedjavascriptsnippet_s", targetHistoryToken);
-        if (html2 != null) {
-            html2.addStyleName("spotGeoRepoItemEscapedJavascriptSnippet");
-        }
-        if (!MyWebApp.isSmallFormat()) {
-            //no 2nd image for small format
-            //mark pick
-            //addMarkPhoto(solrDocument, itemHandler, itemId, hp);
-            addMarkPhoto(solrDocument, targetHistoryToken, hp);
-        }
-        */
+        smc.setUsername(username);
+
+
+
+
+
+
+        spotMarks.add(smc);
     }
 
     ClickHandler displayGroupsHandler = new ClickHandler() {
@@ -477,10 +477,5 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
     public void toggleFirst() {
         // TODO Auto-generated method stub
-    }
-
-    public boolean isLoginRequired() {
-        // TODO Auto-generated method stub
-        return false;
     }
 }

@@ -1,6 +1,7 @@
 package com.spotmouth.gwt.client.chat;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,6 +30,7 @@ import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
+import org.vectomatic.dnd.DropPanel;
 
 import java.util.Date;
 
@@ -42,7 +44,7 @@ import java.util.Date;
 public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
     //https://github.com/laaglu/lib-gwt-file-test/blob/master/src/main/java/org/vectomatic/file/client/TestAppMain.java
     // Load the image in the document and in the case of success attach it to the viewer
-    protected IUploader.OnFinishUploaderHandler onFinishUploaderHandler2 = new IUploader.OnFinishUploaderHandler() {
+    private IUploader.OnFinishUploaderHandler onFinishUploaderHandler2 = new IUploader.OnFinishUploaderHandler() {
         public void onFinish(IUploader uploader) {
             if (uploader.getStatus() == IUploadStatus.Status.SUCCESS) {
                 new PreloadedImage(uploader.fileUrl(), showImage2);
@@ -56,13 +58,14 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
                 //okay, we don't have a final "URL" for this image, and we need one to be able to insert into
                 //a wysiwyg editor
                 //let's call the server and sweep through the session files and convert these to content
-                saveSessionContents();
+                //saveSessionContents();
             }
         }
     };
     // Attach an image to the pictures viewer
     private PreloadedImage.OnLoadPreloadedImageHandler showImage2 = new PreloadedImage.OnLoadPreloadedImageHandler() {
         public void onLoad(PreloadedImage image) {
+            GWT.log("ManageContestPanel, showImage2");
             chatImagePanel.setWidget(image);
         }
     };
@@ -109,9 +112,7 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
        // nameTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
+
 
     public ManageChatPanel() {
     }
@@ -169,13 +170,15 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
 
             Button cancelButton  = new Button();
             cancelButton.addClickHandler(cancelChatHandler);
+            DropPanel dropPanel = getDropPanel();
             this.cfc = new ChatFormComposite(nameTextBox, contentTextArea, startDatePicker, endDatePicker,
                  tagSearchTextBox, selectedTagsPanel, saveButton, cancelButton,
-                     defaultUploader, chatImagePanel, mywebapp, itemHolder,suggestionsPanel);
+                     defaultUploader, chatImagePanel, mywebapp, itemHolder,suggestionsPanel,dropPanel);
             add(cfc);
         }
 
     }
+
 
     private void populate() {
 

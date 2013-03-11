@@ -68,9 +68,6 @@ public class PasswordResetForm extends SpotBasePanel implements SpotMouthPanel {
         usernameTextBox.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
 
     protected void doSave() {
         mywebapp.log("doSave");

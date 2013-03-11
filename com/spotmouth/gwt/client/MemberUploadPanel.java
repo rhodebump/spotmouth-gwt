@@ -50,9 +50,7 @@ public class MemberUploadPanel extends SpotBasePanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 
     protected void doSave() {
         //if we are here, the big files were posted, now we do the actual mark rpc

@@ -47,9 +47,6 @@ public class GroupPanel extends SpotBasePanel implements SpotMouthPanel {
         // TODO Auto-generated method stub
     }
 
-    public boolean isLoginRequired() {
-        return false;
-    }
 
     ClickHandler manageGroupHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {

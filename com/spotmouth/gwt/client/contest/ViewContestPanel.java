@@ -37,16 +37,11 @@ public class ViewContestPanel extends SpotBasePanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-    //private ContestHolder contestHolder = null;
-    private SolrDocument solrDocument = null;
 
 
     public ViewContestPanel(MyWebApp mywebapp, SolrDocument solrDocument) {
         super(mywebapp);
-        this.solrDocument = solrDocument;
+       // this.solrDocument = solrDocument;
         String imgUrl = solrDocument.getFirstString("image_thumbnail_320x320_url_s");
         String desc = solrDocument.getFirstString("description_s");
         this.name = solrDocument.getFirstString("name");
@@ -56,7 +51,6 @@ public class ViewContestPanel extends SpotBasePanel implements SpotMouthPanel {
         String radius = solrDocument.getFirstString("radius_s");
         String location = solrDocument.getFirstString("location_s");
         Integer numberofstars_i = solrDocument.getFirstInteger("numberofstars_i");
-        if (MyWebApp.isDesktop()) {
             ContestDetailComposite cdc = new ContestDetailComposite();
             cdc.setName(name);
             cdc.setRadius(radius);
@@ -67,39 +61,15 @@ public class ViewContestPanel extends SpotBasePanel implements SpotMouthPanel {
             cdc.setLocation(location);
             cdc.setStarCount(numberofstars_i);
             //image
+        if (imgUrl != null) {
             cdc.setImageUrl(imgUrl);
-            add(cdc);
-            return;
         }
 
-        addImageOrig(imgUrl, this, "contestImage");
-        //contest image
-        //name
+            add(cdc);
 
-        HTML nameLabel = new HTML(name);
-        addFieldset(nameLabel, "Contest Name", "desc");
-        setTitle(name);
-        //description
 
-        HTML descLabel = new HTML(desc);
-        addFieldset(descLabel, "Description", "desc");
-        //start / end date
 
-        HTML dateRangeLabel = new HTML(startdate_dt + " though " + enddate_dt);
-        addFieldset(dateRangeLabel, "Contest Valid From/To Date", "daterange");
-        //most votes button
-        FlowPanel fp = new FlowPanel();
-        addViewVotingResults(fp, solrDocument);
-        Fieldset fieldset = new Fieldset();
-        fieldset.add(fp);
-        add(fieldset);
-        //highest average button
-        //edit contest
-
-        Hyperlink editContest = new Hyperlink("Manage Contest", MyWebApp.MANAGE_CONTEST + contestId);
-        //  editContest.addStyleName("whiteButton");
-        add(editContest);
     }
 
-    private String title = null;
+    //private String title = null;
 }

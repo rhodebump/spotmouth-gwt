@@ -95,9 +95,7 @@ public class ContactPanel extends SpotBasePanel implements SpotMouthPanel {
         yourName.setFocus(true);
     }
 
-    public boolean isLoginRequired() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+
 
     protected void doSave() {
         ContactRequest contactRequest = new ContactRequest();

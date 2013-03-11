@@ -49,7 +49,7 @@ public class ProfileSettingsComposite extends Composite {
     final SimplePanel profileImagePanel;
     @UiField(provided = true)
     final Anchor removeProfileImageAnchor;
-    @UiField
+    @UiField(provided = true)
     DropPanel dropPanel;
     @UiField(provided = true)
     final MultiUploader multiUploader;
@@ -71,7 +71,8 @@ public class ProfileSettingsComposite extends Composite {
     public ProfileSettingsComposite(SuggestBox countryTextBox, SuggestBox cityTextBox, SuggestBox stateTextBox,
                                     TextArea aboutMeTextArea, Button saveButton, FlowPanel selectedTagsPanel, SuggestBox tagSearchTextBox, Anchor addTagAnchor,
                                     Anchor removeProfileImageAnchor, MultiUploader multiUploader, FlowPanel panelImages, final SimplePanel profileImagePanel,MyWebApp mywebapp,
-                                    ProfileSettingsPanel profileSettingsPanel,FlowPanel suggestionsPanel) {
+                                    ProfileSettingsPanel profileSettingsPanel,FlowPanel suggestionsPanel,DropPanel dropPanel) {
+        this.dropPanel = dropPanel;
         this.suggestionsPanel = suggestionsPanel;
 
         this.mywebapp = mywebapp;
@@ -90,12 +91,7 @@ public class ProfileSettingsComposite extends Composite {
         this.panelImages = panelImages;
         this.multiUploader = multiUploader;
         initWidget(uiBinder.createAndBindUi(this));
-        dropPanel.getElement().setId("filedrag");
-        Document document = Document.get();
-        com.google.gwt.dom.client.ParagraphElement p = document.createPElement();
-        p.setId("ddabout");
-        p.appendChild(document.createTextNode("drop your photo here"));
-        dropPanel.getElement().appendChild(p);
+
         reader = new FileReader();
         reader.addLoadEndHandler(new LoadEndHandler() {
             @Override
