@@ -115,7 +115,6 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         public void onFailure(Throwable throwable) {
             GWT.log("displayResultsCallback onFailure");
             GWT.log("ResultsPanel", throwable);
-          //  postDialog.hide();
             getMessagePanel().clear();
             getMessagePanel().displayError("Search failure", throwable);
         }
@@ -343,25 +342,19 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         myService.search(searchParameters, new AsyncCallback() {
             public void onFailure(Throwable caught) {
                 caught.printStackTrace();
-                // GWT.log("search onFailure");
-                // gettingResultsDialog.printStackTrace();
                 gettingResultsDialog.hide();
-                //getMessagePanel().displayError("Search Failure: " + caught.getMessage());
                 if (displayResultsCallback != null) {
                     displayResultsCallback.onFailure(caught);
                 }
             }
 
             public void onSuccess(Object result) {
-                GWT.log("search onSuccess");
-                GWT.log("result=" + result.toString());
                 ResultsPanel.this.setDirty(false);
                 gettingResultsDialog.hide();
                 MobileResponse mobileResponse = (MobileResponse) result;
                 displayResultsCallback.onSuccess(mobileResponse);
                 if (messageCallback != null) {
                     messageCallback.onSuccess(null);
-                   // messageCallback = null;
                 }
             }
         });

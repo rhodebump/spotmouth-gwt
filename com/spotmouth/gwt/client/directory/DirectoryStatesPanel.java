@@ -28,13 +28,13 @@ public class DirectoryStatesPanel extends SpotBasePanel implements SpotMouthPane
 
     public DirectoryStatesPanel(MyWebApp mywebapp, MobileResponse mobileResponse) {
         super(mywebapp);
+        setActiveTabId("dirli");
         this.setStyleName("directory");
         //fetchStates(countryId);
         //need to fetch the states for the given country
         displayStates(mobileResponse);
     }
 
-    //Map<Widget, StateProvinceHolder> stateOrProvinceHolderClickMap = new HashMap<Widget, StateProvinceHolder>();
 
     private void displayStates(MobileResponse mobileResponse) {
         ULPanel ul = new ULPanel();
@@ -45,8 +45,6 @@ public class DirectoryStatesPanel extends SpotBasePanel implements SpotMouthPane
            // li.setStyleName("clearing");
             String token = MyWebApp.STATE  + stateProvinceHolder.getId();
             Hyperlink label = new Hyperlink(stateProvinceHolder.getFullName(),token);
-
-          //  stateOrProvinceHolderClickMap.put(label, stateProvinceHolder);
             li.add(label);
             ul.add(li);
         }

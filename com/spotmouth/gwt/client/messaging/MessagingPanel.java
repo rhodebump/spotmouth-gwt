@@ -232,6 +232,7 @@ public class MessagingPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     public void addedToDom() {
+        super.addedToDom();
         mainScoll();
         messageScroll();
     }

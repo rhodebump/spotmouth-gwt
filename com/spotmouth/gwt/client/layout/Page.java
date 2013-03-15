@@ -2,10 +2,15 @@ package com.spotmouth.gwt.client.layout;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.common.ListItem;
 
 /**
  * Created with IntelliJ IDEA.
@@ -87,8 +92,6 @@ public class Page extends Composite {
         initWidget(uiBinder.createAndBindUi(this));
 
         body.setWidget(bodyPanel);
-        //popularPosts.setWidget(popularPostsPanel);
-        //latestPosts.setWidget(latestPostsPanel);
         messages.setWidget(messagePanel);
         //tagCloud.setWidget(tagCloudPanel);
 

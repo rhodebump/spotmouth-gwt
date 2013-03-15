@@ -40,6 +40,7 @@ public class DirectoryCountriesPanel extends SpotBasePanel implements SpotMouthP
 
     public DirectoryCountriesPanel(MyWebApp mywebapp) {
         super(mywebapp);
+        setActiveTabId("dirli");
         this.setStyleName("directory");
         ULPanel ul = new ULPanel();
         ul.setStyleName("results");

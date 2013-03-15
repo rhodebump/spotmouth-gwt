@@ -6,6 +6,7 @@
 
 
     <inherits name="org.atmosphere.gwt.Client"/>
+
     <inherits name="com.kiouri.sliderbar.SliderBarMVP" />
     <inherits name="com.googlecode.mgwt.MGWT" />
 

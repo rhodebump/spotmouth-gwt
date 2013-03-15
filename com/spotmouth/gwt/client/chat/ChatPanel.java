@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client.chat;
 
+import com.spotmouth.gwt.client.dto.ItemHolder;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Element;
@@ -13,6 +14,7 @@ import com.spotmouth.gwt.client.common.SpotBasePanel;
 import org.atmosphere.gwt.client.AtmosphereClient;
 import org.atmosphere.gwt.client.AtmosphereGWTSerializer;
 import org.atmosphere.gwt.client.AtmosphereListener;
+import com.spotmouth.gwt.client.dto.Event;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -31,20 +33,29 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     public String getTitle() {
-        return name;
+        return itemHolder.getTitle();
     }
 
-    private String name = null;
 
-    private String chatId  = null;
 
-    public ChatPanel(MyWebApp mywebapp, String chatId) {
+    private ItemHolder itemHolder = null;
+
+    public ChatPanel(MyWebApp mywebapp, ItemHolder itemHolder) {
         super(mywebapp);
-        this.chatId = chatId;
-        this.name = "Chat";
-        label = new Label(LABEL_ENTER_ROOM);
-        // RootPanel.get("label").add(label);
+        this.itemHolder = itemHolder;
+
+        if (mywebapp.getAuthenticatedUser() != null) {
+            author = mywebapp.getAuthenticatedUser().getUsername();
+        }  else {
+            author = "Anonymous";
+        }
+        label = new Label(LABEL_TYPE_MESSAGE);
         add(label);
+
+
+
+        add(chat);
+
         input = new TextBox();
         input.addKeyDownHandler(new KeyDownHandler() {
             @Override
@@ -73,11 +84,11 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
             }
         };
         add(logPanel);
-        //joinChat(chatRoom);
     }
 
     public void addedToDom() {
-        joinChat(chatId);
+        super.addedToDom();
+        joinChat(itemHolder.getId().toString());
     }
 
     public void toggleFirst() {
@@ -86,7 +97,7 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
     static final Logger logger = Logger.getLogger(ChatsPanel.class.getName());
-    static final String LABEL_ENTER_ROOM = "Type your name to enter the room";
+    //static final String LABEL_ENTER_ROOM = "Type your name to enter the room";
     static final String LABEL_TYPE_MESSAGE = "Type a message to send to the room";
     static final String MESSAGE_JOINED_ROOM = "&lt;joined the room&gt;";
     static final String MESSAGE_LEFT_ROOM = "&lt;left the room&gt;";
@@ -96,51 +107,40 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
     static final String COLOR_SYSTEM_MESSAGE = "grey";
     static final String COLOR_MESSAGE_SELF = "green";
     static final String COLOR_MESSAGE_OTHERS = "red";
-    int count = 0;
+   // int count = 0;
     AtmosphereClient client;
     MyCometListener cometListener = new MyCometListener();
     AtmosphereGWTSerializer serializer = GWT.create(EventSerializer.class);
-    String author;
+    String author = null;
     Label label;
     TextBox input;
-    Element chat;
+    FlowPanel chat = new FlowPanel();
     //String room = "room1";
 
     void sendMessage(String message) {
-        GWT.log("sendMessage " + message);
-        if (author == null) {
-            author = "anonymous";
-            client.broadcast(new Event(author, MESSAGE_JOINED_ROOM));
-            label.setText(LABEL_TYPE_MESSAGE);
-        } else {
             client.broadcast(new Event(author, message));
-        }
     }
 
     String getUrl(String room) {
         return GWT.getModuleBaseURL() + "gwtComet/" + room;
     }
 
-    public void joinChat(final String newRoom) {
-        GWT.log("joinChat " + newRoom);
-        if (client != null) {
-            GWT.log("client not null");
-            if (author != null) {
-                client.broadcast(new Event(author, MESSAGE_LEFT_ROOM));
-            }
-            client.stop();
-            client = null;
-        }
-        author = null;
+    private void joinChat(final String newRoom) {
+
         Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
             @Override
             public void execute() {
                 GWT.log("scheduleDeferred, new AtmosphereClient");
                 //room = newRoom;
-                client = new AtmosphereClient(getUrl(newRoom), serializer, cometListener);
+
+                String url = getUrl(newRoom);
+                GWT.log("url=" + url);
+                //   client = new AtmosphereClient(GWT.getModuleBaseURL() + "gwtComet", serializer, cometListener);
+                client = new AtmosphereClient(url, serializer, cometListener);
+
                 GWT.log("clearChat");
                 clearChat();
-                label.setText(LABEL_ENTER_ROOM);
+                label.setText(LABEL_TYPE_MESSAGE);
                 GWT.log("client start");
                 client.start();
                 GWT.log("client start");
@@ -149,15 +149,19 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     void clearChat() {
-        chat.setInnerHTML("");
+        chat.clear();
     }
 
     void addChatLine(String line, String color) {
         GWT.log("addChatLine " + line);
         HTML newLine = new HTML(line);
+        GWT.log("addChatLine1");
         newLine.getElement().getStyle().setColor(color);
-        chat.appendChild(newLine.getElement());
-        newLine.getElement().scrollIntoView();
+        GWT.log("addChatLine2");
+        //chat.appendChild(newLine.getElement());
+        chat.add(newLine);
+        //GWT.log("addChatLine3");
+        //newLine.getElement().scrollIntoView();
     }
 
     private class MyCometListener implements AtmosphereListener {

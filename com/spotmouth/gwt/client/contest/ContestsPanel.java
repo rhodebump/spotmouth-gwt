@@ -114,7 +114,7 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
 
     public ContestsPanel(MyWebApp mywebapp) {
         super(mywebapp);
-        //not much to this page
+        setActiveTabId("contestsli");
         FlowPanel flowPanel = new FlowPanel();
         flowPanel.setStyleName("contests_list_page");
         flowPanel.getElement().setId("contests_list_page");
@@ -128,6 +128,7 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     public void addedToDom() {
+        super.addedToDom();
         initResults();
     }
 

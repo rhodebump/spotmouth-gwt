@@ -28,6 +28,7 @@ public class DirectoryPostalCodesPanel extends SpotBasePanel implements SpotMout
     //list all zips for a state
     public DirectoryPostalCodesPanel(MyWebApp mywebapp, MobileResponse mobileResponse) {
         super(mywebapp);
+        setActiveTabId("dirli");
         this.setStyleName("directory");
         //fetchPostalCodes(stateId);
         //need to fetch the states for the given country

@@ -921,8 +921,34 @@ public class MyWebApp implements EntryPoint {
     //joinChat
 
     private void joinChat(Long itemId) {
-        ChatPanel chatsPanel = new ChatPanel(this, itemId.toString());
-        swapCenter(chatsPanel);
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.getSearchParameters().setItemId(itemId);
+        final DataOperationDialog itemDetailDialog = new DataOperationDialog(
+                "Retrieving chat.");
+        itemDetailDialog.show();
+        itemDetailDialog.center();
+        ApiServiceAsync myService = getApiServiceAsync();
+        myService.itemdetail(searchRequest, new AsyncCallback() {
+            public void onFailure(Throwable caught) {
+                verifyDisplay();
+                itemDetailDialog.hide();
+                getMessagePanel().clear();
+                getMessagePanel().displayError(caught.getMessage());
+            }
+
+            public void onSuccess(Object result) {
+                itemDetailDialog.hide();
+                MobileResponse mobileResponse = (MobileResponse) result;
+                if (mobileResponse.getStatus() == 1) {
+                    ChatPanel chatsPanel = new ChatPanel(MyWebApp.this, mobileResponse.getItemHolder());
+                    swapCenter(chatsPanel);
+                } else {
+                    verifyDisplay();
+                    getMessagePanel().clear();
+                    getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                }
+            }
+        });
     }
 
     private void manageChat(Long itemId) {
@@ -1918,10 +1944,6 @@ public class MyWebApp implements EntryPoint {
     }
 
     public void toggleContact() {
-//        if (newItem) {
-//            History.newItem(CONTACT);
-//            return;
-//        }
         ContactPanel contactPanel = new ContactPanel(this);
         swapCenter(contactPanel);
     }
@@ -1932,6 +1954,7 @@ public class MyWebApp implements EntryPoint {
     private boolean cookie = true;
 
     public void prepareService(ServiceDefTarget service, final String moduleUrl, String relativeServiceUrl) {
+        //if (true) return;
         service.setServiceEntryPoint(moduleUrl + relativeServiceUrl);
         service.setRpcRequestBuilder(new RpcRequestBuilder() {
             @Override
@@ -2976,6 +2999,8 @@ public class MyWebApp implements EntryPoint {
 
     private void toggleDining() {
         getResultsPanel().resetSearchParameters();
+        getResultsPanel().clear();
+        resultsPanel.setActiveTabId(null);
         resultsPanel.getSearchParameters().setDining(true);
         resultsPanel.getSearchParameters().setSpots(true);
         addCurrentLocation();
@@ -2991,6 +3016,8 @@ public class MyWebApp implements EntryPoint {
 
     public void toggleFun() {
         getResultsPanel().resetSearchParameters();
+        getResultsPanel().clear();
+        resultsPanel.setActiveTabId(null);
         resultsPanel.getSearchParameters().setFun(true);
         resultsPanel.getSearchParameters().setSpots(true);
         addCurrentLocation();
@@ -3005,12 +3032,16 @@ public class MyWebApp implements EntryPoint {
 
     private void toggleLodging() {
         getResultsPanel().resetSearchParameters();
+        getResultsPanel().clear();
+        resultsPanel.setActiveTabId(null);
         resultsPanel.getSearchParameters().setLodging(true);
         resultsPanel.getSearchParameters().setSpots(true);
         addCurrentLocation();
         resultsPanel.setTitle("Lodging");
         resultsPanel.setImageResources(resources.lodging(), resources.lodgingMobile());
         resultsPanel.performSearch();
+
+
     }
 
     private void initSetLocationManuallyPanel() {
@@ -3949,8 +3980,11 @@ public class MyWebApp implements EntryPoint {
         getResultsPanel().getSearchParameters().setLicensePlate(true);
         getResultsPanel().getSearchParameters().setSpots(true);
         getResultsPanel().setTitle("Driver Reports");
+
         getResultsPanel().setImageResources(resources.drivers(), resources.driversMobile());
         getResultsPanel().performSearch();
+        resultsPanel.setActiveTabId("driversli");
+        swapCenter(resultsPanel);
     }
 
     public String getUrl(String href) {
@@ -3971,6 +4005,7 @@ public class MyWebApp implements EntryPoint {
         addCurrentLocation();
         getResultsPanel().getSearchParameters().setLicensePlate(true);
         resultsPanel.setTitle("Contests");
+        resultsPanel.setActiveTabId("contestsli");
         resultsPanel.getSearchParameters().setMarks(true);
         resultsPanel.getSearchParameters().setSpots(true);
         resultsPanel.getSearchParameters().setUsers(true);
@@ -4011,14 +4046,18 @@ public class MyWebApp implements EntryPoint {
 
     public static String DRINKING = "drinking/";
 
-    public void toggleDrinking() {
+    private void toggleDrinking() {
         getResultsPanel().resetSearchParameters();
+
+        resultsPanel.setActiveTabId(null);
         resultsPanel.getSearchParameters().setDrinking(true);
         resultsPanel.getSearchParameters().setSpots(true);
         addCurrentLocation();
         getResultsPanel().setTitle("Drinking");
         resultsPanel.setImageResources(resources.drinking(), resources.drinkingMobile());
         resultsPanel.performSearch();
+       // swapCenter(resultsPanel);
+
     }
 
     /*

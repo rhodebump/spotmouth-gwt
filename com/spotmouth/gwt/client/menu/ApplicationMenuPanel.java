@@ -28,9 +28,12 @@ public class ApplicationMenuPanel extends SpotBasePanel implements SpotMouthPane
 
 
 
+
+
     //Grid grid = null;
     public ApplicationMenuPanel(MyWebApp mywebapp) {
         super(mywebapp,false);
+        setActiveTabId("menuli");
         if (MyWebApp.isDesktop()) {
             MenuComposite menuComposite = new MenuComposite();
 

@@ -145,6 +145,7 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
     };
 
     public void addedToDom() {
+        super.addedToDom();
         updateUI();
     }
 

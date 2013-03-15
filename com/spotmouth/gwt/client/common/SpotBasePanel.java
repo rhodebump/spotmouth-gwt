@@ -74,6 +74,52 @@ import java.util.*;
 
 //BIG, used to extend verticalpanel
 public abstract class SpotBasePanel extends FlowPanel {
+
+    private String activeTabId = null;
+
+    public String getActiveTabId() {
+        return activeTabId;
+
+    }
+    public void setActiveTabId(String activeTabId) {
+        this.activeTabId = activeTabId;
+    }
+
+
+    /*
+    there are a bunch of tabs, and given the chosen tab, we need to set the background of white on it, but also
+    need to remove this attribute on other tabs, if set
+     */
+    protected void activateTab() {
+        GWT.log("activateTab " + getActiveTabId());
+        List<String> ids = new ArrayList<String>();
+        ids.add("contestsli");
+        ids.add("driversli");
+        ids.add("chatsli");
+        ids.add("dirli");
+        ids.add("menuli");
+
+
+        for(String id:ids) {
+            com.google.gwt.dom.client.Element element = DOM.getElementById(id);
+            if (element != null) {
+                element.removeAttribute("style");
+            }
+        }
+        String tabId = getActiveTabId();
+
+        if (tabId != null) {
+            com.google.gwt.dom.client.Element element = DOM.getElementById(tabId);
+            if (element != null) {
+                element.setAttribute("style","background:white;");
+            }
+
+        }
+
+
+
+    }
+
     protected Image bigImage = new Image();
 
     protected DropPanel getDropPanel() {
@@ -450,6 +496,8 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     public void addedToDom() {
         //do nothing but override
+
+        activateTab();
     }
 
     protected void toggleAddGroup(SpotHolder spotHolder) {
@@ -4928,6 +4976,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     public void clear() {
         super.clear();
         addTopPanel();
+       // setActiveTabId(null);
     }
 
     protected Long getManufacturerId() {

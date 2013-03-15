@@ -66,6 +66,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
     public void addedToDom() {
+        super.addedToDom();
         //do nothing but override
         Element replyPanel = DOM.getElementById("md_reply");
         if (replyPanel != null) {

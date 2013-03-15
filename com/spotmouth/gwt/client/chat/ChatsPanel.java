@@ -65,9 +65,6 @@ public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
         return buttonLabel;
     }
 
-    public ChatsPanel(MyWebApp mywebapp) {
-        this(mywebapp,null);
-    }
 
     ULPanel ulPanel = new ULPanel();
 
@@ -87,8 +84,6 @@ public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
             Button joinChatButton = new Button();
             joinChatButton.addClickHandler(joinChatHandler);
             widgetChatIdMap.put(joinChatButton, georepoitemid_l);
-//           Button winnersButton = new Button("Winners");
-//            winnersButton.setVisible(false);
             ChatResultComposite crc = new ChatResultComposite(chatImage, joinChatButton);
             crc.setChatName(name);
             crc.setDescription(desc);
@@ -111,7 +106,7 @@ public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
 
     public ChatsPanel(MyWebApp mywebapp, QueryResponse queryResponse) {
         super(mywebapp);
-
+        setActiveTabId("chatsli");
         initResults(queryResponse);
 
                 //not much to this page

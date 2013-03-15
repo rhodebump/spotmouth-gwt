@@ -102,6 +102,7 @@ public class ViewProfilePanel extends SpotBasePanel implements SpotMouthPanel {
 
     @Override
     public void addedToDom() {
+        super.addedToDom();
                     /*
             If user comes on page to his friend, button '.pp_add_friends' should be hidden and div '#pp_is_friend' - visible;
              */
