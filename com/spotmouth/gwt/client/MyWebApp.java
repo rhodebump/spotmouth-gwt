@@ -63,6 +63,7 @@ import com.spotmouth.gwt.client.layout.Page;
 import com.spotmouth.gwt.client.layout.MapPage;
 import com.spotmouth.gwt.client.location.SetLocationManuallyPanel;
 import com.spotmouth.gwt.client.menu.ApplicationMenuPanel;
+import com.spotmouth.gwt.client.menu.TopNav;
 import com.spotmouth.gwt.client.messaging.MessagingPanel;
 import com.spotmouth.gwt.client.messaging.NotificationsPanel;
 import com.spotmouth.gwt.client.om.LocationOverlay;
@@ -1376,7 +1377,7 @@ public class MyWebApp implements EntryPoint {
             //need to add "hideme" to usmenu
         } else {
             //this is a login
-            page.setUsername(userHolder.getUsername());
+            topNav.setUsername(userHolder.getUsername());
             loginElement.addClassName("hideme");
             element.removeClassName("hideme");
             Image profilePicImage = SpotBasePanel.getImage(userHolder.getContentHolder(), "320x320");
@@ -1384,8 +1385,6 @@ public class MyWebApp implements EntryPoint {
                 profilePicImage = new Image(MyWebApp.resources.spot_image_placeholder320x320());
             }
             profilePicPanel.setWidget(profilePicImage);
-            //profilePicPanel.add(profilePicImage);
-            //need to remove "hideme" from usmenu
         }
         //need to refresh this to reflect login status
         this.setApplicationMenuPanel(null);
@@ -2393,6 +2392,7 @@ public class MyWebApp implements EntryPoint {
         public void onSuccess(Object response) {
             doMapPage();
             getResultsPanel().buildMap();
+            swapCenter(getResultsPanel());
         }
     };
 
@@ -2805,14 +2805,16 @@ public class MyWebApp implements EntryPoint {
 
     public void doMapPage() {
 
+        GWT.log("doMapPage");
 
         if (pageModeDisplayed == 2) return;
 
         //need to do a loadMapsApi at least once
         if (Maps.isLoaded()) {
+            GWT.log("(Maps.isLoaded() is true");
             doMap();
         } else {
-
+            GWT.log("(Maps.isLoaded() is false");
             Maps.loadMapsApi(getGoogleMapKey(), "2", false, new Runnable() {
                        public void run() {
                            doMap();
@@ -2827,9 +2829,11 @@ public class MyWebApp implements EntryPoint {
     //private boolean mapInit = false;
 
     private void doMap() {
-        MapPage page = new MapPage(simplePanel, popularULPanel, latestULPanel, messagePanel, tagCloudPanel, searchBoxPanel, mapPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton, tagListBox, sortingListBox);
+        GWT.log("doMap");
+        MapPage page = new MapPage(simplePanel, popularULPanel, latestULPanel, messagePanel, tagCloudPanel, searchBoxPanel, mapPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton, tagListBox, sortingListBox,topNav);
         RootPanel.get().clear();
         RootPanel.get().add(page);
+        //mapWidget.checkResize();
         this.pageModeDisplayed = 2;
 
     }
@@ -2840,12 +2844,18 @@ public class MyWebApp implements EntryPoint {
         return toggleMapMode;
     }
 
+
+
+
+
     private void doDefaultPage() {
         if (pageModeDisplayed == 1) return;
         Button searchButton = new Button();
 
         searchButton.addClickHandler(searchHandler);
-        this.page = new Page(simplePanel, messagePanel, searchBoxPanel, keywordsTextBox, locationTextBox, profilePicPanel, previousLocationsULPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton, tagListBox, sortingListBox,searchButton);
+        this.page = new Page(simplePanel, messagePanel, searchBoxPanel,
+                keywordsTextBox, locationTextBox, previousLocationsULPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton,
+                tagListBox, sortingListBox,searchButton,topNav);
         RootPanel.get().clear();
         RootPanel.get().add(page);
         this.pageModeDisplayed = 1;
@@ -2854,6 +2864,8 @@ public class MyWebApp implements EntryPoint {
     private Page page = null;
     ULPanel previousLocationsULPanel = new ULPanel();
     SimplePanel profilePicPanel = new SimplePanel();
+    TopNav topNav = new TopNav(profilePicPanel);
+
     ComplexPanel searchBoxPanel = null;
 
     private void initSearchBox() {
@@ -2915,14 +2927,7 @@ public class MyWebApp implements EntryPoint {
         keywordsTextBox.setValue(k2);
         //TabPanel tp1 = new TabPanel();
         searchBoxPanel.add(keywordsTextBox);
-//        tp1.add(keywordsTextBox, k2);
-//        tp1.selectTab(0);
-        //searchBoxPanel.setWidth("100%");
-//        searchBoxPanel.add(tp1);
-//        TabPanel tp = new TabPanel();
-        //  tp.add(locationTextBox, "Near (Address, Neighborhood, City, State or Zip)");
-        // tp.add(locationsListBox, "Previous Locations");
-        //   tp.selectTab(0);
+
         searchBoxPanel.add(locationsListBox);
         Label searchLabel = new Label("Search");
         searchLabel.addClickHandler(clickLocationSearch);
@@ -3199,45 +3204,6 @@ public class MyWebApp implements EntryPoint {
 
 
 
-    private void populateResults(MobileResponse mobileResponse, ULPanel ulPanel) {
-        GWT.log("populateResults");
-        for (LocationResult locationResult : mobileResponse.getLocationResults()) {
-            ListItem listItem = new ListItem();
-            SolrDocument solrDocument = locationResult.getSolrDocument();
-            String miniPath = solrDocument.getFirstString("latest_mark_thumbnail_57x57_url_s");
-            if (miniPath == null) {
-                miniPath = solrDocument.getFirstString("image_thumbnail_57x57_url_s");
-            }
-            Image image = null;
-            if (miniPath == null) {
-                image = new Image(MyWebApp.resources.spotImageMini());
-            } else {
-                image = new Image();
-                image.setUrl(miniPath);
-            }
-            image.setStyleName("tab-thumb");
-            image.addStyleName("wp-post-image");
-            listItem.add(image);
-            FlowPanel info = new FlowPanel();
-            info.setStyleName("info");
-            listItem.add(info);
-            String spot_label_s = solrDocument.getFirstString("spot_label_s");
-            Anchor anchor = new Anchor("@" + spot_label_s);
-            Long spotId = solrDocument.getFirstLong("spotid_l");
-            anchor.setHref("#" + MyWebApp.SPOT_DETAIL + spotId);
-            info.add(anchor);
-            GWT.log(solrDocument.toString());
-            String createdAt = solrDocument.getFirstString("updatedate_s");
-            //we have a lot of old docs with this not in the index
-            if (createdAt != null) {
-                InlineLabel meta = new InlineLabel("At " + createdAt);
-                meta.setStyleName("meta");
-                info.add(meta);
-            }
-            addClear(listItem);
-            ulPanel.add(listItem);
-        }
-    }
 
     private void addClear(Panel flowPanel) {
         FlowPanel clear = new FlowPanel();

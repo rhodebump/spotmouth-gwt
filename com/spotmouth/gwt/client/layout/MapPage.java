@@ -4,6 +4,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.menu.TopNav;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,14 +45,20 @@ public class MapPage extends Composite {
     @UiField(provided = true)
     Button markSpotButton;
 
+    @UiField(provided = true)
+    TopNav topNav;
+
+
+
     //simplePanel,popularPanel,latestPanel,mp,tagCloudPanel,locationPanel,tagCloudPanel2,googleMapPanel
     public MapPage(Panel bodyPanel,Panel popularPostsPanel, Panel latestPostsPanel,Panel messagePanel, Panel tagCloudPanel, Panel searchBoxPanel,
-                   Panel googleMapPanel,  SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,ListBox sortingListBox) {
+                   Panel googleMapPanel,  SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,ListBox sortingListBox,TopNav topNav) {
         this.toggleMapMode = toggleMapMode;
         this.toggleMilesCheckBox = toggleMilesCheckBox;
         this.markSpotButton = markSpotButton;
         this.tagListBox = tagListBox;
         this.sortingListBox = sortingListBox;
+        this.topNav = topNav;
         initWidget(uiBinder.createAndBindUi(this));
         body.setWidget(bodyPanel);
 

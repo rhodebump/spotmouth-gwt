@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.common.ListItem;
+import com.spotmouth.gwt.client.menu.TopNav;
 
 /**
  * Created with IntelliJ IDEA.
@@ -41,15 +42,13 @@ public class Page extends Composite {
     SimplePanel messages;
     @UiField
     SimplePanel searchBox;
-    @UiField(provided = true)
-    SimplePanel profilePicPanel;
+
 
     @UiField(provided = true)
     final TextBox keywordsTextBox;
     @UiField(provided = true)
     final TextBox locationTextBox;
-    @UiField
-    SpanElement usernameSpan;
+
 
     @UiField(provided = true)
     SimpleCheckBox toggleMilesCheckBox;
@@ -68,15 +67,14 @@ public class Page extends Composite {
     @UiField(provided = true)
     final ListBox sortingListBox;
 
+    @UiField(provided = true)
+    TopNav topNav;
 
 
-    public void setUsername(String name) {
-        usernameSpan.setInnerText(name);
-    }
 
     //simplePanel,popularPanel,latestPanel,mp,tagCloudPanel,locationPanel,tagCloudPanel2,googleMapPanel
-    public Page(Panel bodyPanel, Panel messagePanel, Panel searchBoxPanel, TextBox keywordsTextBox, TextBox locationTextBox, SimplePanel profilePicPanel,ULPanel previousLocationsULPanel,
-                SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,ListBox sortingListBox,Button searchButton) {
+    public Page(Panel bodyPanel, Panel messagePanel, Panel searchBoxPanel, TextBox keywordsTextBox, TextBox locationTextBox,ULPanel previousLocationsULPanel,
+                SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,ListBox sortingListBox,Button searchButton,TopNav topNav) {
         this.keywordsTextBox = keywordsTextBox;
 
         this.markSpotButton = markSpotButton;
@@ -86,18 +84,15 @@ public class Page extends Composite {
         this.toggleMilesCheckBox = toggleMilesCheckBox;
        this.tagListBox = tagListBox;
        this.sortingListBox = sortingListBox;
+        this.topNav = topNav;
 
-        this.profilePicPanel = profilePicPanel;
+
         this.searchButton = searchButton;
         initWidget(uiBinder.createAndBindUi(this));
 
         body.setWidget(bodyPanel);
         messages.setWidget(messagePanel);
-        //tagCloud.setWidget(tagCloudPanel);
-
-       // googleMap.setWidget(googleMapPanel);
         searchBox.setWidget(searchBoxPanel);
-        // sidebar.setWidget(sidebarPanel);
 
     }
 }

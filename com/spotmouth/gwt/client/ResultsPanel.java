@@ -439,6 +439,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         opts.setDoubleClick(false);
         mapWidget.setUI(opts);
         add(mapWidget);
+        mapWidget.checkResize();
     }
     //http://code.google.com/p/gwt-google-apis/source/browse/trunk/maps/samples/hellomaps/src/com/google/gwt/maps/sample/hellomaps/client/IconClassDemo.java?r=1875
 

@@ -1,6 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'   xmlns:sc='urn:import:com.spotmouth.gwt.client.common'
+    xmlns:sn='urn:import:com.spotmouth.gwt.client.menu'
     xmlns:xx='urn:import:com.spotmouth.gwt.client'>
 
     <ui:with field="myResources" type="com.spotmouth.gwt.client.icons.SpotImageResource"/>
@@ -60,47 +61,10 @@
     </div>
 
     <div id="top">
-        <ul id="page-nav" class="topnav">
-            <li class="first">
-                <a href="#!home/">Home</a>
-            </li>
 
-            <li class="page_item page-item-6">
-                <a href="#!about-us/">About</a>
-            </li>
-            <li class="page_item page-item-35" id="login-menu">
-                <a href="#!login/">Login</a>
-            </li>
-            <li class="page_item page-item-36">
-                <a href="#!contact">Contact</a>
-            </li>
-
-            <li class="page_item page-item-36">
-                <a href="#!features/">Features</a>
-            </li>
-            <li class="page_item page-item-36">
-                <a href="#biz-owner/">Business Owners</a>
-            </li>
+        <sn:TopNav ui:field="topNav"/>
 
 
-            <div id="usmenu" class="hideme">
-            <input type="text"/>
-            <span id="usava"><!-- <img src="ava.jpg"></img>-->
-                <g:SimplePanel ui:field="profilePicPanel"/>
-            </span>
-            <ul id="usnav">
-                <h3 id="usname"><span ui:field='usernameSpan'/> </h3>
-            <li><a href="#account-settings">Edit your account</a></li>
-            <li><a href="#favorites">Favorite spots</a></li>
-            <li><a href="#notifications">Notifications</a></li>
-            <li><a href="#logout">Sign Out</a></li>
-            </ul>
-
-            </div>
-
-
-
-        </ul>
 
 
         <div id="search">
