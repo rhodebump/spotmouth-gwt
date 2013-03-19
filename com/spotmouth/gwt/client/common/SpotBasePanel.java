@@ -222,7 +222,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     protected Geocoder geocoder;
 
 
-    protected MapWidget mapWidget = null;
+    public MapWidget mapWidget = null;
 
 
 
@@ -1747,27 +1747,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     }
 
-    //this form should display selected tags with remove option for the tag
-    //and a tag search to add to the tags list
-    //http://thinkbelievedo.com/gwt-suggestbox-with-dto-or-pojos
-    protected void addTagHolderForm(List<TagHolder> tagHolders) {
-        SuggestBox suggestBox = initTagHolderForm(tagHolders);
-        //let's add a "link"
-        Label addTagLabel = new Label("Add Tag");
-        addTagLabel.setStyleName("button");
-        addTagLabel.addClickHandler(addTagHandler);
-        FlowPanel fp = new FlowPanel();
-        fp.setWidth("100%");
-        //fp.add(tagSearchTextBox);
-        //FlowPanel fp2 = new FlowPanel();
-        //fp.add(addTagLabel);
-        // fp.add(fp2);
-        fp.add(addTagLabel);
-        //add(tagSearchTextBox);
-        addFieldset(fp, "Tag Search", "tagsearch");
-        FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(suggestBox);
-        addFieldset(selectedTagsPanel, "Selected Tags", "tag");
-    }
+
 
     protected SuggestBox getTagSuggestBox(List<TagHolder> tagHolders) {
         if (tagHolders == null) {

@@ -79,7 +79,7 @@ public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
                 }
             }
         });
-        addTagHolderForm(new ArrayList<TagHolder>());
+        //addTagHolderForm(new ArrayList<TagHolder>());
         FlowPanel checkBoxPanel = new FlowPanel();
         //"Filter by distance"
         geoFilterCheckbox = new SimpleCheckBox();

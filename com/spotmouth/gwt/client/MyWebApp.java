@@ -130,8 +130,8 @@ public class MyWebApp implements EntryPoint {
     String devkey = "ABQIAAAAM9fymNs8HkMYUXmwm3vULhS-Lxx7NiGUwfjIB8UxIofDVocgYRSqughddUxwyzJQHGi7LPalDi6hNw";
 
     public String getGoogleMapKey() {
-        Exception e = new Exception();
-        GWT.log("getGoogleMapKey", e);
+//        Exception e = new Exception();
+//        GWT.log("getGoogleMapKey", e);
         if (getHost().startsWith("http://dev")) {
             return devkey;
         } else if (getHost().startsWith("http://m.")) {
@@ -2017,6 +2017,14 @@ public class MyWebApp implements EntryPoint {
 
     public void runApp() {
 
+                //can't get the callback when api is loaded to work, so I have to just load the api
+        //on startup so it works
+        Maps.loadMapsApi(getGoogleMapKey(), "2", false, new Runnable() {
+                              public void run() {
+
+                              }
+                          });
+
         //common css for tag and upload controls
         //DesktopResource.INSTANCE.upload().ensureInjected();
         log("runApp");
@@ -2052,6 +2060,14 @@ public class MyWebApp implements EntryPoint {
             // displaySplash();
             // toggleHome();
         }
+
+
+
+
+
+
+
+
     }
     //become a member does not require a spotmouth account!  it
     //just allows users to communicate to this email address
@@ -2393,6 +2409,7 @@ public class MyWebApp implements EntryPoint {
             doMapPage();
             getResultsPanel().buildMap();
             swapCenter(getResultsPanel());
+            getResultsPanel().mapWidget.checkResize();
         }
     };
 
@@ -2804,24 +2821,29 @@ public class MyWebApp implements EntryPoint {
     private ListBox sortingListBox = new ListBox();
 
     public void doMapPage() {
-
         GWT.log("doMapPage");
-
         if (pageModeDisplayed == 2) return;
-
         //need to do a loadMapsApi at least once
-        if (Maps.isLoaded()) {
+       // if (Maps.isLoaded()) {
             GWT.log("(Maps.isLoaded() is true");
             doMap();
-        } else {
-            GWT.log("(Maps.isLoaded() is false");
-            Maps.loadMapsApi(getGoogleMapKey(), "2", false, new Runnable() {
-                       public void run() {
-                           doMap();
-                       }
-                   });
-
-        }
+//        } else {
+//            Maps.loadMapsApi(getGoogleMapKey(), "2", false, new Runnable() {
+//                public void run() {
+//                    final Timer t = new Timer() {
+//                        public void run() {
+//                            GWT.log("maps.isloaded=" + Maps.isLoaded());
+//                            Maps.
+//                            if (Maps.isLoaded()) {
+//                                this.cancel();
+//                                doMap();
+//                            }
+//                        }
+//                    };
+//                    t.schedule(500);
+//                }
+//            });
+      //  }
 
 
 

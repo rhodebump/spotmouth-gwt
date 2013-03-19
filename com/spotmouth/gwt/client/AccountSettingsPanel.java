@@ -245,7 +245,7 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         addMediaFields("Profile Picture");
         add(contentsPanel);
         addContentHolder(user.getContentHolder(), true, true);
-        addTagHolderForm(user.getTagHolders());
+        //addTagHolderForm(user.getTagHolders());
         //  }
         add(saveButton());
         //if (!registrationMode) {

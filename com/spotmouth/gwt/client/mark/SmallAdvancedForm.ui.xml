@@ -14,12 +14,12 @@
      			<span class="ma_add_file"><mu:MultiUploader ui:field="multiUploader"/><img src="css/at_icn.png"/></span>
      			<span class="ma_inputs">
      				<label class="ma_add_key">  <g:TextBox ui:field="secretKeyTextBox"/><span class="ma_inp_det">Secret Key</span></label>
-     				<label id="tagslabel" class="ma_add_tag">  <g:SuggestBox ui:field="tagSearchTextBox"/><span class="ma_inp_det">Select Tags</span></label>
+     				<label id="tagslabel" class="ma_add_tag">  <g:SuggestBox ui:field="tagSearchTextBox"/>    <g:FlowPanel ui:field="suggestionsPanel"/><span class="ma_inp_det">Select Tags</span></label>
      			</span>
 
             <g:FlowPanel ui:field="imagesPanel"/>
             <g:FlowPanel ui:field="selectedTagsPanel"/>
-            <g:FlowPanel ui:field="suggestionsPanel"/>
+
 
 
      		</div>

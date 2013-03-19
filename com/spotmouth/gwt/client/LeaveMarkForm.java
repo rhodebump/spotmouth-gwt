@@ -146,7 +146,7 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
            // addCheckbox(shareOnFacebookCheckbox, null,this);
         }
         secretKeyTextBox = addTextBox("Secret Key", "secretKey", "", false);
-        addTagHolderForm(itemHolder.getTagHolders());
+        //addTagHolderForm(itemHolder.getTagHolders());
         add(leaveMarkButton());
         add(cancelButton());
     }

@@ -208,7 +208,7 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
 
 
         voicePhoneTextField= addTextBox("Voice Phone", "voice", spotHolder.getVoicephone());
-        addTagHolderForm(spotHolder.getTagHolders());
+        //addTagHolderForm(spotHolder.getTagHolders());
 //        lodgingCheckBox = addCheckbox2("Lodging", "lodging", spotHolder.getLodging(), mywebapp.getResources().lodging());
 //        diningCheckBox = addCheckbox2("Dining", "dining", spotHolder.getDining(), mywebapp.getResources().dining());
 //        funCheckBox = addCheckbox2("Fun", "fun", spotHolder.getFun(), mywebapp.getResources().fun());
@@ -220,7 +220,7 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
 
 
 
-        addTagHolderForm(spotHolder.getTagHolders());
+        //addTagHolderForm(spotHolder.getTagHolders());
 
 
         factualIdTextField= addTextBox("Factual ID", "facId", spotHolder.getFactualId());
