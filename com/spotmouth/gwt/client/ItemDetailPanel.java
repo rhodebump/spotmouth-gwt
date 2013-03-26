@@ -280,6 +280,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
             MultiUploader multiUploader = new MultiUploader();
+            this.defaultUploader =  multiUploader;
             FlowPanel panelImages = new FlowPanel();
 
             IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandlerDetails(panelImages);

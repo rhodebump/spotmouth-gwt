@@ -62,6 +62,7 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
         if (MyWebApp.isDesktop()) {
             PlateSearchPanel plateSearchPanel = new PlateSearchPanel(mywebapp);
             MultiUploader multiUploader = new MultiUploader();
+            this.defaultUploader =  multiUploader;
             multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             ULPanel pickSpotULPanel = getPickSpotULPanel();
 

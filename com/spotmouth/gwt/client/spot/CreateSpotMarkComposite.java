@@ -23,7 +23,7 @@ public class CreateSpotMarkComposite  extends Composite {
 
 
     public CreateSpotMarkComposite(TextField spotNameTextField,
-                                   SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, TextField zipcodeTextField, TextField address1TextBox,
+                                   SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, SuggestBox zipcodeTextField, TextField address1TextBox,
                                    Button saveButton,Button cancelButton) {
         this.spotNameTextField = spotNameTextField;
         this.countryTextBox = countryTextBox;
@@ -52,7 +52,7 @@ public class CreateSpotMarkComposite  extends Composite {
     @UiField(provided = true)
     final SuggestBox cityTextBox;
     @UiField(provided = true)
-    final TextField zipcodeTextField;
+    final SuggestBox zipcodeTextField;
     @UiField(provided = true)
     final TextField address1TextBox;
     @UiField(provided = true)

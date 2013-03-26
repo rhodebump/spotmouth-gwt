@@ -381,8 +381,8 @@ public class MyWebApp implements EntryPoint {
             public void onSuccess(Object result) {
                 log("fetchInitData success");
                 MobileResponse mobileResponse = (MobileResponse) result;
-                MyWebApp.this.countryHolders = mobileResponse.getCountryHolders();
-                MyWebApp.this.stateProvinceHolders = mobileResponse.getStateProvinceHolders();
+                //MyWebApp.this.countryHolders = mobileResponse.getCountryHolders();
+               // MyWebApp.this.stateProvinceHolders = mobileResponse.getStateProvinceHolders();
                 MyWebApp.this.productHolders = mobileResponse.getProductHolders();
                 MyWebApp.this.manufacturerHolders = mobileResponse.getManufacturerHolders();
 
@@ -883,6 +883,9 @@ public class MyWebApp implements EntryPoint {
         });
     }
 
+
+    public static String MANAGE_USER_GROUP = "manage-user-group/";
+
     public static String MANAGE_CHAT = "manage-chat/";
     public static String JOIN_CHAT = "join-chat/";
     public static String CHAT_DETAIL = "!chat-detail/";
@@ -952,6 +955,17 @@ public class MyWebApp implements EntryPoint {
         });
     }
 
+    private void manageUserGroup(Long userGroupId) {
+        for(UserGroupHolder ugh:MyWebApp.this.getFriendsAndGroups().getUserGroupHolders()) {
+            if (ugh.getId().equals(userGroupId)) {
+                ManageUserGroupPanel groupPanel = new ManageUserGroupPanel(MyWebApp.this, ugh);
+                swapCenter(groupPanel);
+                return;
+            }
+        }
+
+
+    }
     private void manageChat(Long itemId) {
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.getSearchParameters().setItemId(itemId);
@@ -1721,15 +1735,21 @@ public class MyWebApp implements EntryPoint {
     SimplePanel simplePanel = new SimplePanel();
     //for some reason, if we are not connected to network, we cannot use the form panel
     //  private boolean goodInit = false;
-    private int previousWindowScrollPosition = 0;
+   // private int previousWindowScrollPosition = 0;
     private VerticalPanel vp = new VerticalPanel();
 
     public boolean swapCenter(final SpotBasePanel spotBasePanel) {
         GWT.log("swapCenter");
         //store position of where we scrolled so we can go back to this same position
         if (this.currentSpotBasePanel instanceof ResultsPanel) {
-            this.previousWindowScrollPosition = com.google.gwt.user.client.Window.getScrollTop();
+        //    this.previousWindowScrollPosition = com.google.gwt.user.client.Window.getScrollTop();
         }
+
+        if((this.currentSpotBasePanel != null) && (this.currentSpotBasePanel.isUploading())) {
+            GWT.log("canceling upload");
+            currentSpotBasePanel.defaultUploader.cancel();
+        }
+
         if (!checkValidToToggle()) {
             return false;
         }
@@ -1980,10 +2000,10 @@ public class MyWebApp implements EntryPoint {
         }
         return apiServiceAsync;
     }
-
-    public List<CountryHolder> getCountryHolders() {
-        return countryHolders;
-    }
+//
+//    public List<CountryHolder> getCountryHolders() {
+//        return countryHolders;
+//    }
 
     public List<ManufacturerHolder> getManufacturerHolders() {
         return manufacturerHolders;
@@ -1991,11 +2011,11 @@ public class MyWebApp implements EntryPoint {
 
     private List<ManufacturerHolder> manufacturerHolders = new ArrayList<ManufacturerHolder>();
     private List<ProductHolder> productHolders = new ArrayList<ProductHolder>();
-    private List<CountryHolder> countryHolders = new ArrayList<CountryHolder>();
+    //private List<CountryHolder> countryHolders = new ArrayList<CountryHolder>();
 
-    public List<StateProvinceHolder> getStateProvinceHolders() {
-        return stateProvinceHolders;
-    }
+//    public List<StateProvinceHolder> getStateProvinceHolders() {
+//        return stateProvinceHolders;
+//    }
     //  private static boolean mobileSmallFormat = true;
 
     public static boolean isDesktop() {
@@ -2013,9 +2033,84 @@ public class MyWebApp implements EntryPoint {
         return robot;
     }
 
-    private List<StateProvinceHolder> stateProvinceHolders = new ArrayList<StateProvinceHolder>();
+    ///private List<StateProvinceHolder> stateProvinceHolders = new ArrayList<StateProvinceHolder>();
+
+
+
+    private void notMini() {
+      //setTimeout('notElem.className = "normal minimized";',timer);
+
+        Timer t = new Timer() {
+          public void run() {
+
+              com.google.gwt.dom.client.Element notElem = DOM.getElementById("notification");
+              notElem.setClassName("normal minimized");
+                getMessagePanel().setMinimized(true);
+          }
+        };
+
+        // Schedule the timer to run once in 5 seconds.
+        t.schedule(3000);
+
+
+    }
+
+
 
     public void runApp() {
+
+
+
+
+
+        Window.addWindowScrollHandler(new Window.ScrollHandler() {
+            public void onWindowScroll(Window.ScrollEvent scrollEvent) {
+                com.google.gwt.dom.client.Element notElem = DOM.getElementById("notification");
+                if (getMessagePanel().isMinimized()) {
+                    if (Window.getScrollTop() == 0) {
+                        notElem.setClassName("normal");
+                    } else {
+
+                        notElem.setClassName("normal scrolled minimized");
+                    }
+
+                } else {
+                    notElem.setClassName("normal scrolled");
+                    notMini();
+                }
+
+               // notMini();
+              //  int notTop = getCoords(notElem);
+             //   com.google.gwt.dom.client.Element wrapper = DOM.getElementById("wrapper");
+              //  int pageY = Window.getScrollTop();
+             //   com.google.gwt.dom.client.Element mNav = DOM.getElementById("m_nav");
+               // int mWrapTop = wrapper.getOffsetTop();
+//                if (pageY >= mWrapTop * 2) {
+//                    mNav.setClassName("m_nav_fixed");
+//                } else if (pageY <= mWrapTop * 2) {
+//                    mNav.setClassName("m_nav");
+//                }
+//                if (pageY >= notTop + notElem.getOffsetHeight()) {
+//                    if (notElem.getClassName().equals("normal minimized")) {
+//                       // notElem.setClassName("normal minimized");
+//                        notElem.setClassName("normal scrolled");
+//                    } else {
+//                        notElem.setClassName("normal scrolled");
+//                        notMini();
+//                    }
+//                } else {
+//                    if (notElem.getClassName().equals("normal minimized")) {
+//                       // notElem.setClassName("normal minimized");
+//                        notElem.setClassName("normal scrolled");
+//                    } else {
+//                        notElem.setClassName("normal");
+//                    }
+//                }
+
+
+            }
+        });
+
 
                 //can't get the callback when api is loaded to work, so I have to just load the api
         //on startup so it works
@@ -2482,6 +2577,11 @@ public class MyWebApp implements EntryPoint {
             String id = historyToken.replaceAll(MANAGE_CHAT, "");
             Long itemId = new Long(id);
             manageChat(itemId);
+        } else if (historyToken.startsWith(MANAGE_USER_GROUP)) {
+            String id = historyToken.replaceAll(MANAGE_USER_GROUP, "");
+            Long itemId = new Long(id);
+            manageUserGroup(itemId);
+
         } else if (historyToken.startsWith(JOIN_CHAT)) {
             String id = historyToken.replaceAll(JOIN_CHAT, "");
             Long itemId = new Long(id);
@@ -3929,7 +4029,18 @@ public class MyWebApp implements EntryPoint {
             History.newItem(LOGOUT);
             return;
         }
-        log("setAuthenticatedUser");
+
+        //need to do this before setting facebook user to false!
+        if (isFacebookUser()) {
+            log("mywebapp.fbConnect.logout");
+            if (fbConnect != null) {
+                //mywebapp.fbConnect.logout(MyWebApp.APPID);
+                fbConnect.logout(MyWebApp.FACEBOOK_APPID);
+            }
+        } else {
+            log("mywebapp.isFacebookUser is false");
+        }
+
         setAuthenticatedUser(null);
         setFacebookUser(false);
         setFriendsAndGroups(null);
@@ -3950,15 +4061,7 @@ public class MyWebApp implements EntryPoint {
 
         // String spotmouth_session_id = Cookies.getCookie("spotmouth_session_id");
 
-        if (isFacebookUser()) {
-            log("mywebapp.fbConnect.logout");
-            if (fbConnect != null) {
-                //mywebapp.fbConnect.logout(MyWebApp.APPID);
-                fbConnect.logout(MyWebApp.FACEBOOK_APPID);
-            }
-        } else {
-            log("mywebapp.isFacebookUser is false");
-        }
+
     }
 
     private void toggleDrivers() {

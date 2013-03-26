@@ -2,6 +2,7 @@ package com.spotmouth.gwt.client;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.*;
@@ -77,7 +78,15 @@ public class ContactPanel extends SpotBasePanel implements SpotMouthPanel {
 
         if (isEmpty(email)) {
             getMessagePanel().displayError("Your email address is required.");
+        } else {
+            boolean valid = email.getValue().matches(emailPattern);
+            if (!valid) {
+                getMessagePanel().displayError("Email address " + email.getValue() + " is  not invalid.");
+            }
+
         }
+
+
         if (isEmpty(contentTextArea)) {
             getMessagePanel().displayError("A message is required.");
         }
@@ -115,9 +124,15 @@ public class ContactPanel extends SpotBasePanel implements SpotMouthPanel {
                 postDialog.hide();
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
-                    mywebapp.toggleBack();
-                    //mywebapp.displayMessage("Your message has been sent.");
+
+                    //we need to clear out this form
+                    //History.newItem(MyWebApp.CONTACT);
+
+                    mywebapp.toggleContact();
                     mywebapp.getMessagePanel().displayMessage("Your message has been sent.");
+                    //toggleMenu
+
+
                 } else {
                     getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
                 }

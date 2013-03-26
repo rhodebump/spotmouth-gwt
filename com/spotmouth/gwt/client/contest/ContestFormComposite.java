@@ -137,7 +137,7 @@ public class ContestFormComposite extends Composite {
     @UiField(provided = true)
     final SuggestBox cityTextBox;
     @UiField(provided = true)
-    final TextField zipcodeTextField;
+    final SuggestBox zipcodeTextField;
     @UiField(provided = true)
     final TextBox address1TextBox;
 
@@ -187,7 +187,7 @@ public class ContestFormComposite extends Composite {
     private ContestHolder contestHolder = null;
 
     public ContestFormComposite(Button cancelButton, TextField contestNameTextBox, TextArea descriptionTextArea, TextBox numberOfStarsTextBox, TextBox iconStyleTextBox, DateBox startDatePicker, DateBox endDatePicker,
-                                SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, TextField zipcodeTextField, TextBox address1TextBox, SuggestBox tagSearchTextBox,
+                                SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, SuggestBox zipcodeTextField, TextBox address1TextBox, SuggestBox tagSearchTextBox,
                                 FlowPanel selectedTagsPanel, ListBox appliesToListBox, Button saveButton,
                                 SliderBarSimpleHorizontal radiusSlider, MultiUploader multiUploader, final SimplePanel imagePanel,
                                 MyWebApp mywebapp, ContestHolder contestHolder,FlowPanel suggestionsPanel,DropPanel dropPanel) {

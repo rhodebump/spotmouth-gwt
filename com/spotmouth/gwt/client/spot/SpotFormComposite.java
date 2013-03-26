@@ -66,7 +66,7 @@ public class SpotFormComposite   extends Composite {
     @UiField(provided = true)
     final SuggestBox cityTextBox;
     @UiField(provided = true)
-    final TextField zipcodeTextField;
+    final SuggestBox zipcodeTextField;
     @UiField(provided = true)
     final TextField address1TextBox;
 
@@ -99,7 +99,7 @@ public class SpotFormComposite   extends Composite {
     public SpotFormComposite(Button cancelButton,TextField spotNameTextField,TextField voicePhoneTextField,TextField websiteTextField,   TextField emailTextField,
                              TextArea spotDescriptionTextArea,Button saveButton,
                              SimpleCheckBox lodgingCheckBox,SimpleCheckBox funCheckBox,SimpleCheckBox drinkingCheckBox,SimpleCheckBox diningCheckBox,
-                             SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, TextField zipcodeTextField, TextField address1TextBox,
+                             SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, SuggestBox zipcodeTextField, TextField address1TextBox,
                              SuggestBox tagSearchTextBox,
                                                             FlowPanel selectedTagsPanel,FlowPanel suggestionsPanel,
                                                             TextField factualTextField,TextField woeIDTextField,TextField yelpIDTextField) {

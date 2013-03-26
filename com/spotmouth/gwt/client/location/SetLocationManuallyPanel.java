@@ -178,7 +178,10 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
             countryTextBox = getCountrySuggestBox("");
             stateTextBox = getStateSuggestBox("");
             citySuggestBox = getCitySuggestBox("");
-            initZipCodeTextBox();
+
+            //
+
+            zipcodeTextField = initZipCodeTextBox("");
             initAddress1TextBox();
             final Button updateButton = new Button();
             //updateButton.setStyleName("btn_blue");
@@ -241,7 +244,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
     ClickHandler setLocationHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             mywebapp.getMessagePanel().clear();
-            if (!isEmpty(zipcodeTextField)) {
+            if (!isEmpty(zipcodeTextField.getText())) {
                 if (!isNumeric(zipcodeTextField.getValue())) {
                     mywebapp.getMessagePanel().displayError("Zipcode must be numeric");
                     return;

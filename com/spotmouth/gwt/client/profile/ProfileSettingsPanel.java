@@ -79,8 +79,8 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         countryTextBox = getCountrySuggestBox(user.getCountryCode());
         stateTextBox = getStateSuggestBox(user.getState());
         citySuggestBox = getCitySuggestBox(user.getCity());
-        zipcodeTextField = new TextField();
-        zipcodeTextField.setValue(user.getZip());
+        zipcodeTextField = initZipCodeTextBox(user.getZip());
+       // zipcodeTextField.setValue(user.getZip());
         contentTextArea.setValue(user.getAboutMe());
         //add(saveButton());
         Button saveButton = new Button();

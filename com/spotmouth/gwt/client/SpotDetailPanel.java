@@ -1,9 +1,12 @@
 package com.spotmouth.gwt.client;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.maps.client.geocode.Geocoder;
 import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
@@ -20,6 +23,14 @@ import java.util.List;
 import java.util.Map;
 
 public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
+
+
+    public void addedToDom() {
+        super.addedToDom();
+        activateTab("fw-desc",descriptionAnchor);
+    }
+
+
     public TextResource getHelpTextResource() {
         return HelpResources.INSTANCE.getSpotDetailPanel();
     }
@@ -44,12 +55,74 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         }
     };
 
+    SimplePanel mapPanel = new SimplePanel();
+
     protected Button getAddGroupButton() {
         Button btn = new Button("Add New Group");
         btn.addClickHandler(addNewGroupHandler);
         //  btn.setStyleName("whiteButton");
         return btn;
     }
+
+
+
+
+
+    ClickHandler showDescriptionTabHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            activateTab("fw-desc",descriptionAnchor);
+        }
+    };
+
+    ClickHandler groupsHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+
+
+            activateTab("fw-group",groupsAnchor);
+
+        }
+    };
+
+    private void hideElement(String id) {
+        Element elementToHide = DOM.getElementById(id);
+        if (elementToHide == null) {
+            com.google.gwt.core.client.GWT.log("hideElement, element is NULL!: " + id);
+        }
+        hideElement(elementToHide);
+
+    }
+
+    private void showElement(String id) {
+        Element elementToShow = DOM.getElementById(id);
+        if (elementToShow == null) {
+            com.google.gwt.core.client.GWT.log("showElement, element is NULL!: " + id);
+        }
+
+        showElement(elementToShow);
+
+    }
+
+
+    private void activateTab(String id,Anchor clickAnchor) {
+
+        groupsAnchor.removeStyleName("activeTab");
+        mapAnchor.removeStyleName("activeTab");
+
+        descriptionAnchor.removeStyleName("activeTab");
+
+        clickAnchor.addStyleName("activeTab");
+
+        //need to hide all
+        hideElement("fw-group");
+        hideElement("fw-map");
+        hideElement("fw-desc");
+
+        //let's activate the id
+        showElement(id);
+
+
+    }
+
 
     ClickHandler hideMapHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -61,19 +134,27 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
     };
     ClickHandler viewMapHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-            Location location = new Location();
-            location.setLatitude(spotHolder.getLatitude());
-            location.setLongitude(spotHolder.getLongitude());
-            SpotMap spotMap = new SpotMap(mywebapp, location);
-            //let's set the detail object to not display
-            //add this and a link to enable detail again
-            detail.setVisible(false);
-            bottomPanel.setVisible(false);
-            hideMapAnchor.setVisible(true);
-            mapHolderPanel.add(spotMap);
-            //mywebapp.swapCenter(spotMap);
+             GWT.log("viewMapHandler.onClick");
+
+            activateTab("fw-map",mapAnchor);
+            //only init map 1x
+            if (mapWidget == null) {
+                geocoder = new Geocoder();
+                Location location = new Location();
+                location.setLongitude(spotHolder.getLongitude());
+                location.setLatitude(spotHolder.getLatitude());
+                mapPanel.setWidth("100%");
+                initMap(location, mapPanel);
+
+
+            }
+
+
         }
     };
+
+
+
     private SpotHolder spotHolder = null;
     private MobileResponse mobileResponse = null;
     private String title = "Spot Detail";
@@ -92,6 +173,9 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
     public String getPageDescription() {
         return pageDescription;
     }
+    Anchor descriptionAnchor = new Anchor();
+    Anchor groupsAnchor = new Anchor();
+    Anchor mapAnchor = new Anchor();
 
     private void doDetail() {
 //        Anchor backToSearchResultsAnchor = new Anchor();
@@ -107,11 +191,14 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         Anchor adminSpotAnchor = new Anchor();
         adminSpotAnchor.setHref("#" + MyWebApp.MANAGE_SPOT + spotHolder.getId());
         Anchor phoneAnchor = getPhone(spotHolder.getVoicephone());
-        Anchor groupsAnchor = new Anchor();
-        groupsAnchor.setHref("#" + MyWebApp.SPOT_GROUPS + spotHolder.getId());
-        groupsAnchor.setStyleName("groups");
-        Anchor mapAnchor = new Anchor();
+
+        groupsAnchor.addClickHandler(groupsHandler);
+
+
         mapAnchor.addClickHandler(viewMapHandler);
+
+
+
         Image mainImage = getImage(spotHolder.getContentHolder(), "320x320");
         if (mainImage == null) {
             mainImage = new Image(MyWebApp.resources.spot_image_placeholder320x320());
@@ -139,8 +226,13 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         } else {
             websiteAnchor.setVisible(false);
         }
+
+
+
+        descriptionAnchor.addClickHandler(showDescriptionTabHandler);
+
         this.detail = new Detail(backToSearchResultsAnchor, addMyBizAnchor, addtoFavoriteAnchor, adminSpotAnchor, phoneAnchor, groupsAnchor, mapAnchor, mainImage, markSpotAnchor, groupsPanel,
-                addGroupButton, hoursHTML, websiteAnchor);
+                addGroupButton, hoursHTML, websiteAnchor,mapPanel,descriptionAnchor);
         detail.setName(spotHolder.getName());
         detail.setAddress(spotHolder.getGeocodeInput());
         if (isEmpty(spotHolder.getDescription())) {
@@ -211,8 +303,11 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             this.spotHolder = mobileResponse.getSpotHolder();
             this.title = spotHolder.getName();
             this.pageTitle = spotHolder.getName() + ", " + spotHolder.getGeocodeInput();
+            mywebapp.log("dodetail start");
             doDetail();
+            mywebapp.log("doBottom start");
             doBottom();
+            mywebapp.log("doBottom end");
         } else {
             //add the menu where
             this.addStyleName("SpotDetailPanel");
@@ -282,18 +377,24 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
     FlowPanel bottomPanel = new FlowPanel();
 
     private void doBottom() {
+        mywebapp.log("doBottom 1");
         add(bottomPanel);
         bottomPanel.add(contentsPanel);
         if (spotHolder.getContentHolder() != null) {
             addContentHolder(spotHolder.getContentHolder(), false, true);
         }
+        mywebapp.log("doBottom 2");
         addYelpDetails(bottomPanel, mobileResponse.getYelpDetails());
+        mywebapp.log("doBottom 3");
         addYahooUpcoming(bottomPanel, mobileResponse.getEvents());
+        mywebapp.log("doBottom 4");
         if (mobileResponse.getYelpDetails() != null) {
+            mywebapp.log("doBottom 5");
             FlowPanel flowPanel = new FlowPanel();
             flowPanel.setStyleName("yelp");
             YelpDetails yelpDetails = mobileResponse.getYelpDetails();
             for (YelpReview yelpReview : yelpDetails.getReviews()) {
+                mywebapp.log("doBottom 5L");
                 //add user profile pic
                 HorizontalPanel hp = new HorizontalPanel();
                 if (yelpReview.getUserImageUrl() != null) {
@@ -316,7 +417,9 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
                 }
                 flowPanel.add(hp);
             }
+            mywebapp.log("doBottom 6");
             for (YelpDeal yelpDeal : yelpDetails.getDeals()) {
+                mywebapp.log("doBottom 6L");
                 HorizontalPanel hp = new HorizontalPanel();
                 Image image = new Image(yelpDeal.getImageUrl());
                 hp.add(image);
@@ -333,8 +436,11 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             bottomPanel.add(flowPanel);
             //how about deals??
         }
+        mywebapp.log("doBottom 7");
         addInstagramDetailPage(bottomPanel, mobileResponse.getInstagrams());
+        mywebapp.log("doBottom 8");
         ContestVotingPanel cvp = new ContestVotingPanel(mywebapp, mobileResponse.getContestQueryResponse(), spotHolder.getId());
+        mywebapp.log("doBottom 9");
         bottomPanel.add(cvp);
         FlowPanel spotMarks = new FlowPanel();
         spotMarks.getElement().setId("spot_marks");
@@ -342,9 +448,13 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         FlowPanel marksPanel = new FlowPanel();
         marksPanel.getElement().setId("marks_panel");
         // spotMarks.add(marksPanel);
+        mywebapp.log("doBottom 10");
         addResults(mobileResponse.getEventLocationResults(), spotMarks);
+        mywebapp.log("doBottom 11");
         addResults(mobileResponse.getCouponLocationResults(), spotMarks);
+        mywebapp.log("doBottom 12");
         addResults(mobileResponse.getItemLocationResults(), spotMarks);
+        mywebapp.log("doBottom 13");
         if (spotHolder.getContactEnabled()) {
             bottomPanel.add(contactButton());
         }
@@ -352,7 +462,7 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
     protected void addResults(List<LocationResult> locationResults, FlowPanel spotMarks) {
         for (LocationResult locationResult : locationResults) {
-            LocationResult lr = new LocationResult();
+          //  LocationResult lr = new LocationResult();
            // lr.setSolrDocument(solrDocument);
             addSpotDetailPageResult(locationResult, spotMarks);
         }
@@ -368,13 +478,18 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
     //mode 2, always a mark item to go to
     protected void addSpotDetailPageResult(LocationResult locationResult, FlowPanel spotMarks) {
+        mywebapp.log("addSpotDetailPageResult 1");
         SolrDocument solrDocument = locationResult.getSolrDocument();
         ItemHolder itemHolder = locationResult.getItemHolder();
-        //debug(solrDocument);
+        mywebapp.log("addSpotDetailPageResult 2");
+        if (itemHolder == null) {
+            mywebapp.log("addSpotDetailPageResult itemHolder is null");
+        }
         Long itemId = itemHolder.getId();
         //solrDocument.getFirstLong("georepoitemid_l");
         String targetHistoryToken = "#" + MyWebApp.ITEM_DETAIL + itemId;
         Image userMarkImage = null;
+        mywebapp.log("addSpotDetailPageResult 3");
         String userImagePath = solrDocument.getFirstString("user_thumbnail_130x130_url_s");
         if (userImagePath != null) {
             userMarkImage = new Image();
@@ -382,6 +497,7 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         } else {
             userMarkImage = new Image(MyWebApp.resources.anon130x130());
         }
+        mywebapp.log("addSpotDetailPageResult 4");
         String userHistoryToken = null;
         Long userId = solrDocument.getFirstLong("userid_");
         if (userId != null) {
@@ -391,6 +507,7 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         if (userHistoryToken != null) {
             userImageAnchor.setHref(userHistoryToken);
         }
+        mywebapp.log("addSpotDetailPageResult 5");
         userImageAnchor.getElement().appendChild(userMarkImage.getElement());
         Anchor markImageAnchor = new Anchor();
         markImageAnchor.setHref(targetHistoryToken);
@@ -402,26 +519,12 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         FlowPanel markContentPanel = new FlowPanel();
         markContentPanel.getElement().setId("md_mark_photo");
 
-
+        mywebapp.log("addSpotDetailPageResult 6");
 
         addImages(itemHolder,markContentPanel);
 
-   //     if (itemHolder.getContentHolder() != null) {
-//            for (ContentHolder contentHolder : itemHolder.getContentHolder().getContentHolders()) {
-//
-//
-//                Image image = getImage(contentHolder, "320x320");
-//                image.setStyleName("md_pop");
-//                SpotSpan spotSpan = new SpotSpan();
-//                spotSpan.setStyleName("md_photo_thumb");
-//                spotSpan.add(image);
-//                markContentPanel.add(spotSpan);
-//
-//                //we need to add handler to each image so when clicked we bring it up big
-//                imageMap.put(image,contentHolder);
-//                image.addClickHandler(imageClickHandler);
-//            }
-//        }
+        mywebapp.log("addSpotDetailPageResult 7");
+
 
 
 
@@ -433,7 +536,7 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         }
         smc.setUsername(username);
 
-
+        mywebapp.log("addSpotDetailPageResult 8");
 
 
 

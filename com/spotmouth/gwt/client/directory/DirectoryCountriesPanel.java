@@ -1,13 +1,22 @@
 package com.spotmouth.gwt.client.directory;
 
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Hyperlink;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestOracle;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.CountryHolder;
+import com.spotmouth.gwt.client.dto.MobileResponse;
+import com.spotmouth.gwt.client.dto.SearchRequest;
+import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,25 +45,47 @@ public class DirectoryCountriesPanel extends SpotBasePanel implements SpotMouthP
 
     }
 
+    /*
+    This will do a wildcard search and get all the countries
+     */
+    private void fetchAllCountries() {
+        SearchRequest searchRequest = new SearchRequest();
+        ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+        myService.searchCountries(searchRequest, new AsyncCallback() {
+            public void onFailure(Throwable caught) {
+                mywebapp.getMessagePanel().displayError(caught.getMessage());
+            }
+
+            public void onSuccess(Object result) {
+                MobileResponse mobileResponse = (MobileResponse) result;
+                if (mobileResponse.getStatus() == 1) {
+
+                    for (CountryHolder countryHolder : mobileResponse.getCountryHolders()) {
+                        ListItem li = new ListItem();
+                        String token = MyWebApp.COUNTRY  + countryHolder.getId();
+                        Hyperlink countryLabel = new Hyperlink(countryHolder.getFullName(),token);
+
+                        li.add(countryLabel);
+                        ul.add(li);
+                    }
+;
+                } else {
+                    mywebapp.getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                }
+            }
+        });
 
 
+    }
+
+    ULPanel ul = new ULPanel();
     public DirectoryCountriesPanel(MyWebApp mywebapp) {
         super(mywebapp);
         setActiveTabId("dirli");
         this.setStyleName("directory");
-        ULPanel ul = new ULPanel();
         ul.setStyleName("results");
         add(ul);
-        for (CountryHolder countryHolder : mywebapp.getCountryHolders()) {
-
-            ListItem li = new ListItem();
-            String token = MyWebApp.COUNTRY  + countryHolder.getId();
-            Hyperlink countryLabel = new Hyperlink(countryHolder.getFullName(),token);
-
-            li.add(countryLabel);
-            ul.add(li);
-
-        }
+        fetchAllCountries();
 
     }
     public DirectoryCountriesPanel() {

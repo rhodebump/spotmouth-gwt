@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client.chat;
 
+import org.vectomatic.dnd.DropFlowPanel;
 import com.spotmouth.gwt.client.dto.ItemHolder;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
@@ -15,6 +16,7 @@ import org.atmosphere.gwt.client.AtmosphereClient;
 import org.atmosphere.gwt.client.AtmosphereGWTSerializer;
 import org.atmosphere.gwt.client.AtmosphereListener;
 import com.spotmouth.gwt.client.dto.Event;
+import org.vectomatic.dnd.DropPanel;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -54,7 +56,7 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
 
-        add(chat);
+
 
         input = new TextBox();
         input.addKeyDownHandler(new KeyDownHandler() {
@@ -66,7 +68,7 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
                 }
             }
         });
-        add(input);
+        //add(input);
         Button send = new Button("Send");
         send.addClickHandler(new ClickHandler() {
             @Override
@@ -75,7 +77,15 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
                 input.setText("");
             }
         });
-        add(send);
+        //add(send);
+        DropPanel dropPanel = getDropPanel();
+
+        ChattingComposite chattingComposite = new ChattingComposite(mywebapp,chat,input,send,itemHolder,dropPanel);
+
+        add(chattingComposite);
+
+
+
         HTMLPanel logPanel = new HTMLPanel("") {
             @Override
             public void add(Widget widget) {
@@ -115,6 +125,8 @@ public class ChatPanel extends SpotBasePanel implements SpotMouthPanel {
     Label label;
     TextBox input;
     FlowPanel chat = new FlowPanel();
+
+
     //String room = "room1";
 
     void sendMessage(String message) {

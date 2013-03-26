@@ -40,7 +40,9 @@
                   <smc:TextField  tabIndex="5"  ui:field="address1TextBox"  placeholder="Address"/>
       		</label>
       		<label>
-                  <smc:TextField tabIndex="6" maxLength="6" placeholder="ZIP code" ui:field="zipcodeTextField"/>
+
+
+                  <g:SuggestBox  tabIndex="6"  ui:field="zipcodeTextField"/>
 
       		</label>
       </fieldset>

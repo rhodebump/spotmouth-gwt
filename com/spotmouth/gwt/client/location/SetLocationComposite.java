@@ -32,7 +32,7 @@ public class SetLocationComposite extends Composite {
     @UiField(provided = true)
     final SuggestBox cityTextBox;
     @UiField(provided = true)
-    final TextField zipcodeTextBox;
+    final SuggestBox zipcodeTextBox;
     @UiField(provided = true)
     final TextField address1TextBox;
 
@@ -55,7 +55,7 @@ public class SetLocationComposite extends Composite {
 
     public SetLocationComposite(ULPanel previousLocations,SuggestBox countryTextBox,
                                 SuggestBox stateTextBox,SuggestBox cityTextBox,
-                                TextField zipcodeTextBox,TextField address1TextBox,Button updateButton,Button fromDeviceButton,SimplePanel mapPanel,
+                                SuggestBox zipcodeTextBox,TextField address1TextBox,Button updateButton,Button fromDeviceButton,SimplePanel mapPanel,
                                 SimpleRadioButton mapRadioButton) {
         this.previousLocations = previousLocations;
         this.countryTextBox = countryTextBox;

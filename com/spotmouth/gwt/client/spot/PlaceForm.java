@@ -176,7 +176,7 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
             stateTextBox = getStateSuggestBox(spotHolder.getState());
             citySuggestBox = getCitySuggestBox(spotHolder.getCity());
             emailTextField = new TextField();
-            initZipCodeTextBox();
+            zipcodeTextField = initZipCodeTextBox(spotHolder.getZip());
             initForm(spotHolder);
 
             SpotFormComposite sfc = new SpotFormComposite(cancelButton, nameTextBox, voicePhoneTextField, websiteTextField,  emailTextField,
@@ -198,7 +198,7 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
         citySuggestBox = addCity(spotHolder.getCity(),this);
         //stateTextBox = addTextBox("State", "state", spotHolder.getState());
         stateTextBox = addState(spotHolder.getState(),this);
-        zipcodeTextField = addTextBox("Zip", "zip", spotHolder.getZip());
+        //zipcodeTextField = addTextBox("Zip", "zip", spotHolder.getZip());
         emailTextField = addTextBox("Email", "email", "");
         Label label2 = new Label();
         label2.setText("Email address can be saved, but will never be displayed.  This is to protect email addresses from being spammed.");

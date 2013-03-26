@@ -88,7 +88,7 @@ public class CreateSpotMarkPanel extends SpotBasePanel implements SpotMouthPanel
         countryTextBox = getCountrySuggestBox(spotHolder.getCountryCode());
         stateTextBox = getStateSuggestBox(spotHolder.getState());
         citySuggestBox = getCitySuggestBox(spotHolder.getCity());
-        initZipCodeTextBox();
+        initZipCodeTextBox(spotHolder.getZip());
         CreateSpotMarkComposite createSpotMarkComposite = new CreateSpotMarkComposite(nameTextBox, countryTextBox, stateTextBox, citySuggestBox, zipcodeTextField, address1TextField, saveButton, cancelButton);
         formPanel.setWidget(createSpotMarkComposite);
         add(formPanel);

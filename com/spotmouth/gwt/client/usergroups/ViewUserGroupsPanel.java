@@ -71,7 +71,10 @@ public class ViewUserGroupsPanel extends SpotBasePanel implements SpotMouthPanel
                  */
                 for (FriendHolder friendHolder : ugh.getFriendHolders()) {
                     //Image image = new Image();
-                    Image image = getImage(friendHolder.getUserHolder().getContentHolder(), "130x130");
+                    Image image = null;
+                    if (friendHolder.getUserHolder() != null) {
+                        image = getImage(friendHolder.getUserHolder().getContentHolder(), "130x130");
+                    }
                     if (image == null) {
                         image = new Image();
 
@@ -110,7 +113,7 @@ public class ViewUserGroupsPanel extends SpotBasePanel implements SpotMouthPanel
 
                 Anchor editGroupLink = new Anchor(ugh.getName());
                 listItem.add(editGroupLink);
-                editGroupLink.addClickHandler(selectGroupHandler);
+                editGroupLink.addClickHandler(selectUserGroupHandler);
                 userGroupMap.put(editGroupLink, ugh);
                 userGroupsULPanel.add(listItem);
 
@@ -266,9 +269,8 @@ public class ViewUserGroupsPanel extends SpotBasePanel implements SpotMouthPanel
                     //need to popup panel about group and
                     //with button to join
                     //let required a login to go into the grouppanel
-                    ManageUserGroupPanel groupPanel = new ManageUserGroupPanel(mywebapp, userGroupHolder);
-                    mywebapp.swapCenter(groupPanel);
-                    //toggleUserGroup(groupHolder);
+                    History.newItem(MyWebApp.MANAGE_USER_GROUP + userGroupHolder.getId());
+
                 }
             }
         }

@@ -177,7 +177,7 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
         } else {
             address1TextField.addStyleName("mc_selected");
         }
-        if (isEmpty(zipcodeTextField)) {
+        if (isEmpty(zipcodeTextField.getText())) {
             zipcodeTextField.removeStyleName("mc_selected");
         } else {
             zipcodeTextField.addStyleName("mc_selected");
@@ -257,12 +257,12 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
             citySuggestBox.addValueChangeHandler(vch);
             //		<input type="text" placeholder="Zip Code" maxlength="6" tabindex="9" onblur="inpValidate(this, this.value);mcShowRadius(this.value);"/>
 
-            initZipCodeTextBox();
+            zipcodeTextField = initZipCodeTextBox(contestHolder.getZip());
 
 
-            zipcodeTextField.setTabIndex(9);
+            //zipcodeTextField.setTabIndex(9);
 
-            zipcodeTextField.setValue(contestHolder.getZip());
+            //zipcodeTextField.setValue(contestHolder.getZip());
             zipcodeTextField.addValueChangeHandler(vch);
 
 
@@ -270,7 +270,7 @@ public class ManageContestPanel extends SpotBasePanel implements SpotMouthPanel 
 
             initAddress1TextBox();
 
-            address1TextField.setTabIndex(8);
+           // address1TextField.setTabIndex(8);
             address1TextField.addValueChangeHandler(vch);
             address1TextField.setValue(contestHolder.getAddressLine1());
 

@@ -81,6 +81,7 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
         if (MyWebApp.isDesktop()) {
             MultiUploader multiUploader = new MultiUploader();
+            this.defaultUploader =  multiUploader;
             //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
             multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             MarkData markData = new MarkData();

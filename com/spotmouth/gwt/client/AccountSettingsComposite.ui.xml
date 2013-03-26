@@ -15,21 +15,15 @@
 <h1>Account Settings</h1>
 <span id="kill-prof">
     <g:Anchor ui:field="removeProfileAnchor"/>
-    <!--<a href="remove-profile.html" title="Remove Profile">x</a>
---></span>
+</span>
+
 <label>
 <p>Username</p>
-<!--
-<input type="text" value="Dima" class="pcheck"/>
--->
     <g:TextBox addStyleNames="pcheck" ui:field="usernameTextBox"/>
 </label>
 
 <label>
 <p>E-mail</p>
-    <!--
-<input type="text" value="test-email@sm.com" class="pcheck">
-        -->
         <g:TextBox addStyleNames="pcheck" ui:field="emailAddressTextBox"/>
 </label><br/>
 

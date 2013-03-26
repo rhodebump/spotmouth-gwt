@@ -115,7 +115,7 @@
      			</span>
 
                  <span class="mc_inp_loc">
-                     <smc:TextField tabIndex="9" maxLength="6" placeholder="ZIP code" ui:field="zipcodeTextField"/>
+                     <g:SuggestBox tabIndex="9" ui:field="zipcodeTextField"/>
      			</span>
 
      			<ul id="mc_adrs_done" class="mc_loc_list mc_adrs_list">

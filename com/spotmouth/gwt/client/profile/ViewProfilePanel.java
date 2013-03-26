@@ -29,7 +29,10 @@ public class ViewProfilePanel extends SpotBasePanel implements SpotMouthPanel {
         FriendHolder friendHolder = new FriendHolder();
         friendRequest.setFriendHolder(friendHolder);
         friendRequest.setAuthToken(mywebapp.getAuthToken());
-        friendHolder.setUserId(userHolder.getId());
+        friendHolder.setUserHolder(new UserHolder());
+        friendHolder.getUserHolder().setId(userHolder.getId());
+
+        //friendHolder.setUserId(userHolder.getId());
         // friendHolder.setEmailAddress(emailTextBox.getValue());
         // friendHolder.setSmsPhoneNumber(smsPhoneNumberBox.getValue());
         ApiServiceAsync myService = mywebapp.getApiServiceAsync();
@@ -127,7 +130,9 @@ public class ViewProfilePanel extends SpotBasePanel implements SpotMouthPanel {
         //are we friend??
         UserHolder meUserHolder = mywebapp.getAuthenticatedUser();
         for(FriendHolder friendHolder:mywebapp.getFriendsAndGroups().getFriendHolders()) {
-            if (friendHolder.getUserId().equals(meUserHolder.getId())) {
+            UserHolder fuh = friendHolder.getUserHolder();
+            if (fuh == null) {
+            } else if (fuh.getId().equals(meUserHolder.getId())) {
                 return true;
             }
         }

@@ -54,7 +54,9 @@
 
      		</div>
 
-     		<div class="mc_buttons"><g:Button ui:field="saveButton"/> </div>
+     		<div class="mc_buttons"><g:Button ui:field="saveButton"/>
+                 <g:Button ui:field="shareOnFacebookButton">Share on facebook</g:Button>
+             </div>
      	</div>
      </div>
 

@@ -28,31 +28,26 @@
      </div>
      </div>
      <div class="info">
-         <!--
-     <h1>La Gourmandine Bakery &amp; Pastry Shop</h1>
-     -->
          <h1><span ui:field='nameSpan'/></h1>
 
          <h4 class="address"><span ui:field='addressSpan'/></h4>
 
        <g:HTML ui:field="hoursHTML"/>
+         <g:Anchor  addStyleNames="tab-tgl fw-tab-one" title="View Map" ui:field="mapAnchor">View Map</g:Anchor>
 
-<div style="display:none">
-    <g:Anchor title="Groups" ui:field="groupsAnchor">Groups</g:Anchor>
-     </div>
+         <g:Anchor addStyleNames="tab-tgl fw-tab-two" title="Description" ui:field="descriptionAnchor">Description</g:Anchor>
+         <g:Anchor addStyleNames="tab-tgl fw-tab-three" title="Groups" ui:field="groupsAnchor">Groups</g:Anchor>
 
-
-
-         <input type="radio" id="fw-tab-one" class="fw-tab" name="switch" value="descr" checked="checked"/>
-         <input type="radio" id="fw-tab-two" class="fw-tab" name="switch" value="groups"/>
-         <h3 id="tab-tgl">Description</h3>
-         <span href="#" id="tab-tgl-two" class="groups"><a>Groups</a></span>
-         <g:Anchor title="View Map" ui:field="mapAnchor">View Map</g:Anchor>
-         <p id="fw-desc"><span ui:field='descriptionSpan'/></p>
+         <div id="fw-desc">
+             <span ui:field='descriptionSpan'/>
+         </div>
          <div id="fw-group">
              <g:FlowPanel ui:field="groupsPanel"/>
              <g:Button ui:field="addGroupButton"/>
 
+         </div>
+         <div id="fw-map">
+             <g:SimplePanel ui:field="mapPanel"/>
          </div>
 
 

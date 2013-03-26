@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client.friends;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
@@ -42,8 +43,29 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
         } else if (isEmpty(emailTextField)) {
             getMessagePanel().displayError("A valid phone number or email address is required");
         }
+
+        if (!isEmpty(emailTextField)) {
+            //is it a valid email address
+            //need to split by comma and validate each email address
+            String[] emailAddresses = emailTextField.getValue().split(",");
+
+            for (String emailaddress:emailAddresses) {
+
+                boolean valid = emailaddress.matches(emailPattern);
+                if (!valid) {
+                    getMessagePanel().displayError("Email address " + emailaddress + " is  not invalid.");
+                }
+
+
+
+            }
+
+        }
+
+
         return (!getMessagePanel().isHaveMessages());
     }
+
 
     public String getTitle() {
         return "Friend";
@@ -168,13 +190,16 @@ public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
                 if (mobileResponse.getStatus() == 1) {
                     mywebapp.fetchFriendsAndGroups(null);
                     if (friendCreatedCallback == null) {
+                        GWT.log("friendCreatedCallback is null");
                         mywebapp.setFriendsAndGroups(null);
                         mywebapp.setHomeCallback(messageCallback);
                         History.newItem(MyWebApp.MANAGE_FRIENDS);
                     } else {
-                        friendCreatedCallback.onSuccess(mobileResponse.getFriendHolder());
+                        GWT.log("friendCreatedCallback is not null");
+                        friendCreatedCallback.onSuccess(mobileResponse);
                     }
                 } else {
+                    GWT.log("friendCreatedCallback 3");
                     getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
                 }
             }

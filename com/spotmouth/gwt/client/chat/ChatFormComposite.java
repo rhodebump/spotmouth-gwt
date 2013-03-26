@@ -49,11 +49,17 @@ public class ChatFormComposite extends Composite {
     private MyWebApp mywebapp = null;
     private ItemHolder itemHolder = null;
 
+
+    @UiField(provided = true)
+    final Button shareOnFacebookButton;
+
+
+
     public ChatFormComposite(TextField nameTextBox, TextArea descriptionTextArea, DateBox startDatePicker, DateBox endDatePicker,
                              SuggestBox tagSearchTextBox,
                              FlowPanel selectedTagsPanel, Button saveButton, Button cancelButton,
                              MultiUploader multiUploader, final SimplePanel imagePanel,
-                             MyWebApp mywebapp, ItemHolder itemHolder, FlowPanel suggestionsPanel, DropPanel dropPanel) {
+                             MyWebApp mywebapp, ItemHolder itemHolder, FlowPanel suggestionsPanel, DropPanel dropPanel,Button shareOnFacebookButton) {
         this.suggestionsPanel = suggestionsPanel;
         this.nameTextBox = nameTextBox;
         this.descriptionTextArea = descriptionTextArea;
@@ -66,6 +72,7 @@ public class ChatFormComposite extends Composite {
         this.mywebapp = mywebapp;
         this.itemHolder = itemHolder;
         this.dropPanel = dropPanel;
+        this.shareOnFacebookButton = shareOnFacebookButton;
         initWidget(uiBinder.createAndBindUi(this));
     }
 }

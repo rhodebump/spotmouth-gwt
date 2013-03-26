@@ -53,6 +53,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             Button leaveMarkButton = new Button();
             leaveMarkButton.addClickHandler(saveHandler);
             MultiUploader multiUploader = new MultiUploader();
+            this.defaultUploader =  multiUploader;
             //FlowPanel panelImages3 = new FlowPanel();
             multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages3);

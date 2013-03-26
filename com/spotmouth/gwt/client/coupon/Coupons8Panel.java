@@ -90,6 +90,13 @@ public class Coupons8Panel extends SpotBasePanel implements SpotMouthPanel {
 		<h4>Valid until 2012 November 25</h4>
 	</li>
              */
+
+            if (couponResponse.getCoupons().isEmpty()) {
+                Label mylabel = new Label("Sorry, no coupons found.");
+                mylabel.setStyleName("h1");
+                ulPanel.add(mylabel);
+            }
+
             for (ItemHolder coupon : couponResponse.getCoupons()) {
                 ListItem listItem = new ListItem();
                 listItem.setStyleName("coupons_result");
@@ -127,80 +134,8 @@ public class Coupons8Panel extends SpotBasePanel implements SpotMouthPanel {
             Coupon8Composite cc = new Coupon8Composite(ulPanel);
             add(cc);
             return;
-        }
-        //coupon8flowPanel.clear();
-        ComplexPanel coupon8flowPanel = this;
-        ImageAnchor imageAnchor = new ImageAnchor();
-        imageAnchor.setResource(mywebapp.resources.coupons8());
-        imageAnchor.setHref("http://www.8coupons.com");
-        imageAnchor.setTarget("_blank");
-        coupon8flowPanel.add(imageAnchor);
-        if (couponResponse.getCoupons().isEmpty()) {
-            Label mylabel = new Label("Sorry, no coupons found.");
-            mylabel.setStyleName("h1");
-            coupon8flowPanel.add(mylabel);
-        } else {
-            //Label mylabel = new Label("Coupons");
-//            mylabel.setStyleName("h1");
-//            coupon8flowPanel.add(mylabel);
-            ULPanel couponUL = new ULPanel();
-            //VerticalPanel couponUL = new VerticalPanel();
-            couponUL.setStyleName("results");
-            coupon8flowPanel.add(couponUL);
-            for (ItemHolder coupon : couponResponse.getCoupons()) {
-                ListItem li = new ListItem();
-                couponUL.add(li);
-                li.setStyleName("clearing");
-                //addLabel("Name:", coupon.getTitle(), hp);
-                SpotHolder couponSpotHolder = coupon.getSpotHolder();
-                VerticalPanel vp = new VerticalPanel();
-                Label spotLabel = new Label("@" + couponSpotHolder.getLabel2());
-                vp.add(spotLabel);
-                spotLabel.addClickHandler(clickCouponHandler);
-                spotLabel.setStyleName("spotLabel");
-                spotLabel.addStyleName("linky");
-                couponClickMap.put(spotLabel, coupon);
-                Label titleLabel = new Label(coupon.getTitle());
-                //HorizontalPanel hp = new HorizontalPanel();
-                // vp.add(hp);
-                // hp.setWidth("100%");
-                vp.add(titleLabel);
-                titleLabel.addClickHandler(clickCouponHandler);
-                titleLabel.setStyleName("linky");
-                couponClickMap.put(titleLabel, coupon);
-//                hp.add(vp);
-                //hp.setCellWidth(titleLabel, "50%");
-                //hp.set
-                // VerticalPanel datesVP = new VerticalPanel();
-//                String startDate = "";
-//                if (coupon.getStartDate() != null) {
-//                    startDate = coupon.getStartDate().toString();
-//                }
-//
-//                Label startDateLabel2 = new Label(startDate);
-//                datesVP.add(startDateLabel2);
-                //hp.add(startDateLabel2);
-                ///hp.setCellWidth(startDateLabel2,"20%");
-                String endDate = "";
-                if (coupon.getEndDate() != null) {
-                    endDate =  fmt.format(coupon.getEndDate());
-                }
-
-                // prints Monday, December 17, 2007 in the default locale
-                //GWT.log(fmt.format(today), null);
 
 
-
-
-             //   String lastUsedDate  = fmt.format(coupon.getEndDate());
-
-                Label endDateLabel2 = new Label("Valid until " + endDate);
-                //      datesVP.add(endDateLabel2);
-                vp.add(endDateLabel2);
-
-                li.add(vp);
-                couponUL.add(li);
-            }
         }
     }
 

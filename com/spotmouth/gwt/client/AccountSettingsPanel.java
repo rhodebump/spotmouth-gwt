@@ -24,8 +24,6 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
  * To change this template use File | Settings | File Templates.
  */
 public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPanel {
-
-
     ClickHandler saveAccountSettingsHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             saveAccountSettings();
@@ -65,12 +63,8 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
     }
 
     private TextBox usernameTextBox = new TextBox();
-
     private TextBox passwordTextBox = new TextBox();
     private TextBox confirmPasswordTextBox = new TextBox();
-
-
-
     private TextBox firstNameTextBox = new TextBox();
     private TextBox lastNameTextBox = new TextBox();
 
@@ -99,6 +93,7 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
 
     public AccountSettingsPanel() {
     }
+
     //private boolean registrationMode = false;
     public ClickHandler removeProfileHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -180,84 +175,25 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         }
         addRequired(usernameTextBox);
         usernameTextBox.setValue(user.getUsername());
-        usernameTextBox.setReadOnly(true);
+        //i removed the readonly field for username, what effect will this have?
+        //usernameTextBox.setReadOnly(true);
         emailTextField = new TextField();
         emailTextField.setValue(user.getEmailAddress());
-
-
         smsPhoneNumberTextBox.setValue(user.getSmsPhoneNumber());
-        if (MyWebApp.isDesktop()) {
-            //it's not registration, just profile
-            //usernameTextBox.setStyleName("pcheck");
-           // emailTextField.setStyleName("pcheck");
-           // smsPhoneNumberTextBox.setStyleName("pcheck");
-            Button saveAccountSettingsButton = new Button();
-            saveAccountSettingsButton.addClickHandler(saveAccountSettingsHandler);
-            //<a href="remove-profile.html" title="Remove Profile">x</a>
-            Anchor removeProfileAnchor = new Anchor("x");
-            removeProfileAnchor.setTitle("Remove Profile");
-            removeProfileAnchor.addClickHandler(removeProfileHandler);
-            //removeProfileAnchor.setStyleName("ddkill");
-            AccountSettingsComposite accountSettingsComposite = new AccountSettingsComposite(usernameTextBox, emailTextField, oldPasswordTextBox, newPasswordTextBox,
-                    smsPhoneNumberTextBox, saveAccountSettingsButton, removeProfileAnchor);
-            add(accountSettingsComposite);
-            return;
-        }
-        usernameTextBox = addTextBox("Username", "username", user.getUsername());
-        usernameTextBox.setReadOnly(true);
-        Fieldset passwordFieldSet = new Fieldset();
-        VerticalPanel passwordVerticalPanel = new VerticalPanel();
-        passwordTextBox = addTextBox("Password", "password", "", false, passwordVerticalPanel);
-        confirmPasswordTextBox = addTextBox("Confirm Password", "password", "", false, passwordVerticalPanel);
-        passwordFieldSet.add(passwordVerticalPanel);
-        add(passwordFieldSet);
-        //changing your email address or sms number will require re-validation of your accounts
-        //username is readonly
-        //email, make edit
-        //first
-        //last
-        //password
-        //add uploaders for profile pic
-        // if (!registrationMode) {
-        Label changeWarning = new Label("If you change your phone number or email, you will have to re-validate those accounts");
-        add(changeWarning);
-        smsPhoneNumberTextBox = addTextBox("SMS Phone Number", "smsPhoneNumber", user.getSmsPhoneNumber());
-        emailTextField = addTextBox("Email", "email", user.getEmailAddress());
-        Fieldset nameFieldset = new Fieldset();
-        VerticalPanel nameVP = new VerticalPanel();
-        firstNameTextBox = addTextBox("First Name", "fn", user.getFirstName(), false, nameVP);
-        lastNameTextBox = addTextBox("Last Name", "ln", user.getLastName(), false, nameVP);
-        nameFieldset.add(nameVP);
-        Label label = new Label("Your location is only required if you want to participate in contests");
-        add(label);
-        //cityTextBox = addTextBox("City", "na4", user.getCity(), false);
-        countryTextBox = addCountry(user.getCountryCode(), this);
-        stateTextBox = addState(user.getState(), this);
-        citySuggestBox = addCity(user.getCity(), this);
-        //stateTextBox = addTextBox("State", "na5", user.getState(), false);
-        zipcodeTextField = addTextBox("Zip", "na6", user.getZip(), false);
-        //dont want to show an email address since one cannot change it
-        //emailTextBox = addTextBox("Email Address", "emaial", mywebapp.getAuthenticatedUser().getEmailAddress());
-        Label lbl = new Label("Tell us a little about yourself");
-        add(lbl);
-        contentTextArea = addTextArea("About Me", "na", user.getAboutMe(), false);
-        //about me
-        addMediaFields("Profile Picture");
-        add(contentsPanel);
-        addContentHolder(user.getContentHolder(), true, true);
-        //addTagHolderForm(user.getTagHolders());
-        //  }
-        add(saveButton());
-        //if (!registrationMode) {
-        add(cancelButton());
-        //  }
+        Button saveAccountSettingsButton = new Button();
+        saveAccountSettingsButton.addClickHandler(saveAccountSettingsHandler);
+        //<a href="remove-profile.html" title="Remove Profile">x</a>
+        Anchor removeProfileAnchor = new Anchor("x");
+        removeProfileAnchor.setTitle("Remove Profile");
+        removeProfileAnchor.addClickHandler(removeProfileHandler);
+        AccountSettingsComposite accountSettingsComposite = new AccountSettingsComposite(usernameTextBox, emailTextField, oldPasswordTextBox, newPasswordTextBox,
+                smsPhoneNumberTextBox, saveAccountSettingsButton, removeProfileAnchor);
+        add(accountSettingsComposite);
     }
 
     public void toggleFirst() {
         passwordTextBox.setFocus(true);
     }
-
-
 
     protected void doSave() {
         GWT.log("do save");

@@ -113,18 +113,8 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
     public void refresh() {
         buildMembersULPanel();
         buildAvailableULPanel();
-//        selectedFriendsAndGroupsPanel.clear();
-//        clickMapFriendHolder.clear();
-//        clickMapGroupHolder.clear();
-//        clickMapUserGroupHolder.clear();
-//        showSelectedFriends(userGroupHolder.getFriendHolders(), removeFriendFromGroupHandler);
-//        //showSelectedGroups(userGroupHolder.getGroupHolders());
-//        //showSelectedUserGroups(userGroupHolder.getUserGroupHolders());
-//        GWT.log("refreshAvailable");
-//        availableFriendsAndGroupsPanel.clear();
-//        showAvailableFriends(mywebapp.getFriendsAndGroups().getFriendHolders(), userGroupHolder.getFriendHolders(), addFriendToGroupHandler);
-//        //showAvailableGroups(mywebapp.getFriendsAndGroups().getGroupHolders(),getItemHolder().getGroupHolders(), addGroupHandler);
-//        //showAvailableUserGroups(mywebapp.getFriendsAndGroups().getUserGroupHolders(), getItemHolder().getUserGroupHolders(), addUserGroupHandler);
+        ugfc.setMemberCount(userGroupHolder.getFriendHolders().size());
+
     }
 
     AsyncCallback friendCreatedCallback = new AsyncCallback() {
@@ -134,11 +124,16 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
 
         public void onSuccess(Object response) {
             GWT.log("toggleMessaging callback");
-            FriendHolder friendHolder = (FriendHolder) response;
-            userGroupHolder.getFriendHolders().add(friendHolder);
+            MobileResponse mobileResponse = (MobileResponse) response;
+            for(FriendHolder friendHolder:mobileResponse.getFriendHolders()) {
+                userGroupHolder.getFriendHolders().add(friendHolder);
+            }
             refresh();
-            mywebapp.toggleBack();
-            getMessagePanel().displayMessage("Friend has been added");
+            //mywebapp.toggleBack();
+            //we need to swap our past panel back in here
+            mywebapp.swapCenter(ManageUserGroupPanel.this);
+
+            getMessagePanel().displayMessage("Friend(s) have been added");
         }
     };
     ClickHandler addNewFriendToGroupHandler = new ClickHandler() {
@@ -153,7 +148,6 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
         membersULPanel.clear();
         for (FriendHolder friendHolder : userGroupHolder.getFriendHolders()) {
             ListItem listItem = getListItem(friendHolder);
-            //addDomHandler(handler, ClickEvent.getType());
             membersULPanel.add(listItem);
             listItem.addDomHandler(removeFriendFromGroupHandler, ClickEvent.getType());
             clickMapFriendHolder.put(listItem, friendHolder);
@@ -167,7 +161,9 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
         vug_ava.setStyleName("vug_ava");
         vug_ava.addClickHandler(removeFriendFromGroupHandler);
         String imageUrl = null;
-        UserHolder userHolder = friendHolder.getUserHolder();
+        //userHolder is the user who owns the friend,which is me
+       // UserHolder userHolder = friendHolder.getUserHolder();
+        UserHolder userHolder = friendHolder.getFriendUserHolder();
         if (userHolder != null) {
             ImageScaleHolder imageScaleHolder = getImageScaleHolder(userHolder.getContentHolder(), "320x320");
             if (imageScaleHolder != null) {
@@ -181,7 +177,10 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
         vug_ava.getElement().setAttribute("style", theStyle);
         listItem.add(vug_ava);
         H2 h2 = new H2();
-        h2.setText(userHolder.getUsername());
+
+            h2.setText(friendHolder.getLabel());
+
+
         h2.setStyleName("vug_name");
         listItem.add(h2);
         return listItem;
@@ -227,42 +226,19 @@ public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPane
     public ManageUserGroupPanel(MyWebApp mywebapp, UserGroupHolder userGroupHolder) {
         super(mywebapp);
         this.userGroupHolder = userGroupHolder;
-        //if (MyWebApp.isDesktop()) {
-            Button saveButton = saveButton();
-            Button cancelButton = cancelButton();
-            groupNameTextBox = new TextField();
-            availableULPanel.getElement().setId("f_list_c");
-            membersULPanel.getElement().setId("f_sel_list");
-            buildMembersULPanel();
-            buildAvailableULPanel();
-            Button inviteButton = new Button();
-            inviteButton.addClickHandler(addNewFriendToGroupHandler);
-            this.ugfc = new UserGroupFormComposite(saveButton, cancelButton, groupNameTextBox, membersULPanel, availableULPanel, inviteButton);
-            ugfc.setMemberCount(userGroupHolder.getFriendHolders().size());
-            add(ugfc);
-
-            return;
-//        }
-//        groupNameTextBox = addTextBox("Name", "groupNameTextBox", userGroupHolder.getName());
-//        Label memberCount = new Label("" + userGroupHolder.getFriendHolders().size());
-//        addFieldset(memberCount, "Member Count", "memberCount");
-//        if (userGroupHolder.getId() != null) {
-//            Label deleteButton = new Label("Delete Group");
-//            deleteButton.addClickHandler(deleteUserGroupHandler);
-//            deleteButton.setStyleName("whiteButton");
-//            add(deleteButton);
-//        }
-//        //showSelectedFriends(userGroupHolder.getFriendHolders());
-//        refresh();
-//        addFieldset(selectedFriendsAndGroupsPanel, "Friends in Group", "na");
-//        //showAvailableFriends(mywebapp.getFriendsAndGroups().getFriendHolders(), userGroupHolder.getFriendHolders(), addFriendToGroupHandler);
-//        addFieldset(availableFriendsAndGroupsPanel, "Available Friends", "notused2");
-//        Label addNewFriendButton = new Label("Add NEW Friend to Group");
-//        addNewFriendButton.addClickHandler(addNewFriendToGroupHandler);
-//        fixButton(addNewFriendButton);
-//        add(addNewFriendButton);
-//        add(saveButton());
-//        add(cancelButton());
+        Button saveButton = saveButton();
+        Button cancelButton = cancelButton();
+        groupNameTextBox = new TextField();
+        groupNameTextBox.setValue(userGroupHolder.getName());
+        availableULPanel.getElement().setId("f_list_c");
+        membersULPanel.getElement().setId("f_sel_list");
+        buildMembersULPanel();
+        buildAvailableULPanel();
+        Button inviteButton = new Button();
+        inviteButton.addClickHandler(addNewFriendToGroupHandler);
+        this.ugfc = new UserGroupFormComposite(saveButton, cancelButton, groupNameTextBox, membersULPanel, availableULPanel, inviteButton);
+        ugfc.setMemberCount(userGroupHolder.getFriendHolders().size());
+        add(ugfc);
     }
 
     private UserGroupFormComposite ugfc = null;

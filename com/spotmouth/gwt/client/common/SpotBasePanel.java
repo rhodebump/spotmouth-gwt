@@ -224,10 +224,8 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     public MapWidget mapWidget = null;
 
-
-
     //mapPanel could be null;
-    protected void initMap(Location location,SimplePanel mapPanel) {
+    protected void initMap(Location location, SimplePanel mapPanel) {
         GWT.log("initMap");
         if (location == null) {
             mapWidget = new MapWidget();
@@ -238,7 +236,7 @@ public abstract class SpotBasePanel extends FlowPanel {
             Marker marker = new Marker(latLng);
             mapWidget.addOverlay(marker);
         }
-        mapWidget.setSize("840px", "400px");
+        mapWidget.setSize("840px", "600px");
         mapWidget.setUIToDefault();
         MapUIOptions opts = mapWidget.getDefaultUI();
         opts.setDoubleClick(false);
@@ -256,12 +254,10 @@ public abstract class SpotBasePanel extends FlowPanel {
                 }
             }
         });
-
-
-        if (mapPanel != null) {
-            mapPanel.setWidget(mapWidget);
-        }
-
+        //mapWidget.checkResize();
+        //if (mapPanel != null) {
+        mapPanel.setWidget(mapWidget);
+        //  }
     }
 
     AsyncCallback afterGeocodeCallback = new AsyncCallback() {
@@ -322,12 +318,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
 
 
-    protected void initZipCodeTextBox() {
-        zipcodeTextField = new TextField();
 
-
-
-    }
 
     protected void initAddress1TextBox() {
         address1TextField = new TextField();
@@ -361,6 +352,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
 
     protected void hideElement(Element element) {
+
         element.setAttribute("style","display: none !important;");
     }
 
@@ -515,12 +507,14 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     }
 
-    protected Map<Label, GroupHolder> groupMap = new HashMap<Label, GroupHolder>();
+    protected Map<Widget, GroupHolder> groupMap = new HashMap<Widget, GroupHolder>();
     protected ClickHandler selectGroupHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
+            GWT.log("selectGroupHandler.onCLick");
             Object sender = event.getSource();
-            if (sender instanceof Label) {
-                Label b = (Label) sender;
+            if (sender instanceof Widget) {
+                GWT.log("selectGroupHandler.onCLick 1");
+                Widget b = (Widget) sender;
                 GroupHolder groupHolder = groupMap.get(b);
                 if (groupHolder != null) {
                     History.newItem(MyWebApp.GROUP + groupHolder.getId());
@@ -1618,56 +1612,86 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     }
 
-    protected void addSearchFormOrig() {
-        //FlexTable hp  = new FlexTable();
-        //FlowPanel flowPanel = new FlowPanel();
-        //flowPanel.setStyleName("topsearch");
-        Fieldset fs = new Fieldset();
-        fs.addStyleName("globalsearch");
-        keywordsTextBox = new TextField();
-        final String text = "Find People, Places, and Stuff";
-        keywordsTextBox.setText(text);
-        //hp.getFlexCellFormatter().setColSpan(0, 1, 2);
-        //hp.setWidget(0, 1, keywordsTextBox);
-        FocusHandler focusHandler = new FocusHandler() {
-            public void onFocus(FocusEvent event) {
-                if (keywordsTextBox.getValue().equals(text)) {
-                    keywordsTextBox.setText("");
-                }
-            }
-        };
-        // Listen for keyboard events in the input box.
-        keywordsTextBox.addKeyPressHandler(new KeyPressHandler() {
-            public void onKeyPress(KeyPressEvent event) {
-                if (event.getCharCode() == KeyCodes.KEY_ENTER) {
-                    searchHandler.onClick(null);
-                }
-            }
-        });
-        keywordsTextBox.addFocusHandler(focusHandler);
-        Label btn = new Label("Search");
-        //btn.setStyleName("button");
-        fixButton(btn);
-        // btn.addClickHandler(cancelHandler);
-        ImageResource ir = null;
-        if (MyWebApp.isSmallFormat()) {
-            ir = MyWebApp.resources.searchButtonSmall();
-        } else {
-            ir = MyWebApp.resources.searchButton();
+
+
+
+    public class CountrySuggestOracle extends SuggestOracle {
+        public boolean isDisplayStringHTML() {
+            return false;
         }
-        Image img = new Image(ir);
-        btn.getElement().appendChild(img.getElement());
-        btn.addClickHandler(searchHandler);
-        fs.add(keywordsTextBox);
-        fs.add(btn);
-        if (!MyWebApp.isSmallFormat()) {
-            //let's not put a search form
-            add(fs);
+
+        public void requestSuggestions(SuggestOracle.Request req, SuggestOracle.Callback callback) {
+            fetchCountries(req, callback);
         }
-        addHelp();
+
+        private void fetchCountries(final SuggestOracle.Request req, final SuggestOracle.Callback callback) {
+            SearchRequest searchRequest = new SearchRequest();
+            //searchRequest.getSearchParameters().setCountryShortNameCode(countryTextBox.getText());
+
+            searchRequest.setQuery(req.getQuery());
+            ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+            myService.searchCountries(searchRequest, new AsyncCallback() {
+                public void onFailure(Throwable caught) {
+                    mywebapp.getMessagePanel().displayError(caught.getMessage());
+                }
+
+                public void onSuccess(Object result) {
+                    MobileResponse mobileResponse = (MobileResponse) result;
+                    if (mobileResponse.getStatus() == 1) {
+                        List<MultiWordSuggestion> list = new ArrayList<MultiWordSuggestion>();
+                        for (CountryHolder countryHolder : mobileResponse.getCountryHolders()) {
+                            //java.lang.String replacementString, java.lang.String displayString
+                            MultiWordSuggestion mws = new MultiWordSuggestion(countryHolder.getShortName(), countryHolder.getFullName());
+                            list.add(mws);
+                        }
+                        Response resp = new Response(list);
+                        callback.onSuggestionsReady(req, resp);
+                    } else {
+                        mywebapp.getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                    }
+                }
+            });
+        }
     }
-    //public SuggestBox tagSearchTextBox = null;
-    //http://thinkbelievedo.com/gwt-suggestbox-with-dto-or-pojos
+
+    public class StateSuggestOracle extends SuggestOracle {
+        public boolean isDisplayStringHTML() {
+            return false;
+        }
+
+        public void requestSuggestions(SuggestOracle.Request req, SuggestOracle.Callback callback) {
+            fetchStates(req, callback);
+        }
+
+        private void fetchStates(final SuggestOracle.Request req, final SuggestOracle.Callback callback) {
+            SearchRequest searchRequest = new SearchRequest();
+            searchRequest.getSearchParameters().setCountryShortNameCode(countryTextBox.getText());
+
+            searchRequest.setQuery(req.getQuery());
+            ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+            myService.searchStates(searchRequest, new AsyncCallback() {
+                public void onFailure(Throwable caught) {
+                    mywebapp.getMessagePanel().displayError(caught.getMessage());
+                }
+
+                public void onSuccess(Object result) {
+                    MobileResponse mobileResponse = (MobileResponse) result;
+                    if (mobileResponse.getStatus() == 1) {
+                        List<MultiWordSuggestion> list = new ArrayList<MultiWordSuggestion>();
+                        for (StateProvinceHolder pch : mobileResponse.getStateProvinceHolders()) {
+                            //java.lang.String replacementString, java.lang.String displayString
+                            MultiWordSuggestion mws = new MultiWordSuggestion(pch.getShortName(), pch.getFullName());
+                            list.add(mws);
+                        }
+                        Response resp = new Response(list);
+                        callback.onSuggestionsReady(req, resp);
+                    } else {
+                        mywebapp.getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                    }
+                }
+            });
+        }
+    }
 
     public class CitySuggestOracle extends SuggestOracle {
         public boolean isDisplayStringHTML() {
@@ -1685,6 +1709,7 @@ public abstract class SpotBasePanel extends FlowPanel {
             searchRequest.setDistinctCitiesOnly(true);
             searchRequest.getSearchParameters().setState(stateTextBox.getText());
             searchRequest.setQuery(req.getQuery());
+            searchRequest.setByCityName(true);
             ApiServiceAsync myService = mywebapp.getApiServiceAsync();
             myService.searchPostalCodes(searchRequest, new AsyncCallback() {
                 public void onFailure(Throwable caught) {
@@ -1697,6 +1722,47 @@ public abstract class SpotBasePanel extends FlowPanel {
                         List<MultiWordSuggestion> list = new ArrayList<MultiWordSuggestion>();
                         for (PostalCodeHolder pch : mobileResponse.getPostalCodeHolders()) {
                             MultiWordSuggestion mws = new MultiWordSuggestion(pch.getCityName(), pch.getCityName());
+                            list.add(mws);
+                        }
+                        Response resp = new Response(list);
+                        callback.onSuggestionsReady(req, resp);
+                    } else {
+                        mywebapp.getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                    }
+                }
+            });
+        }
+    }
+
+
+    public class PostalCodeSuggestOracle extends SuggestOracle {
+        public boolean isDisplayStringHTML() {
+            return false;
+        }
+
+        public void requestSuggestions(SuggestOracle.Request req, SuggestOracle.Callback callback) {
+            //IQuoteService.Util.getInstance().getQuote(req, new TagSuggestCallback(req, callback));
+            //TagSuggestCallback tagSuggestCallback = new TagSuggestCallback(req, callback);
+            fetchPostalCodes(req, callback);
+        }
+
+        private void fetchPostalCodes(final SuggestOracle.Request req, final SuggestOracle.Callback callback) {
+            SearchRequest searchRequest = new SearchRequest();
+            searchRequest.getSearchParameters().setState(stateTextBox.getText());
+            searchRequest.setQuery(req.getQuery());
+            searchRequest.setByPostalCode(true);
+            ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+            myService.searchPostalCodes(searchRequest, new AsyncCallback() {
+                public void onFailure(Throwable caught) {
+                    mywebapp.getMessagePanel().displayError(caught.getMessage());
+                }
+
+                public void onSuccess(Object result) {
+                    MobileResponse mobileResponse = (MobileResponse) result;
+                    if (mobileResponse.getStatus() == 1) {
+                        List<MultiWordSuggestion> list = new ArrayList<MultiWordSuggestion>();
+                        for (PostalCodeHolder pch : mobileResponse.getPostalCodeHolders()) {
+                            MultiWordSuggestion mws = new MultiWordSuggestion(pch.getPostalCode(), pch.getPostalCode());
                             list.add(mws);
                         }
                         Response resp = new Response(list);
@@ -1779,6 +1845,30 @@ public abstract class SpotBasePanel extends FlowPanel {
         return tagSearchTextBox;
     }
 
+
+
+
+
+    protected SuggestBox initZipCodeTextBox(String postalCode) {
+        PostalCodeSuggestOracle oracle = new PostalCodeSuggestOracle();
+
+        SuggestBox postalCodeTextBox = new SuggestBox(oracle);
+        //add(tagSearchTextBox);
+        if ((postalCode != null) && (postalCode.length() > 0)) {
+            postalCodeTextBox.setText(postalCode);
+        } else {
+            // cityTextBox.setText("US");
+        }
+        //placeholder="Zipcode/Postal Code"
+        postalCodeTextBox.getTextBox().getElement().setAttribute("placeholder","Zipcode/Postal Code");
+
+        postalCodeTextBox.getTextBox().addFocusHandler(focusHandler);
+
+        return postalCodeTextBox;
+
+
+
+    }
     protected SuggestBox getCitySuggestBox(String cityName) {
         CitySuggestOracle oracle = new CitySuggestOracle();
         /*
@@ -1793,8 +1883,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         //add(tagSearchTextBox);
         if ((cityName != null) && (cityName.length() > 0)) {
             cityTextBox.setText(cityName);
-      //  } else if (mywebapp.getCurrentLocation() != null) {
-     //       cityTextBox.setText(mywebapp.getCurrentLocation().getCity());
         } else {
             // cityTextBox.setText("US");
         }
@@ -1825,19 +1913,12 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     protected SuggestBox initState(String state) {
         GWT.log("addState");
-        MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
-        for (StateProvinceHolder stateProvinceHolder : mywebapp.getStateProvinceHolders()) {
-            oracle.add(stateProvinceHolder.getShortName());
-            // oracle.add
-        }
-        SuggestBox stateSuggestBox = new SuggestBox(oracle);
+
+        StateSuggestOracle stateSuggestOracle = new StateSuggestOracle();
+        SuggestBox stateSuggestBox = new SuggestBox(stateSuggestOracle);
         stateSuggestBox.getTextBox().addFocusHandler(focusHandler);
         if ((state != null) && (state.length() > 0)) {
             stateSuggestBox.setText(state);
-       // } else if (mywebapp.getCurrentLocation() != null) {
-      //      stateSuggestBox.setText(mywebapp.getCurrentLocation().getState());
-        } else {
-            //stateSuggestBox.setText("US");
         }
         stateSuggestBox.getTextBox().getElement().setAttribute("placeholder","Select State/Province");
         stateSuggestBox.getTextBox().addFocusHandler(focusHandler);
@@ -1857,16 +1938,17 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     protected SuggestBox getCountrySuggestBox(String country) {
         GWT.log("getCountrySuggestBox " + country);
-        MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
-        for (CountryHolder countryHolder : mywebapp.getCountryHolders()) {
-            oracle.add(countryHolder.getShortName());
-        }
-        SuggestBox countrySuggestBox = new SuggestBox(oracle);
+        CountrySuggestOracle countrySuggestOracle = new CountrySuggestOracle();
+
+//        MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+//        for (CountryHolder countryHolder : mywebapp.getCountryHolders()) {
+//            oracle.add(countryHolder.getShortName());
+//
+//        }
+        SuggestBox countrySuggestBox = new SuggestBox(countrySuggestOracle);
         countrySuggestBox.getTextBox().addFocusHandler(focusHandler);
         if ((country != null) && (country.length() > 0)) {
             countrySuggestBox.setValue(country);
-        } else {
-           // countrySuggestBox.setValue("Select Country");
         }
 
 
@@ -1876,13 +1958,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         return countrySuggestBox;
     }
 
-    protected SuggestBox addCountry(String country, Panel panel) {
-        SuggestBox suggestBox = getCountrySuggestBox(country);
-        addFieldset(suggestBox, "Country", "countrySearch", panel);
-        return suggestBox;
-    }
-
-    //public FlowPanel selectedTagsPanel = new FlowPanel();
     protected AsyncCallback callback = null;
 
     public void setCallback(AsyncCallback callback) {
@@ -2051,7 +2126,7 @@ public abstract class SpotBasePanel extends FlowPanel {
             citySuggestBox = addCity(spotHolder.getCity(), this);
             stateTextBox = addState(spotHolder.getState(), this);
             //addTextBox("State", "state", spotHolder.getState(), spotreadonly);
-            zipcodeTextField = addTextBox("Postal Code", "zip", spotHolder.getZip(), spotreadonly);
+            //zipcodeTextField = add("Postal Code", "zip", spotHolder.getZip(), spotreadonly);
         }
     }
 
@@ -2644,7 +2719,9 @@ public abstract class SpotBasePanel extends FlowPanel {
             Button leaveMarkButton = new Button();
             leaveMarkButton.addClickHandler(saveHandler2);
             widgetMarkDataMap.put(leaveMarkButton, advancedMarkData);
+
             MultiUploader multiUploader = new MultiUploader();
+            this.defaultUploader =  multiUploader;
             FlowPanel panelImages = new FlowPanel();
             IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
             multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
@@ -2850,7 +2927,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         label.setStyleName("whiteButton");
     }
 
-    protected boolean isUploading() {
+    public boolean isUploading() {
         if (defaultUploader == null) return false;
         if (defaultUploader.getStatus() == Status.INPROGRESS) {
             mywebapp.getMessagePanel().displayMessage("Please wait until files are done uploading.");
@@ -2897,6 +2974,10 @@ public abstract class SpotBasePanel extends FlowPanel {
             doSave();
         }
     }
+
+
+    protected static final String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?:[a-zA-Z]{2,6})$";
+
 
     public ClickHandler saveHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -4606,7 +4687,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 //        return true;
     }
 
-    protected MultiUploader defaultUploader = null;
+    public MultiUploader defaultUploader = null;
     protected FlowPanel panelImages = new FlowPanel();
 
     protected void addUpload(String prompt, ComplexPanel parentPanel) {
@@ -4739,28 +4820,28 @@ public abstract class SpotBasePanel extends FlowPanel {
     };
     Map<PreloadedImage, FlowPanel> preloadedImagePanelMap = new HashMap<PreloadedImage, FlowPanel>();
 
-    protected void saveSessionContents() {
-        ApiServiceAsync myService = mywebapp.getApiServiceAsync();
-        ContentRequest contentRequest = new ContentRequest();
-        myService.saveSessionContents(contentRequest, new AsyncCallback() {
-            public void onFailure(Throwable caught) {
-                getMessagePanel().displayError(caught.getMessage());
-            }
-
-            public void onSuccess(Object result) {
-                MobileResponse mobileResponse = (MobileResponse) result;
-                if (mobileResponse.getStatus() == 1) {
-                    ContentHolder contentHolder = mobileResponse.getContentHolder();
-                    if (parentContentHolder == null) {
-                        parentContentHolder = new ContentHolder();
-                    }
-                    parentContentHolder.getContentHolders().add(contentHolder);
-                    addContentHolder(parentContentHolder, true, true);
-                    addContentHolderHandler(contentHolder);
-                }
-            }
-        });
-    }
+//    protected void saveSessionContents() {
+//        ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+//        ContentRequest contentRequest = new ContentRequest();
+//        myService.saveSessionContents(contentRequest, new AsyncCallback() {
+//            public void onFailure(Throwable caught) {
+//                getMessagePanel().displayError(caught.getMessage());
+//            }
+//
+//            public void onSuccess(Object result) {
+//                MobileResponse mobileResponse = (MobileResponse) result;
+//                if (mobileResponse.getStatus() == 1) {
+//                    ContentHolder contentHolder = mobileResponse.getContentHolder();
+//                    if (parentContentHolder == null) {
+//                        parentContentHolder = new ContentHolder();
+//                    }
+//                    parentContentHolder.getContentHolders().add(contentHolder);
+//                    addContentHolder(parentContentHolder, true, true);
+//                    addContentHolderHandler(contentHolder);
+//                }
+//            }
+//        });
+//    }
 
     protected List<MediaFile> mediaFiles = new ArrayList<MediaFile>();
     CaptureCallback captureCallback = new CaptureCallback() {
@@ -4835,7 +4916,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     protected SuggestBox citySuggestBox = null;
     protected SuggestBox countryTextBox = null;
     public SuggestBox stateTextBox = null;
-    protected TextField zipcodeTextField = null;
+    protected SuggestBox zipcodeTextField = null;
     protected TextField emailTextField = null;
     protected TextField websiteTextField = new TextField();
     protected TextField titleTextBox = null;

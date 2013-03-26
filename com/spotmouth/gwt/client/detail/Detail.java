@@ -46,7 +46,13 @@ public class Detail extends Composite {
     final Anchor groupsAnchor;
 
     @UiField(provided=true)
+    final Anchor descriptionAnchor;
+
+
+    @UiField(provided=true)
     final Anchor mapAnchor;
+
+
 
     @UiField(provided=true)
     final FlowPanel groupsPanel;
@@ -65,6 +71,9 @@ public class Detail extends Composite {
     @UiField(provided=true)
     final HTML hoursHTML;
 
+
+    @UiField(provided=true)
+    final SimplePanel mapPanel;
 
 
     @UiField SpanElement descriptionSpan;
@@ -88,8 +97,8 @@ public class Detail extends Composite {
 //    @UiField
 //    SimplePanel googleMap;
     public Detail(Anchor backToSearchResultsAnchor,Anchor addMyBizAnchor,Anchor addtoFavoriteAnchor,Anchor adminSpotAnchor,Anchor phoneAnchor, Anchor groupsAnchor,Anchor mapAnchor,Image mainImage,
-                  Anchor markSpotAnchor,FlowPanel groupsPanel,Button addGroupButton,HTML hoursHTML,Anchor websiteAnchor) {
-
+                  Anchor markSpotAnchor,FlowPanel groupsPanel,Button addGroupButton,HTML hoursHTML,Anchor websiteAnchor,SimplePanel mapPanel,Anchor descriptionAnchor) {
+        this.mapPanel = mapPanel;
         this.backToSearchResultsAnchor      = backToSearchResultsAnchor;
         this.addMyBizAnchor = addMyBizAnchor;
         this.addtoFavoriteAnchor  = addtoFavoriteAnchor;
@@ -103,6 +112,8 @@ public class Detail extends Composite {
         this.addGroupButton = addGroupButton;
         this.hoursHTML = hoursHTML;
         this.websiteAnchor = websiteAnchor;
+        this.descriptionAnchor = descriptionAnchor;
+        //this.descriptionAnchor.getElement().setId("fw-tab-one");
         initWidget(uiBinder.createAndBindUi(this));
 
     }

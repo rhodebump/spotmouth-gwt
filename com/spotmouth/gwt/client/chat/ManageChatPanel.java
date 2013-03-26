@@ -124,7 +124,13 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
     private SimplePanel chatImagePanel = new SimplePanel();
 
 
-
+    public ClickHandler saveHandlerFacebook2 = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+          GWT.log("saveHandler.onClick");
+            getItemHolder().setShareOnFacebook(true);
+            saveIt();
+        }
+    };
 
     private ChatFormComposite cfc = null;
 
@@ -171,9 +177,20 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
             Button cancelButton  = new Button();
             cancelButton.addClickHandler(cancelChatHandler);
             DropPanel dropPanel = getDropPanel();
+            //Button shareOnFacebookButton = getFacebookButton(markData);
+
+            Button shareOnFacebookButton = new Button();
+            shareOnFacebookButton.addClickHandler(saveHandlerFacebook2);
+            //widgetMarkDataMap.put(shareOnFacebookButton,markData);
+            if (! mywebapp.isFacebookUser()) {
+                //need to do directly on this element
+
+                hideElement(shareOnFacebookButton.getElement());
+            }
+
             this.cfc = new ChatFormComposite(nameTextBox, contentTextArea, startDatePicker, endDatePicker,
                  tagSearchTextBox, selectedTagsPanel, saveButton, cancelButton,
-                     defaultUploader, chatImagePanel, mywebapp, itemHolder,suggestionsPanel,dropPanel);
+                     defaultUploader, chatImagePanel, mywebapp, itemHolder,suggestionsPanel,dropPanel,shareOnFacebookButton);
             add(cfc);
         }
 

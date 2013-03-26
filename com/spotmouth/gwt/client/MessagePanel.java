@@ -1,6 +1,7 @@
 package com.spotmouth.gwt.client;
 
-import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -24,6 +25,11 @@ public class MessagePanel extends FlowPanel {
             clear();
         }
     };
+
+
+
+
+
 
 
     private Logger log = Logger.getLogger(getClass().getName());
@@ -62,12 +68,49 @@ public class MessagePanel extends FlowPanel {
 
         Anchor resize_notification = new Anchor("x");
         resize_notification.getElement().setId("resize_notification");
+        resize_notification.addClickHandler(resizeHandler);
+
+
         resize_notification.setStyleName("resize_notification");
         add(resize_notification);
 
 
 
+
     }
+
+    protected ClickHandler resizeHandler = new ClickHandler() {
+         public void onClick(ClickEvent event) {
+            int pageY = Window.getScrollTop();
+
+             com.google.gwt.dom.client.Element notElem = DOM.getElementById("notification");
+             //int notTop = MyWebApp.getCoords(notElem);
+            // if (pageY >= notTop + notElem.getOffsetHeight()) {
+             if (Window.getScrollTop() == 0) {
+                 notElem.setClassName( "normal");
+
+             } else {
+                 notElem.setClassName( "normal scrolled");
+             }
+
+         }
+     };
+
+
+    /*
+
+ document.getElementById('resize_notification').onclick = function(){
+ 	pageY = window.pageYOffset || document.documentElement.scrollTop;
+ 	if (pageY >= notTop + notElem.offsetHeight) {
+ 		notElem.className = "normal scrolled";
+ 	} else {
+ 		notElem.className = "normal";
+ 	}
+ 	timer = 3000;
+ 	}
+
+
+     */
 
     public void clear() {
         messageHolderPanel.clear();
@@ -121,11 +164,43 @@ public class MessagePanel extends FlowPanel {
 
     }
 
+    private void fixNotification() {
+        //we call this method whenever a new message is added, let's set minimized back to false
+        setMinimized(false);
+        GWT.log("scrolltop=" + Window.getScrollTop());
+        com.google.gwt.dom.client.Element notElem = DOM.getElementById("notification");
+
+
+        if (Window.getScrollTop() == 0) {
+            notElem.setClassName("normal");
+        } else {
+            notElem.setClassName("normal scrolled");
+        }
+
+
+
+    }
+
+
+    private boolean minimized = false;
+    public void setMinimized(boolean minimized) {
+        this.minimized = minimized;
+    }
+    public boolean isMinimized() {
+       return minimized;
+    }
+
+
+
     public void displayError(String errorMessage) {
+
+        fixNotification();
+
         GWT.log("displayError " + errorMessage);
         //scrolling to top was annoying for location problems
         //shouldn't be getting location problems
-        com.google.gwt.user.client.Window.scrollTo(0, 0);
+        //we now have notification appear good
+       // com.google.gwt.user.client.Window.scrollTo(0, 0);
 
         String m = chopMessage(errorMessage);
        // Label errorLabel = new Label(m);
@@ -140,7 +215,7 @@ public class MessagePanel extends FlowPanel {
 
     //this is same as displayError, but we will not scroll totop
     public void displayMessage(String message) {
-        //displayError(message);
+         fixNotification();
 
         String m = chopMessage(message);
         InlineHTML html   = new InlineHTML("<p>" + message + "</p>");

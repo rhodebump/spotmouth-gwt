@@ -14,7 +14,11 @@
 
 <div id="coupons">
 	<div id="coupons_bar">
-	<span id="coupons_eight"></span>
+
+        <a href="http://www.8coupons.com" target="_blank">
+            <img src="css/img/8coupons_big.png"/>
+
+    </a>
 	</div>
 
 

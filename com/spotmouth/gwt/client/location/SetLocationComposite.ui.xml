@@ -45,7 +45,7 @@
         		<label class="sl_lb">   <g:SuggestBox ui:field="cityTextBox"/></label>
         		<ul class="mc_loc_list"><button class="button"/></ul>
         		<h2 class="sl_title">Address</h2>
-                <label class="sl_lb">   <smc:TextField placeholder="Zipcode/Postal Code" ui:field="zipcodeTextBox"/></label>
+                <label class="sl_lb">   <g:SuggestBox ui:field="zipcodeTextBox"/></label>
         		<label class="sl_lb"> <smc:TextField placeholder="Address" ui:field="address1TextBox"/></label>
 
         		<ul class="mc_loc_list mc_adrs_list"><button class="button"></button></ul>
