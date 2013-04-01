@@ -2,6 +2,7 @@ package com.spotmouth.gwt.client;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.common.TextField;
@@ -44,7 +45,7 @@ public class RegistrationConfirmPanel extends SpotBasePanel implements SpotMouth
 
         saveAccountSettings();
     }
-
+    protected PasswordTextBox maskedPasswordTextBox = new PasswordTextBox();
 
     public RegistrationConfirmPanel(MyWebApp mywebapp) {
         super(mywebapp);
@@ -57,7 +58,8 @@ public class RegistrationConfirmPanel extends SpotBasePanel implements SpotMouth
 
         Button saveButton = new Button("Submit");
         saveButton.addClickHandler(saveHandler);
-        RegistrationConfirmComposite registrationConfirmComposite = new RegistrationConfirmComposite(usernameTextBox, newPasswordTextBox, saveButton);
+
+        RegistrationConfirmComposite registrationConfirmComposite = new RegistrationConfirmComposite(usernameTextBox, newPasswordTextBox, maskedPasswordTextBox,saveButton);
         add(registrationConfirmComposite);
 
 
@@ -68,12 +70,25 @@ public class RegistrationConfirmPanel extends SpotBasePanel implements SpotMouth
 
     protected boolean isValid() {
         mywebapp.getMessagePanel().clear();
+        if (newPasswordTextBox.isVisible()) {
 
-        if (newPasswordTextBox.getValue().length() == 0) {
-            mywebapp.getMessagePanel().displayMessage("Password is required");
+            if (isEmpty(newPasswordTextBox)) {
+                mywebapp.getMessagePanel().displayMessage("Password is required");
+            }
+
+        }
+        if (maskedPasswordTextBox.isVisible()) {
+
+            if (isEmpty(maskedPasswordTextBox)) {
+                mywebapp.getMessagePanel().displayMessage("Password is required");
+            }
         }
 
-        return true;
+        if (getMessagePanel().isHaveMessages()) {
+            return false;
+        }else {
+            return true;
+        }
     }
 
 

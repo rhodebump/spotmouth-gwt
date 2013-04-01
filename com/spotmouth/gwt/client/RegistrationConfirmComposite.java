@@ -1,9 +1,13 @@
 package com.spotmouth.gwt.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.History;
+import  com.spotmouth.gwt.client.common.*;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -26,23 +30,46 @@ public class RegistrationConfirmComposite   extends Composite {
 
 
     @UiField(provided=true)
-    final TextBox passwordTextBox;
+    final TextField clearPasswordTextField;
+
+
+
+    @UiField(provided=true)
+    final PasswordTextBox maskedPasswordTextBox;
+
 
 
     @UiField(provided=true)
     final Button saveButton;
 
 
+    @UiField(provided=false)
+    SimpleCheckBox showTypingCheckBox;
 
-            public RegistrationConfirmComposite(TextBox usernameTextBox,TextBox passwordTextBox,Button saveButton ) {
+
+            public RegistrationConfirmComposite(TextBox usernameTextBox,TextField clearPasswordTextField,PasswordTextBox maskedPasswordTextBox , Button saveButton ) {
                 this.usernameTextBox = usernameTextBox;
-                this.passwordTextBox = passwordTextBox;
+                this.clearPasswordTextField = clearPasswordTextField;
+                this.clearPasswordTextField.setVisible(false);
+                this.maskedPasswordTextBox = maskedPasswordTextBox;
                 this.saveButton = saveButton;
-    initWidget(uiBinder.createAndBindUi(this));
+        initWidget(uiBinder.createAndBindUi(this));
 
 
 }
 
+    @UiHandler("showTypingCheckBox")
+    public void onClick0(ClickEvent event) {
+        if (showTypingCheckBox.getValue()) {
+            //show typing
+            clearPasswordTextField.setVisible(true);
+            maskedPasswordTextBox.setVisible(false);
+        }   else {
+            clearPasswordTextField.setVisible(false);
+            maskedPasswordTextBox.setVisible(true);
+        }
+
+    }
 
 
 }

@@ -2251,6 +2251,45 @@ public class MyWebApp implements EntryPoint {
         });
     }
 
+    //
+
+    private void doConfirmEmail(String historyToken) {
+
+        String loginToken = historyToken.replaceAll("confirm-email/loginToken=", "");
+        final DataOperationDialog dialog = new DataOperationDialog(
+                "Confirming email.");
+
+
+
+        ApiServiceAsync myService = getApiServiceAsync();
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setLoginToken(loginToken);
+        myService.confirmLoginByToken(loginRequest, new AsyncCallback() {
+            public void onFailure(Throwable caught) {
+                dialog.hide();
+                getMessagePanel().displayError(caught.getMessage());
+            }
+
+            public void onSuccess(Object result) {
+                dialog.hide();
+                MobileResponse mobileResponse = (MobileResponse) result;
+                if (mobileResponse.getStatus() == 1) {
+                    setLoginMobileResponse(mobileResponse);
+                    verifyDisplay();
+                    getMessagePanel().displayError("Your email address has been confirmed.");
+
+                } else {
+                    //let's bring up some screen
+                    verifyDisplay();
+                    getMessagePanel().displayError("We could not validate your account with the provided token");
+                    getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                }
+            }
+        });
+    }
+
+    public static String CONFIRM_EMAIL = "confirm-email";
+
     private void doConfirmRegistration(String historyToken) {
 
         String loginToken = historyToken.replaceAll("registration/loginToken=", "");
@@ -2520,6 +2559,8 @@ public class MyWebApp implements EntryPoint {
             doConfirmRegistration(historyToken);
         } else if (historyToken.startsWith(REGISTER)) {
             toggleRegister(newItem);
+        }else if (historyToken.startsWith(CONFIRM_EMAIL)) {
+            doConfirmEmail(historyToken);
         } else if (historyToken.startsWith("passwordreset")) {
             doPasswordReset(historyToken);
         } else if (historyToken.startsWith("managemember")) {

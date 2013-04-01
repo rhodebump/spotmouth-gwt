@@ -1,5 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 
@@ -96,13 +97,17 @@ background: white;
 <g:TextBox ui:field="usernameTextBox"/>
 </label>
 
-<input type="checkbox" id="pwd_sw"/>
+<g:SimpleCheckBox ui:field="showTypingCheckBox"/>Show Typing
 
 <label>
 <p>Input your password</p>
+
 <span></span>
-<g:TextBox ui:field="passwordTextBox"/>
+<smc:TextField ui:field="clearPasswordTextField"/>
+
+
 <g:TextBox  ui:field='maskedPasswordTextBox' />
+
 </label>
 
 <g:Button ui:field="saveButton"/>
