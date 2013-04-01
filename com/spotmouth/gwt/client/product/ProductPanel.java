@@ -1,11 +1,9 @@
 package com.spotmouth.gwt.client.product;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.*;
-import com.spotmouth.gwt.client.MyHtmlResources;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;

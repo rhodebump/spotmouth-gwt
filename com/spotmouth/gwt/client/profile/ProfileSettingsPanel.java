@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.common.TextField;
+import com.spotmouth.gwt.client.dto.ContentHolder;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.UserHolder;
 import com.spotmouth.gwt.client.dto.UserRequest;
@@ -17,8 +17,6 @@ import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
-import com.spotmouth.gwt.client.dto.ContentHolder;
-import com.spotmouth.gwt.client.profile.*;
 import org.vectomatic.dnd.DropPanel;
 
 /**
@@ -95,7 +93,7 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         Anchor removeProfileImageAnchor = new Anchor();
         removeProfileImageAnchor.addClickHandler(removeProfileImageHandler);
 
-        defaultUploader = new MultiUploader();
+        this.defaultUploader = new MultiUploader();
         defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler2);
 
         FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
@@ -183,9 +181,6 @@ public class ProfileSettingsPanel extends SpotBasePanel implements SpotMouthPane
         userRequest.setUserHolder(mywebapp.getAuthenticatedUser());
         userRequest.setAuthToken(mywebapp.getAuthToken());
         UserHolder userHolder = userRequest.getUserHolder();
-        if (userHolder == null) {
-            GWT.log("userholder is null");
-        }
         userHolder.setAboutMe(contentTextArea.getValue());
         if (citySuggestBox != null) {
             userHolder.setCity(citySuggestBox.getValue());

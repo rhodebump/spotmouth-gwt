@@ -1,14 +1,15 @@
 package com.spotmouth.gwt.client;
 //http://google-web-toolkit.googlecode.com/svn/javadoc/2.4/com/google/gwt/user/client/ui/SimpleCheckBox.html
 import com.google.api.gwt.oauth2.client.Auth;
-import com.google.gwt.user.client.DOM;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.storage.client.Storage;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.phonegap.gwt.console.client.Logger;
@@ -16,13 +17,11 @@ import com.phonegap.gwt.fbconnect.client.FBConnect;
 import com.phonegap.gwt.fbconnect.client.OnConnectCallback;
 import com.spotmouth.gwt.client.common.Fieldset;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.LoginRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
+import com.spotmouth.gwt.client.login.Login;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.Timer;
-import com.spotmouth.gwt.client.login.*;
-import com.spotmouth.gwt.client.common.TextField;
 
 //import com.gwtfb.client.Callback;
 //import com.gwtfb.sdk.FBEvent;
@@ -112,7 +111,7 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
         super(mywebapp, false, false, true);
         //MyWebApp mywebapp, boolean displayTopPanel,boolean displayHelp,boolean newStyle
         if (MyWebApp.isDesktop()) {
-            //DOM.setElementAttribute(usernameTextBox.getElement(), "type", "email");
+
             DOM.setElementAttribute(maskedPasswordTextBox.getElement(), "placeholder", "Password...");
             addRequired(maskedPasswordTextBox);
             Button signUp = new Button();

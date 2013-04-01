@@ -1,28 +1,12 @@
 package com.spotmouth.gwt.client.common;
 
-import com.google.api.gwt.oauth2.client.Auth;
-import com.google.gwt.user.client.DOM;
-import com.google.api.gwt.oauth2.client.AuthRequest;
-import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.*;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.storage.client.Storage;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.*;
-import com.phonegap.gwt.console.client.Logger;
-import com.phonegap.gwt.fbconnect.client.FBConnect;
-import com.phonegap.gwt.fbconnect.client.OnConnectCallback;
-import com.spotmouth.gwt.client.common.Fieldset;
-import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.dto.LoginRequest;
-import com.spotmouth.gwt.client.dto.MobileResponse;
-import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.Timer;
-import com.spotmouth.gwt.client.login.*;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.modernizr.client.Modernizr;
+import com.google.gwt.user.client.ui.TextBox;
 
 /**
  * Created with IntelliJ IDEA.

@@ -250,7 +250,8 @@ public class ApplicationMenuPanel extends SpotBasePanel implements SpotMouthPane
     };
     ClickHandler manageProfileHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-            mywebapp.toggleAccountSettings(true);
+            //mywebapp.toggleAccountSettings(true);
+            History.newItem(MyWebApp.ACCOUNT_SETTINGS);
         }
     };
     ClickHandler manageFriendsHandler = new ClickHandler() {

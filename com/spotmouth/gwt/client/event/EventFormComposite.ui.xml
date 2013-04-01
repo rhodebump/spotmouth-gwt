@@ -2,8 +2,7 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:mu='urn:import:gwtupload.client'
              xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
-             xmlns:datepicker='urn:import:com.google.gwt.user.datepicker.client'
-    xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:xx='urn:import:com.spotmouth.gwt.client'>
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 
 

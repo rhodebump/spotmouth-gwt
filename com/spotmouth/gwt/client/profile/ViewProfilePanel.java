@@ -1,19 +1,19 @@
 package com.spotmouth.gwt.client.profile;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.*;
-import com.spotmouth.gwt.client.ContestVotingPanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Image;
 import com.spotmouth.gwt.client.MyWebApp;
-import com.spotmouth.gwt.client.ResultsPanel;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.dto.*;
+import com.spotmouth.gwt.client.dto.FriendHolder;
+import com.spotmouth.gwt.client.dto.FriendRequest;
+import com.spotmouth.gwt.client.dto.MobileResponse;
+import com.spotmouth.gwt.client.dto.UserHolder;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 
 /*

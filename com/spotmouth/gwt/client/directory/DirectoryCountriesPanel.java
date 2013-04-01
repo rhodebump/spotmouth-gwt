@@ -3,8 +3,6 @@ package com.spotmouth.gwt.client.directory;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Hyperlink;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
-import com.google.gwt.user.client.ui.SuggestOracle;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.ULPanel;
@@ -14,9 +12,6 @@ import com.spotmouth.gwt.client.dto.CountryHolder;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.SearchRequest;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

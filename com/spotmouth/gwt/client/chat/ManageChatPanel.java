@@ -1,38 +1,22 @@
 package com.spotmouth.gwt.client.chat;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import com.kiouri.sliderbar.client.event.BarValueChangedEvent;
-import com.kiouri.sliderbar.client.event.BarValueChangedHandler;
-import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.common.TextField;
-import com.spotmouth.gwt.client.contest.ViewContestPanel;
-import com.spotmouth.gwt.client.dto.ContestHolder;
-import com.spotmouth.gwt.client.dto.ContestRequest;
 import com.spotmouth.gwt.client.dto.*;
-import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
 import gwtupload.client.PreloadedImage;
 import org.vectomatic.dnd.DropPanel;
-
-import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -140,14 +124,10 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
        setItemHolder(itemHolder);
         if (MyWebApp.isDesktop()) {
             nameTextBox = new TextField();
-            nameTextBox.setTabIndex(1);
-           // nameTextBox.getElement().setAttribute("placeholder", "Chat Name");
             nameTextBox.setValue(itemHolder.getTitle());
 
             contentTextArea = new TextArea();
-            contentTextArea.setStyleName("mc_desc");
-            contentTextArea.setVisibleLines(4);
-            contentTextArea.setTabIndex(4);
+
             contentTextArea.setValue(itemHolder.getTextData());
             startDatePicker.setValue(itemHolder.getStartDate());
             endDatePicker.setValue(itemHolder.getEndDate());
@@ -165,11 +145,9 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
             Button saveButton = saveButton();
 
 
-            defaultUploader = new MultiUploader();
+            this.defaultUploader = new MultiUploader();
             defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler2);
-            //do we have an iamge
             Image mainImage = getImage(itemHolder.getContentHolder(), "320x320");
-            //contestImagePanel
             if (mainImage != null) {
                 chatImagePanel.setWidget(mainImage);
             }
@@ -177,11 +155,11 @@ public class ManageChatPanel extends SpotBasePanel implements SpotMouthPanel {
             Button cancelButton  = new Button();
             cancelButton.addClickHandler(cancelChatHandler);
             DropPanel dropPanel = getDropPanel();
-            //Button shareOnFacebookButton = getFacebookButton(markData);
+
 
             Button shareOnFacebookButton = new Button();
             shareOnFacebookButton.addClickHandler(saveHandlerFacebook2);
-            //widgetMarkDataMap.put(shareOnFacebookButton,markData);
+
             if (! mywebapp.isFacebookUser()) {
                 //need to do directly on this element
 

@@ -1,17 +1,13 @@
 package com.spotmouth.gwt.client.chat;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
-import com.spotmouth.gwt.client.common.Fieldset;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.contest.ContestDetailComposite;
-import com.spotmouth.gwt.client.dto.*;
+import com.spotmouth.gwt.client.dto.ItemHolder;
+import com.spotmouth.gwt.client.dto.SolrDocument;
+import com.spotmouth.gwt.client.dto.SpotHolder;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,10 +1,7 @@
 package com.spotmouth.gwt.client;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.HeadingElement;
-import com.google.gwt.dom.client.MetaElement;
-import com.google.gwt.dom.client.NodeList;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
@@ -14,16 +11,12 @@ import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.common.H1;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.*;
-import com.spotmouth.gwt.client.mark.*;
+import com.spotmouth.gwt.client.mark.MarkDetailComposite;
+import com.spotmouth.gwt.client.mark.ReplyComposite;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import com.spotmouth.gwt.client.common.*;
-//import com.google.gwt.user.client.Element;
-
-import com.google.gwt.dom.client.Element;
 import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
-
-import java.util.*;
+//import com.google.gwt.user.client.Element;
 
 public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
@@ -279,12 +272,12 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             replyMarkData.spotHolder = itemHolder.getSpotHolder();
 
 
-            MultiUploader multiUploader = new MultiUploader();
-            this.defaultUploader =  multiUploader;
+           this.defaultUploader = new MultiUploader();
+           // this.defaultUploader =  multiUploader;
             FlowPanel panelImages = new FlowPanel();
 
             IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandlerDetails(panelImages);
-            multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+            defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
 
             Button addTagButton = new Button("Add");
               addTagButton.addClickHandler(addTagHandler);
@@ -300,7 +293,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
             this.markDetailComposite = new MarkDetailComposite(mainImage, markSpotButton, viewMapButton, usernameAnchor, profileImage, markContentPanel, repliesULPanel,bigImage,
                     killPhoto,itemTagsPanel,backToSearchResultsAnchor,replyButton,cancelButton,selectedTagsPanel,tagSearchTextBox,replyMarkData.secretKeyTextBox,replyMarkData.saySomethingTextArea,
-                    saveReplyButton,multiUploader,panelImages,addTagButton,repliesH1,selectedTagsPanel2);
+                    saveReplyButton,defaultUploader,panelImages,addTagButton,repliesH1,selectedTagsPanel2);
             markDetailComposite.setMarkContent(itemHolder.getTextData());
             markDetailComposite.setFullAddress(spotHolder.getAddressLabel());
             markDetailComposite.setPhoneNumber(spotHolder.getVoicephone());

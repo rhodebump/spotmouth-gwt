@@ -1,10 +1,8 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:x='urn:import:com.spotmouth.gwt.client'     xmlns:mu='urn:import:gwtupload.client'
-             xmlns:dnd='urn:import:org.vectomatic.dnd'   xmlns:datepicker='urn:import:com.google.gwt.user.datepicker.client'
+             xmlns:x='urn:import:com.spotmouth.gwt.client'
              xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
-             xmlns:gm='urn:import:com.google.gwt.maps.client'
-    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 
 

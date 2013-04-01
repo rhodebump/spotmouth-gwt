@@ -4,6 +4,7 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.TextBox;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,8 +25,7 @@ public class RegistrationConfirmPanel extends SpotBasePanel implements SpotMouth
     }
 
 
-    //private TextBox passwordTextBox = new TextBox();
-    private TextBox usernameTextBox = new TextBox();
+
     public RegistrationConfirmPanel() {}
 
 
@@ -50,12 +50,16 @@ public class RegistrationConfirmPanel extends SpotBasePanel implements SpotMouth
         super(mywebapp);
         this.clear();
         addRequired(newPasswordTextBox);
-        usernameTextBox.setValue(mywebapp.getAuthenticatedUser().getUsername());
+        usernameTextBox = new TextField();
+        if (mywebapp.getAuthenticatedUser() != null) {
+            usernameTextBox.setValue(mywebapp.getAuthenticatedUser().getUsername());
+        }
+
         Button saveButton = new Button("Submit");
         saveButton.addClickHandler(saveHandler);
         RegistrationConfirmComposite registrationConfirmComposite = new RegistrationConfirmComposite(usernameTextBox, newPasswordTextBox, saveButton);
         add(registrationConfirmComposite);
-        return;
+
 
 
 

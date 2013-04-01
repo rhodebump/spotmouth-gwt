@@ -1,31 +1,15 @@
 package com.spotmouth.gwt.client;
 
-import com.google.gwt.core.client.*;
-import com.google.gwt.user.datepicker.client.CalendarUtil;
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.dom.client.*;
-import com.spotmouth.gwt.client.coupon.CouponForm;
-import com.spotmouth.gwt.client.directory.DirectoryCountriesPanel;
-import com.spotmouth.gwt.client.directory.DirectoryPostalCodesPanel;
-import com.spotmouth.gwt.client.directory.DirectoryStatesPanel;
-import com.spotmouth.gwt.client.event.EventForm;
-import com.spotmouth.gwt.client.chat.ChatsPanel;
-import com.spotmouth.gwt.client.chat.*;
-import com.spotmouth.gwt.client.common.ListItem;
-import com.spotmouth.gwt.client.contest.ContestsPanel;
-import com.spotmouth.gwt.client.contest.ManageContestPanel;
-import com.spotmouth.gwt.client.contest.ViewContestPanel;
-import com.spotmouth.gwt.client.coupon.Coupons8Panel;
-import com.spotmouth.gwt.client.friends.Invited;
-import com.spotmouth.gwt.client.friends.ManageFriendPanel;
-import com.spotmouth.gwt.client.friends.ManageFriendsPanel;
-import com.spotmouth.gwt.client.group.GroupPanel;
-import com.spotmouth.gwt.client.group.ManageGroupPanel;
-import com.spotmouth.gwt.client.instagram.Data;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.api.gwt.oauth2.client.Auth;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.MetaElement;
+import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -43,42 +27,62 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.storage.client.Storage;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.*;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RpcRequestBuilder;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.googlecode.gwtphonegap.client.*;
 import com.googlecode.gwtphonegap.client.geolocation.*;
 import com.googlecode.mgwt.ui.client.MGWT;
 import com.phonegap.gwt.device.client.Device;
 import com.phonegap.gwt.fbconnect.client.FBConnect;
+import com.spotmouth.gwt.client.chat.ChatPanel;
+import com.spotmouth.gwt.client.chat.ChatsPanel;
+import com.spotmouth.gwt.client.chat.ManageChatPanel;
+import com.spotmouth.gwt.client.chat.ViewChatPanel;
+import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.contest.ContestsPanel;
+import com.spotmouth.gwt.client.contest.ManageContestPanel;
+import com.spotmouth.gwt.client.contest.ViewContestPanel;
+import com.spotmouth.gwt.client.coupon.CouponForm;
+import com.spotmouth.gwt.client.coupon.Coupons8Panel;
+import com.spotmouth.gwt.client.directory.DirectoryCountriesPanel;
+import com.spotmouth.gwt.client.directory.DirectoryPostalCodesPanel;
+import com.spotmouth.gwt.client.directory.DirectoryStatesPanel;
 import com.spotmouth.gwt.client.dto.*;
+import com.spotmouth.gwt.client.event.EventForm;
+import com.spotmouth.gwt.client.friends.Invited;
+import com.spotmouth.gwt.client.friends.ManageFriendPanel;
+import com.spotmouth.gwt.client.friends.ManageFriendsPanel;
+import com.spotmouth.gwt.client.group.GroupPanel;
+import com.spotmouth.gwt.client.group.ManageGroupPanel;
 import com.spotmouth.gwt.client.help.IntroPanel;
 import com.spotmouth.gwt.client.icons.SpotImageResource;
-import com.spotmouth.gwt.client.layout.Page;
+import com.spotmouth.gwt.client.instagram.Data;
 import com.spotmouth.gwt.client.layout.MapPage;
+import com.spotmouth.gwt.client.layout.Page;
 import com.spotmouth.gwt.client.location.SetLocationManuallyPanel;
 import com.spotmouth.gwt.client.menu.ApplicationMenuPanel;
 import com.spotmouth.gwt.client.menu.TopNav;
 import com.spotmouth.gwt.client.messaging.MessagingPanel;
 import com.spotmouth.gwt.client.messaging.NotificationsPanel;
 import com.spotmouth.gwt.client.om.LocationOverlay;
+import com.spotmouth.gwt.client.product.ManageProductsPanel;
 import com.spotmouth.gwt.client.profile.ProfileSettingsPanel;
 import com.spotmouth.gwt.client.profile.ViewProfilePanel;
 import com.spotmouth.gwt.client.rpc.ApiService;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.spotmouth.gwt.client.search.SearchForm;
-import com.spotmouth.gwt.client.product.ManageProductsPanel;
 import com.spotmouth.gwt.client.spot.CreateSpotMarkPanel;
 import com.spotmouth.gwt.client.spot.ManageSpotPanel;
 import com.spotmouth.gwt.client.usergroups.ManageUserGroupPanel;
 import com.spotmouth.gwt.client.usergroups.ViewUserGroupsPanel;
-import gdurelle.tagcloud.client.tags.TagCloud;
-import gdurelle.tagcloud.client.tags.WordTag;
+import gwtupload.client.IUploadStatus;
+import gwtupload.client.MultiUploader;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -88,6 +92,9 @@ import java.util.logging.Logger;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class MyWebApp implements EntryPoint {
+
+
+
 
     private ClickHandler searchHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -1615,11 +1622,7 @@ public class MyWebApp implements EntryPoint {
                     Location location = mobileResponse.getLocations().get(0);
                     setCurrentLocation(location);
                     log("toggleHome");
-                    //toggleHome(locationUpdateCallback);
-                    //getMessagePanel().clear();
                     MyWebApp.this.homeCallback = locationUpdateCallback;
-                    //need to do search
-                    //showHome();
                     performKeywordSearch();
                 } else {
                     getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
@@ -1712,42 +1715,17 @@ public class MyWebApp implements EntryPoint {
         return true;
     }
 
-//    private void addBackToResults(SpotBasePanel spotBasePanel, ComplexPanel parentPanel) {
-//        if (MyWebApp.isDesktop()) {
-//            return;
-//        }
-//        if (!spotBasePanel.showBackToResults()) {
-//            return;
-//        }
-//        if (resultsPanel == null) {
-//            return;
-//        }
-//        if (currentSpotBasePanel instanceof ResultsPanel) {
-//            //don't want to show if this is results page!
-//            return;
-//        }
-//        Label backToResults = new Label("<< Back To Results");
-//        backToResults.addClickHandler(backToResultsHandler);
-//        backToResults.setStyleName("whiteButton");
-//        parentPanel.add(backToResults);
-//    }
+
 
     SimplePanel simplePanel = new SimplePanel();
-    //for some reason, if we are not connected to network, we cannot use the form panel
-    //  private boolean goodInit = false;
-   // private int previousWindowScrollPosition = 0;
     private VerticalPanel vp = new VerticalPanel();
 
     public boolean swapCenter(final SpotBasePanel spotBasePanel) {
         GWT.log("swapCenter");
-        //store position of where we scrolled so we can go back to this same position
-        if (this.currentSpotBasePanel instanceof ResultsPanel) {
-        //    this.previousWindowScrollPosition = com.google.gwt.user.client.Window.getScrollTop();
-        }
 
         if((this.currentSpotBasePanel != null) && (this.currentSpotBasePanel.isUploading())) {
-            GWT.log("canceling upload");
-            currentSpotBasePanel.defaultUploader.cancel();
+            GWT.log("uploading");
+            return false;
         }
 
         if (!checkValidToToggle()) {
@@ -2274,11 +2252,19 @@ public class MyWebApp implements EntryPoint {
     }
 
     private void doConfirmRegistration(String historyToken) {
-        //registration/loginToken=${user.loginToken}
+
         String loginToken = historyToken.replaceAll("registration/loginToken=", "");
-        GWT.log("loginToken=" + loginToken);
+        GWT.log("doConfirmRegistration " + loginToken);
         final DataOperationDialog dialog = new DataOperationDialog(
                 "Confirming registration.");
+
+        //we want to show ui person form
+        if (loginToken.equals("showme")) {
+            RegistrationConfirmPanel upf = new RegistrationConfirmPanel(MyWebApp.this);
+            swapCenter(upf);
+            return;
+        }
+
         ApiServiceAsync myService = getApiServiceAsync();
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setLoginToken(loginToken);
@@ -2298,6 +2284,7 @@ public class MyWebApp implements EntryPoint {
                     swapCenter(upf);
                     getMessagePanel().displayMessage("Your account has been validated.");
                     getMessagePanel().displayMessage("Now enter a password and press save.");
+
                 } else {
                     //let's bring up some screen
                     verifyDisplay();
@@ -2646,7 +2633,7 @@ public class MyWebApp implements EntryPoint {
             Long stateId = new Long(id);
             toggleState(newItem, stateId);
         } else if (historyToken.startsWith(ACCOUNT_SETTINGS)) {
-            toggleAccountSettings(newItem);
+            toggleAccountSettings();
         } else if (historyToken.startsWith(PROFILE_SETTINGS)) {
             toggleProfileSettings();
         } else if (historyToken.startsWith(MOST_RECENTLY_VOTED)) {
@@ -3059,28 +3046,8 @@ public class MyWebApp implements EntryPoint {
 
     private PhoneGap phoneGap = null;
 
-    public void updateTagCloud(QueryResponse queryResponse) {
-        if (true) return;
-        //we only have tagcloud in desktop app
-        if (!isDesktop()) return;
-        this.tagCloudPanel.clear();
-        this.tagCloud = new TagCloud();
-        this.tagCloudPanel.add(tagCloud);
-        processTagCloud(queryResponse, tagCloud);
-    }
 
-    private void processTagCloud(QueryResponse queryResponse, TagCloud tagCloud) {
-        for (FacetField facetField : queryResponse.getFacetFields()) {
-            // GWT.log("looping 1");
-            for (FacetCount facetCount : facetField.getFacetCounts()) {
-                for (int i = 0; i < facetCount.getValueCount(); i++) {
-                    String link = "#" + MyWebApp.TAG_FILTER + facetCount.getName();
-                    WordTag wordTag = new WordTag(facetCount.getName(), link);
-                    tagCloud.addWord(wordTag);
-                }
-            }
-        }
-    }
+
 
     public MessagePanel getMessagePanel() {
         return messagePanel;
@@ -3271,7 +3238,7 @@ public class MyWebApp implements EntryPoint {
 
 
     Panel tagCloudPanel = null;
-    TagCloud tagCloud = null;
+    //TagCloud tagCloud = null;
     FlowPanel mapPanel = new FlowPanel();
 
     private void initMapPanel() {
@@ -4322,45 +4289,35 @@ public class MyWebApp implements EntryPoint {
     public static String NEW_FRIEND = "new-friend";
     private static String PROFILE_SETTINGS = "profile-settings";
     //private static String USER_PROFILE_FORM = "user-profile-form";
-    private static String ACCOUNT_SETTINGS = "account-settings";
+    public static String ACCOUNT_SETTINGS = "account-settings";
 
     public void toggleProfileSettings() {
-        //temp
-//        AsyncCallback backCallback = new AsyncCallback() {
-//            public void onFailure(Throwable throwable) {
-//                Window.alert(throwable.getMessage());
-//            }
-//
-//            public void onSuccess(Object response) {
-//                toggleUserProfileForm(false);
-//            }
-//        };
-//        if (!isLoggedIn(backCallback)) {
-//            return;
-//        }
+
         ProfileSettingsPanel upf = new ProfileSettingsPanel(this);
         swapCenter(upf);
     }
 
-    public void toggleAccountSettings(boolean newItem) {
-        if (newItem) {
-            History.newItem(ACCOUNT_SETTINGS);
+    private void toggleAccountSettings() {
+
+        AsyncCallback backCallback = new AsyncCallback() {
+            public void onFailure(Throwable throwable) {
+                Window.alert(throwable.getMessage());
+            }
+
+            public void onSuccess(Object response) {
+                toggleAccountSettings();
+            }
+        };
+        if (!isLoggedIn(backCallback)) {
             return;
         }
-//        AsyncCallback backCallback = new AsyncCallback() {
-//            public void onFailure(Throwable throwable) {
-//                Window.alert(throwable.getMessage());
-//            }
-//
-//            public void onSuccess(Object response) {
-//                toggleUserProfileForm(false);
-//            }
-//        };
-//        if (!isLoggedIn(backCallback)) {
-//            return;
-//        }
         AccountSettingsPanel upf = new AccountSettingsPanel(this);
         swapCenter(upf);
+        if (homeCallback != null) {
+            homeCallback.onSuccess(null);
+            this.homeCallback = null;
+        }
+
     }
 
     private void toggleManageFriends() {

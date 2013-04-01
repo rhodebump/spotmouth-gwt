@@ -1,19 +1,13 @@
 package com.spotmouth.gwt.client.group;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
-
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.spotmouth.gwt.client.ManageMembersPanel;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
@@ -23,7 +17,6 @@ import com.spotmouth.gwt.client.dto.GroupHolder;
 import com.spotmouth.gwt.client.dto.GroupRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.SpotHolder;
-import com.spotmouth.gwt.client.group.GroupPanel;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 

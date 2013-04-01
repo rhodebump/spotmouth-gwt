@@ -2,17 +2,10 @@ package com.spotmouth.gwt.client.search;
 //import com.spotmouth.commons.AuthenticationResponse;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.dto.TagHolder;
-
-import java.util.ArrayList;
 
 public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
     public SearchForm() {

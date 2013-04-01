@@ -1,8 +1,8 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-    xmlns:g='urn:import:com.google.gwt.user.client.ui'   xmlns:sc='urn:import:com.spotmouth.gwt.client.common'
-    xmlns:sn='urn:import:com.spotmouth.gwt.client.menu'
-    xmlns:xx='urn:import:com.spotmouth.gwt.client'>
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:sn='urn:import:com.spotmouth.gwt.client.menu'
+             xmlns:xx='urn:import:com.spotmouth.gwt.client'>
 
     <ui:with field="myResources" type="com.spotmouth.gwt.client.icons.SpotImageResource"/>
 

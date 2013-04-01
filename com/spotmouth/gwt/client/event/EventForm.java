@@ -10,7 +10,6 @@ import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.common.TextField;
-import com.spotmouth.gwt.client.coupon.CouponFormComposite;
 import com.spotmouth.gwt.client.dto.ItemHolder;
 import com.spotmouth.gwt.client.dto.LeaveMarkRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
@@ -91,7 +90,8 @@ public class EventForm extends SpotBasePanel implements SpotMouthPanel {
             Button cancelButton = new Button();
             saveButton.addClickHandler(cancelHandler);
             titleTextBox = new TextField();
-            defaultUploader = new MultiUploader();
+            this.defaultUploader = new MultiUploader();
+
             defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler2);
             //do we have an iamge
             Image mainImage = getImage(eventItemHolder.getContentHolder(), "320x320");

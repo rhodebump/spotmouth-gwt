@@ -1,10 +1,7 @@
 package com.spotmouth.gwt.client.chat;
 
-import org.vectomatic.dnd.DropFlowPanel;
-import com.spotmouth.gwt.client.dto.ItemHolder;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.StatusCodeException;
@@ -12,10 +9,11 @@ import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.dto.Event;
+import com.spotmouth.gwt.client.dto.ItemHolder;
 import org.atmosphere.gwt.client.AtmosphereClient;
 import org.atmosphere.gwt.client.AtmosphereGWTSerializer;
 import org.atmosphere.gwt.client.AtmosphereListener;
-import com.spotmouth.gwt.client.dto.Event;
 import org.vectomatic.dnd.DropPanel;
 
 import java.util.List;

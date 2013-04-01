@@ -14,7 +14,7 @@
 <div id="accp">
 <h1>Account Settings</h1>
 <span id="kill-prof">
-    <g:Anchor ui:field="removeProfileAnchor"/>
+    <g:Anchor ui:field="removeProfileAnchor" title="Remove Profile">x</g:Anchor>
 </span>
 
 <label>

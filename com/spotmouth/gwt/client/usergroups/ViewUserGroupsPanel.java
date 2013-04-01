@@ -13,7 +13,6 @@ import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.*;
-import com.spotmouth.gwt.client.usergroups.ManageUserGroupPanel;
 
 import java.util.HashMap;
 import java.util.List;

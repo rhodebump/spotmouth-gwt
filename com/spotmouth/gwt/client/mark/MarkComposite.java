@@ -1,7 +1,6 @@
 package com.spotmouth.gwt.client.mark;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.*;
@@ -143,20 +142,10 @@ public class MarkComposite extends Composite {
         this.secretKeyTextBox = secretKeyTextBox;
         this.shareOnFacebookButton = shareOnFacebookButton;
 
-        //leaveMarkButton.setStyleName("btn_blue");
-
-        /*
-                                  <span class="ddplaceholedr"></span>
-                            <span class="ddplaceholedr"></span>
-                            <span class="ddplaceholedr"></span>
-
-         */
-
-        //panelImages1.add(new InlineLabel());
 
 
         this.addTagButton = addTagButton;
-        //addTagButton.setStyleName("btn_blue");
+
 
         initWidget(uiBinder.createAndBindUi(this));
 

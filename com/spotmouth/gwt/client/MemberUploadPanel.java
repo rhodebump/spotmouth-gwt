@@ -1,8 +1,8 @@
 package com.spotmouth.gwt.client;
 
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Label;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.GroupHolder;
 import com.spotmouth.gwt.client.dto.GroupRequest;
@@ -34,7 +34,7 @@ public class MemberUploadPanel extends SpotBasePanel implements SpotMouthPanel {
         }
 
 
-        addUpload("Member File Upload (CSV Format)",this);
+        //addUpload("Member File Upload (CSV Format)",this);
         add(processFileButton());
         add(cancelButton());
     }

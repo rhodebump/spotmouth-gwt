@@ -6,7 +6,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.*;
-import com.spotmouth.gwt.client.*;
+import com.spotmouth.gwt.client.ULPanel;
 
 /**
  * Created with IntelliJ IDEA.

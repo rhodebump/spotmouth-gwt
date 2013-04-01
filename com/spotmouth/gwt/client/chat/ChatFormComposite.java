@@ -5,14 +5,11 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 import com.spotmouth.gwt.client.MyWebApp;
-import com.spotmouth.gwt.client.contest.ManageContestPanel;
-import com.spotmouth.gwt.client.dto.ContestHolder;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.ItemHolder;
 import gwtupload.client.MultiUploader;
 import org.vectomatic.dnd.DropPanel;
-import com.spotmouth.gwt.client.common.TextField;
 
 /**
  * Created with IntelliJ IDEA.

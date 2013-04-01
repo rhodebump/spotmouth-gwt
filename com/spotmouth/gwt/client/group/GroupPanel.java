@@ -1,15 +1,15 @@
 package com.spotmouth.gwt.client.group;
 
-import com.spotmouth.gwt.client.common.*;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import com.spotmouth.gwt.client.ULPanel;
-import com.spotmouth.gwt.client.common.Fieldset;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
+import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.common.Fieldset;
+import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;

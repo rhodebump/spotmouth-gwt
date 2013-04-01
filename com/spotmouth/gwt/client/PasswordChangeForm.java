@@ -1,22 +1,16 @@
 package com.spotmouth.gwt.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
-import com.spotmouth.gwt.client.dto.LoginRequest;
+import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.UserHolder;
 import com.spotmouth.gwt.client.dto.UserRequest;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.TextBox;
-import com.spotmouth.gwt.client.common.SpotBasePanel;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,8 +20,8 @@ import com.spotmouth.gwt.client.common.SpotBasePanel;
  * To change this template use File | Settings | File Templates.
  */
 public class PasswordChangeForm extends SpotBasePanel implements SpotMouthPanel {
-    //private TextBox passwordTextBox = new TextBox();
-    private TextBox usernameTextBox = new TextBox();
+
+
     public PasswordChangeForm() {}
 
 
@@ -38,6 +32,17 @@ public class PasswordChangeForm extends SpotBasePanel implements SpotMouthPanel 
             return MyWebApp.resources.password();
         }
     }
+
+
+    AsyncCallback passwordSaved = new AsyncCallback() {
+        public void onFailure(Throwable throwable) {
+            getMessagePanel().displayError(throwable.getMessage());
+        }
+
+        public void onSuccess(Object response) {
+            getMessagePanel().displayMessage("Your password has been updated.");
+        }
+    };
 
 
     protected void saveResetPassword() {
@@ -63,8 +68,10 @@ public class PasswordChangeForm extends SpotBasePanel implements SpotMouthPanel 
                     //UserHolder uh = mobileResponse.getUserHolder();
                     mywebapp.setAuthenticatedUser(mobileResponse.getUserHolder());
                     //we should exit the account settings page, but where to go??
-                    mywebapp.toggleAccountSettings(true);
-                    getMessagePanel().displayMessage("Your password has been updated.");
+                    mywebapp.setHomeCallback(passwordSaved);
+                    History.newItem(MyWebApp.ACCOUNT_SETTINGS);
+
+
                 } else {
                     getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
                 }

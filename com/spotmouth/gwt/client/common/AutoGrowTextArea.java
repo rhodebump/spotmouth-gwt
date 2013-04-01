@@ -1,19 +1,13 @@
 package com.spotmouth.gwt.client.common;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Style.Overflow;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.Command;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.event.dom.client.*;
-import com.google.gwt.core.client.*;
-import com.google.gwt.core.client.Scheduler.*;
 
 /**
  * A {@link TextArea} that automatically grows and shrinks depending on its content.

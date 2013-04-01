@@ -1,11 +1,8 @@
 package com.spotmouth.gwt.client.contest;
 
-
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.event.dom.client.ErrorEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -14,14 +11,14 @@ import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
 import com.spotmouth.gwt.client.MyWebApp;
-import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.ContestHolder;
 import gwtupload.client.MultiUploader;
 import org.vectomatic.dnd.DataTransferExt;
 import org.vectomatic.dnd.DropPanel;
 import org.vectomatic.file.*;
-import org.vectomatic.file.events.*;
-import com.spotmouth.gwt.client.common.TextField;
+import org.vectomatic.file.events.LoadEndEvent;
+import org.vectomatic.file.events.LoadEndHandler;
 
 import java.util.ArrayList;
 import java.util.List;

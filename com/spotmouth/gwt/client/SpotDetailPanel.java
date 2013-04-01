@@ -12,11 +12,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.detail.Detail;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.mark.SpotMarkComposite;
 import com.spotmouth.gwt.client.spot.ContactForm;
-import com.spotmouth.gwt.client.detail.*;
 
 import java.util.HashMap;
 import java.util.List;

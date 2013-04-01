@@ -3,14 +3,10 @@ package com.spotmouth.gwt.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Hyperlink;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.dto.LocationResult;
 import com.spotmouth.gwt.client.dto.SolrDocument;
 import com.spotmouth.gwt.client.help.HelpResources;
-import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.ui.InlineHTML;
 
 /**
  * Created by IntelliJ IDEA.

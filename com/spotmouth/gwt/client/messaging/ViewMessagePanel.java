@@ -1,8 +1,9 @@
 package com.spotmouth.gwt.client.messaging;
 
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Label;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.ItemHolder;

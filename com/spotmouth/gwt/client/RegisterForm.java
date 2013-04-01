@@ -7,6 +7,7 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.RegistrationRequest;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
@@ -45,9 +46,9 @@ public class RegisterForm extends SpotBasePanel implements SpotMouthPanel {
     }
    private       FlowPanel ugcPanel = new FlowPanel();
     private SimpleCheckBox acceptCheckbox = new SimpleCheckBox();
-    private TextBox usernameTextBox = new TextBox();
-    private TextBox smsPhoneNumberBox = new TextBox();
-    private TextBox emailAddressTextBox = new TextBox();
+
+
+    private TextField emailAddressTextBox = new TextField();
 
     public RegisterForm(MyWebApp mywebapp) {
         super(mywebapp,false);
@@ -55,6 +56,7 @@ public class RegisterForm extends SpotBasePanel implements SpotMouthPanel {
         if (MyWebApp.isDesktop()) {
             Button registrationButton = new Button("Submit");
             registrationButton.addClickHandler(registerHandler);
+            usernameTextBox = new TextField();
             addRequired(usernameTextBox);
             addRequired(emailAddressTextBox);
 
@@ -68,61 +70,17 @@ public class RegisterForm extends SpotBasePanel implements SpotMouthPanel {
             Anchor showTermsAnchor = new Anchor();
             showTermsAnchor.addClickHandler(showTerms);
 
-            RegistrationComposite registrationComposite = new RegistrationComposite(usernameTextBox,emailAddressTextBox,smsPhoneNumberBox,acceptCheckbox,registrationButton,ugcPanel,showTermsAnchor);
+            RegistrationComposite registrationComposite = new RegistrationComposite(usernameTextBox,emailAddressTextBox,smsPhoneNumberTextBox,acceptCheckbox,registrationButton,ugcPanel,showTermsAnchor);
             add(registrationComposite);
 
 
-            return;
+
 
         }
 
-        this.addStyleName("RegisterPanel");
-        //need to add the policy here
-        ScrollPanel sp = new ScrollPanel();
-        sp.setHeight("200px");
-        String html = MyHtmlResources.INSTANCE.getUGC().getText();
-        Label ugcLabel = new Label("User Generated Content Policy");
-        ugcLabel.setStyleName("h1");
-        sp.setWidget(new HTML(html));
-        add(ugcLabel);
-        add(sp);
 
-        //add(acceptCheckbox);
-        //this.acceptCheckbox = new SimplCheckBox("I accept these terms & conditions.");
-        FlowPanel fp =new FlowPanel();
-        fp.add(acceptCheckbox);
-        fp.add(new Label("I accept these terms & conditions."));
-        // addVoting(mywebapp.resources.thumbsDownBig(), mywebapp.resources.thumbsUpBig(), null);
-        addFieldset(fp, "", "na4");
-        Label label = new Label("You will need to provide a valid email address to activate your account.");
-        add(label);
-        usernameTextBox = addTextBox("Username *", "username", "");
-        emailAddressTextBox = addTextBox("Email *", "email", "");
-
-        Label smsLabel = new Label("If you want to receive text alerts, you need to provide a phone number.");
-        add(smsLabel);
-
-        smsPhoneNumberBox = addTextBox("SMS Phone Number", "smsPhoneNumber", "");
-
-        add(registerButton());
-        add(cancelButton());
-        usernameTextBox.setFocus(true);
     }
 
-    Label registerButton() {
-        Label btn = new Label("Register");
-        btn.addClickHandler(registerHandler);
-        fixButton(btn);
-        ImageResource ir = MyWebApp.resources.registerButton();
-
-        if (MyWebApp.isSmallFormat()) {
-            ir = MyWebApp.resources.registerButtonMobile();
-        }
-
-        Image img = new Image(ir);
-        btn.getElement().appendChild(img.getElement());
-        return btn;
-    }
 
     ClickHandler registerHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -148,7 +106,7 @@ public class RegisterForm extends SpotBasePanel implements SpotMouthPanel {
         RegistrationRequest registrationRequest = new RegistrationRequest();
         registrationRequest.setEmail(emailAddressTextBox.getValue());
         registrationRequest.setUsername(usernameTextBox.getValue());
-        registrationRequest.setSmsPhoneNumber(smsPhoneNumberBox.getValue());
+        registrationRequest.setSmsPhoneNumber(smsPhoneNumberTextBox.getValue());
         ApiServiceAsync myService = mywebapp.getApiServiceAsync();
         myService.doregister(registrationRequest, new AsyncCallback() {
             DataOperationDialog validateLoginDialog = new DataOperationDialog(

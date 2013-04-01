@@ -1,29 +1,32 @@
 package com.spotmouth.gwt.client.common;
 
+import com.bramosystems.oss.player.core.client.*;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.i18n.client.NumberFormat;
+import com.google.gwt.maps.client.InfoWindow;
+import com.google.gwt.maps.client.InfoWindowContent;
+import com.google.gwt.maps.client.MapUIOptions;
+import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.event.MapClickHandler;
 import com.google.gwt.maps.client.geocode.Geocoder;
 import com.google.gwt.maps.client.geocode.LocationCallback;
 import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geocode.StatusCodes;
 import com.google.gwt.maps.client.geom.LatLng;
-import com.google.gwt.maps.client.overlay.Overlay;
-import com.google.gwt.safehtml.shared.*;
-import com.google.gwt.i18n.client.NumberFormat;
-import com.bramosystems.oss.player.core.client.*;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JsArray;
-import com.google.gwt.event.dom.client.*;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.maps.client.*;
 import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
@@ -42,16 +45,16 @@ import com.phonegap.gwt.filetransfer.client.FileTransfer;
 import com.spotmouth.gwt.client.*;
 import com.spotmouth.gwt.client.contest.ContestsPanel;
 import com.spotmouth.gwt.client.dto.*;
-import com.spotmouth.gwt.client.mark.*;
 import com.spotmouth.gwt.client.group.ManageGroupPanel;
-import com.spotmouth.gwt.client.instagram.Data;
 import com.spotmouth.gwt.client.help.HelpPanel;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.icons.SpotImageResource;
+import com.spotmouth.gwt.client.instagram.Data;
+import com.spotmouth.gwt.client.mark.SmallAdvancedForm;
 import com.spotmouth.gwt.client.messaging.ViewMessagePanel;
+import com.spotmouth.gwt.client.product.ProductInstallPanel;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.spotmouth.gwt.client.search.SearchForm;
-import com.spotmouth.gwt.client.product.ProductInstallPanel;
 import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploadStatus.Status;
 import gwtupload.client.IUploader;
@@ -74,6 +77,83 @@ import java.util.*;
 
 //BIG, used to extend verticalpanel
 public abstract class SpotBasePanel extends FlowPanel {
+
+    protected TextField usernameTextBox = null;
+
+    protected void saveAccountSettings() {
+        getMessagePanel().clear();
+        GWT.log("saveAccountSettings");
+        UserRequest userRequest = new UserRequest();
+        userRequest.setUserHolder(mywebapp.getAuthenticatedUser());
+        userRequest.setAuthToken(mywebapp.getAuthToken());
+        UserHolder userHolder = userRequest.getUserHolder();
+        //sometimes username will not be in form,
+        //it will not be in registrationconfirmpanel
+        if (usernameTextBox != null) {
+            userHolder.setUsername(usernameTextBox.getValue());
+        }
+        if (emailTextField != null) {
+
+            String emailAddress =  emailTextField.getValue();
+
+            if (! mywebapp.getAuthenticatedUser().getEmailAddress().equals(emailAddress)) {
+                //since our email address will be changed, we need to re-certificate
+                getMessagePanel().displayMessage("Since you changed your email address, you will need to re-confirm this new address.");
+            }
+            userHolder.setEmailAddress(emailTextField.getValue());
+
+
+        }
+
+
+        userHolder.setSmsPhoneNumber(smsPhoneNumberTextBox.getValue());
+        userRequest.setOldPassword(oldPasswordTextBox.getValue());
+        userRequest.setNewPassword(newPasswordTextBox.getValue());
+        //should we check if valid??
+        //don't know old password, and everything is optional, so no!
+        ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+        final DataOperationDialog saveAccountSettingsDialog = new DataOperationDialog("Saving account settings");
+        myService.saveUser(userRequest, new AsyncCallback() {
+            public void onFailure(Throwable caught) {
+                saveAccountSettingsDialog.hide();
+                getMessagePanel().displayError(caught.getMessage());
+            }
+
+            public void onSuccess(Object result) {
+                saveAccountSettingsDialog.hide();
+                MobileResponse mobileResponse = (MobileResponse) result;
+                if (mobileResponse.getStatus() == 1) {
+                    mywebapp.setAuthenticatedUser(mobileResponse.getUserHolder());
+                    History.newItem(MyWebApp.ACCOUNT_SETTINGS);
+                    getMessagePanel().displayMessage("Your account have been saved.");
+                } else {
+                    getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                }
+            }
+        });
+    }
+
+
+
+    protected MultiUploader defaultUploader = null;
+
+
+
+
+    public boolean isUploading() {
+        if (defaultUploader == null) return false;
+        if (defaultUploader.getStatus() == IUploadStatus.Status.INPROGRESS) {
+            getMessagePanel().displayMessage("Please wait until files are done uploading.");
+            return true;
+        } else if (defaultUploader.getStatus() == IUploadStatus.Status.QUEUED) {
+                getMessagePanel().displayMessage("Please wait until files are done uploading.");
+            return true;
+        }
+        return false;
+    }
+
+
+
 
     private String activeTabId = null;
 
@@ -184,6 +264,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     // Attach an image to the pictures viewer
     private PreloadedImage.OnLoadPreloadedImageHandler showImage3 = new PreloadedImage.OnLoadPreloadedImageHandler() {
         public void onLoad(PreloadedImage image) {
+            GWT.log("showImage3");
             image.setStyleName("ddplaceholedr");
             panelImages.add(image);
         }
@@ -524,46 +605,11 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     };
     //protected TextBox emailAddressTextBox = new TextBox();
-    protected TextBox smsPhoneNumberTextBox = new TextBox();
-    protected TextBox oldPasswordTextBox = new TextBox();
-    protected TextBox newPasswordTextBox = new TextBox();
+    protected TextField smsPhoneNumberTextBox = new TextField();
+    protected TextField oldPasswordTextBox = new TextField();
+    protected TextField newPasswordTextBox = new TextField();
 
-    protected void saveAccountSettings() {
-        getMessagePanel().clear();
-        GWT.log("saveAccountSettings");
-        UserRequest userRequest = new UserRequest();
-        userRequest.setUserHolder(mywebapp.getAuthenticatedUser());
-        userRequest.setAuthToken(mywebapp.getAuthToken());
-        UserHolder userHolder = userRequest.getUserHolder();
-        userHolder.setEmailAddress(emailTextField.getValue());
-        userHolder.setSmsPhoneNumber(smsPhoneNumberTextBox.getValue());
-        userRequest.setOldPassword(oldPasswordTextBox.getValue());
-        userRequest.setNewPassword(newPasswordTextBox.getValue());
-        //should we check if valid??
-        //don't know old password, and everything is optional, so no!
-        ApiServiceAsync myService = mywebapp.getApiServiceAsync();
-        final DataOperationDialog saveAccountSettingsDialog = new DataOperationDialog("Saving account settings");
-        myService.saveAccountSettings(userRequest, new AsyncCallback() {
-            public void onFailure(Throwable caught) {
-                saveAccountSettingsDialog.hide();
-                getMessagePanel().displayError(caught.getMessage());
-            }
 
-            public void onSuccess(Object result) {
-                saveAccountSettingsDialog.hide();
-                MobileResponse mobileResponse = (MobileResponse) result;
-                if (mobileResponse.getStatus() == 1) {
-                    //UserHolder uh = mobileResponse.getUserHolder();
-                    mywebapp.setAuthenticatedUser(mobileResponse.getUserHolder());
-                    //we should exit the account settings page, but where to go??
-                    mywebapp.toggleAccountSettings(true);
-                    getMessagePanel().displayMessage("Your account have been saved.");
-                } else {
-                    getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
-                }
-            }
-        });
-    }
 
     protected boolean havePicture(MobileResponse mobileResponse) {
         if (mobileResponse.getUserHolder().getContentHolder() == null) {
@@ -1361,9 +1407,6 @@ public abstract class SpotBasePanel extends FlowPanel {
             return imageResource;
         }
     }
-//    public void setImageResourceMobile(ImageResource imageResourceMobile) {
-//        this.imageResourceMobile = imageResourceMobile;
-//    }
 
     public void setImageResources(ImageResource imageResource, ImageResource imageResourceMobile) {
         this.imageResource = imageResource;
@@ -1377,7 +1420,6 @@ public abstract class SpotBasePanel extends FlowPanel {
     }
 
     protected void checkRequired(SuggestBox textBox, String message) {
-        //mywebapp.log("checkRequired message=" + message);
         if (textBox == null) return;
         if (textBox.getValue() == null || textBox.getValue().length() == 0) {
             getMessagePanel().displayError(message);
@@ -1741,8 +1783,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
 
         public void requestSuggestions(SuggestOracle.Request req, SuggestOracle.Callback callback) {
-            //IQuoteService.Util.getInstance().getQuote(req, new TagSuggestCallback(req, callback));
-            //TagSuggestCallback tagSuggestCallback = new TagSuggestCallback(req, callback);
             fetchPostalCodes(req, callback);
         }
 
@@ -1860,6 +1900,7 @@ public abstract class SpotBasePanel extends FlowPanel {
             // cityTextBox.setText("US");
         }
         //placeholder="Zipcode/Postal Code"
+
         postalCodeTextBox.getTextBox().getElement().setAttribute("placeholder","Zipcode/Postal Code");
 
         postalCodeTextBox.getTextBox().addFocusHandler(focusHandler);
@@ -2112,7 +2153,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         addFieldset(addressLabel, spotHolder.getName(), "x");
         if (!isEmpty(spotHolder.getVoicephone())) {
             Fieldset fieldset = new Fieldset();
-            //addPhone(spotHolder.getVoicephone(), fieldset);
             add(fieldset);
         }
     }
@@ -2400,9 +2440,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         Button showAdvancedButton = new Button(SHOW_ADVANCED);
         showAdvancedMap.put(showAdvancedButton, markData);
         showAdvancedButton.addClickHandler(showAdvancedWriteHerePanelHandler);
-//        Button shareOnFacebookButton = new Button("Share On facebook");
-//        shareOnFacebookButton.addClickHandler(saveHandlerFacebook);
-//        widgetMarkDataMap.put(shareOnFacebookButton, markData);
+
 
 
         Button shareOnFacebookButton =   getFacebookButton(markData);
@@ -2426,32 +2464,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         return anchor;
     }
 
-    /*
-    <div id="result">
-    	<img src="ava.png" class="avatar"/>
-    	<input class="check" type="checkbox">
-    	<div class="center-block">
-    		<a href="#" class="result-header"><h2>@Vishal Adma, 4300 Brenner Dr, Kansas City, KS 66104</h2></a>
-    		<div class="tags"><a href="#">ks</a><a href="#">66104</a><a href="#">kansas city</a></div>
-    			<form class="comment-form">
-    				<img src="" class="com-ava"/>
-    				<textarea rows="1" placeholder="Leave your comment..."></textarea><input class="search-send" type="submit"><br>
-    				<a class="adv">show advanced</a><a class="adv">hide</a>
-    			</form>
-    		</div>
-    		<a href="#" class="distanse"><h1>560</h1><p>meters avay</p></a>
-    	<div class="search-adv">
-    	<form class="adv-form">
-    			<label class="add-photo" title="add photo"><input type="file"></label>
-    			<label class="add-photo" title="add photo"><input type="file"></label>
-    			<label class="add-photo" title="add photo"><input type="file"></label>
-    			<textarea rows="1" placeholder="Secret Key"></textarea>
-    			<span><input type="submit">
-    			<p>Max file size - 5mb</p></span>
-    		</form>
-    	</div>
-    </div>
-    */
+
     protected ComplexPanel getLocationPanel(LocationResult locationResult, ClickHandler handler, boolean showCategories) {
         Location location = locationResult.getLocation();
         FlowPanel result = new FlowPanel();
@@ -2660,15 +2673,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         return leaveMarkButton;
     }
 
-//    protected void addPhone(String phone, ComplexPanel complexPanel) {
-//        //let's show the phone
-//        //<a href="callto:0123456789">call me</a>         will work for desktop, (/^callto:/, "tel:
-//        if (phone == null) {
-//            return;
-//        }
-//        Anchor phoneAnchor = getPhone(phone);
-//        complexPanel.add(phoneAnchor);
-//    }
+
 
     protected Anchor getPhone(String phone) {
         if (MyWebApp.isDesktop()) {
@@ -2720,35 +2725,32 @@ public abstract class SpotBasePanel extends FlowPanel {
             leaveMarkButton.addClickHandler(saveHandler2);
             widgetMarkDataMap.put(leaveMarkButton, advancedMarkData);
 
-            MultiUploader multiUploader = new MultiUploader();
-            this.defaultUploader =  multiUploader;
+            if((isUploading())) {
+                GWT.log("uploading");
+                return;
+            }
+
+            this.defaultUploader= new MultiUploader();
             FlowPanel panelImages = new FlowPanel();
             IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
-            multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+            defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
             SuggestBox tagSearchTextBox = getTagSuggestBox(null);
             markData.tagSearchTextBox = tagSearchTextBox;
-//            TextBox secretKeyTextBox = new TextBox();
-//            markData.secretKeyTextBox = secretKeyTextBox;
-            //SimpleCheckBox shareOnFacebookCheckbox = new SimpleCheckBox();
-            //markData.shareOnFacebookCheckbox = shareOnFacebookCheckbox;
+
             Anchor addTagAnchor = new Anchor("Add");
             addTagAnchor.getElement().setId("addTag");
             addTagAnchor.addClickHandler(addTagHandler);
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
 
-            //MultiUploader multiUploader = new MultiUploader();
-            //FlowPanel panelImages = new FlowPanel();
-            //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
-            //multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-            SmallAdvancedForm smallAdvancedForm = new SmallAdvancedForm(selectedTagsPanel, tagSearchTextBox, markData.secretKeyTextBox, multiUploader, panelImages,suggestionsPanel);
+            SmallAdvancedForm smallAdvancedForm = new SmallAdvancedForm(selectedTagsPanel, tagSearchTextBox, markData.secretKeyTextBox, defaultUploader, panelImages,suggestionsPanel);
             //MarkComposite markComposite = new MarkComposite(leaveMarkButton, advancedMarkData.saySomethingTextArea, multiUploader, panelImages, mywebapp,tagSearchTextBox,selectedTagsPanel,addTagAnchor);
             hideAdvancedMap.put(label, smallAdvancedForm);
             FormPanel myform = new FormPanel();
             setupRootPanelForm(myform, advancedMarkData);
             myform.setWidget(smallAdvancedForm);
             advancedMarkData.expandData.resultPanel.add(myform);
-            //markComposite.hideTitle();
+
         } else {
             //hide advanced
             SmallAdvancedForm markComposite = hideAdvancedMap.get(label);
@@ -2927,17 +2929,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         label.setStyleName("whiteButton");
     }
 
-    public boolean isUploading() {
-        if (defaultUploader == null) return false;
-        if (defaultUploader.getStatus() == Status.INPROGRESS) {
-            mywebapp.getMessagePanel().displayMessage("Please wait until files are done uploading.");
-            return true;
-        } else if (defaultUploader.getStatus() == Status.QUEUED) {
-            mywebapp.getMessagePanel().displayMessage("Please wait until files are done uploading.");
-            return true;
-        }
-        return false;
-    }
+
 
     //need to override
     protected boolean isValid() {
@@ -2955,9 +2947,9 @@ public abstract class SpotBasePanel extends FlowPanel {
         //temp, let's see if we do not clear
         getMessagePanel().clear();
         //com.google.gwt.user.client.Window.scrollTo(0, 0);
-        if (isUploading()) {
-            return;
-        }
+//        if (isUploading()) {
+//            return;
+//        }
         if (!isValid()) {
             return;
         }
@@ -3039,9 +3031,9 @@ public abstract class SpotBasePanel extends FlowPanel {
         //temp, let's see if we do not clear
         getMessagePanel().clear();
         //com.google.gwt.user.client.Window.scrollTo(0, 0);
-        if (isUploading()) {
-            return;
-        }
+//        if (isUploading()) {
+//            return;
+//        }
         if (!isValid(markData)) {
             GWT.log("not valid returning");
             return;
@@ -4687,30 +4679,29 @@ public abstract class SpotBasePanel extends FlowPanel {
 //        return true;
     }
 
-    public MultiUploader defaultUploader = null;
+    //public MultiUploader defaultUploader = null;
     protected FlowPanel panelImages = new FlowPanel();
 
-    protected void addUpload(String prompt, ComplexPanel parentPanel) {
-        if (!isUploadSupported()) {
-            return;
-        }
-        VerticalPanel vp = new VerticalPanel();
-        panelImages.setStyleName("images_uploaded_preview");
-        defaultUploader = new MultiUploader();
-        vp.add(defaultUploader);
-        Label limitLabel = new Label("There is a 50 mg limit on file uploads");
-        vp.add(limitLabel);
-        addFieldset(vp, prompt, "multiUploader", parentPanel);
-        //add(defaultUploader);
-        defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-    }
+//    protected void addUpload(String prompt, ComplexPanel parentPanel) {
+//        if (!isUploadSupported()) {
+//            return;
+//        }
+//        VerticalPanel vp = new VerticalPanel();
+//        panelImages.setStyleName("images_uploaded_preview");
+//        vp.add(defaultUploader);
+//        Label limitLabel = new Label("There is a 50 mg limit on file uploads");
+//        vp.add(limitLabel);
+//        addFieldset(vp, prompt, "multiUploader", parentPanel);
+//        //add(defaultUploader);
+//        defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+//    }
 
     protected void addMediaFields(String prompt) {
         addMediaFields(prompt, this);
     }
 
     protected void addMediaFields(String prompt, ComplexPanel parentPanel) {
-        addUpload(prompt, parentPanel);
+       // addUpload(prompt, parentPanel);
         //addFileUpload();
         if (mywebapp.isMobileDevice()) {
             addCameraStuff(parentPanel);

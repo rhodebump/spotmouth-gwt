@@ -2,21 +2,20 @@ package com.spotmouth.gwt.client.coupon;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
-import com.spotmouth.gwt.client.common.DateTextField;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.common.TextField;
-import com.spotmouth.gwt.client.dto.*;
+import com.spotmouth.gwt.client.dto.ItemHolder;
 import com.spotmouth.gwt.client.dto.LeaveMarkRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.SpotHolder;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import gwtupload.client.IUploadStatus;
-import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
-import gwtupload.client.PreloadedImage;
 
 public class CouponForm extends SpotBasePanel implements SpotMouthPanel {
 
@@ -87,7 +86,7 @@ public class CouponForm extends SpotBasePanel implements SpotMouthPanel {
             Button cancelButton = new Button();
             saveButton.addClickHandler(cancelHandler);
             titleTextBox = new TextField();
-            defaultUploader = new MultiUploader();
+            this.defaultUploader = new MultiUploader();
             defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler2);
             //do we have an iamge
             Image mainImage = getImage(couponItemHolder.getContentHolder(), "320x320");

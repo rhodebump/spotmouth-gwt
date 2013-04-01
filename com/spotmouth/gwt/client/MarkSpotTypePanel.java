@@ -1,6 +1,5 @@
 package com.spotmouth.gwt.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.Button;
@@ -8,14 +7,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.dto.TagHolder;
 import com.spotmouth.gwt.client.help.HelpResources;
-import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
 import org.vectomatic.dnd.DropPanel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 //3 buttons to choose type of spot to mark
 public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
@@ -59,11 +53,10 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
 
     public MarkSpotTypePanel(MyWebApp mywebapp) {
         super(mywebapp);
-        if (MyWebApp.isDesktop()) {
+
             PlateSearchPanel plateSearchPanel = new PlateSearchPanel(mywebapp);
-            MultiUploader multiUploader = new MultiUploader();
-            this.defaultUploader =  multiUploader;
-            multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
+            this.defaultUploader = new MultiUploader();
+        defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             ULPanel pickSpotULPanel = getPickSpotULPanel();
 
 
@@ -92,12 +85,12 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(plateSearchPanel.colorsListBox, plateSearchPanel.plateNameTextBox,
                     plateSearchPanel.keywordsTextBox, plateSearchPanel.manufacturersListBox, plateSearchPanel.stateTextBox, plateSearchPanel.vehicleTypeListBox,
                     plateSearchPanel.plateSearchButton, markData.tagSearchTextBox,
-                    markData.secretKeyTextBox, markData.saySomethingTextArea, selectedTagsPanel, leaveMarkButton, multiUploader, panelImages,
+                    markData.secretKeyTextBox, markData.saySomethingTextArea, selectedTagsPanel, leaveMarkButton, defaultUploader, panelImages,
                     pickSpotULPanel, mywebapp, shareOnFacebookButton, addTagButton,suggestionsPanel,markData.spotDescriptionTextArea,dropPanel);
             plateSearchComposite.tab2.setValue(true);
             myFormPanel.setWidget(plateSearchComposite);
             add(myFormPanel);
-        }
+
 
     }
 

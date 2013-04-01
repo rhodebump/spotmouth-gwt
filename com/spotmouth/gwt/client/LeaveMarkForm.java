@@ -10,10 +10,7 @@ import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.mark.MarkComposite;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import gwtupload.client.IUploadStatus;
-import gwtupload.client.IUploader;
 import gwtupload.client.MultiUploader;
-import gwtupload.client.PreloadedImage;
 import org.vectomatic.dnd.DropPanel;
 
 public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
@@ -80,10 +77,10 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
 
         if (MyWebApp.isDesktop()) {
-            MultiUploader multiUploader = new MultiUploader();
-            this.defaultUploader =  multiUploader;
+          this.defaultUploader = new MultiUploader();
+           // this.defaultUploader =  multiUploader;
             //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
-            multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
+            defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             MarkData markData = new MarkData();
             markData.expandData = new ExpandData();
             markData.spotHolder = spotHolder;
@@ -99,7 +96,7 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
             DropPanel dropPanel = getDropPanel();
-            MarkComposite markComposite = new MarkComposite(leaveMarkButton, contentTextArea, multiUploader, panelImages, mywebapp, markData.tagSearchTextBox, selectedTagsPanel,
+            MarkComposite markComposite = new MarkComposite(leaveMarkButton, contentTextArea, defaultUploader, panelImages, mywebapp, markData.tagSearchTextBox, selectedTagsPanel,
                     addTagButton, markData.secretKeyTextBox, shareOnFacebookButton, suggestionsPanel,dropPanel);
             markComposite.setLocationName(spotHolder.getName());
             markComposite.setFullAddress(spotHolder.getAddressLabel());

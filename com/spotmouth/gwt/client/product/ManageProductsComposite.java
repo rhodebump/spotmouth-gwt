@@ -1,13 +1,12 @@
 package com.spotmouth.gwt.client.product;
 
-import com.spotmouth.gwt.client.*;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
-import com.spotmouth.gwt.client.common.TextField;
+import com.spotmouth.gwt.client.ULPanel;
 
 /**
  * Created with IntelliJ IDEA.

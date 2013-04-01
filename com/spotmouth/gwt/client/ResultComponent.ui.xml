@@ -1,6 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'   xmlns:xx='urn:import:com.spotmouth.gwt.client'  xmlns:xx1='urn:import:com.spotmouth.gwt.client.common'
-    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:xx='urn:import:com.spotmouth.gwt.client'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
     <g:HTMLPanel>
         <!--

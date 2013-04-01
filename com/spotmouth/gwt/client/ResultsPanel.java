@@ -1,16 +1,13 @@
 package com.spotmouth.gwt.client;
 
 import com.google.gwt.core.client.GWT;
-import java.util.*;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.InfoWindow;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapUIOptions;
 import com.google.gwt.maps.client.MapWidget;
-import com.google.gwt.maps.client.event.*;
+import com.google.gwt.maps.client.event.MarkerMouseOverHandler;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.geom.Point;
 import com.google.gwt.maps.client.geom.Size;
@@ -21,16 +18,11 @@ import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import com.spotmouth.gwt.client.common.AutoGrowTextArea;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.help.HelpResources;
-import com.spotmouth.gwt.client.mark.SpotMarkComposite;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
 
@@ -506,7 +498,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
            // add(fp);
         }
 
-        mywebapp.updateTagCloud(mobileResponse.getSearchQueryResponse());
+
         processIfContest(mobileResponse);
         processIfDrivers();
         //wierd, but this is where the facets are kept

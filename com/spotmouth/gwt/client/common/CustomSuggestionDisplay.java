@@ -1,5 +1,7 @@
 package com.spotmouth.gwt.client.common;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasAnimation;
 import com.google.gwt.user.client.ui.SuggestBox;
@@ -8,11 +10,9 @@ import com.google.gwt.user.client.ui.SuggestBox.SuggestionDisplay;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.spotmouth.gwt.client.ULPanel;
 
-import java.util.*;
-
-import com.google.gwt.event.dom.client.*;
-
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.

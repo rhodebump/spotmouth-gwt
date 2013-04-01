@@ -1,7 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:dnd='urn:import:org.vectomatic.dnd'  xmlns:mu='urn:import:gwtupload.client'
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:x2='urn:import:com.spotmouth.gwt.client.common'>
+        >
 
 
     <g:HTMLPanel tag="li" addStyleNames="mp_message">

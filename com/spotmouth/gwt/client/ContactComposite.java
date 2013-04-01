@@ -1,10 +1,10 @@
 package com.spotmouth.gwt.client;
 
-import com.spotmouth.gwt.client.common.TextField;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.common.TextField;
 
 /**
  * Created with IntelliJ IDEA.

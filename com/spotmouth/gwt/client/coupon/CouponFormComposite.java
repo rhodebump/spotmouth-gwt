@@ -5,9 +5,8 @@ import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.datepicker.client.DateBox;
-import com.spotmouth.gwt.client.ULPanel;
-import com.spotmouth.gwt.client.common.*;
+import com.spotmouth.gwt.client.common.DateTextField;
+import com.spotmouth.gwt.client.common.TextField;
 import gwtupload.client.MultiUploader;
 
 /**

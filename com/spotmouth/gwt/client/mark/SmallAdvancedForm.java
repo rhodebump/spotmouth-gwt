@@ -28,7 +28,6 @@ public class SmallAdvancedForm extends Composite {
         this.multiUploader = multiUploader;
         this.imagesPanel = imagesPanel;
         this.imagesPanel.setStyleName("ma_files");
-        //multiUploader.getStatusWidget().setVisible(false);
         initWidget(uiBinder.createAndBindUi(this));
 
     }

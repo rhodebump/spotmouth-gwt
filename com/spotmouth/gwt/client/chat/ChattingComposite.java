@@ -1,7 +1,10 @@
 package com.spotmouth.gwt.client.chat;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.dom.client.DragEnterEvent;
+import com.google.gwt.event.dom.client.DragLeaveEvent;
+import com.google.gwt.event.dom.client.DragOverEvent;
+import com.google.gwt.event.dom.client.DropEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -12,7 +15,6 @@ import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import org.vectomatic.dnd.DataTransferExt;
-import org.vectomatic.dnd.DropFlowPanel;
 import org.vectomatic.dnd.DropPanel;
 import org.vectomatic.file.*;
 import org.vectomatic.file.events.ErrorEvent;
