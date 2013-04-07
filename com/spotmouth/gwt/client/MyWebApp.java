@@ -37,6 +37,7 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.googlecode.gwtphonegap.client.*;
 import com.googlecode.gwtphonegap.client.geolocation.*;
 import com.googlecode.mgwt.ui.client.MGWT;
+import com.gwtfb.sdk.FBCore;
 import com.phonegap.gwt.device.client.Device;
 import com.phonegap.gwt.fbconnect.client.FBConnect;
 import com.spotmouth.gwt.client.chat.ChatPanel;
@@ -402,13 +403,19 @@ public class MyWebApp implements EntryPoint {
                     Map<String, Location> locationMap = getLocationsFromLocalStorage();
                     Location location = locationMap.get(lastLocationKey);
                     if (location == null) {
-                        MyWebApp.this.setCurrentLocation(mobileResponse.getGeocodedLocation());
+                        List<Location> locations = mobileResponse.getLocations();
+                        Location clocation = locations.get(0);
+
+                        MyWebApp.this.setCurrentLocation(clocation);
                     } else {
                         MyWebApp.this.setCurrentLocation(location);
                     }
                 } else {
                     log("fetchInitData onSuccess setCurrentLocation");
-                    MyWebApp.this.setCurrentLocation(mobileResponse.getGeocodedLocation());
+                    List<Location> locations = mobileResponse.getLocations();
+                    Location clocation = locations.get(0);
+
+                    MyWebApp.this.setCurrentLocation(clocation);
                 }
                 String initToken = History.getToken();
                 if (initToken == null || initToken.length() == 0) {
@@ -599,7 +606,9 @@ public class MyWebApp implements EntryPoint {
                 log("reverseGeocode onSuccess");
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
-                    Location gelocation = mobileResponse.getGeocodedLocation();
+                    List<Location> locations = mobileResponse.getLocations();
+                    Location gelocation = locations.get(0);
+
                     gelocation.setLongitude(currentLocation.getLongitude());
                     gelocation.setLatitude(currentLocation.getLatitude());
                     GWT.log("reverseGeocode onSuccess " + gelocation.toString());
@@ -1591,22 +1600,17 @@ public class MyWebApp implements EntryPoint {
 
 
                     //we can't do any wildcards in the location search, so let's check on client side(easy enough)
-          //  String locationSearchString = locationTextBox.getValue();
+
             if (locationSearchString.indexOf("*") != -1) {
                 getMessagePanel().displayError("Sorry, but the wildcard '*' character is not valid for location search.");
-              //  return;
             }
 
-
-
-        //String locationSearchString = locationTextBox.getValue();
-        //need to reverse geocode search and set location
         final DataOperationDialog searchingDialog = new DataOperationDialog("Searching for your spot...");
         GeocodeRequest geocodeRequest = new GeocodeRequest();
-        // geocodeRequest.setGeocodeInput(locationTextBox.getValue());
+
         geocodeRequest.setGeocodeInput(locationSearchString);
         ApiServiceAsync myService = getApiServiceAsync();
-        myService.geocode2(geocodeRequest, new AsyncCallback() {
+        myService.geocode(geocodeRequest, new AsyncCallback() {
             public void onFailure(Throwable caught) {
                 searchingDialog.hide();
                 getMessagePanel().displayError("Could not set location", caught);
@@ -2033,6 +2037,11 @@ public class MyWebApp implements EntryPoint {
 
     }
 
+    private FBCore fbCore = GWT.create(FBCore.class);
+
+    public FBCore getFbCore() {
+        return fbCore;
+    }
 
 
     public void runApp() {
@@ -2104,16 +2113,30 @@ public class MyWebApp implements EntryPoint {
         if (!isDesktop()) {
             RootPanel.get().add(simplePanel);
         }
-        // if we always do this, local or not, we can maybe logout!
+
+
+        //fbConnect = FBConnect.getFBConnect();
+        log("inited fbconnect");
+//        // if we always do this, local or not, we can maybe logout!
         if (isMobileDevice()) {
             fbConnect = FBConnect.getFBConnect();
             // since we cannot seem to permanently delete cookies, let's nuke
             // the session cookies whenever we start
-            //fbConnect.logout(APPID);
+            //bConnect.logout(APPID);
         } else {
+
+              //this inits facebook
+                            //https://developers.facebook.com/docs/reference/javascript/FB.init/
+                boolean status = true;
+                boolean cookie = true;
+                boolean xfbml = false;
+
+             //   init (FACEBOOK_APPID,  status,  cookie,  xfbml);
+
+
             //recaptchaWidget = new RecaptchaWidget("6LeoPwYAAAAAAEgl-99fWvVvzRQObu5UoTPoQtg1");
-            //fbCore.init(MyWebApp.APPID, status, cookie, xfbml);
-            log("doing fbCoreLogout");
+            fbCore.init(FACEBOOK_APPID, status, cookie, xfbml);
+
             //fbCore.logout(new LogoutCallback());
         }
         centerPanel.setWidth("100%");
@@ -4032,7 +4055,18 @@ public class MyWebApp implements EntryPoint {
         }
     };
 
+    AsyncCallback facebooklogoutMessageCallback = new AsyncCallback() {
+        public void onFailure(Throwable throwable) {
+            getMessagePanel().displayError(throwable.getMessage());
+        }
+
+        public void onSuccess(Object response) {
+            log("facebook logged out!");
+        }
+    };
+
     public void toggleLogout(boolean newItem) {
+        log("toggleLogout");
         if (newItem) {
             History.newItem(LOGOUT);
             return;
@@ -4044,6 +4078,11 @@ public class MyWebApp implements EntryPoint {
             if (fbConnect != null) {
                 //mywebapp.fbConnect.logout(MyWebApp.APPID);
                 fbConnect.logout(MyWebApp.FACEBOOK_APPID);
+            }  else {
+                log("fbCore.logout");
+
+                fbCore.logout(facebooklogoutMessageCallback);
+                //logout(facebooklogoutMessageCallback);
             }
         } else {
             log("mywebapp.isFacebookUser is false");
@@ -4457,9 +4496,11 @@ public class MyWebApp implements EntryPoint {
     }
 
     public void log(String message) {
-        log.warning(message);
-        logList.add(message);
-        GWT.log(message);
+//        log.warning("1=" + message);
+//        logList.add("2=" + message);
+//        GWT.log("3="  + message);
+
+        //this is what pops things into the developer console that i can see via production!
         Log.warn(message);
     }
 
@@ -4672,4 +4713,8 @@ public class MyWebApp implements EntryPoint {
             }
         });
     }
+
+
+
+
 }

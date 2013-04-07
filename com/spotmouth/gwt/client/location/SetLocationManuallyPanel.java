@@ -20,6 +20,7 @@ import com.spotmouth.gwt.client.dto.Location;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
+import java.util.List;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -267,8 +268,10 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
                     MobileResponse mobileResponse = (MobileResponse) result;
                     if (mobileResponse.getStatus() == 1) {
                         //we need to turn off the auto gps since we have set this
-                        mywebapp.setCurrentLocation(mobileResponse
-                                .getGeocodedLocation());
+                        List<Location> locations = mobileResponse.getLocations();
+                        Location location = locations.get(0);
+
+                        mywebapp.setCurrentLocation(location);
                         mywebapp.toggleHome(mywebapp.locationUpdateCallback);
                         mywebapp.getMessagePanel().clear();
                     } else {

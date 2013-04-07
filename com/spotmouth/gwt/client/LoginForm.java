@@ -12,6 +12,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.Cookies;
 import com.phonegap.gwt.console.client.Logger;
 import com.phonegap.gwt.fbconnect.client.FBConnect;
 import com.phonegap.gwt.fbconnect.client.OnConnectCallback;
@@ -22,7 +23,6 @@ import com.spotmouth.gwt.client.dto.LoginRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.login.Login;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-
 //import com.gwtfb.client.Callback;
 //import com.gwtfb.sdk.FBEvent;
 
@@ -34,8 +34,6 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 */
 public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
     private String historyToken = null;
-
-
 
     public ImageResource getImageResource() {
         if (MyWebApp.isSmallFormat()) {
@@ -53,8 +51,7 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
         return "Login";
     }
 
-    //    public FBCore fbCore = GWT.create(FBCore.class);
-//    public FBEvent fbEvent = GWT.create(FBEvent.class);
+
     private TextField usernameTextBox = new TextField();
     //clear text password
     private TextField passwordTextBox = new TextField();
@@ -109,101 +106,87 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
 
     public LoginForm(MyWebApp mywebapp) {
         super(mywebapp, false, false, true);
-        //MyWebApp mywebapp, boolean displayTopPanel,boolean displayHelp,boolean newStyle
-        if (MyWebApp.isDesktop()) {
-
-            DOM.setElementAttribute(maskedPasswordTextBox.getElement(), "placeholder", "Password...");
-            addRequired(maskedPasswordTextBox);
-            Button signUp = new Button();
-            signUp.addClickHandler(registerHandler);
-            Button loginButton = new Button();
-            loginButton.setStyleName("loginButton");
-            loginButton.addClickHandler(loginHandler);
-            showTypingCheckbox.addClickHandler(new ClickHandler() {
-                public void onClick(ClickEvent event) {
-                    if (showTypingCheckbox.getValue()) {
-                        passwordTextBox.setVisible(true);
-                        maskedPasswordTextBox.setVisible(false);
-                    } else {
-                        passwordTextBox.setVisible(false);
-                        maskedPasswordTextBox.setVisible(true);
-                    }
+        DOM.setElementAttribute(maskedPasswordTextBox.getElement(), "placeholder", "Password...");
+        addRequired(maskedPasswordTextBox);
+        Button signUp = new Button();
+        signUp.addClickHandler(registerHandler);
+        Button loginButton = new Button();
+        loginButton.setStyleName("loginButton");
+        loginButton.addClickHandler(loginHandler);
+        showTypingCheckbox.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                if (showTypingCheckbox.getValue()) {
+                    passwordTextBox.setVisible(true);
+                    maskedPasswordTextBox.setVisible(false);
+                } else {
+                    passwordTextBox.setVisible(false);
+                    maskedPasswordTextBox.setVisible(true);
                 }
-            });
-            passwordTextBox.setVisible(false);
-            Anchor facebookAnchor = new Anchor();
-            DOM.setElementAttribute(facebookAnchor.getElement(), "id", "fb");
-            if (FBConnect.isSupported()) {
-                facebookAnchor.addClickHandler(facebookloginHandlerMobile);
-                // addImageIcon(facebookloginHandlerMobile, "Login with Facebook", MyWebApp.resources.facebook(), MyWebApp.resources.facebookMobile(), topPanel, "Login with Facebook");
-            } else {
-                facebookAnchor.addClickHandler(facebookloginHandlerWeb);
-                //addImageIcon(facebookloginHandlerWeb, "Login with Facebook", MyWebApp.resources.facebook(), MyWebApp.resources.facebookMobile(), topPanel, "Login with Facebook");
             }
-            Anchor resetAnchor = new Anchor("reset");
-            DOM.setElementAttribute(resetAnchor.getElement(), "id", "reset");
-            resetAnchor.addClickHandler(resetPasswordHandler);
-
-            Anchor googleAnchor = new Anchor();
-            DOM.setElementAttribute(googleAnchor.getElement(), "id", "gp");
-            googleAnchor.addClickHandler(goggleSignin);
-            Anchor twitterAnchor = new Anchor();
-            DOM.setElementAttribute(twitterAnchor.getElement(), "id", "twit");
-            twitterAnchor.addClickHandler(twitterHandler);
-
-            passwordTextBox.addFocusHandler(new FocusHandler() {
-                @Override
-                public void onFocus(com.google.gwt.event.dom.client.FocusEvent focusEvent){
-                    if (showTypingCheckbox.getValue()) {
-                        //no need to do anything
-                    } else {
-                        maskedPasswordTextBox.setVisible(true);
-                        passwordTextBox.setVisible(false);
-                        maskedPasswordTextBox.setFocus(true);
-                    }
-                }
-            });
-
-
-            maskedPasswordTextBox.addBlurHandler(new BlurHandler() {
-                @Override
-                public void onBlur(BlurEvent event) {
-                    if (maskedPasswordTextBox.getValue().isEmpty()) {
-                        maskedPasswordTextBox.setVisible(false);
-                        passwordTextBox.setVisible(true);
-                    }
-                }
-            });
-
-
-
-            passwordTextBox.addKeyDownHandler(new KeyDownHandler() {
-                @Override
-                public void onKeyDown(KeyDownEvent event) {
-                    if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                        performLogin();
-                    }
-                }
-            });
-            maskedPasswordTextBox.addKeyDownHandler(new KeyDownHandler() {
-                @Override
-                public void onKeyDown(KeyDownEvent event) {
-                    if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                        performLogin();
-                    }
-                }
-            });
-            makeNoMessing(usernameTextBox);
-            makeNoMessing(passwordTextBox);
-
-            //be default, maskedPasswordTextBox is going to be the default, but we make passwordTextBox become invisible when it gets focus
-            maskedPasswordTextBox.setVisible(false);
-            passwordTextBox.setVisible(true);
-            Login login = new Login(usernameTextBox, passwordTextBox, maskedPasswordTextBox, signUp, loginButton, showTypingCheckbox, rememberMeCheckbox, facebookAnchor, resetAnchor, googleAnchor, twitterAnchor);
-            add(login);
+        });
+        passwordTextBox.setVisible(false);
+        Anchor facebookAnchor = new Anchor();
+        DOM.setElementAttribute(facebookAnchor.getElement(), "id", "fb");
+        if (FBConnect.isSupported()) {
+             mywebapp.log("FBConnect is  supported, adding facebookloginHandlerMobile");
+            facebookAnchor.addClickHandler(facebookloginHandlerMobile);
         } else {
-            initOriginal();
+            mywebapp.log("FBConnect is not supported, using  facebookloginHandlerWeb");
+            facebookAnchor.addClickHandler(doFacebookLoginClickHandler);
         }
+        Anchor resetAnchor = new Anchor("reset");
+        DOM.setElementAttribute(resetAnchor.getElement(), "id", "reset");
+        resetAnchor.addClickHandler(resetPasswordHandler);
+        Anchor googleAnchor = new Anchor();
+        DOM.setElementAttribute(googleAnchor.getElement(), "id", "gp");
+        googleAnchor.addClickHandler(goggleSignin);
+        Anchor twitterAnchor = new Anchor();
+        DOM.setElementAttribute(twitterAnchor.getElement(), "id", "twit");
+        twitterAnchor.addClickHandler(twitterHandler);
+        passwordTextBox.addFocusHandler(new FocusHandler() {
+            @Override
+            public void onFocus(com.google.gwt.event.dom.client.FocusEvent focusEvent) {
+                if (showTypingCheckbox.getValue()) {
+                    //no need to do anything
+                } else {
+                    maskedPasswordTextBox.setVisible(true);
+                    passwordTextBox.setVisible(false);
+                    maskedPasswordTextBox.setFocus(true);
+                }
+            }
+        });
+        maskedPasswordTextBox.addBlurHandler(new BlurHandler() {
+            @Override
+            public void onBlur(BlurEvent event) {
+                if (maskedPasswordTextBox.getValue().isEmpty()) {
+                    maskedPasswordTextBox.setVisible(false);
+                    passwordTextBox.setVisible(true);
+                }
+            }
+        });
+        passwordTextBox.addKeyDownHandler(new KeyDownHandler() {
+            @Override
+            public void onKeyDown(KeyDownEvent event) {
+                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+                    performLogin();
+                }
+            }
+        });
+        maskedPasswordTextBox.addKeyDownHandler(new KeyDownHandler() {
+            @Override
+            public void onKeyDown(KeyDownEvent event) {
+                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+                    performLogin();
+                }
+            }
+        });
+        makeNoMessing(usernameTextBox);
+        makeNoMessing(passwordTextBox);
+        //be default, maskedPasswordTextBox is going to be the default, but we make passwordTextBox become invisible when it gets focus
+        maskedPasswordTextBox.setVisible(false);
+        passwordTextBox.setVisible(true);
+        Login login = new Login(usernameTextBox, passwordTextBox, maskedPasswordTextBox, signUp, loginButton, showTypingCheckbox, rememberMeCheckbox, facebookAnchor, resetAnchor, googleAnchor, twitterAnchor);
+        add(login);
     }
 
     ClickHandler twitterHandler = new ClickHandler() {
@@ -342,94 +325,9 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
             }
         });
     }
-
-    private void initOriginal() {
-        usernameTextBox = addTextBoxNoMessing("Username", "username", "");
-        //passwordTextBox = addTextBoxNoMessing("Password", "password", "");
-        clearTextFieldset = addFieldset(passwordTextBox, "Password", "pass1");
-        makeNoMessing(passwordTextBox);
-        maskedTextFieldset = addFieldset(maskedPasswordTextBox, "Password", "pass2");
-        makeNoMessing(maskedPasswordTextBox);
-        //by default, let's hide the clear one
-        clearTextFieldset.setVisible(false);
-        //TODO
-        //rememberMeCheckbox = addCheckbox2("Remember Me?", "lodging", false, null);
-        //showTypingCheckbox = addCheckbox2("Show Typing", "showtyping", false, null);
-        showTypingCheckbox.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                if (showTypingCheckbox.getValue()) {
-                    clearTextFieldset.setVisible(true);
-                    maskedTextFieldset.setVisible(false);
-                } else {
-                    clearTextFieldset.setVisible(false);
-                    maskedTextFieldset.setVisible(true);
-                }
-            }
-        });
-        usernameTextBox.setFocus(true);
-        add(loginButton());
-        Hyperlink signUpLabel = new Hyperlink("New to spotmouth? Sign up", MyWebApp.REGISTER);
-        //Anchor signUpAnchor  = new Anchor("New to spotmouth? Sign up", MyWebApp.REGISTER);
-        signUpLabel.setStyleName("whiteButton");
-        add(signUpLabel);
-        Label facebookSignInLabel = new Label();
-        facebookSignInLabel.setText("Login with Facebook");
-        fixButton(facebookSignInLabel);
-        addImageToButton(facebookSignInLabel, MyWebApp.resources.facebookButton(), MyWebApp.resources.facebookButtonMobile());
-        add(facebookSignInLabel);
-        if (FBConnect.isSupported()) {
-            facebookSignInLabel.addClickHandler(facebookloginHandlerMobile);
-            // addImageIcon(facebookloginHandlerMobile, "Login with Facebook", MyWebApp.resources.facebook(), MyWebApp.resources.facebookMobile(), topPanel, "Login with Facebook");
-        } else {
-            facebookSignInLabel.addClickHandler(facebookloginHandlerWeb);
-            //addImageIcon(facebookloginHandlerWeb, "Login with Facebook", MyWebApp.resources.facebook(), MyWebApp.resources.facebookMobile(), topPanel, "Login with Facebook");
-        }
-        //add(loginButton2());
-        // need an OR
-        if (mywebapp.isLocalStorageSupported()) {
-            Storage localStorage = Storage.getLocalStorageIfSupported();
-            String username = localStorage.getItem("username");
-            usernameTextBox.setValue(username);
-            String passwordVal = localStorage.getItem("password");
-            passwordTextBox.setValue(passwordVal);
-        }
-        passwordTextBox.addKeyDownHandler(new KeyDownHandler() {
-            @Override
-            public void onKeyDown(KeyDownEvent event) {
-                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                    performLogin();
-                }
-            }
-        });
-        maskedPasswordTextBox.addKeyDownHandler(new KeyDownHandler() {
-            @Override
-            public void onKeyDown(KeyDownEvent event) {
-                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                    performLogin();
-                }
-            }
-        });
-        FlowPanel topPanel = new FlowPanel();
-        topPanel.setStyleName("menugrouping");
-        topPanel.addStyleName("clearing");
-        add(topPanel);
-        if (FBConnect.isSupported()) {
-            addImageIcon(facebookloginHandlerMobile, "Login with Facebook", MyWebApp.resources.facebook(), MyWebApp.resources.facebookMobile(), topPanel, "Login with Facebook");
-        } else {
-            addImageIcon(facebookloginHandlerWeb, "Login with Facebook", MyWebApp.resources.facebook(), MyWebApp.resources.facebookMobile(), topPanel, "Login with Facebook");
-        }
-        addImageIcon(resetPasswordHandler, "Reset Password", MyWebApp.resources.passwordReset(), MyWebApp.resources.passwordResetMobile(), topPanel, "Reset Password");
-        addImageIcon(registerHandler, "Register", MyWebApp.resources.register(), MyWebApp.resources.registerMobile(), topPanel, "Register");
-        add(cancelButton());
-    }
 //http://code.google.com/p/gwt-oauth2/
 
-    Label loginButton() {
-        Label btn = new Label("Login");
-        btn.addClickHandler(loginHandler);
-        fixButton(btn);
-        return btn;
-    }
+
 
     ClickHandler loginHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -443,30 +341,96 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
             mywebapp.toggleRegister(true);
         }
     };
-    ClickHandler facebookloginHandlerWeb = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            if (mywebapp.getAuth() == null) {
-                getMessagePanel().displayError("Facebook Login is not functioning for this platform currently.  Sorry.");
-                return;
-            }
-            final AuthRequest req = new AuthRequest(FACEBOOK_AUTH_URL, FACEBOOK_CLIENT_ID)
-                    .withScopes("publish_stream", "read_stream")
-                            // Facebook expects a comma-delimited list of scopes
-                    .withScopeDelimiter(",");
-            mywebapp.getAuth().login(req, new Callback<String, Throwable>() {
-                public void onSuccess(String token) {
-                    performFacebookLogin(token);
-                }
+    /*
+    the gwt-oauth2 project doesn't do signoff well at all, we
+    are using gwtFB project to integrate to facebook
+     */
 
-                public void onFailure(Throwable caught) {
-                    getMessagePanel().displayError("Error:\n" + caught.getMessage());
-                }
-            });
+
+
+
+    AsyncCallback facebookLoggedInStatusCallback = new AsyncCallback() {
+        public void onFailure(Throwable throwable) {
+            getMessagePanel().displayError(throwable.getMessage());
+        }
+
+        public void onSuccess(Object response) {
+
+            mywebapp.log("facebookLoggedInStatusCallback null");
+
+//            java.util.Collection<String> cookies = Cookies.getCookieNames();
+//            java.util.Iterator<String> vals = cookies.iterator();
+//            String accessToken = "";
+//            while (vals.hasNext()) {
+//                String val = vals.next();
+//                mywebapp.log("val=" + val);
+//                if (val.startsWith("fbs_")) {
+//                    accessToken = Cookies.getCookie(val);
+//                }
+//            }
+//            //we need to strip accessToken
+//            //access_token
+//            mywebapp.log("accessToken1=" + accessToken);
+//            String[] args = accessToken.split("&");
+//            mywebapp.log("accessToken2=" + accessToken);
+//            mywebapp.log("args=" + args);
+//            if (args.length > 0) {
+//                accessToken = args[0];
+//            }
+//            mywebapp.log("accessToken2=" + accessToken);
+//            //http://developers.facebook.com/docs/authentication/
+//            accessToken = accessToken.replaceAll("access_token=", "");
+//            mywebapp.log("accessToken3=" + accessToken);
+//            //wrapped with quotes
+//            accessToken = accessToken.replaceAll("\"", "");
+//            mywebapp.log("accessToken=" + accessToken);
+            String accessToken = mywebapp.getFbCore().getAuthResponse().getAccessToken();
+
+               performFacebookLogin(accessToken);
         }
     };
+
+
+    AsyncCallback facebookLoginStatusCallback = new AsyncCallback() {
+        public void onFailure(Throwable throwable) {
+            getMessagePanel().displayError(throwable.getMessage());
+        }
+
+        public void onSuccess(Object response) {
+
+            mywebapp.log("facebookLoginStatusCallback.onSuccess");
+
+
+            if (mywebapp.getFbCore().getAuthResponse()  == null) {
+                mywebapp.log("getFbCore.getAuthResponse is null");
+                mywebapp.getFbCore().login(facebookLoggedInStatusCallback);
+            } else {
+                mywebapp.log("getFbCore.getAuthResponse is not null");
+                facebookLoggedInStatusCallback.onSuccess(null);
+            }
+
+        }
+    };
+
+    ClickHandler doFacebookLoginClickHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+
+            //we can't do a login if we are already logged in
+             mywebapp.getFbCore().getLoginStatus(facebookLoginStatusCallback);
+
+
+
+
+
+
+
+
+        }
+    };
+
     ClickHandler facebookloginHandlerMobile = new ClickHandler() {
         public void onClick(ClickEvent event) {
-            final Logger logger = new Logger();
+
             mywebapp.fbConnect.setOnConnectCallback(new OnConnectCallback() {
                 public void onFBConnected() {
                     String accessToken = mywebapp.fbConnect.getAccessToken();
@@ -545,7 +509,8 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
             }
         });
     }
-//
+
+    //
 //    AsyncCallback loginMessageCallback = new AsyncCallback() {
 //        public void onFailure(Throwable throwable) {
 //            getMessagePanel().displayError(throwable.getMessage());
@@ -650,6 +615,4 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
     public void toggleFirst() {
         //usernameTextBox.setFocus(true);
     }
-
-
 }

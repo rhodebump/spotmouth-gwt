@@ -34,8 +34,6 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
             } else if (spotHolder.isPlace()) {
                 return MyWebApp.resources.place();
             }
-        } else if (!locationOnly) {
-            return MyWebApp.resources.place();
         } else {
             return MyWebApp.resources.location();
         }
@@ -62,7 +60,7 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
     private boolean spotreadonly = true;
     private Location location = null;
-    private boolean locationOnly = true;
+    //private boolean locationOnly = true;
     private ItemHolder itemHolder = null;
 
     public LeaveMarkForm(MyWebApp mywebapp, Location location, boolean locationOnly, ItemHolder itemHolder) {
@@ -70,7 +68,6 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
         this.itemHolder = itemHolder;
         this.spotreadonly = isSpotReadOnly();
         SpotHolder spotHolder = itemHolder.getSpotHolder();
-        this.locationOnly = locationOnly;
         this.location = location;
         this.addStyleName("LeaveMarkForm");
 
@@ -163,26 +160,7 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
         itemHolder.setPassword(secretKeyTextBox.getValue());
         leaveMarkRequest.setAuthToken(mywebapp.getAuthToken());
         leaveMarkRequest.setMobileDevice(mywebapp.isMobileDevice());
-        if (locationOnly) {
-            GWT.log("doSave locationOnly is true");
-            //just marking a location
-            //leaveMarkRequest.setSpotHolder(null);
-            leaveMarkRequest.setLocation(location);
-            //leaveMarkRequest.set
-            leaveMarkRequest.getItemHolder().setLocationMark(true);
-        } else if (location != null) {
-            GWT.log("doSave location is not null");
-            //we want to create a new spot from the location
-            //leaveMarkRequest.setSpotHolder(null);
-            GWT.log("setting location of leavemarkrequest ");
-            GWT.log("country code is " + location.getCountryCode());
-            leaveMarkRequest.setLocation(location);
-            //leaveMarkRequest.setFromGisgraphy(true);
-        } else if (spotreadonly) {
-            GWT.log("doSave spotreadonly is true");
-            //SpotHolder sh = leaveMarkRequest.getSpotHolder();
-            // sh.setId(spotHolder.getId());
-        } else {
+
             GWT.log("doSave else");
             SpotHolder spotHolder = itemHolder.getSpotHolder();
             if (nameTextBox != null) {
@@ -214,7 +192,7 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
 
             GWT.log("spotType=" + spotHolder.getSpotType());
-        }
+
         ApiServiceAsync myService = mywebapp.getApiServiceAsync();
         myService.leavemark(leaveMarkRequest, new AsyncCallback() {
             public void onFailure(Throwable caught) {
