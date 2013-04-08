@@ -4905,7 +4905,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     protected TextField nameTextBox = null;
     protected TextField address1TextField = null;
     protected SuggestBox citySuggestBox = null;
-    protected SuggestBox countryTextBox = null;
+    public SuggestBox countryTextBox = null;
     public SuggestBox stateTextBox = null;
     protected SuggestBox zipcodeTextField = null;
     protected TextField emailTextField = null;

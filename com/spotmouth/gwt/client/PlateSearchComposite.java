@@ -44,6 +44,14 @@ public class PlateSearchComposite extends Composite {
     final ListBox manufacturersListBox;
     @UiField(provided = true)
     final SuggestBox stateTextBox;
+
+
+    @UiField(provided = true)
+    final SuggestBox countryTextBox;
+
+
+
+
     @UiField(provided = true)
     final ListBox vehicleTypeListBox;
     @UiField(provided = true)
@@ -109,7 +117,7 @@ public class PlateSearchComposite extends Composite {
     public PlateSearchComposite(ListBox colorsListBox, TextBox plateNameTextBox, TextBox keywordsTextBox, ListBox manufacturersListBox, SuggestBox stateTextBox, ListBox vehicleTypeListBox,
                                 Button plateSearchButton, SuggestBox tagSearchTextBox, TextBox secretKeyTextBox, TextArea contentTextArea, FlowPanel selectedTagsPanel,
                                 Button leaveMarkButton, MultiUploader multiUploader, FlowPanel panelImages1, ULPanel pickSpotUL,MyWebApp mywebapp,Button shareOnFacebookButton,Button addTagButton,
-                                FlowPanel suggestionsPanel,TextArea spotDescriptionTextArea,DropPanel dropPanel
+                                FlowPanel suggestionsPanel,TextArea spotDescriptionTextArea,DropPanel dropPanel,SuggestBox countryTextBox
     ) {
         this.dropPanel = dropPanel;
         this.spotDescriptionTextArea = spotDescriptionTextArea;
@@ -130,6 +138,7 @@ public class PlateSearchComposite extends Composite {
         this.selectedTagsPanel = selectedTagsPanel;
         this.leaveMarkButton = leaveMarkButton;
         this.shareOnFacebookButton = shareOnFacebookButton;
+        this.countryTextBox = countryTextBox;
         this.multiUploader = multiUploader;
         this.panelImages = panelImages1;
         this.pickSpotUL = pickSpotUL;

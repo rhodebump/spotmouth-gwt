@@ -43,6 +43,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             initColorListBox("");
             initManufacturersListBox(null);
             stateTextBox = initState("");
+            countryTextBox = getCountrySuggestBox("");
             initVehicleType("");
             MarkData markData = new MarkData();
             markData.saySomethingTextArea = contentTextArea;
@@ -66,7 +67,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             DropPanel dropPanel = getDropPanel();
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox, plateNameTextBox, keywordsTextBox, manufacturersListBox, stateTextBox,
                     vehicleTypeListBox, plateSearchButton, markData.tagSearchTextBox, markData.secretKeyTextBox, markData.saySomethingTextArea,
-                    selectedTagsPanel, leaveMarkButton, defaultUploader, panelImages, pickSpotListBox, mywebapp, shareOnFacebookButton, addTagButton, suggestionsPanel, markData.spotDescriptionTextArea,dropPanel);
+                    selectedTagsPanel, leaveMarkButton, defaultUploader, panelImages, pickSpotListBox, mywebapp, shareOnFacebookButton, addTagButton, suggestionsPanel, markData.spotDescriptionTextArea,dropPanel,countryTextBox);
             plateSearchComposite.tab1.setValue(true);
             add(plateSearchComposite);
 

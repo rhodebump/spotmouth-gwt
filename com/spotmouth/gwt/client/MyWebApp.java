@@ -3130,29 +3130,29 @@ public class MyWebApp implements EntryPoint {
 
     private void toggleChats() {
         SearchParameters searchParameters = new SearchParameters();
-        searchParameters.setChats(true);
-        addCurrentLocation(searchParameters);
-        ApiServiceAsync myService = getApiServiceAsync();
-        final DataOperationDialog gettingResultsDialog = new DataOperationDialog("Getting results");
-        gettingResultsDialog.show();
-        gettingResultsDialog.center();
-        myService.searchChats(searchParameters, new AsyncCallback() {
-            public void onFailure(Throwable caught) {
-                gettingResultsDialog.hide();
-                getMessagePanel().displayError(caught.getMessage());
-            }
+                searchParameters.setChats(true);
+                addCurrentLocation(searchParameters);
+                ApiServiceAsync myService = getApiServiceAsync();
+                final DataOperationDialog gettingResultsDialog = new DataOperationDialog("Getting results");
+                gettingResultsDialog.show();
+                gettingResultsDialog.center();
+                myService.searchChats(searchParameters, new AsyncCallback() {
+                    public void onFailure(Throwable caught) {
+                        gettingResultsDialog.hide();
+                        getMessagePanel().displayError(caught.getMessage());
+                    }
 
-            public void onSuccess(Object result) {
-                gettingResultsDialog.hide();
-                MobileResponse mobileResponse = (MobileResponse) result;
-                if (mobileResponse.getStatus() == 1) {
-                    ChatsPanel chatsPanel = new ChatsPanel(MyWebApp.this, mobileResponse.getSearchQueryResponse());
-                    swapCenter(chatsPanel);
-                } else {
-                    getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
-                }
-            }
-        });
+                    public void onSuccess(Object result) {
+                        gettingResultsDialog.hide();
+                        MobileResponse mobileResponse = (MobileResponse) result;
+                        if (mobileResponse.getStatus() == 1) {
+                            ChatsPanel chatsPanel = new ChatsPanel(MyWebApp.this, mobileResponse.getSearchQueryResponse());
+                            swapCenter(chatsPanel);
+                        } else {
+                            getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                        }
+                    }
+                });
     }
 
     private void toggleDining() {

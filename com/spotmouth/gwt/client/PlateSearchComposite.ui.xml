@@ -33,13 +33,7 @@
                         <label>
                             <p>Color</p>
                             <g:ListBox ui:field="colorsListBox"/>
-                            <!--
-                       <select>
-                       <option>Apple</option>
-                       <option>Banana</option>
-                       <option>Citrus</option>
-                   </select>
-                   -->
+
 
                         </label>
 
@@ -51,14 +45,17 @@
                         <label>
                             <p>Manufacturer</p>
                             <g:ListBox ui:field="manufacturersListBox"/>
-                            <!--
-                       <select>
-                       <option>Apple</option>
-                       <option>Banana</option>
-                       <option>Citrus</option>
-                   </select>
-                   -->
+
                         </label>
+
+
+
+                        <label>
+                            <p>Country</p>
+                            <g:SuggestBox ui:field="countryTextBox"/>
+                        </label>
+
+
                         <label>
                             <p>State</p>
                             <g:SuggestBox ui:field="stateTextBox"/>
@@ -67,18 +64,10 @@
                         <label>
                             <p>Vehicle Type</p>
                             <g:ListBox ui:field="vehicleTypeListBox"/>
-                            <!--
-                       <select>
-                       <option>Apple</option>
-                       <option>Banana</option>
-                       <option>Citrus</option>
-                   </select>
-                   -->
+
 
                         </label>
-                        <!--
-                  <button>Submit</button>
-                  -->
+
                         <g:Button ui:field="plateSearchButton"/>
                     </div>
                 </div>

@@ -86,7 +86,7 @@ public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
                     plateSearchPanel.keywordsTextBox, plateSearchPanel.manufacturersListBox, plateSearchPanel.stateTextBox, plateSearchPanel.vehicleTypeListBox,
                     plateSearchPanel.plateSearchButton, markData.tagSearchTextBox,
                     markData.secretKeyTextBox, markData.saySomethingTextArea, selectedTagsPanel, leaveMarkButton, defaultUploader, panelImages,
-                    pickSpotULPanel, mywebapp, shareOnFacebookButton, addTagButton,suggestionsPanel,markData.spotDescriptionTextArea,dropPanel);
+                    pickSpotULPanel, mywebapp, shareOnFacebookButton, addTagButton,suggestionsPanel,markData.spotDescriptionTextArea,dropPanel,plateSearchPanel.countryTextBox);
             plateSearchComposite.tab2.setValue(true);
             myFormPanel.setWidget(plateSearchComposite);
             add(myFormPanel);
