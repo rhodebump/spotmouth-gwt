@@ -55,20 +55,21 @@
                             <g:SuggestBox ui:field="countryTextBox"/>
                         </label>
 
+                        <label>
+                            <p>Vehicle Type</p>
+                            <g:ListBox ui:field="vehicleTypeListBox"/>
+                        </label>
 
                         <label>
                             <p>State</p>
                             <g:SuggestBox ui:field="stateTextBox"/>
                         </label>
-
-                        <label>
-                            <p>Vehicle Type</p>
-                            <g:ListBox ui:field="vehicleTypeListBox"/>
-
-
-                        </label>
-
-                        <g:Button ui:field="plateSearchButton"/>
+                          
+                          <span class="h_leave_mark">
+                                       <g:Button ui:field="plateSearchButton"></g:Button>
+                                       <g:Button ui:field="shareOnFacebookButton">Share on facebook</g:Button>
+                          </span>
+                        
                     </div>
                 </div>
 
