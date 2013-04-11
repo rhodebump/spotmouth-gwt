@@ -24,15 +24,7 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
  * this constructs links to all application menus
  */
 public class ManageGroupPanel extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.groupsMobile();
-        }   else {
 
-            return MyWebApp.resources.groups();
-        }
-
-    }
 
 
 

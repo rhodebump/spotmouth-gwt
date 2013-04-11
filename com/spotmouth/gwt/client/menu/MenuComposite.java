@@ -4,8 +4,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.spotmouth.gwt.client.MyWebApp;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,10 +17,20 @@ import com.google.gwt.user.client.ui.Widget;
  * To change this template use File | Settings | File Templates.
  */
 public class MenuComposite extends Composite {
-    interface MyUiBinder extends UiBinder<Widget, MenuComposite> {
-    }
+//    interface MyUiBinder extends UiBinder<Widget, MenuComposite> {
+//    }
+//
+//    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+    @UiTemplate("MenuComposite.ui.xml")
+    interface MenuCompositeBinder extends UiBinder<Widget, MenuComposite> {}
+    private static MenuCompositeBinder desktopBinder = GWT.create(MenuCompositeBinder.class);
+
+    @UiTemplate("MMenuComposite.ui.xml")
+    interface MMenuCompositeBinder extends UiBinder<Widget, MenuComposite> {}
+    private static MMenuCompositeBinder mobileBinder = GWT.create(MMenuCompositeBinder.class);
+
 
 
     @UiField
@@ -63,7 +75,14 @@ public class MenuComposite extends Composite {
 
     public MenuComposite() {
 
-        initWidget(uiBinder.createAndBindUi(this));
+       // initWidget(uiBinder.createAndBindUi(this));
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        }else {
+            GWT.log("mpage binder");
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
+
     }
 
 

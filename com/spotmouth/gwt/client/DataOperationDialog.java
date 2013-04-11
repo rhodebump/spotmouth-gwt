@@ -10,10 +10,12 @@ public class DataOperationDialog {
     }
 
     public void show() {
+        if (!MyWebApp.isDesktop()) return;
         MyWebApp.showPopup();
     }
 
     public void hide() {
+        if (!MyWebApp.isDesktop()) return;
         MyWebApp.hidePopup();
     }
 

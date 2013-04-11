@@ -4,8 +4,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.menu.TopNav;
+import  com.google.gwt.uibinder.client.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,7 +20,37 @@ public class Page extends Composite {
     interface MyUiBinder extends UiBinder<Widget, Page> {
     }
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+    @UiTemplate("Page.ui.xml")
+    interface PageBinder extends UiBinder<Widget, Page> {}
+    private static PageBinder desktopBinder = GWT.create(PageBinder.class);
+
+    @UiTemplate("MPage.ui.xml")
+    interface MPageBinder extends UiBinder<Widget, Page> {}
+    private static MPageBinder mobileBinder = GWT.create(MPageBinder.class);
+
+
+//    protected Page(UiBinder<Widget, Page> binder) {
+//      initWidget(uiBinder.createAndBindUi(this));
+//    }
+
+
+  // private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+
+//
+//    public static Page createRedPicker() {
+//      return new Page(redBinder);
+//    }
+
+
+
+    @UiField(provided = true)
+    Button menuButton;
+
+
+
+
     //@UiField ListBox listBox;
     @UiField
     SimplePanel body;
@@ -34,8 +66,8 @@ public class Page extends Composite {
 
     @UiField
     SimplePanel messages;
-    @UiField
-    SimplePanel searchBox;
+//    @UiField
+//    SimplePanel searchBox;
 
 
     @UiField(provided = true)
@@ -68,7 +100,9 @@ public class Page extends Composite {
 
     //simplePanel,popularPanel,latestPanel,mp,tagCloudPanel,locationPanel,tagCloudPanel2,googleMapPanel
     public Page(Panel bodyPanel, Panel messagePanel, Panel searchBoxPanel, TextBox keywordsTextBox, TextBox locationTextBox,ULPanel previousLocationsULPanel,
-                SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,ListBox sortingListBox,Button searchButton,TopNav topNav) {
+                SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,
+                ListBox sortingListBox,Button searchButton,
+                TopNav topNav,Button menuButton) {
         this.keywordsTextBox = keywordsTextBox;
 
         this.markSpotButton = markSpotButton;
@@ -82,11 +116,19 @@ public class Page extends Composite {
 
 
         this.searchButton = searchButton;
-        initWidget(uiBinder.createAndBindUi(this));
+      this.menuButton = menuButton;
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        }else {
+            GWT.log("mpage binder");
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
+
+
 
         body.setWidget(bodyPanel);
         messages.setWidget(messagePanel);
-        searchBox.setWidget(searchBoxPanel);
+        //searchBox.setWidget(searchBoxPanel);
 
     }
 }

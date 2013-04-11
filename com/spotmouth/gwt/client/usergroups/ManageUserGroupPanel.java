@@ -32,13 +32,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ManageUserGroupPanel extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.groupsMobile();
-        } else {
-            return MyWebApp.resources.groups();
-        }
-    }
+
 
     public String getTitle() {
         return "Manage Group";

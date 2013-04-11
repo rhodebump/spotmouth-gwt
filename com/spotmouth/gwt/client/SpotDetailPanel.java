@@ -326,10 +326,6 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         topPanel.setStyleName("menugrouping");
         topPanel.addStyleName("clearing");
         add(topPanel);
-        //addImageIcon(markSpotHandler, "Mark Spot", MyWebApp.resources.markspot(), MyWebApp.resources.markspotMobile(), topPanel, "Mark this spot");
-        addImageIcon(displayGroupsHandler, "Groups", MyWebApp.resources.groups(), MyWebApp.resources.groupsMobile(), topPanel, "View groups for this spot");
-        addImageIcon(viewMapHandler, "View Map", MyWebApp.resources.locationmanual(), MyWebApp.resources.locationmanualMobile(), topPanel, "View spot on a map");
-        //addImageIcon(followSpotHandler, "Add spot to Favorites", MyWebApp.resources.followSpot(),MyWebApp.resources.followSpotMobile(), topPanel, "Add spot to Favorites");
     }
 
     private Map<Widget, String> itemMap = new HashMap<Widget, String>();

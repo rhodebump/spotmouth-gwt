@@ -35,14 +35,6 @@ public class ViewUserGroupsPanel extends SpotBasePanel implements SpotMouthPanel
     public ViewUserGroupsPanel() {
     }
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.groupsMobile();
-        } else {
-            return MyWebApp.resources.groups();
-        }
-    }
-
     ULPanel userGroupsULPanel = new ULPanel();
     ULPanel spotGroupsULPanel = new ULPanel();
 

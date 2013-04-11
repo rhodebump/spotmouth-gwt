@@ -753,7 +753,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         addImageIcon(MyWebApp.MARK_SPOT, new MarkSpotTypePanel(), topPanel);
         addImageIcon(MyWebApp.SEARCH, new SearchForm(), topPanel);
         addImageIcon(MyWebApp.CONTESTS, new ContestsPanel(), topPanel);
-        addImageIcon("Drivers", MyWebApp.DRIVERS, mywebapp.resources.drivers(), mywebapp.resources.driversMobile(), topPanel, null);
+       // addImageIcon("Drivers", MyWebApp.DRIVERS, mywebapp.resources.drivers(), mywebapp.resources.driversMobile(), topPanel, null);
         return topPanel;
     }
 

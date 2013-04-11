@@ -32,7 +32,7 @@ public class HelpPanel extends VerticalPanel {
         Label btn = new Label("Show Help");
         //ImageResource ir  = getImageResource();
 
-        SpotBasePanel.addImageToButton(btn,MyWebApp.resources.helpButton(),MyWebApp.resources.helpButtonMobile());
+        //SpotBasePanel.addImageToButton(btn,MyWebApp.resources.helpButton(),MyWebApp.resources.helpButtonMobile());
 
         //Image img = new Image(ir);
         btn.addClickHandler(showHelpHandler);
@@ -54,7 +54,7 @@ public class HelpPanel extends VerticalPanel {
 
     protected Label hideHelpButton() {
         Label btn = new Label("Hide Help");
-        SpotBasePanel.addImageToButton(btn,MyWebApp.resources.helpButton(),MyWebApp.resources.helpButtonMobile());
+        //SpotBasePanel.addImageToButton(btn,MyWebApp.resources.helpButton(),MyWebApp.resources.helpButtonMobile());
 
         btn.addClickHandler(hideHelpHandler);
         btn.setStyleName("whiteButton");

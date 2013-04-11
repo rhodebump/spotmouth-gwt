@@ -18,15 +18,7 @@ import com.spotmouth.gwt.client.dto.MemberHolder;
 public class ManageMemberPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.groupsMobile();
-        }   else {
 
-            return MyWebApp.resources.groups();
-        }
-
-    }
 
     private TextBox firstNameTextBox = new TextBox();
     private TextBox lastNameTextBox = new TextBox();

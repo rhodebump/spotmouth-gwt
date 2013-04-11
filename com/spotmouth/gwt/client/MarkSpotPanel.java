@@ -17,11 +17,11 @@ import java.util.List;
 
 //this is used for places and plates
 public class MarkSpotPanel extends SpotBasePanel implements SpotMouthPanel {
-    private ImageResource imageResource = MyWebApp.resources.place();
-
-    public ImageResource getImageResource() {
-        return imageResource;
-    }
+   // private ImageResource imageResource = MyWebApp.resources.place();
+//
+//    public ImageResource getImageResource() {
+//        return imageResource;
+//    }
 
 
 

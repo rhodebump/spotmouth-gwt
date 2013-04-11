@@ -49,15 +49,7 @@ public class ManageMembersPanel extends SpotBasePanel implements SpotMouthPanel 
         }
     }
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.groupsMobile();
-        }   else {
 
-            return MyWebApp.resources.groups();
-        }
-
-    }
 
     public String getTitle() {
         return "Members";

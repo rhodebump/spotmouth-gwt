@@ -106,6 +106,17 @@ public class MyWebApp implements EntryPoint {
 
     public static final String findx = "Near (Address, Neighborhood, City, State or Zip)";
 
+
+
+    public ClickHandler menuButtonHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+                History.newItem(MyWebApp.MENU);
+
+        }
+    };
+
+
+
     public ClickHandler showResultsOnMapHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             GWT.log("showResultsOnMapHandler " + toggleMapMode.getValue());
@@ -2001,7 +2012,7 @@ public class MyWebApp implements EntryPoint {
     //  private static boolean mobileSmallFormat = true;
 
     public static boolean isDesktop() {
-        //if (true) return false;
+        if (true) return false;
         if (getHost().startsWith("http://m.")) {
             return false;
         }
@@ -2047,6 +2058,11 @@ public class MyWebApp implements EntryPoint {
     public void runApp() {
 
 
+        if (MyWebApp.isDesktop()) {
+            loadDesktopCss();
+        }else {
+            loadMobileCss();
+        }
 
 
 
@@ -3024,11 +3040,15 @@ public class MyWebApp implements EntryPoint {
     private void doDefaultPage() {
         if (pageModeDisplayed == 1) return;
         Button searchButton = new Button();
-
         searchButton.addClickHandler(searchHandler);
+        Button menuButton = new Button();
+        menuButton.addClickHandler(menuButtonHandler);
+
+
+
         this.page = new Page(simplePanel, messagePanel, searchBoxPanel,
                 keywordsTextBox, locationTextBox, previousLocationsULPanel, toggleMilesCheckBox, toggleMapMode, markSpotButton,
-                tagListBox, sortingListBox,searchButton,topNav);
+                tagListBox, sortingListBox,searchButton,topNav,menuButton);
         RootPanel.get().clear();
         RootPanel.get().add(page);
         this.pageModeDisplayed = 1;
@@ -3196,7 +3216,7 @@ public class MyWebApp implements EntryPoint {
         resultsPanel.getSearchParameters().setSpots(true);
         addCurrentLocation();
         resultsPanel.setTitle("Lodging");
-        resultsPanel.setImageResources(resources.lodging(), resources.lodgingMobile());
+        //resultsPanel.setImageResources(resources.lodging(), resources.lodgingMobile());
         resultsPanel.performSearch();
 
 
@@ -3230,6 +3250,66 @@ public class MyWebApp implements EntryPoint {
         }
     }
 
+    private static native void loadCss(String url) /*-{
+       var l = $doc.createElement("link");
+       l.setAttribute("id", url);
+       l.setAttribute("rel", "stylesheet");
+       l.setAttribute("type", "text/css");
+       l.setAttribute("href", url); // Make sure this request is not cached
+       $doc.getElementsByTagName("head")[0].appendChild(l);
+   	}-*/;
+
+    private void loadMobileCss() {
+
+        loadCss("css/m-style.css");
+        loadCss("css/m-pcr.css");
+    }
+    private void loadDesktopCss() {
+        loadCss("css/style.css");
+        loadCss("css/pagenavi-css.css");
+        loadCss("css/spotmouth.css");
+        loadCss("css/default.css");
+
+        loadCss("css/cat-menu.css");
+        loadCss("css/topnav.css");
+
+        loadCss("css/login.css");
+        loadCss("css/new-search.css");
+
+        loadCss("css/styles.css");
+        loadCss("css/details.css");
+
+
+        loadCss("css/message.css");
+        loadCss("css/friends.css");
+
+
+        loadCss("css/notifications.css");
+        loadCss("css/contests.css");
+        loadCss("css/prof.css");
+
+         /*
+            <link rel="stylesheet" href="css/style.css" type="text/css"/>
+   <link rel="stylesheet" href="css/pagenavi-css.css" type="text/css"/>
+   <link rel="stylesheet" href="css/spotmouth.css" type="text/css"/>
+   <link rel="stylesheet" href="css/default.css" type="text/css"/>
+   <link rel="stylesheet" href="css/cat-menu.css" type="text/css"/>
+   <link rel="stylesheet" href="css/topnav.css" type="text/css"/>
+   <link rel="stylesheet" href="css/login.css" type="text/css"/>
+   <link rel="stylesheet" href="css/new-search.css" type="text/css"/>
+   <link rel="stylesheet" href="css/styles.css" type="text/css"/>
+   <link rel="stylesheet" href="css/details.css" type="text/css"/>
+
+   <link rel="stylesheet" href="css/message.css" type="text/css"/>
+
+   <link rel="stylesheet" href="css/friends.css" type="text/css"/>
+   <link rel="stylesheet" href="css/notifications.css" type="text/css"/>
+   <link rel="stylesheet" href="css/contests.css" type="text/css"/>
+
+      <link rel="stylesheet" href="css/prof.css" type="text/css"/>
+          */
+
+    }
     SetLocationManuallyPanel setLocationManuallyPanel = null;
     HomePanel homePanel = new HomePanel(this);
 
@@ -4119,7 +4199,7 @@ public class MyWebApp implements EntryPoint {
         getResultsPanel().getSearchParameters().setSpots(true);
         getResultsPanel().setTitle("Driver Reports");
 
-        getResultsPanel().setImageResources(resources.drivers(), resources.driversMobile());
+        //getResultsPanel().setImageResources(resources.drivers(), resources.driversMobile());
         getResultsPanel().performSearch();
         resultsPanel.setActiveTabId("driversli");
         swapCenter(resultsPanel);

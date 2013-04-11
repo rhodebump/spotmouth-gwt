@@ -26,19 +26,19 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
     public Button leaveMarkButton = new Button();
 
 
-    public ImageResource getImageResource() {
-        SpotHolder spotHolder = itemHolder.getSpotHolder();
-        if (spotHolder != null) {
-            if (spotHolder.getLicensePlate()) {
-                return MyWebApp.resources.plate();
-            } else if (spotHolder.isPlace()) {
-                return MyWebApp.resources.place();
-            }
-        } else {
-            return MyWebApp.resources.location();
-        }
-        return MyWebApp.resources.markspot();
-    }
+//    public ImageResource getImageResource() {
+//        SpotHolder spotHolder = itemHolder.getSpotHolder();
+//        if (spotHolder != null) {
+//            if (spotHolder.getLicensePlate()) {
+//                return MyWebApp.resources.plate();
+//            } else if (spotHolder.isPlace()) {
+//                return MyWebApp.resources.place();
+//            }
+//        } else {
+//            return MyWebApp.resources.location();
+//        }
+//        return MyWebApp.resources.markspot();
+//    }
 
     public String getTitle() {
         return "Leave Mark";

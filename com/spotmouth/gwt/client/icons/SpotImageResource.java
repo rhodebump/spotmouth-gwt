@@ -112,37 +112,14 @@ public interface SpotImageResource extends ClientBundle {
     ImageResource contestButton();
 
 
-    @Source("medal.png")
-    @ImageOptions(width = buttonSizeMobile)
-    ImageResource contestButtonMobile();
 
 
 
-
-    @Source("eagle_bulkhead_door.png")
-    @ImageOptions(width = 72)
-    ImageResource lockSpot();
-
-    @Source("beos_mailbox.png")
-    @ImageOptions(width = 72)
-    ImageResource mailinglist();
-
-    @Source("location2.png")
-    @ImageOptions(width = 72)
-    ImageResource location();
-
-
-    @Source("location2.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource locationMobile();
 
     @Source("plate.png")
     @ImageOptions(width = 72)
     ImageResource plate();
 
-    @Source("qdoba.png")
-    @ImageOptions(width = 72)
-    ImageResource place();
 ;
 
     @Source("facebook.png")
@@ -211,14 +188,9 @@ public interface SpotImageResource extends ClientBundle {
     ImageResource registerMobile();
 
 
-    @Source("help_dialog_question.png")
-    @ImageOptions(width = buttonSize)
-    ImageResource helpButton();
 
 
-    @Source("help_dialog_question.png")
-    @ImageOptions(width = buttonSizeMobile)
-    ImageResource helpButtonMobile();
+
 
 
     @Source("Question-mark-icon.png")
@@ -300,13 +272,9 @@ public interface SpotImageResource extends ClientBundle {
     @ImageOptions(width = mobileSize)
     ImageResource thumbsUpMobile();
 
-    @Source("beos_people.png")
-    @ImageOptions(width = 72)
-    ImageResource groups();
 
-    @Source("beos_people.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource groupsMobile();
+
+
 
     @Source("agt_family.png")
     @ImageOptions(width = 72)
@@ -392,18 +360,10 @@ public interface SpotImageResource extends ClientBundle {
     @ImageOptions(width = mobileSize)
     ImageResource funMobile();
 
-    @Source("bird_vista_archigraphs.png")
-    @ImageOptions(width = 72)
-    ImageResource followSpot();
-
-    @Source("bird_vista_archigraphs.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource followSpotMobile();
 
 
-    @Source("setlocation.png")
-    @ImageOptions(width = 72)
-    ImageResource locationmanual();
+
+
 
     @Source("setlocation.png")
     @ImageOptions(width = mobileSize)
@@ -432,14 +392,6 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-
-    @Source("sleep_hotel_128.png")
-    @ImageOptions(width = 72)
-    ImageResource lodging();
-
-    @Source("sleep_hotel_128.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource lodgingMobile();
 
     @Source("lock_128.png")
     @ImageOptions(width = 72)
@@ -546,18 +498,7 @@ public interface SpotImageResource extends ClientBundle {
     @ImageOptions(width = mobileSize)
     ImageResource secretkeyMobile();
 
-//    @Source("really_angry.png")
-//    @ImageOptions(width = 72)
-//    ImageResource worsedriversBig();
-//    @Source("really_angry.png")
-//    @ImageOptions(width = 30)
-//    ImageResource worsedriversSmall();
-//    @Source("worseplaces.png")
-//    @ImageOptions(width = 72)
-//    ImageResource worseplacesBig();
-//    @Source("worseplaces.png")
-//    @ImageOptions(width = 30)
-//    ImageResource worseplacesSmall();
+
 
     @Source("modem2_128.png")
     @ImageOptions(width = 72)
@@ -570,9 +511,7 @@ public interface SpotImageResource extends ClientBundle {
     @Source("8coupons-med.png")
     ImageResource coupons8();
 
-    @ImageOptions(width = 30)
-    @Source("email_reply_01.png")
-    ImageResource emailReplySmall();
+
 
 //    @Source("markspot2.png")
 //    @ImageOptions(width = 30)
@@ -591,23 +530,6 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-    /*
-    there are four sizes for each image
-    2 sets of 2
-    1 set is for the header of the page
-    2nd set are for any buttons
-
-    sometimes we do not need a second set of images if we do not show the image on any buttons
-     */
-    @Source("cute_vehicle.png")
-    @ImageOptions(width = 72)
-    ImageResource drivers();
-
-
-
-    @Source("cute_vehicle.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource driversMobile();
 
 
 

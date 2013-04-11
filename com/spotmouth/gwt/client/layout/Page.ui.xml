@@ -13,12 +13,11 @@
 
 
 
+
       <div style="display:none">
-          <g:SimplePanel ui:field='searchBox'>
+          <g:Button addStyleNames="_menu" ui:field="menuButton"><span class="_icon _menu"></span></g:Button>
 
-            </g:SimplePanel>
       </div>
-
 
 
 
@@ -164,9 +163,9 @@
 
 
 
-        <g:SimplePanel ui:field='messages'>
+        <g:SimplePanel ui:field='messages'/>
 
-        </g:SimplePanel>
+
 
 
         <div class="heading">
@@ -174,9 +173,9 @@
         </div>
         <!-- end .heading -->
 
-        <g:SimplePanel ui:field='body'>
+        <g:SimplePanel ui:field='body' />
 
-        </g:SimplePanel>
+
 
         <div class="clear"></div>
 

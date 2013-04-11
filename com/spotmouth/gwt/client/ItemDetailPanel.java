@@ -447,7 +447,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         fixButton(replyMarkLabel);
         replyMarkLabel.addClickHandler(replyMarkHandler);
 
-        addImageToButton(replyMarkLabel, MyWebApp.resources.emailReplySmall(), MyWebApp.resources.emailReplySmall());
+        //addImageToButton(replyMarkLabel, MyWebApp.resources.emailReplySmall(), MyWebApp.resources.emailReplySmall());
         add(replyMarkLabel);
 
         if (isSpot) {
@@ -460,7 +460,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
                 addImageIcon(viewMapHandler, "View Map", new Image(MyWebApp.resources.locationmanualMobile()), topPanel, "View this mark on a map");
             } else {
                 addImageIcon(markSpotHandler, "Mark Spot", new Image(MyWebApp.resources.markspot()), topPanel, "Mark this spot");
-                addImageIcon(viewMapHandler, "View Map", new Image(MyWebApp.resources.locationmanual()), topPanel, "View this mark on a map");
+                ///addImageIcon(viewMapHandler, "View Map", new Image(MyWebApp.resources.locationmanual()), topPanel, "View this mark on a map");
             }
         }
         if (getItemHolder().getUserHolder() != null) {

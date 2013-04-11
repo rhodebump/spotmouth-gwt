@@ -27,13 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.locationManualMobile();
-        } else {
-            return MyWebApp.resources.locationmanual();
-        }
-    }
+
 
     public TextResource getHelpTextResource() {
         return HelpResources.INSTANCE.getSetLocation();

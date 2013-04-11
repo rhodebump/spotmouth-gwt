@@ -15,14 +15,7 @@ public class MarkLocationForm extends LeaveMarkForm  {
 
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.locationMobile();
-        } else {
-            return MyWebApp.resources.location();
-        }
 
-    }
 
 
 
