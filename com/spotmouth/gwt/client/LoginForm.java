@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client;
 //http://google-web-toolkit.googlecode.com/svn/javadoc/2.4/com/google/gwt/user/client/ui/SimpleCheckBox.html
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.gwt.core.client.Callback;
@@ -13,6 +14,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.Cookies;
+import com.gwtfb.client.overlay.AuthResponse;
 import com.phonegap.gwt.console.client.Logger;
 import com.phonegap.gwt.fbconnect.client.FBConnect;
 import com.phonegap.gwt.fbconnect.client.OnConnectCallback;
@@ -50,7 +52,6 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
     public String getTitle() {
         return "Login";
     }
-
 
     private TextField usernameTextBox = new TextField();
     //clear text password
@@ -128,7 +129,7 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
         Anchor facebookAnchor = new Anchor();
         DOM.setElementAttribute(facebookAnchor.getElement(), "id", "fb");
         if (FBConnect.isSupported()) {
-             mywebapp.log("FBConnect is  supported, adding facebookloginHandlerMobile");
+            mywebapp.log("FBConnect is  supported, adding facebookloginHandlerMobile");
             facebookAnchor.addClickHandler(facebookloginHandlerMobile);
         } else {
             mywebapp.log("FBConnect is not supported, using  facebookloginHandlerWeb");
@@ -326,9 +327,6 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
         });
     }
 //http://code.google.com/p/gwt-oauth2/
-
-
-
     ClickHandler loginHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             GWT.log("adding login button");
@@ -345,19 +343,13 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
     the gwt-oauth2 project doesn't do signoff well at all, we
     are using gwtFB project to integrate to facebook
      */
-
-
-
-
     AsyncCallback facebookLoggedInStatusCallback = new AsyncCallback() {
         public void onFailure(Throwable throwable) {
             getMessagePanel().displayError(throwable.getMessage());
         }
 
         public void onSuccess(Object response) {
-
-            mywebapp.log("facebookLoggedInStatusCallback null");
-
+            mywebapp.log("facebookLoggedInStatusCallback.onSuccess");
 //            java.util.Collection<String> cookies = Cookies.getCookieNames();
 //            java.util.Iterator<String> vals = cookies.iterator();
 //            String accessToken = "";
@@ -384,12 +376,17 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
 //            //wrapped with quotes
 //            accessToken = accessToken.replaceAll("\"", "");
 //            mywebapp.log("accessToken=" + accessToken);
-            String accessToken = mywebapp.getFbCore().getAuthResponse().getAccessToken();
-
-               performFacebookLogin(accessToken);
+            AuthResponse authResponse = mywebapp.getFbCore().getAuthResponse();
+            //.authresponse status=undefined
+            String accessToken = authResponse.getAccessToken();
+            Log.warn("facebookLoggedInStatusCallback.accessToken=" + accessToken);
+            Log.warn("facebookLoggedInStatusCallback.authresponse expires=" + authResponse.getExpiresIn());
+            Log.warn("facebookLoggedInStatusCallback.authresponse status=" + authResponse.getStatus());
+            Log.warn("acebookLoggedInStatusCallback.authresponse2=" + mywebapp.getFbCore().getStatus());
+            //facebookLoggedInStatusCallback.authresponse status=undefined
+            performFacebookLogin(accessToken);
         }
     };
-
 
     AsyncCallback facebookLoginStatusCallback = new AsyncCallback() {
         public void onFailure(Throwable throwable) {
@@ -397,40 +394,29 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
         }
 
         public void onSuccess(Object response) {
-
             mywebapp.log("facebookLoginStatusCallback.onSuccess");
-
-
-            if (mywebapp.getFbCore().getAuthResponse()  == null) {
+            //JavaScriptObject.
+            Log.warn("facebookLoginStatusCallback.onSuccess " + response.toString());
+            if (mywebapp.getFbCore().getAuthResponse() == null) {
                 mywebapp.log("getFbCore.getAuthResponse is null");
                 mywebapp.getFbCore().login(facebookLoggedInStatusCallback);
             } else {
                 mywebapp.log("getFbCore.getAuthResponse is not null");
+                AuthResponse authResponse = mywebapp.getFbCore().getAuthResponse();
+                Log.warn("authresponse expires=" + authResponse.getExpiresIn());
+                Log.warn("mywebapp.getFbCore()getstatus=" + mywebapp.getFbCore().getStatus());
                 facebookLoggedInStatusCallback.onSuccess(null);
             }
-
         }
     };
-
     ClickHandler doFacebookLoginClickHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
-
             //we can't do a login if we are already logged in
-             mywebapp.getFbCore().getLoginStatus(facebookLoginStatusCallback);
-
-
-
-
-
-
-
-
+            mywebapp.getFbCore().getLoginStatus(facebookLoginStatusCallback,true);
         }
     };
-
     ClickHandler facebookloginHandlerMobile = new ClickHandler() {
         public void onClick(ClickEvent event) {
-
             mywebapp.fbConnect.setOnConnectCallback(new OnConnectCallback() {
                 public void onFBConnected() {
                     String accessToken = mywebapp.fbConnect.getAccessToken();
@@ -453,11 +439,13 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
 
             public void onFailure(Throwable caught) {
                 validateLoginDialog.hide();
-                getMessagePanel().displayError(caught.getMessage());
+                getMessagePanel().displayError("Facebook login error");
+
             }
 
             public void onSuccess(Object result) {
                 validateLoginDialog.hide();
+                Log.warn("performFacebookLogin.onSuccess");
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
                     mywebapp.setLoginMobileResponse(mobileResponse);
@@ -471,7 +459,8 @@ public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
                         mywebapp.getMessagePanel().displayMessage("Logged in via Facebook");
                     }
                 } else {
-                    mywebapp.getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
+                    //mywebapp.getFbCore().logout(facebookLoginStatusCallback2);
+                    getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
                 }
             }
         });

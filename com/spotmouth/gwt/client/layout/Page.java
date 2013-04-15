@@ -117,6 +117,8 @@ public class Page extends Composite {
 
         this.searchButton = searchButton;
       this.menuButton = menuButton;
+
+        this.menuButton.getElement().setId("show-menu");
         if (MyWebApp.isDesktop()) {
             initWidget(desktopBinder.createAndBindUi(this));
         }else {

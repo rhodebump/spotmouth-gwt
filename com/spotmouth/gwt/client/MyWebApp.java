@@ -1,5 +1,6 @@
 package com.spotmouth.gwt.client;
 
+import com.spotmouth.gwt.client.contact.*;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.gwt.core.client.EntryPoint;
@@ -40,6 +41,7 @@ import com.googlecode.mgwt.ui.client.MGWT;
 import com.gwtfb.sdk.FBCore;
 import com.phonegap.gwt.device.client.Device;
 import com.phonegap.gwt.fbconnect.client.FBConnect;
+import com.spotmouth.gwt.client.about.AboutPanel;
 import com.spotmouth.gwt.client.chat.ChatPanel;
 import com.spotmouth.gwt.client.chat.ChatsPanel;
 import com.spotmouth.gwt.client.chat.ManageChatPanel;
@@ -82,8 +84,6 @@ import com.spotmouth.gwt.client.spot.CreateSpotMarkPanel;
 import com.spotmouth.gwt.client.spot.ManageSpotPanel;
 import com.spotmouth.gwt.client.usergroups.ManageUserGroupPanel;
 import com.spotmouth.gwt.client.usergroups.ViewUserGroupsPanel;
-import gwtupload.client.IUploadStatus;
-import gwtupload.client.MultiUploader;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -2012,7 +2012,7 @@ public class MyWebApp implements EntryPoint {
     //  private static boolean mobileSmallFormat = true;
 
     public static boolean isDesktop() {
-        if (true) return false;
+        //if (true) return false;
         if (getHost().startsWith("http://m.")) {
             return false;
         }
@@ -2058,11 +2058,6 @@ public class MyWebApp implements EntryPoint {
     public void runApp() {
 
 
-        if (MyWebApp.isDesktop()) {
-            loadDesktopCss();
-        }else {
-            loadMobileCss();
-        }
 
 
 
@@ -2680,8 +2675,6 @@ public class MyWebApp implements EntryPoint {
             String location = historyToken.replaceAll(AROUND_LOCATION, "");
             //this will set the location
             toggleAroundLocation(location);
-        } else if (historyToken.startsWith(ABOUT)) {
-            toggleAbout();
         } else if (historyToken.startsWith(FEATURES)) {
             toggleFeatures();
         } else if (historyToken.startsWith(COUPONS)) {
@@ -2898,6 +2891,14 @@ public class MyWebApp implements EntryPoint {
      * This is the entry point method.
      */
     public void onModuleLoad() {
+
+
+        if (MyWebApp.isDesktop()) {
+            loadDesktopCss();
+        }else {
+            loadMobileCss();
+        }
+
 
 
         GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
@@ -3665,24 +3666,23 @@ public class MyWebApp implements EntryPoint {
 
     public static String AROUND_LOCATION = "around-location/";
     public static String ABOUT_US = "!about-us/";
-    public static String ABOUT = "!about/";
+    //public static String ABOUT = "!about/";
     public static String FEATURES = "!features/";
     public static String COUPONS = "!coupons/";
 
     private void toggleAboutUS() {
         this.getMessagePanel().clear();
-        String html = MyHtmlResources.INSTANCE.getAboutUSHtml().getText();
-        AboutPanel aboutPanel = new AboutPanel(this, html);
+        AboutPanel aboutPanel = new AboutPanel(this);
         swapCenter(aboutPanel);
     }
 
-    private void toggleAbout() {
-        this.getMessagePanel().clear();
-        // need to clear out keyword search if one was done
-        String html = MyHtmlResources.INSTANCE.getAboutHtml().getText();
-        AboutPanel aboutPanel = new AboutPanel(this, html);
-        swapCenter(aboutPanel);
-    }
+//    private void toggleAbout() {
+//        this.getMessagePanel().clear();
+//        // need to clear out keyword search if one was done
+//        //String html = MyHtmlResources.INSTANCE.getAboutHtml().getText();
+//        AboutPanel aboutPanel = new AboutPanel(this);
+//        swapCenter(aboutPanel);
+//    }
 
     private void toggleFeatures() {
         this.getMessagePanel().clear();
@@ -4137,11 +4137,15 @@ public class MyWebApp implements EntryPoint {
 
     AsyncCallback facebooklogoutMessageCallback = new AsyncCallback() {
         public void onFailure(Throwable throwable) {
+            Log.warn("facebooklogoutMessageCallback.onFailure");
             getMessagePanel().displayError(throwable.getMessage());
         }
 
         public void onSuccess(Object response) {
-            log("facebook logged out!");
+            Log.warn("facebooklogoutMessageCallback.onSuccess");
+            //we need to reinit if we come back
+
+
         }
     };
 
@@ -4161,7 +4165,10 @@ public class MyWebApp implements EntryPoint {
             }  else {
                 log("fbCore.logout");
 
+                //there appears to be a bug in which if user is not logged in, the callback is never called
                 fbCore.logout(facebooklogoutMessageCallback);
+               //  fbCore.log
+
                 //logout(facebooklogoutMessageCallback);
             }
         } else {

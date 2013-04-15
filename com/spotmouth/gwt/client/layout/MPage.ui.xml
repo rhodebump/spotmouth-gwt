@@ -30,11 +30,12 @@
      		<button id="show-search" class="_search" onclick="screenLoc('search','_right');"><span class="_icon _search"></span></button>
      		<button id="hide-search" class="_search _blue" onclick="screenNormal();"><span class="_icon _search"></span></button>
      		<a href="home-page.html"><img class="logo" src="css/img/sm-logo.png"/></a>
-          <g:Button addStyleNames="_menu" ui:field="menuButton"><span class="_icon _menu"></span></g:Button>
+
+          <g:Button styleName="_menu" ui:field="menuButton"><span class="_icon _menu"></span></g:Button>
           <!--
      		<button id="show-menu" class="_menu" onclick="screenLoc('menu');" ><span class="_icon _menu"></span></button>
      		<button id="hide-menu" class="_menu _blue" onclick="screenNormal();"> <span class="_icon _menu"></span></button>
-     		-->
+              -->
      		<button id="show-login" class="_login" style="display:none;" onclick="screenLoc('login')"><span class="_icon _login"></span></button>
      		<button id="hide-login" class="_login _blue" onclick="screenNormal();"><span class="_icon _login"></span></button>
      		<button id="hide-nav" class="_nav _blue" onclick="screenNormal();"><span class="_icon _nav"></span></button>

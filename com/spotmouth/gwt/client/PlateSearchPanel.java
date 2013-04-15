@@ -79,6 +79,9 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
         if (isEmpty(plateNameTextBox)) {
             getMessagePanel().displayError("Plate is required.");
         }
+        if (isEmpty(countryTextBox.getTextBox())) {
+            getMessagePanel().displayError("Country is required.");
+        }
         if (isEmpty(stateTextBox.getTextBox())) {
             getMessagePanel().displayError("State is required.");
         }
@@ -101,6 +104,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
         searchParameters.setSpots(true);
         searchParameters.setPlateName(plateNameTextBox.getValue());
         searchParameters.setKeywords(keywordsTextBox.getValue());
+        searchParameters.setCountryShortNameCode(countryTextBox.getValue());
         searchParameters.setState(stateTextBox.getValue());
         {
             String val = getValue(colorsListBox);
@@ -143,6 +147,7 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
         GWT.log("showSpot factual");
         SpotHolder spotHolder = new SpotHolder();
         spotHolder.setName(plateNameTextBox.getValue());
+        spotHolder.setCountryCode(countryTextBox.getValue());
         spotHolder.setState(stateTextBox.getValue());
         String color = getValue(colorsListBox);
         spotHolder.setColor(color);

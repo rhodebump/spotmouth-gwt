@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:xx='urn:import:com.spotmouth.gwt.client'>
+
+
+
+
+
+
+  <g:HTMLPanel>
+
+
+      <div id="content" class="content">
+    		<div class="about _page">
+    			<h1>About Us</h1>
+    			<p style="padding:15px;">We are based in Pittsburgh, Pennsylvania in the USA.   Use the contact form if you want to reach out with a comment or suggestion for spotmouth.</p>
+    			<label><a href="#contact/"><button class="_white">Contact Us</button></a></label>
+    			<span class="_sep _light" style="margin:25px auto;"></span>
+    			<label><a href="#features/"><button class="_white">Features</button></a></label>
+    		</div>
+    	</div>
+
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>
