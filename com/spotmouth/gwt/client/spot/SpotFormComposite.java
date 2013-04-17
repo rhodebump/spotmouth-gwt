@@ -1,9 +1,12 @@
 package com.spotmouth.gwt.client.spot;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.common.TextField;
 
 /**
@@ -14,10 +17,32 @@ import com.spotmouth.gwt.client.common.TextField;
  * To change this template use File | Settings | File Templates.
  */
 public class SpotFormComposite   extends Composite {
-    interface MyUiBinder extends UiBinder<Widget, SpotFormComposite> {
-    }
+//    interface MyUiBinder extends UiBinder<Widget, SpotFormComposite> {
+//    }
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+    //private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+
+
+    @UiField
+    SpanElement labelSpan;
+
+     public void setLabel(String label) {
+         labelSpan.setInnerText(label);
+     }
+
+    @UiField(provided = true)
+    final Anchor spotDetailAnchor;
+
+    @UiTemplate("SpotFormComposite.ui.xml")
+    interface DesktopBinder extends UiBinder<Widget, SpotFormComposite> {}
+    private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
+
+    @UiTemplate("MSpotFormComposite.ui.xml")
+    interface MobileBinder extends UiBinder<Widget, SpotFormComposite> {}
+    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
+
+
 
 
     @UiField(provided = true)
@@ -99,7 +124,8 @@ public class SpotFormComposite   extends Composite {
                              SuggestBox countryTextBox, SuggestBox stateTextBox, SuggestBox cityTextBox, SuggestBox zipcodeTextField, TextField address1TextBox,
                              SuggestBox tagSearchTextBox,
                                                             FlowPanel selectedTagsPanel,FlowPanel suggestionsPanel,
-                                                            TextField factualTextField,TextField woeIDTextField,TextField yelpIDTextField) {
+                                                            TextField factualTextField,TextField woeIDTextField,TextField yelpIDTextField,Anchor spotDetailAnchor) {
+        this.spotDetailAnchor = spotDetailAnchor;
         this.cancelButton = cancelButton;
         this.spotNameTextField = spotNameTextField;
         this.voicePhoneTextField = voicePhoneTextField;
@@ -124,7 +150,13 @@ public class SpotFormComposite   extends Composite {
         this.woeIDTextField = woeIDTextField;
         this.yelpIDTextField    = yelpIDTextField;
 
-        initWidget(uiBinder.createAndBindUi(this));
+        //initWidget(uiBinder.createAndBindUi(this));
+
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        }else {
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
     }
 
 

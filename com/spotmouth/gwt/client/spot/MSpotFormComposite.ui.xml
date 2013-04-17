@@ -1,0 +1,107 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:smc="urn:import:com.spotmouth.gwt.client.common"
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+
+
+
+
+  <g:HTMLPanel>
+
+      <div id="content" class="content">
+
+                <g:Button  ui:field="cancelButton" addStyleNames="_dark">Go Back</g:Button>
+     		<div class="change_listing _page">
+     			<g:Anchor ui:field="spotDetailAnchor"><h1>@<span ui:field='labelSpan'/></h1></g:Anchor>
+
+     			<h2>Listing Info</h2>
+
+     				<!-- NOTE! Every empty input should have empty attribut value NOTE!-->
+     				<label>
+     					<p>Name</p>
+                         <smc:TextField ui:field="spotNameTextField"  tabIndex="1" placeholder="Name..."/>
+     				</label>
+     				<label>
+     					<p>Description</p>
+                         <g:TextArea visibleLines="5" tabIndex="2" ui:field="spotDescriptionTextArea"/>
+     				</label>
+     				<span class="_sep _light"></span>
+     				<label>
+     					<p>Location</p>
+                         <g:SuggestBox tabIndex="3" ui:field="countryTextBox"/>
+     				</label>
+     				<label>
+                         <g:SuggestBox ui:field="stateTextBox"/>
+     				</label>
+     				<label>
+                         <g:SuggestBox ui:field="cityTextBox"/>
+     				</label>
+     				<span class="_sep _light"></span>
+     				<label>
+     					<p>Address</p>
+                         <smc:TextField ui:field="address1TextBox"  tabIndex="8" placeholder="Address"/>
+     				</label>
+     				<label>
+                         <g:SuggestBox ui:field="zipcodeTextField"/>
+     				</label>
+     				<span class="_sep _light"></span>
+     				<label>
+     					<p>Contact</p>
+                         <smc:TextField type="email" ui:field="emailTextField"  tabIndex="10" placeholder="Example@mail.com"/>
+     				</label>
+     				<label>
+                         <smc:TextField ui:field="websiteTextField"  tabIndex="11" placeholder="Website..."/>
+     				</label>
+     				<label>
+                         <smc:TextField ui:field="voicePhoneTextField"  tabIndex="12" placeholder="Voice Phone..."/>
+     				</label>
+     				<span class="_sep _light"></span>
+     				<label>
+     					<p>Tags</p>
+                         <g:SuggestBox tabIndex="13"  ui:field="tagSearchTextBox"/>
+
+                         <div>
+                                   <g:FlowPanel ui:field="selectedTagsPanel" />
+                                   <g:FlowPanel ui:field="suggestionsPanel" />
+
+
+                       		</div>
+
+
+     				</label>
+     				<span class="_sep _light"></span>
+     				<label>
+     					<p>ID's</p>
+                         <smc:TextField ui:field="factualTextField"    tabIndex="18" placeholder="Factual ID..."/>
+     				</label>
+     				<label>
+                         <smc:TextField ui:field="woeIDTextField"   tabIndex="19"  placeholder="WOE ID..."/>
+     				</label>
+     				<label>
+                         <smc:TextField ui:field="yelpIDTextField"  tabIndex="20" placeholder="Yelp ID..."/>
+     				</label>
+     				<span class="_sep _light"></span>
+     				<label>
+     					<p>Spot Type</p>
+     				</label>
+     				<label class="_check">
+                         <g:SimpleCheckBox tabIndex="14" ui:field="lodgingCheckBox"/>Lodging
+     				</label>
+     				<label class="_check"> <g:SimpleCheckBox tabIndex="15" ui:field="funCheckBox"/>Fun</label>
+     				<label class="_check">  <g:SimpleCheckBox tabIndex="16" ui:field="drinkingCheckBox"/>Drinking</label>
+     				<label class="_check">  <g:SimpleCheckBox tabIndex="17" ui:field="diningCheckBox"/>Dining</label>
+     				<span class="_sep _light"></span>
+     				<label>
+
+
+                         <g:Button ui:field="saveButton" addStyleNames="_white _active">Save</g:Button>
+
+     				</label>
+
+     		</div>
+      </div>
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

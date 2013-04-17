@@ -177,6 +177,8 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
             emailTextField = new TextField();
             zipcodeTextField = initZipCodeTextBox(spotHolder.getZip());
             initForm(spotHolder);
+            Anchor spotDetailAnchor = new Anchor();
+            spotDetailAnchor.setHref("#" + MyWebApp.SPOT_DETAIL + spotHolder.getId());
 
             SpotFormComposite sfc = new SpotFormComposite(cancelButton, nameTextBox, voicePhoneTextField, websiteTextField,  emailTextField,
                                           contentTextArea, saveButton,
@@ -184,7 +186,8 @@ public class PlaceForm extends SpotBasePanel implements SpotMouthPanel {
                                           countryTextBox,  stateTextBox,  citySuggestBox,  zipcodeTextField,  address1TextField,
                                           tagSearchTextBox,
                                                                          selectedTagsPanel, suggestionsPanel,
-                                                                         factualIdTextField, woeIdTextField, yelpIdTextField);
+                                                                         factualIdTextField, woeIdTextField, yelpIdTextField,spotDetailAnchor);
+            sfc.setLabel(spotHolder.getLabel());
             add(sfc);
 
             return;
