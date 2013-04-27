@@ -96,22 +96,6 @@ public interface SpotImageResource extends ClientBundle {
     @Source("thumbs_up_deselected.png")
     @ImageOptions(width = 28)
     ImageResource thumbsUpDeselected16();
-//
-//    @Source("medal.png")
-//    @ImageOptions(width = 72)
-//    ImageResource contests();
-//
-//    @Source("medal.png")
-//    @ImageOptions(width = mobileSize)
-//    ImageResource contestsMobile();
-
-
-//
-//    @Source("medal.png")
-//    @ImageOptions(width = buttonSize)
-//    ImageResource contestButton();
-
-
 
 
 
@@ -160,14 +144,6 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-    @Source("icon-register.png")
-    @ImageOptions(width = buttonSize)
-    ImageResource registerButton();
-
-
-    @Source("icon-register.png")
-    @ImageOptions(width = buttonSizeMobile)
-    ImageResource registerButtonMobile();
 
 
 
@@ -265,24 +241,6 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-//    @Source("agt_family.png")
-//    @ImageOptions(width = 72)
-//    ImageResource friends();
-//
-//
-//
-//    @Source("agt_family.png")
-//    @ImageOptions(width = mobileSize)
-//    ImageResource friendsMobile();
-
-    @Source("info_128.png")
-    @ImageOptions(width = 72)
-    ImageResource about();
-
-    @Source("info_128.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource aboutMobile();
-
 //    @Source("bestplaces.png")
 //    @ImageOptions(width = 72)
 //    ImageResource bestplacesBig();
@@ -298,56 +256,9 @@ public interface SpotImageResource extends ClientBundle {
     @ImageOptions(width = mobileSize)
     ImageResource diningMobile();
 
-//    @Source("restaurant_food-64.png")
-//    @ImageOptions(width = 30)
-//    ImageResource diningSmall();
-//
-//    @Source("beer_128.png")
-//    @ImageOptions(width = 72)
-//    ImageResource drinking();
-//
-//    @Source("beer_128.png")
-//    @ImageOptions(width = mobileSize)
-//    ImageResource drinkingMobile();
 
 
-//    @Source("beer_64.png")
-//    @ImageOptions(width = 30)
-//    ImageResource drinkingSmall();
 
-    @Source("favorites2.png")
-    @ImageOptions(width = 72)
-    ImageResource favorites();
-
-    @Source("favorites2.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource favoritesMobile();
-
-//
-//    @Source("favorites2.png")
-//    @ImageOptions(width = 30)
-//    ImageResource favoritesSmall();
-//
-//    @Source("cake_128.png")
-//    @ImageOptions(width = 72)
-//    ImageResource fun();
-
-
-    //console128.png
-
-    @Source("console128.png")
-    @ImageOptions(width = 72)
-    ImageResource console();
-
-    @Source("console128.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource consoleMobile();
-
-//
-//
-//    @Source("cake_128.png")
-//    @ImageOptions(width = mobileSize)
-//    ImageResource funMobile();
 
 
 
@@ -385,14 +296,6 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-    @Source("unlock_128.png")
-    @ImageOptions(width = 72)
-    ImageResource logout();
-
-    @Source("unlock_128.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource logoutMobile();
-
     @Source("markspot2.png")
     @ImageOptions(width = 72)
     ImageResource markspot();
@@ -410,15 +313,7 @@ public interface SpotImageResource extends ClientBundle {
         //@ImageOptions(width = 72)
     ImageResource add();
 
-    //it's 72 high
-    //, SpotHolder spotHolder
-    @Source("coupon_cut.png")
-    @ImageOptions(width = 100)
-    ImageResource coupon();
 
-    @Source("coupon_cut.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource couponMobile();
 
 
     @Source("calendar.png")
