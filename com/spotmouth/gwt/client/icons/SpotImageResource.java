@@ -393,19 +393,8 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-    @Source("lock_128.png")
-    @ImageOptions(width = 72)
-    ImageResource login();
-
-    @Source("lock_128.png")
-    @ImageOptions(width = 30)
-    ImageResource loginMobile();
 
 
-
-    @Source("lock_128.png")
-    @ImageOptions(width = 72)
-    ImageResource loginSmall();
 
     @Source("unlock_128.png")
     @ImageOptions(width = 72)
