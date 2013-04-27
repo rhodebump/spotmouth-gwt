@@ -106,10 +106,10 @@ public interface SpotImageResource extends ClientBundle {
 //    ImageResource contestsMobile();
 
 
-
-    @Source("medal.png")
-    @ImageOptions(width = buttonSize)
-    ImageResource contestButton();
+//
+//    @Source("medal.png")
+//    @ImageOptions(width = buttonSize)
+//    ImageResource contestButton();
 
 
 
@@ -191,15 +191,15 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-
-
-    @Source("Question-mark-icon.png")
-    @ImageOptions(width = 72)
-    ImageResource passwordReset();
-
-    @Source("Question-mark-icon.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource passwordResetMobile();
+//
+//
+//    @Source("Question-mark-icon.png")
+//    @ImageOptions(width = 72)
+//    ImageResource passwordReset();
+//
+//    @Source("Question-mark-icon.png")
+//    @ImageOptions(width = mobileSize)
+//    ImageResource passwordResetMobile();
 
 
 //    @Source("password.png")
@@ -215,18 +215,7 @@ public interface SpotImageResource extends ClientBundle {
     @Source("ajax-loader.gif")
     ImageResource ajaxLoader();
 
-    @Source("anon128x128.png")
-    ImageResource anon130x130();
 
-    @Source("anon128x128.png")
-    @ImageOptions(width = 57)
-    ImageResource anon57x57();
-
-
-
-    @Source("anon128x128.png")
-    @ImageOptions(width = 90)
-    ImageResource anon130x130Mobile();
 
 
 
@@ -276,15 +265,15 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-    @Source("agt_family.png")
-    @ImageOptions(width = 72)
-    ImageResource friends();
-
-
-
-    @Source("agt_family.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource friendsMobile();
+//    @Source("agt_family.png")
+//    @ImageOptions(width = 72)
+//    ImageResource friends();
+//
+//
+//
+//    @Source("agt_family.png")
+//    @ImageOptions(width = mobileSize)
+//    ImageResource friendsMobile();
 
     @Source("info_128.png")
     @ImageOptions(width = 72)
@@ -312,14 +301,14 @@ public interface SpotImageResource extends ClientBundle {
 //    @Source("restaurant_food-64.png")
 //    @ImageOptions(width = 30)
 //    ImageResource diningSmall();
-
-    @Source("beer_128.png")
-    @ImageOptions(width = 72)
-    ImageResource drinking();
-
-    @Source("beer_128.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource drinkingMobile();
+//
+//    @Source("beer_128.png")
+//    @ImageOptions(width = 72)
+//    ImageResource drinking();
+//
+//    @Source("beer_128.png")
+//    @ImageOptions(width = mobileSize)
+//    ImageResource drinkingMobile();
 
 
 //    @Source("beer_64.png")
@@ -338,10 +327,10 @@ public interface SpotImageResource extends ClientBundle {
 //    @Source("favorites2.png")
 //    @ImageOptions(width = 30)
 //    ImageResource favoritesSmall();
-
-    @Source("cake_128.png")
-    @ImageOptions(width = 72)
-    ImageResource fun();
+//
+//    @Source("cake_128.png")
+//    @ImageOptions(width = 72)
+//    ImageResource fun();
 
 
     //console128.png
@@ -354,11 +343,11 @@ public interface SpotImageResource extends ClientBundle {
     @ImageOptions(width = mobileSize)
     ImageResource consoleMobile();
 
-
-
-    @Source("cake_128.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource funMobile();
+//
+//
+//    @Source("cake_128.png")
+//    @ImageOptions(width = mobileSize)
+//    ImageResource funMobile();
 
 
 
@@ -385,12 +374,12 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-
-    @Source("phone_transfer.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource locationDeviceMobile();
-
-
+//
+//    @Source("phone_transfer.png")
+//    @ImageOptions(width = mobileSize)
+//    ImageResource locationDeviceMobile();
+//
+//
 
 
 
@@ -478,14 +467,14 @@ public interface SpotImageResource extends ClientBundle {
     @ImageOptions(width = 20)
     ImageResource searchButtonSmall();
 
-
-    @Source("lock_key.png")
-    @ImageOptions(width = 72)
-    ImageResource secretkey();
-
-    @Source("lock_key.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource secretkeyMobile();
+//
+//    @Source("lock_key.png")
+//    @ImageOptions(width = 72)
+//    ImageResource secretkey();
+//
+//    @Source("lock_key.png")
+//    @ImageOptions(width = mobileSize)
+//    ImageResource secretkeyMobile();
 
 
 
@@ -507,16 +496,14 @@ public interface SpotImageResource extends ClientBundle {
 //    ImageResource markspot30();
 
 
-    @Source("advanced_options.png")
-    @ImageOptions(width = buttonSize)
-    ImageResource advancedOptionsButton();
+//    @Source("advanced_options.png")
+//    @ImageOptions(width = buttonSize)
+//    ImageResource advancedOptionsButton();
 
 
-    @Source("advanced_options.png")
-    @ImageOptions(width = buttonSizeMobile)
-    ImageResource advancedOptionsButtonMobile();
-
-
+//    @Source("advanced_options.png")
+//    @ImageOptions(width = buttonSizeMobile)
+//    ImageResource advancedOptionsButtonMobile();
 
 
 
@@ -524,15 +511,17 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-    @Source("directory.png")
-    @ImageOptions(width = 72)
-    ImageResource directory();
-
-
-
-    @Source("directory.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource directoryMobile();
+//
+//
+//    @Source("directory.png")
+//    @ImageOptions(width = 72)
+//    ImageResource directory();
+//
+//
+//
+//    @Source("directory.png")
+//    @ImageOptions(width = mobileSize)
+//    ImageResource directoryMobile();
 
 
 }
