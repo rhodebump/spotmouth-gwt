@@ -1,4 +1,4 @@
-package com.spotmouth.gwt.client;
+package com.spotmouth.gwt.client.account;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ImageResource;
@@ -6,6 +6,9 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.TextBox;
+import com.spotmouth.gwt.client.DataOperationDialog;
+import com.spotmouth.gwt.client.MyWebApp;
+import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.UserHolder;
