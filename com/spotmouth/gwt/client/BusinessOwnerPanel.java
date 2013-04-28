@@ -22,16 +22,6 @@ public class BusinessOwnerPanel extends ResultsPanel implements SpotMouthPanel {
 
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.favoritesMobile();
-        } else {
-            return MyWebApp.resources.favorites();
-        }
-
-    }
-
-
 
     @Override
     public TextResource getHelpTextResource() {

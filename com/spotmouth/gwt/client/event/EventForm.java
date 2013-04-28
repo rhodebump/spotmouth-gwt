@@ -1,10 +1,13 @@
 package com.spotmouth.gwt.client.event;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
@@ -18,9 +21,7 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.MultiUploader;
 
 public class EventForm extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        return MyWebApp.resources.event();
-    }
+
 
     protected boolean isValid() {
         populateItemHolder();
@@ -103,8 +104,10 @@ public class EventForm extends SpotBasePanel implements SpotMouthPanel {
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
             initControls(eventItemHolder);
+            Anchor spotDetailsAnchor =new Anchor();
+            spotDetailsAnchor.addClickHandler(spotDetailsHandler);
             EventFormComposite cfc = new EventFormComposite(cancelButton, imageUploaderImagePanel, defaultUploader, startDatePicker, endDatePicker, titleTextBox,
-                    contentTextArea, saveButton, suggestionsPanel, tagSearchTextBox, selectedTagsPanel);
+                    contentTextArea, saveButton, suggestionsPanel, tagSearchTextBox, selectedTagsPanel,spotDetailsAnchor);
             cfc.setName(spotHolder.getName());
             cfc.setLocation(spotHolder.getAddressLabel());
             add(cfc);
@@ -125,5 +128,14 @@ public class EventForm extends SpotBasePanel implements SpotMouthPanel {
         titleTextBox.setFocus(true);
     }
 
+    protected ClickHandler spotDetailsHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            String token = MyWebApp.SPOT_DETAIL + spotHolder.getId();
 
+
+            History.newItem(token);
+
+
+        }
+    };
 }

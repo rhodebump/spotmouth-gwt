@@ -24,13 +24,7 @@ import java.util.Map;
  * this constructs links to all application menus
  */
 public class ManageFriendsPanel extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.friendsMobile();
-        } else {
-            return MyWebApp.resources.friends();
-        }
-    }
+
 
     private Map<Widget, FriendHolder> clickMap = new HashMap<Widget, FriendHolder>();
 
@@ -177,13 +171,12 @@ public class ManageFriendsPanel extends SpotBasePanel implements SpotMouthPanel 
         super(mywebapp);
 
 
-        if (MyWebApp.isDesktop()) {
+
             ULPanel friendsULPanel = getFriendsUL();
 
             //	<button class="btn_blue f_invite">Invite Friends</button>
             Button inviteFriendButton = new Button("Invite Friends");
-            inviteFriendButton.setStyleName("btn_blue");
-            inviteFriendButton.addStyleName("f_invite");
+
             inviteFriendButton.addClickHandler(addHandler);
             FriendsComposite friendsComposite = new FriendsComposite(friendsULPanel,inviteFriendButton);
 
@@ -191,34 +184,10 @@ public class ManageFriendsPanel extends SpotBasePanel implements SpotMouthPanel 
             friendsComposite.setFriendCount(mywebapp.getFriendsAndGroups().getFriendHolders().size());
             add(friendsComposite);
 
-            return;
 
 
-        }
 
-        add(addFriendButton());
-        //add or create button
-        //list of friends
-        //clicking on friend goes to edit page or you can delete
-        if (mywebapp.getFriendsAndGroups().getFriendHolders().isEmpty()) {
-            Label label = new Label("There are no friends available.");
-            add(label);
-        }
-        ULPanel ul = new ULPanel();
-        add(ul);
-        for (FriendHolder friendHolder : mywebapp.getFriendsAndGroups().getFriendHolders()) {
-            FlowPanel hp = new FlowPanel();
-            ListItem li = new ListItem();
-            li.setStyleName("clearing");
-            li.add(hp);
-            ul.add(li);
-            Label friendLabel = new Label(friendHolder.getLabel());
-            friendLabel.setStyleName("friend");
-            friendLabel.addStyleName("linky");
-            clickMap.put(friendLabel, friendHolder);
-            li.add(friendLabel);
-            friendLabel.addClickHandler(friendHandler);
-        }
+
     }
 
     ClickHandler addHandler = new ClickHandler() {

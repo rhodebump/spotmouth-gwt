@@ -71,9 +71,6 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
         this.location = location;
         this.addStyleName("LeaveMarkForm");
 
-
-
-        if (MyWebApp.isDesktop()) {
           this.defaultUploader = new MultiUploader();
            // this.defaultUploader =  multiUploader;
             //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages);
@@ -104,46 +101,7 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
             setupRootPanelForm(myFormPanel, markData);
             myFormPanel.setWidget(markComposite);
             add(myFormPanel);
-            return;
 
-
-        }
-        if (spotHolder.getLicensePlate()) {
-            doPlate(spotHolder, spotreadonly);
-        } else if (spotHolder.isPlace()) {
-            doPlace(spotHolder, spotreadonly);
-        } else if (location != null && !locationOnly) {
-            String address = location.getAddress1() + ", " + location.getCity() + " " + location.getState() + " " + location.getZipcode();
-            Label addressLabel = new Label(address);
-            addFieldset(addressLabel, location.getName(), "displayName");
-        }
-        if (itemHolder.getParentItemHolder() != null) {
-            ItemHolder parentItemHolder = itemHolder.getParentItemHolder();
-            HTML textData = new HTML(parentItemHolder.getTextData());
-            addFieldset(textData, "Reply to", "na1");
-            addContentHolder(parentItemHolder.getContentHolder(), false, false);
-
-
-
-        }
-            contentTextArea = addTextArea("Your Mark", "textData", "", false);
-        //addMediaFields("Upload images OR videos for mark");
-
-
-        addMediaFields("Upload images OR video for spot");
-        add(contentsPanel);
-        addContentHolder(itemHolder.getContentHolder(), true, true);
-
-
-
-        add(leaveMarkButton());
-        if (mywebapp.isFacebookUser()) {
-           // addCheckbox(shareOnFacebookCheckbox, null,this);
-        }
-        secretKeyTextBox = addTextBox("Secret Key", "secretKey", "", false);
-        //addTagHolderForm(itemHolder.getTagHolders());
-        add(leaveMarkButton());
-        add(cancelButton());
     }
 
 

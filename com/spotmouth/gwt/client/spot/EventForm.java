@@ -12,9 +12,7 @@ import com.spotmouth.gwt.client.dto.SpotHolder;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 
 public class EventForm extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        return MyWebApp.resources.event();
-    }
+
 
     protected boolean isValid() {
         populateItemHolder();

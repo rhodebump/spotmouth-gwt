@@ -14,14 +14,6 @@ import java.util.Comparator;
 
 public class NotificationsPanel extends SpotBasePanel implements SpotMouthPanel {
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.notificationsMobile();
-        } else {
-            return MyWebApp.resources.notifications();
-        }
-
-    }
 
     public String getPageTitle() {
         return getTitle();

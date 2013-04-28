@@ -14,13 +14,6 @@ import org.vectomatic.dnd.DropPanel;
 //3 buttons to choose type of spot to mark
 public class MarkSpotTypePanel extends SpotBasePanel implements SpotMouthPanel {
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.markspotMobile();
-        } else {
-            return MyWebApp.resources.markspot();
-        }
-    }
 
     public TextResource getHelpTextResource() {
         return HelpResources.INSTANCE.getMarkSpotTypePanel();

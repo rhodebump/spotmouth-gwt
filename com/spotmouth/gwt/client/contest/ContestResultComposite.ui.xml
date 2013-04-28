@@ -4,19 +4,18 @@
         >
 
 
+<g:HTMLPanel tag="li" styleName="cl_item">
 
-<g:HTMLPanel tag="li">
-
-    <g:Image ui:field="contestImage"/>
+    <g:Image ui:field="contestImage" styleName="cl_item_photo"/>
 
 
    		<div class="cl_item_center">
-   			<h3><g:Anchor ui:field="nameAnchor"> <span ui:field='nameSpan'/></g:Anchor></h3>
+   			<h3><g:Anchor ui:field="detailAnchor"> <span ui:field='nameSpan'/></g:Anchor></h3>
    			<p><span ui:field='descriptionSpan'/></p>
    		</div>
    		<span class="cl_btns">
-             <g:Button ui:field="mostVotedButton">Most Voted</g:Button>
-               <g:Button ui:field="winnersButton">Winners</g:Button>
+             <g:Button styleName="button" ui:field="mostVotedButton">Most Voted</g:Button>
+               <g:Button styleName="button" ui:field="winnersButton">Winners</g:Button>
 
    		</span>
 

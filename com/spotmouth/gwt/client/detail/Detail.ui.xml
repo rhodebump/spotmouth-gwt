@@ -12,6 +12,9 @@
 
 
 <div class="content">
+    <div style="display:none">
+        <span ui:field='labelSpan'/>
+    </div>
     <!--
      <a href="#" id="goback" title="Back to Search Results">
      <img src="images/back.png"></img>

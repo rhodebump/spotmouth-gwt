@@ -24,14 +24,7 @@ public class AboutPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.aboutMobile();
-        } else {
-            return MyWebApp.resources.about();
-        }
 
-    }
 
     //plain panel, used for features
     public AboutPanel(MyWebApp mywebapp,String html) {

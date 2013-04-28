@@ -38,12 +38,7 @@ public class RegisterForm extends SpotBasePanel implements SpotMouthPanel {
     };
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.registerMobile();
-        }
-        return MyWebApp.resources.register();
-    }
+
    private       FlowPanel ugcPanel = new FlowPanel();
     private SimpleCheckBox acceptCheckbox = new SimpleCheckBox();
 

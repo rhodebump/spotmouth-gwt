@@ -8,7 +8,7 @@
        		<span class="ug_top_bar"><g:Button addStyleNames="btn_blue" ui:field="addGroupButton">Add Group</g:Button> </span>
        		<div class="content" id="ug_list_wrap">
 
-                 <x:ULPanel ui:field="userGroupsULPanel"/>
+                 <x:ULPanel addStyleNames="user_groups_list" ui:field="userGroupsULPanel"/>
 
 
                    <x:ULPanel ui:field="spotGroupsULPanel"/>

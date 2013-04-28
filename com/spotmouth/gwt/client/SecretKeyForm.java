@@ -13,14 +13,6 @@ public class SecretKeyForm extends SpotBasePanel implements SpotMouthPanel {
         return "Secret Key";
     }
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.secretkeyMobile();
-        } else {
-            return MyWebApp.resources.secretkey();
-        }
-
-    }
 
 
 

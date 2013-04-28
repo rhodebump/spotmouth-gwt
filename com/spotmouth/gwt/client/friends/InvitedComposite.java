@@ -3,9 +3,11 @@ package com.spotmouth.gwt.client.friends;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.ULPanel;
 
 /**
@@ -16,10 +18,18 @@ import com.spotmouth.gwt.client.ULPanel;
  * To change this template use File | Settings | File Templates.
  */
 public class InvitedComposite extends Composite {
-    interface MyUiBinder extends UiBinder<Widget, InvitedComposite> {
-    }
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+    @UiTemplate("InvitedComposite.ui.xml")
+    interface DesktopBinder extends UiBinder<Widget, InvitedComposite> {}
+    private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
+
+    @UiTemplate("InvitedCompositeM.ui.xml")
+    interface MobileBinder extends UiBinder<Widget, InvitedComposite> {}
+    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
+
+
+
 
 
 
@@ -36,7 +46,14 @@ public class InvitedComposite extends Composite {
         this.invitedUL = invitedUL;
 
 
-        initWidget(uiBinder.createAndBindUi(this));
+
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        }else {
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
+
+
     }
 
 

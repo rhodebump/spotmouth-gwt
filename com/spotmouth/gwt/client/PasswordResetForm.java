@@ -20,9 +20,7 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
  * To change this template use File | Settings | File Templates.
  */
 public class PasswordResetForm extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        return MyWebApp.resources.passwordReset();
-    }
+
 
     public String getTitle() {
         return "Reset Password";

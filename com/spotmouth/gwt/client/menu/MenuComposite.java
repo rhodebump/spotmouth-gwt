@@ -2,12 +2,16 @@ package com.spotmouth.gwt.client.menu;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
+import com.spotmouth.gwt.client.common.ListItem;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,9 +31,84 @@ public class MenuComposite extends Composite {
     interface MenuCompositeBinder extends UiBinder<Widget, MenuComposite> {}
     private static MenuCompositeBinder desktopBinder = GWT.create(MenuCompositeBinder.class);
 
-    @UiTemplate("MMenuComposite.ui.xml")
+    @UiTemplate("MenuCompositeM.ui.xml")
     interface MMenuCompositeBinder extends UiBinder<Widget, MenuComposite> {}
     private static MMenuCompositeBinder mobileBinder = GWT.create(MMenuCompositeBinder.class);
+
+
+    @UiField
+    ListItem frequentListItem;
+
+    @UiField
+    HTMLPanel frequentPanel;
+
+
+    @UiField
+    HTMLPanel personalPanel;
+
+    @UiField
+    ListItem personalListItem;
+
+    @UiField
+    ListItem findListItem;
+
+    @UiField
+    HTMLPanel findPanel;
+
+
+
+    @UiHandler("frequentListItem")
+    public void onClickFrequent(ClickEvent event) {
+        clearall();
+        frequentListItem.setStyleName("_active");
+        frequentPanel.setVisible(true);
+
+    }
+
+    private void clearall() {
+        personalPanel.setVisible(false);
+        frequentPanel.setVisible(false);
+        findPanel.setVisible(false);
+        toolsPanel.setVisible(false);
+        frequentListItem.removeStyleName("_active");
+        personalListItem.removeStyleName("_active");
+        findListItem.removeStyleName("_active");
+        toolsListItem.removeStyleName("_active");
+
+    }
+
+    @UiHandler("personalListItem")
+    public void onClick1(ClickEvent event) {
+        clearall();
+        personalListItem.setStyleName("_active");
+        personalPanel.setVisible(true);
+
+    }
+
+    @UiField
+    ListItem toolsListItem;
+
+    @UiField
+    HTMLPanel toolsPanel;
+
+
+
+    @UiHandler("findListItem")
+    public void onClickFind(ClickEvent event) {
+        clearall();
+        findListItem.setStyleName("_active");
+        findPanel.setVisible(true);
+
+    }
+
+    @UiHandler("toolsListItem")
+    public void onClickTools(ClickEvent event) {
+        clearall();
+        toolsListItem.setStyleName("_active");
+        toolsPanel.setVisible(true);
+
+    }
+
 
 
 

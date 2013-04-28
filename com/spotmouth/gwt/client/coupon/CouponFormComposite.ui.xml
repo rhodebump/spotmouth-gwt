@@ -11,7 +11,14 @@
 
   <g:HTMLPanel>
 
+      <div style="display:none">
+          <g:Anchor ui:field="spotDetailsAnchor"></g:Anchor>
+      </div>
+
       <div id="create_coupon" class="create_coupon">
+
+
+
       		<h1>Create Coupon<g:Button ui:field="cancelButton" addStyleNames="button">Cancel</g:Button></h1>
       	<div class="content">
       		<div class="mc_photo_wrap" id="mc_photo_wrap">

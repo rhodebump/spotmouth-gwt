@@ -15,7 +15,10 @@
       				<input type="text" placeholder="Find friend"/> <!-- Search users in current friends list and in all users list -->
       			</label>
       			<button class="button f_search_btn" title="Search"><img class="mp_search" src="css/mp_search.png"/></button>
-                  <g:Button ui:field="inviteFriendButton"/>
+
+
+
+                  <g:Button addStyleNames="btn_blue f_invite" ui:field="inviteFriendButton">Invite Friends</g:Button>
 
       		</div>
       		<div class="f_t_bar">
@@ -24,25 +27,7 @@
                   <!-- If there are no sent invitations this span should be hidden -->
       		</div>
       		<div class="f_list" id="f_list">
-
                   <sm:ULPanel ui:field="friendsULPanel"/>
-
-                  <!--
-      			<ul id="f_list_c">
-
-      				<li class="f_list_item">
-      					<a href="#" class="f_item_ava">
-      						<div class="f_item_options">
-      							<button class="button f_text" title="Send Message"><img src="inbox.png"/></button>
-      							<button class="button f_remove" onclick="fRemove(this.parentNode.parentNode.parentNode);">x</button>
-      						</div>
-      					</a>
-      					<a href="#" class="f_item_name" title="go to User Name's page">User Name</a>
-
-                    -->
-
-
-
       		</div>
       	</div>
 

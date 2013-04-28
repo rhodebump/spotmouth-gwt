@@ -18,7 +18,9 @@
      			</label>
      			<button class="button f_search_btn" title="Search"><img class="mp_search" src="css/mp_search.png"/></button>
 
-                 <g:Button ui:field="inviteFriendButton"/>
+
+
+                 <g:Button addStyleNames="btn_blue f_invite" ui:field="inviteFriendButton"/>
      		</div>
      		<div class="f_t_bar">
      			<h2 class="f_title">Invited friends <span id="f_m_count"></span></h2>

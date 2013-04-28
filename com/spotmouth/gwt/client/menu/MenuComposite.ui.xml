@@ -1,5 +1,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:mu='urn:import:gwtupload.client'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 
@@ -7,6 +9,21 @@
 
 
   <g:HTMLPanel>
+      <div style="display:none">
+          <smc:ListItem  ui:field="frequentListItem"/>
+          <g:HTMLPanel ui:field="frequentPanel"/>
+          <g:HTMLPanel ui:field="personalPanel"/>
+
+          <smc:ListItem ui:field="personalListItem"/>
+          <smc:ListItem ui:field="findListItem"/>
+          <g:HTMLPanel ui:field="findPanel"/>
+
+          <smc:ListItem ui:field="toolsListItem"/>
+          <g:HTMLPanel ui:field="toolsPanel"/>
+
+
+
+      </div>
       <div id="menu_page">
       <input type="radio" name="mp_switch" id="mp_sw_frequent" class="mp_switch" checked="checked"/>
       <input type="radio" name="mp_switch" id="mp_sw_personal" class="mp_switch"/>

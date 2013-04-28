@@ -83,13 +83,6 @@ public class MessagingPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.messagingMobile();
-        } else {
-            return MyWebApp.resources.messaging();
-        }
-    }
 
     public String getTitle() {
         return "Messaging";

@@ -77,8 +77,6 @@ public class MemberDetailsPanel extends SpotBasePanel implements SpotMouthPanel 
 
         btn.addClickHandler(cancelHandler1);
 
-        addImageToButton(btn, MyWebApp.resources.cancelButton(),MyWebApp.resources.cancelButtonMobile());
-
 
         btn.setStyleName("btn_blue");
        // fixButton(btn);

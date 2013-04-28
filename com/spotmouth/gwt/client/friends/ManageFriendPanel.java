@@ -26,13 +26,6 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 * this constructs links to all application menus
 */
 public class ManageFriendPanel extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.friendsMobile();
-        } else {
-            return MyWebApp.resources.friends();
-        }
-    }
 
     protected boolean isValid() {
         if (!isEmpty(smsPhoneNumberBox)) {

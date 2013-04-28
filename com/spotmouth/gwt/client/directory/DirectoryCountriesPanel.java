@@ -29,16 +29,7 @@ public class DirectoryCountriesPanel extends SpotBasePanel implements SpotMouthP
 
 
 
-
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-
-            return MyWebApp.resources.directoryMobile();
-        }  else {
-            return MyWebApp.resources.directory();
-        }
-
-    }
+//
 
     /*
     This will do a wildcard search and get all the countries

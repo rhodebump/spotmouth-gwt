@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.DropEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
@@ -42,10 +43,18 @@ public class ChattingComposite extends Composite {
     @UiField(provided = true)
     final DropPanel dropPanel;
 
-    interface MyUiBinder extends UiBinder<Widget, ChattingComposite> {
-    }
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+    @UiTemplate("ChattingComposite.ui.xml")
+    interface DesktopBinder extends UiBinder<Widget, ChattingComposite> {}
+    private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
+
+    @UiTemplate("ChattingCompositeM.ui.xml")
+    interface MobileBinder extends UiBinder<Widget, ChattingComposite> {}
+    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
+
+
+
     private MyWebApp mywebapp = null;
     private ItemHolder itemHolder = null;
 
@@ -56,7 +65,11 @@ public class ChattingComposite extends Composite {
         this.mywebapp = mywebapp;
         this.itemHolder = itemHolder;
         this.dropPanel = dropPanel;
-        initWidget(uiBinder.createAndBindUi(this));
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        }else {
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
         try {
             reader = new FileReader();
             reader.addLoadEndHandler(new LoadEndHandler() {

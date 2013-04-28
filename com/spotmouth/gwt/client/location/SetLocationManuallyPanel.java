@@ -47,59 +47,59 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
             }
         }
     };
-    ClickHandler hidePreviousLocationsHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            com.google.gwt.user.client.Window.scrollTo(0, 0);
-            previousLocationsPanel.clear();
-            previousLocationsPanel.add(showPreviousLocationsButton());
-        }
-    };
-    ClickHandler displayPreviousLocationsHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            com.google.gwt.user.client.Window.scrollTo(0, 0);
-            CaptionPanel captionPanel = getPreviousLocationsPanel();
-            previousLocationsPanel.clear();
-            previousLocationsPanel.add(hidePreviousLocationsButton());
-            previousLocationsPanel.add(captionPanel);
-        }
-    };
+//    ClickHandler hidePreviousLocationsHandler = new ClickHandler() {
+//        public void onClick(ClickEvent event) {
+//            com.google.gwt.user.client.Window.scrollTo(0, 0);
+//            previousLocationsPanel.clear();
+//            previousLocationsPanel.add(showPreviousLocationsButton());
+//        }
+//    };
+//    ClickHandler displayPreviousLocationsHandler = new ClickHandler() {
+//        public void onClick(ClickEvent event) {
+//            com.google.gwt.user.client.Window.scrollTo(0, 0);
+//            CaptionPanel captionPanel = getPreviousLocationsPanel();
+//            previousLocationsPanel.clear();
+//            previousLocationsPanel.add(hidePreviousLocationsButton());
+//            previousLocationsPanel.add(captionPanel);
+//        }
+//    };
     private VerticalPanel previousLocationsPanel = new VerticalPanel();
-    private VerticalPanel addressFormPanel = new VerticalPanel();
+  //  private VerticalPanel addressFormPanel = new VerticalPanel();
 
-    private CaptionPanel getPreviousLocationsPanel() {
-        Map<String, Location> locationMap1 = mywebapp.getLocationsFromLocalStorage();
-        Collection<Location> locations = locationMap1.values();
-        //List<Location> locations = mywebapp.getLocationsFromLocalStorage();
-        CaptionPanel captionPanel = new CaptionPanel("Previous Locations");
-        if (!locations.isEmpty()) {
-            add(captionPanel);
-        }
-        ULPanel ul = new ULPanel();
-        ul.setStyleName("previouslocations");
-        captionPanel.add(ul);
-        for (Location location : locations) {
-            // while (iterator.hasNext()) {
-            FlowPanel hp = new FlowPanel();
-            ListItem li = new ListItem();
-            li.setStyleName("clearing");
-            li.add(hp);
-            ul.add(li);
-            Label locationLabel = new Label(location.getFullAddress());
-            locationLabel.addClickHandler(selectLocationHandler);
-            locationMap.put(locationLabel, location);
-            locationLabel.setTitle("Use this location");
-            locationLabel.addStyleName("linky");
-            ImageResource deleteImageIR = MyWebApp.resources.deleteX();
-            Image deleteImage = new Image(deleteImageIR);
-            deleteImage.addClickHandler(removeLocationHandler);
-            deleteImage.setStyleName("linky");
-            deleteImage.setTitle("Remove Location");
-            locationMap.put(deleteImage, location);
-            hp.add(locationLabel);
-            hp.add(deleteImage);
-        }
-        return captionPanel;
-    }
+//    private CaptionPanel getPreviousLocationsPanel() {
+//        Map<String, Location> locationMap1 = mywebapp.getLocationsFromLocalStorage();
+//        Collection<Location> locations = locationMap1.values();
+//        //List<Location> locations = mywebapp.getLocationsFromLocalStorage();
+//        CaptionPanel captionPanel = new CaptionPanel("Previous Locations");
+//        if (!locations.isEmpty()) {
+//            add(captionPanel);
+//        }
+//        ULPanel ul = new ULPanel();
+//        ul.setStyleName("previouslocations");
+//        captionPanel.add(ul);
+//        for (Location location : locations) {
+//            // while (iterator.hasNext()) {
+//            FlowPanel hp = new FlowPanel();
+//            ListItem li = new ListItem();
+//            li.setStyleName("clearing");
+//            li.add(hp);
+//            ul.add(li);
+//            Label locationLabel = new Label(location.getFullAddress());
+//            locationLabel.addClickHandler(selectLocationHandler);
+//            locationMap.put(locationLabel, location);
+//            locationLabel.setTitle("Use this location");
+//            locationLabel.addStyleName("linky");
+//            ImageResource deleteImageIR = MyWebApp.resources.deleteX();
+//            Image deleteImage = new Image(deleteImageIR);
+//            deleteImage.addClickHandler(removeLocationHandler);
+//            deleteImage.setStyleName("linky");
+//            deleteImage.setTitle("Remove Location");
+//            locationMap.put(deleteImage, location);
+//            hp.add(locationLabel);
+//            hp.add(deleteImage);
+//        }
+//        return captionPanel;
+//    }
 
     ClickHandler resizeMapHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -126,7 +126,7 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
                 //mywebapp.toggleSetLocationManually();
                 getMessagePanel().displayMessage("Removed " + location.getFullAddress());
                 //this will rebuild the list of locations that should be displayed
-                displayPreviousLocationsHandler.onClick(null);
+                //displayPreviousLocationsHandler.onClick(null);
             }
         }
     };
@@ -166,7 +166,6 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
 
     public SetLocationManuallyPanel(final MyWebApp mywebapp) {
         super(mywebapp, false);
-        if (MyWebApp.isDesktop()) {
             final ULPanel previousLocations = getPreviousLocations();
             countryTextBox = getCountrySuggestBox("");
             stateTextBox = getStateSuggestBox("");
@@ -205,24 +204,22 @@ public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouth
                     }
                 });
             }
-        }
+
     }
 
-    Label hidePreviousLocationsButton() {
-        Label btn = new Label("Hide Previous Locations");
-        btn.addClickHandler(hidePreviousLocationsHandler);
-        addImageToButton(btn, MyWebApp.resources.mapButton(), MyWebApp.resources.mapButtonMobile());
-        fixButton(btn);
-        return btn;
-    }
-
-    Label showPreviousLocationsButton() {
-        Label btn = new Label("Show Previous Locations");
-        addImageToButton(btn, MyWebApp.resources.mapButton(), MyWebApp.resources.mapButtonMobile());
-        btn.addClickHandler(displayPreviousLocationsHandler);
-        fixButton(btn);
-        return btn;
-    }
+//    Label hidePreviousLocationsButton() {
+//        Label btn = new Label("Hide Previous Locations");
+//        btn.addClickHandler(hidePreviousLocationsHandler);
+//        fixButton(btn);
+//        return btn;
+//    }
+//
+//    Label showPreviousLocationsButton() {
+//        Label btn = new Label("Show Previous Locations");
+//        btn.addClickHandler(displayPreviousLocationsHandler);
+//        fixButton(btn);
+//        return btn;
+//    }
 
 
     public static boolean isNumeric(String str) {

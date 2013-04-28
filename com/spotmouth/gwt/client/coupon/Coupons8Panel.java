@@ -40,14 +40,6 @@ public class Coupons8Panel extends SpotBasePanel implements SpotMouthPanel {
     }
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.couponMobile();
-        } else {
-            return MyWebApp.resources.coupon();
-        }
-
-    }
 
     DateTimeFormat fmt = DateTimeFormat.getFormat(DateTimeFormat.PredefinedFormat.DATE_LONG);
 
@@ -73,13 +65,13 @@ public class Coupons8Panel extends SpotBasePanel implements SpotMouthPanel {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-
+    ULPanel ulPanel = new ULPanel();
 
     public  Coupons8Panel(MyWebApp mywebapp,MobileResponse couponResponse) {
         super(mywebapp, false);
 
-        if (MyWebApp.isDesktop()) {
-            ULPanel ulPanel = new ULPanel();
+
+
             ulPanel.getElement().setId("coupons_results");
             /*
             	<li class="coupons_result spa">
@@ -97,37 +89,55 @@ public class Coupons8Panel extends SpotBasePanel implements SpotMouthPanel {
             }
 
             for (ItemHolder coupon : couponResponse.getCoupons()) {
-                ListItem listItem = new ListItem();
-                listItem.setStyleName("coupons_result");
-                InlineLabel coupons_ident = new InlineLabel();
-                coupons_ident.setStyleName("coupons_ident");
-                listItem.add(coupons_ident);
-                Anchor coupons_title = new Anchor();
-                coupons_title.setStyleName("coupons_title");
-                coupons_title.addClickHandler(clickCouponHandler);
-                couponClickMap.put(coupons_title, coupon);
-                //coupons_title.setHref(coupon.getDetailsUrl());
-                //coupons_title.setTarget("_blank");
+                Anchor detailAnchor = new Anchor();
+                detailAnchor.addClickHandler(clickCouponHandler);
+                couponClickMap.put(detailAnchor, coupon);
+
+
+                CouponResult couponResult = new CouponResult(detailAnchor);
+
                 SpotHolder couponSpotHolder = coupon.getSpotHolder();
-                coupons_title.setText("@" + couponSpotHolder.getLabel2());
+                String venueName = couponSpotHolder.getLabel2();
 
-                listItem.add(coupons_title);
-                //InlineLabel inlineLabel = new Inli;neLabel(coupon.getTitle());
-                HTML title = new HTML("<p>" + coupon.getTitle() + "</p>");
 
-                title.addClickHandler(clickCouponHandler);
-                couponClickMap.put(title, coupon);
+                couponResult.setVenue(venueName);
 
-                listItem.add(title);
+                couponResult.setTitle(coupon.getTitle());
 
+
+                //ListItem listItem = new ListItem();
+               // listItem.setStyleName("coupons_result");
+//                InlineLabel coupons_ident = new InlineLabel();
+//                coupons_ident.setStyleName("coupons_ident");
+//                listItem.add(coupons_ident);
+//
+//
+//
+//                Anchor coupons_title = new Anchor();
+//                coupons_title.setStyleName("coupons_title");
+//                coupons_title.addClickHandler(clickCouponHandler);
+//                couponClickMap.put(coupons_title, coupon);
+//                SpotHolder couponSpotHolder = coupon.getSpotHolder();
+//                coupons_title.setText("@" + couponSpotHolder.getLabel2());
+//
+//                listItem.add(coupons_title);
+//
+//                HTML title = new HTML("<p>" + coupon.getTitle() + "</p>");
+//
+//                title.addClickHandler(clickCouponHandler);
+//                couponClickMap.put(title, coupon);
+//
+//                listItem.add(title);
+//
                 String endDate = "";
                  if (coupon.getEndDate() != null) {
                      endDate =  fmt.format(coupon.getEndDate());
-                     HTML validUntil = new HTML("<h4>" + "Valid until " + endDate + "</h4>");
-                     listItem.add(validUntil);
+                    // HTML validUntil = new HTML("<h4>" + "Valid until " + endDate + "</h4>");
+                    // listItem.add(validUntil);
+                     couponResult.setEndDate(endDate);
                  }
 
-                ulPanel.add(listItem);
+                ulPanel.add(couponResult);
             }
 
             Coupon8Composite cc = new Coupon8Composite(ulPanel);
@@ -135,7 +145,6 @@ public class Coupons8Panel extends SpotBasePanel implements SpotMouthPanel {
             return;
 
 
-        }
     }
 
 }

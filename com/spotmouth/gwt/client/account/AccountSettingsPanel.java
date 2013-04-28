@@ -48,13 +48,6 @@ public class AccountSettingsPanel extends SpotBasePanel implements SpotMouthPane
         return "Profile";
     }
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.passwordMobile();
-        } else {
-            return MyWebApp.resources.password();
-        }
-    }
 
 
     private TextBox passwordTextBox = new TextBox();

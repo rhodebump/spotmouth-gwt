@@ -21,9 +21,7 @@ public class ContactForm extends SpotBasePanel implements SpotMouthPanel {
     }
 
 
-    public boolean isRootPanel() {
-        return true;
-    }
+
 
     private SpotHolder spotHolder = null;
     TextBox yourName = null;

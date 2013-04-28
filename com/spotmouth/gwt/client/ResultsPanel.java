@@ -23,6 +23,7 @@ import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
+import java.util.*;
 
 public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
 
@@ -151,19 +152,53 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         return searchParameters;
     }
 
+    protected Map<Widget,UserHolder> userClickMap = new HashMap<Widget,UserHolder>();
+
+    ClickHandler userClickHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+
+
+            Object sender = event.getSource();
+            GWT.log("removeTagHandler onClick");
+            if (sender instanceof Widget) {
+                Widget widget = (Widget) sender;
+                UserHolder userHolder = userClickMap.get(widget);
+                String targetHistoryToken = MyWebApp.VIEW_USER_PROFILE + userHolder.getId();
+
+                History.newItem(targetHistoryToken);
+            }
+
+
+
+
+        }
+    };
+
+
     protected void addUserResult(ULPanel ul, LocationResult locationResult) {
         FlowPanel fp = new FlowPanel();
         SolrDocument solrDocument = locationResult.getSolrDocument();
-        Long latestMarkUserId = solrDocument.getFirstLong("latest_mark_userid_l");
-        // GWT.log("latestMarkUserId=" + latestMarkUserId);
-        //SolrDocument result, Panel hp, String fieldName,ImageResource imageResourceBig,  ImageResource imageResourceMobile,String stylename, String targetHistoryToken
-        String targetHistoryToken = MyWebApp.VIEW_USER_PROFILE + latestMarkUserId;
-        Image userimage = addImage(solrDocument, fp, "latest_mark_user__thumbnail_130x130_url_s",
-                MyWebApp.resources.anon130x130(), MyWebApp.resources.anon130x130Mobile(), "userimage", targetHistoryToken);
-        String username_s = solrDocument.getFirstString("username_s");
+        //Long latestMarkUserId = solrDocument.getFirstLong("latest_mark_userid_l");
+
+        //String targetHistoryToken = MyWebApp.VIEW_USER_PROFILE + latestMarkUserId;
+
+        UserHolder userHolder = locationResult.getUserHolder();
+        ContentHolder contentHolder = userHolder.getContentHolder();
+
+        Image userimage = getImage(contentHolder, "latest_mark_user__thumbnail_130x130_url_s");
+
+        if (userimage == null) {
+            userimage = new Image(ANON_IMAGE_PATH);
+        }
+
+//        Image userimage = addImage(solrDocument, fp, "latest_mark_user__thumbnail_130x130_url_s",
+//                MyWebApp.resources.anon130x130(), MyWebApp.resources.anon130x130Mobile(), "userimage", targetHistoryToken);
+
+
+        String username_s = userHolder.getUsername();
         Label usernameLabel = new Label(username_s);
         fp.add(usernameLabel);
-        String aboutme_s = solrDocument.getFirstString("aboutme_s");
+        String aboutme_s = userHolder.getAboutMe();
         Label aboutMeLabel = new Label(aboutme_s);
         fp.add(aboutMeLabel);
         Long contestId = searchParameters.getContestId();
@@ -177,6 +212,12 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         li.setStyleName("clearing");
         li.add(fp);
         ul.add(li);
+        li.addClickHandler(userClickHandler);
+
+        userClickMap.put(li,userHolder);
+
+
+
     }
 
     public static int RESULT_COUNT = 20;
@@ -485,7 +526,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
     private MobileResponse mobileResponse = null;
 
     public void commonInit(MobileResponse mobileResponse) {
-        addLeaveMarkAtTopForm();
+        //addLeaveMarkAtTopForm();
         FlowPanel fp = new FlowPanel();
         fp.setWidth("100%");
         fp.setStyleName("topbuttonsmark");

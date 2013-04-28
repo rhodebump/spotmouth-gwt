@@ -11,6 +11,7 @@
 
   <g:HTMLPanel>
 
+
       <div id="create_coupon" class="create_coupon">
       		<h1>Create Coupon<g:Button ui:field="cancelButton" addStyleNames="button">Cancel</g:Button></h1>
       	<div class="content">
@@ -21,7 +22,7 @@
 
       		</div>
       		<h2><span ui:field='nameSpan'/></h2>
-      		<h5><span ui:field='locationSpan'/></h5>
+              <g:Anchor ui:field="spotDetailsAnchor"><h5><span ui:field='locationSpan'/></h5></g:Anchor>
 
       		<div class="mc_date">
 

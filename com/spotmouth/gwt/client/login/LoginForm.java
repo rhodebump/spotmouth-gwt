@@ -1,4 +1,4 @@
-package com.spotmouth.gwt.client;
+package com.spotmouth.gwt.client.login;
 //http://google-web-toolkit.googlecode.com/svn/javadoc/2.4/com/google/gwt/user/client/ui/SimpleCheckBox.html
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.api.gwt.oauth2.client.Auth;
@@ -6,24 +6,22 @@ import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.Cookies;
 import com.gwtfb.client.overlay.AuthResponse;
-import com.phonegap.gwt.console.client.Logger;
 import com.phonegap.gwt.fbconnect.client.FBConnect;
 import com.phonegap.gwt.fbconnect.client.OnConnectCallback;
+import com.spotmouth.gwt.client.DataOperationDialog;
+import com.spotmouth.gwt.client.MyWebApp;
+import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.Fieldset;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.common.TextField;
 import com.spotmouth.gwt.client.dto.LoginRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
-import com.spotmouth.gwt.client.login.Login;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 //import com.gwtfb.client.Callback;
 //import com.gwtfb.sdk.FBEvent;
@@ -37,13 +35,7 @@ import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 public class LoginForm extends SpotBasePanel implements SpotMouthPanel {
     private String historyToken = null;
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.loginMobile();
-        } else {
-            return MyWebApp.resources.login();
-        }
-    }
+
 
     private SimpleCheckBox showTypingCheckbox = new SimpleCheckBox();
     ;

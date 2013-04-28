@@ -13,15 +13,6 @@ import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.help.HelpResources;
 
 public class SettingsPanel extends SpotBasePanel implements SpotMouthPanel {
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-
-            return MyWebApp.resources.settingsMobile();
-        }  else {
-            return MyWebApp.resources.settings();
-        }
-
-    }
 
     public TextResource getHelpTextResource() {
         return HelpResources.INSTANCE.getSettingsPanel();

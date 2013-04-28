@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -21,14 +22,22 @@ import com.spotmouth.gwt.client.MyWebApp;
  * To change this template use File | Settings | File Templates.
  */
 public class ContestDetailComposite extends Composite {
-    interface MyUiBinder extends UiBinder<Widget, ContestDetailComposite> {
-    }
 
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+    @UiField(provided = true)
+    final Button cancelButton;
 
 
- //<span class="ac_photo" style="background: url('photo.jpg') no-repeat center center"></span>
+    @UiTemplate("ContestDetailComposite.ui.xml")
+    interface DesktopBinder extends UiBinder<Widget, ContestDetailComposite> {}
+    private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
+
+    @UiTemplate("ContestDetailCompositeM.ui.xml")
+    interface MobileBinder extends UiBinder<Widget, ContestDetailComposite> {}
+    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
+
+
 
 
     @UiField
@@ -115,24 +124,16 @@ public class ContestDetailComposite extends Composite {
     }
 
 
-    public ContestDetailComposite() {
-        initWidget(uiBinder.createAndBindUi(this));
-            //button class="button">Winners</button>
+    public ContestDetailComposite( Button cancelButton) {
 
-        winnersButton.setStyleName("button");
-        winnersButton.setText("Winners");
-
-
-        //	<button class="button">Most Voted</button>
-
-        mostVotedButton.setStyleName("button");
-        mostVotedButton.setText("Most Voted");
-       //    		<button class="button ac_edit">Edit</button>
+        this.cancelButton = cancelButton;
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        }else {
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
 
 
-        editButton.setText("Edit");
-        editButton.setStyleName("button");
-        editButton.addStyleName("ac_edit");
 
         photoSpan.setStyleName("ac_photo");
     }

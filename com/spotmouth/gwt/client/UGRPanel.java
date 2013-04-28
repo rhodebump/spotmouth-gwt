@@ -11,14 +11,6 @@ public class UGRPanel extends SpotBasePanel implements SpotMouthPanel {
     public UGRPanel() {
     }
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.aboutMobile();
-        } else {
-            return MyWebApp.resources.about();
-        }
-    }
-
     public String getTitle() {
         return "Policy";
     }

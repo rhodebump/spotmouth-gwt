@@ -18,13 +18,11 @@ package com.spotmouth.gwt.client.chat;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.common.H1;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.QueryResponse;
 import com.spotmouth.gwt.client.dto.SolrDocument;
@@ -36,7 +34,6 @@ import java.util.Map;
  * @author p.havelaar
  */
 public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
-
     public String getPageTitle() {
         return getTitle();
     }
@@ -45,32 +42,16 @@ public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
         return "Chats";
     }
 
-
-
     Map<Widget, Long> widgetChatIdMap = new HashMap<Widget, Long>();
-
     private ClickHandler createChatHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             History.newItem(MyWebApp.CREATE_CHAT);
-
         }
     };
 
-    Button addChatButton() {
-        Button buttonLabel = new Button("Create Chat");
-
-        buttonLabel.setStyleName("btn_blue");
-        buttonLabel.addClickHandler(createChatHandler);
-
-        return buttonLabel;
-    }
 
 
-    ULPanel ulPanel = new ULPanel();
-
-    private void initResults(QueryResponse queryResponse) {
-
-        ulPanel.setStyleName("_cl");
+    private void initResults(QueryResponse queryResponse, ComplexPanel holder) {
         for (SolrDocument solrDocument : queryResponse.getResults()) {
             Image chatImage = new Image();
             String imgUrl = solrDocument.getFirstString("latest_mark_thumbnail_320x320_url_s");
@@ -85,12 +66,15 @@ public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
             joinChatButton.addClickHandler(joinChatHandler);
             widgetChatIdMap.put(joinChatButton, georepoitemid_l);
             ChatResultComposite crc = new ChatResultComposite(chatImage, joinChatButton);
+            if (!MyWebApp.isDesktop()) {
+                crc.addClickHandler(joinChatHandler);
+                widgetChatIdMap.put(crc, georepoitemid_l);
+            }
             crc.setChatName(name);
             crc.setDescription(desc);
-            ulPanel.add(crc);
+            holder.add(crc);
         }
     }
-
 
     private ClickHandler joinChatHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -101,37 +85,53 @@ public class ChatsPanel extends SpotBasePanel implements SpotMouthPanel {
         }
     };
 
-
-
-
     public ChatsPanel(MyWebApp mywebapp, QueryResponse queryResponse) {
         super(mywebapp);
-        setActiveTabId("chatsli");
-        initResults(queryResponse);
 
-                //not much to this page
-        FlowPanel flowPanel = new FlowPanel();
-        flowPanel.setStyleName("contests_list_page");
-        flowPanel.getElement().setId("contests_list_page");
-        add(flowPanel);
-        FlowPanel cl_top = new FlowPanel();
-        cl_top.setStyleName("cl_top");
-        cl_top.add(addChatButton());
-        flowPanel.add(cl_top);
-
-        flowPanel.add(ulPanel);
+        Button  createChatButton = new Button();
+        //buttonLabel.setStyleName("btn_blue");
+        createChatButton.addClickHandler(createChatHandler);
 
 
 
+        if (MyWebApp.isDesktop()) {
+            setActiveTabId("chatsli");
+            ULPanel ulPanel = new ULPanel();
+            ulPanel.setStyleName("_cl");
+            initResults(queryResponse, ulPanel);
+
+            ChatsComposite chatsComposite = new ChatsComposite(createChatButton,ulPanel);
+            add(chatsComposite);
+
+//            //not much to this page
+//            FlowPanel flowPanel = new FlowPanel();
+//            flowPanel.setStyleName("contests_list_page");
+//            flowPanel.getElement().setId("contests_list_page");
+//            add(flowPanel);
+//            FlowPanel cl_top = new FlowPanel();
+//            cl_top.setStyleName("cl_top");
+//            cl_top.add(addChatButton());
+//            flowPanel.add(cl_top);
+//            flowPanel.add(ulPanel);
+        } else {
+            //chats _page
+//            FlowPanel flowPanel = new FlowPanel();
+//            flowPanel.setStyleName("chats");
+//            flowPanel.addStyleName("_page");
+//            add(flowPanel);
+            //	<h1><a href="manage-chat.html"><button class="_white">Create Chat</button></a></h1>
+            FlowPanel list = new FlowPanel();
+            list.setStyleName("_list");
+            initResults(queryResponse, list);
 
 
+            ChatsComposite chatsComposite = new ChatsComposite(createChatButton,list);
+            add(chatsComposite);
 
-
+        }
     }
 
     public void toggleFirst() {
         //To change body of implemented methods use File | Settings | File Templates.
     }
-
-
 }

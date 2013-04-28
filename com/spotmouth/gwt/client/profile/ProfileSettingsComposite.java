@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.*;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
@@ -28,6 +29,17 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ProfileSettingsComposite extends Composite {
+
+    @UiTemplate("ProfileSettingsComposite.ui.xml")
+    interface DesktopBinder extends UiBinder<Widget, ProfileSettingsComposite> {}
+    private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
+
+    @UiTemplate("MProfileSettingsComposite.ui.xml")
+    interface MobileBinder extends UiBinder<Widget, ProfileSettingsComposite> {}
+    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
+
+
+
     @UiField(provided = true)
     final SuggestBox countryTextBox;
     @UiField(provided = true)
@@ -58,10 +70,6 @@ public class ProfileSettingsComposite extends Composite {
     final FlowPanel suggestionsPanel;
 
 
-    interface MyUiBinder extends UiBinder<Widget, ProfileSettingsComposite> {
-    }
-
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
 
     private MyWebApp mywebapp = null;
@@ -89,7 +97,16 @@ public class ProfileSettingsComposite extends Composite {
 
         this.panelImages = panelImages;
         this.multiUploader = multiUploader;
-        initWidget(uiBinder.createAndBindUi(this));
+        //initWidget(uiBinder.createAndBindUi(this));
+
+
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        }else {
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
+
+
 
         reader = new FileReader();
         reader.addLoadEndHandler(new LoadEndHandler() {

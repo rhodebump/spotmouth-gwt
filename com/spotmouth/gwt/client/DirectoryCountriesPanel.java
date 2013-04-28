@@ -29,16 +29,6 @@ public class DirectoryCountriesPanel extends SpotBasePanel implements SpotMouthP
 
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-
-            return MyWebApp.resources.directoryMobile();
-        }  else {
-            return MyWebApp.resources.directory();
-        }
-
-    }
-
 
     private void showCountries(List<CountryHolder> countryHolders) {
         for (CountryHolder countryHolder : countryHolders) {

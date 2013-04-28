@@ -30,13 +30,6 @@ public class RegistrationConfirmPanel extends SpotBasePanel implements SpotMouth
     public RegistrationConfirmPanel() {}
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.passwordMobile();
-        } else {
-            return MyWebApp.resources.password();
-        }
-    }
 
 
 

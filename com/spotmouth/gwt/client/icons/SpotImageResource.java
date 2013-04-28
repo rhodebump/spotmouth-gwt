@@ -124,63 +124,10 @@ public interface SpotImageResource extends ClientBundle {
     ImageResource facebookButtonMobile();
 
 
-    @Source("save.png")
-    @ImageOptions(width = buttonSize)
-    ImageResource saveButton();
-
-    @Source("save.png")
-    @ImageOptions(width = buttonSizeMobile)
-    ImageResource saveButtonMobile();
-
-
-
-    @ImageOptions(width = buttonSize)
-    @Source("stop.png")
-    ImageResource cancelButton();
-
-    @ImageOptions(width = buttonSizeMobile)
-    @Source("stop.png")
-    ImageResource cancelButtonMobile();
 
 
 
 
-
-
-    @Source("password.png")
-    @ImageOptions(width = 72)
-    ImageResource password();
-
-    @Source("password.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource passwordMobile();
-
-    @Source("icon-register.png")
-    @ImageOptions(width = 72)
-    ImageResource register();
-
-    @Source("icon-register.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource registerMobile();
-
-
-
-
-
-//
-//
-//    @Source("Question-mark-icon.png")
-//    @ImageOptions(width = 72)
-//    ImageResource passwordReset();
-//
-//    @Source("Question-mark-icon.png")
-//    @ImageOptions(width = mobileSize)
-//    ImageResource passwordResetMobile();
-
-
-//    @Source("password.png")
-//    @ImageOptions(width = 30)
-//    ImageResource passwordSmall();
 
     @Source("spotmouth-50x50.png")
     ImageResource spotmouth50x50();
@@ -200,17 +147,12 @@ public interface SpotImageResource extends ClientBundle {
     ImageResource spot_image_placeholder57x57();
 
 
-    //spot-image-placeholder130x130.png
 
     @Source("ava.png")
     ImageResource spot_image_placeholder130x130();
 
 
 
-
-//    @Source("guy128.png")
-//    @ImageOptions(width = 90)
-//    ImageResource spot_image_placeholder130x130Mobile();
 
     @Source("guy128.png")
     @ImageOptions(width = 57)
@@ -225,9 +167,7 @@ public interface SpotImageResource extends ClientBundle {
     @ImageOptions(width = 72)
     ImageResource thumbsDownBig();
 
-//    @Source("thumbs_down.png")
-//    @ImageOptions(width = 30)
-//    ImageResource thumbsDownSmall();
+
 
     @Source("thumbs_up.png")
     @ImageOptions(width = 72)
@@ -241,109 +181,7 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-//    @Source("bestplaces.png")
-//    @ImageOptions(width = 72)
-//    ImageResource bestplacesBig();
 
-
-
-
-    @Source("restaurant_food-128.png")
-    @ImageOptions(width = 72)
-    ImageResource dining();
-
-    @Source("restaurant_food-128.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource diningMobile();
-
-
-
-
-
-
-
-
-
-
-    @Source("setlocation.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource locationmanualMobile();
-
-    @Source("setlocation.png")
-    @ImageOptions(width = 30)
-    ImageResource mapButton();
-
-    @Source("setlocation.png")
-    @ImageOptions(width = buttonSizeMobile)
-    ImageResource mapButtonMobile();
-
-
-
-    @Source("setlocation.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource locationManualMobile();
-
-
-
-//
-//    @Source("phone_transfer.png")
-//    @ImageOptions(width = mobileSize)
-//    ImageResource locationDeviceMobile();
-//
-//
-
-
-
-
-
-    @Source("markspot2.png")
-    @ImageOptions(width = 72)
-    ImageResource markspot();
-
-    @Source("markspot2.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource markspotMobile();
-
-
-
-    @Source("removeX.png")
-    ImageResource deleteX();
-
-    @Source("add.png")
-        //@ImageOptions(width = 72)
-    ImageResource add();
-
-
-
-
-    @Source("calendar.png")
-    @ImageOptions(width = 72)
-    ImageResource event();
-
-
-    @Source("system_preferences.png")
-    @ImageOptions(width = 72)
-    ImageResource settings();
-
-    @Source("system_preferences.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource settingsMobile();
-
-    @Source("email.png")
-    @ImageOptions(width = 72)
-    ImageResource messaging();
-
-    @Source("email.png")
-    @ImageOptions(width = 30)
-    ImageResource messagingMobile();
-
-    @Source("notifications2.png")
-    @ImageOptions(width = 72)
-    ImageResource notifications();
-
-    @Source("notifications2.png")
-    @ImageOptions(width = 30)
-    ImageResource notificationsMobile();
 
     @Source("find.png")
     @ImageOptions(width = 72)
@@ -362,61 +200,13 @@ public interface SpotImageResource extends ClientBundle {
     @ImageOptions(width = 20)
     ImageResource searchButtonSmall();
 
-//
-//    @Source("lock_key.png")
-//    @ImageOptions(width = 72)
-//    ImageResource secretkey();
-//
-//    @Source("lock_key.png")
-//    @ImageOptions(width = mobileSize)
-//    ImageResource secretkeyMobile();
 
-
-
-    @Source("modem2_128.png")
-    @ImageOptions(width = 72)
-    ImageResource contact();
-
-    @Source("modem2_128.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource contactMobile();
 
     @Source("8coupons-med.png")
     ImageResource coupons8();
 
 
 
-//    @Source("markspot2.png")
-//    @ImageOptions(width = 30)
-//    ImageResource markspot30();
-
-
-//    @Source("advanced_options.png")
-//    @ImageOptions(width = buttonSize)
-//    ImageResource advancedOptionsButton();
-
-
-//    @Source("advanced_options.png")
-//    @ImageOptions(width = buttonSizeMobile)
-//    ImageResource advancedOptionsButtonMobile();
-
-
-
-
-
-
-
-//
-//
-//    @Source("directory.png")
-//    @ImageOptions(width = 72)
-//    ImageResource directory();
-//
-//
-//
-//    @Source("directory.png")
-//    @ImageOptions(width = mobileSize)
-//    ImageResource directoryMobile();
 
 
 }

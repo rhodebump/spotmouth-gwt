@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.ULPanel;
+import com.spotmouth.gwt.client.chat.ChatsComposite;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.SolrDocument;
 
@@ -45,12 +46,6 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
         }
     };
 
-    Button addContestButton() {
-        Button buttonLabel = new Button("Add Contest");
-        buttonLabel.setStyleName("btn_blue");
-        buttonLabel.addClickHandler(addContestHandler);
-        return buttonLabel;
-    }
 
     private ClickHandler mostVotedHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -104,8 +99,8 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
             widgetContestIdMap.put(winnersButton, contestId);
             ContestResultComposite crc = new ContestResultComposite(contestImage, mostVotedButton, winnersButton);
 
-            crc.nameAnchor.addClickHandler(contestDetailHandler);
-            widgetContestIdMap.put(crc.nameAnchor,contestId);
+            crc.detailAnchor.addClickHandler(contestDetailHandler);
+            widgetContestIdMap.put(crc.detailAnchor,contestId);
 
             crc.setContestName(name);
             crc.setDescription(desc);
@@ -114,8 +109,24 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     public ContestsPanel(MyWebApp mywebapp) {
+
         super(mywebapp);
         setActiveTabId("contestsli");
+
+        Button createContestButton = new Button();
+        createContestButton.setStyleName("btn_blue");
+        createContestButton.addClickHandler(addContestHandler);
+
+
+        ContestsComposite contestsComposite = new ContestsComposite(createContestButton,ulPanel);
+        add(contestsComposite);
+
+
+
+
+        /*
+
+
         FlowPanel flowPanel = new FlowPanel();
         flowPanel.setStyleName("contests_list_page");
         flowPanel.getElement().setId("contests_list_page");
@@ -126,6 +137,7 @@ public class ContestsPanel extends SpotBasePanel implements SpotMouthPanel {
         flowPanel.add(cl_top);
 
         flowPanel.add(ulPanel);
+        */
     }
 
     public void addedToDom() {

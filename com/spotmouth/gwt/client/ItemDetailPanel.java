@@ -450,19 +450,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         //addImageToButton(replyMarkLabel, MyWebApp.resources.emailReplySmall(), MyWebApp.resources.emailReplySmall());
         add(replyMarkLabel);
 
-        if (isSpot) {
-            FlowPanel topPanel = new FlowPanel();
-            topPanel.setStyleName("menugrouping");
-            topPanel.addStyleName("clearing");
-            add(topPanel);
-            if (MyWebApp.isSmallFormat()) {
-                addImageIcon(markSpotHandler, "Mark Spot", new Image(MyWebApp.resources.markspotMobile()), topPanel, "Mark this spot");
-                addImageIcon(viewMapHandler, "View Map", new Image(MyWebApp.resources.locationmanualMobile()), topPanel, "View this mark on a map");
-            } else {
-                addImageIcon(markSpotHandler, "Mark Spot", new Image(MyWebApp.resources.markspot()), topPanel, "Mark this spot");
-                ///addImageIcon(viewMapHandler, "View Map", new Image(MyWebApp.resources.locationmanual()), topPanel, "View this mark on a map");
-            }
-        }
+
         if (getItemHolder().getUserHolder() != null) {
             String token = MyWebApp.VIEW_USER_PROFILE + getItemHolder().getUserHolder().getId();
             Hyperlink userLabel = new Hyperlink(getItemHolder().getUserHolder().getUsername(), token);
@@ -503,7 +491,6 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
         Label deleteMarkLabel = new Label("Delete Item");
         fixButton(deleteMarkLabel);
         deleteMarkLabel.addClickHandler(deleteMarkHandler);
-        addImageToButton(deleteMarkLabel, MyWebApp.resources.deleteX(), MyWebApp.resources.deleteX());
         add(deleteMarkLabel);
     }
 }

@@ -8,7 +8,7 @@
 
 <div class="add_contest" id="add_contest">
        	<div class="content">
-
+               <g:Button ui:field="cancelButton" styleName="_dark">Go Back</g:Button>
                <g:InlineLabel ui:field="photoSpan"/>
 
        		<h1 class="ac_title"><span ui:field='nameSpan'/><span class="ac_stars">x&nbsp;<span ui:field='starCountSpan'/></span></h1>
@@ -19,10 +19,12 @@
        			<span class="ac_date ac_date_to"><img src="css/enddate.png"/><span ui:field='endDateSpan'/></span>
        		</div>
                           <div class="_btns_wrap">
-                                       <g:Button ui:field="winnersButton"/>
-                                       <g:Button ui:field="mostVotedButton"/>
+
+
+                                       <g:Button styleName="button" ui:field="winnersButton">Winners</g:Button>
+                              <g:Button styleName="button" ui:field="mostVotedButton">Most Voted</g:Button>
                           </div>
-               <g:Button ui:field="editButton"/>
+               <g:Button addStyleNames="button ac_edit" ui:field="editButton">Edit</g:Button>
 
 
        	</div>

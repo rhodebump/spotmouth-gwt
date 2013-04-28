@@ -10,6 +10,8 @@
   <g:HTMLPanel>
 
       <div id="listing_info" class="create_coupon">
+          <g:Anchor ui:field="spotDetailAnchor"><h1>@<span ui:field='labelSpan'/></h1></g:Anchor>
+
       		<h1>Listing Info<g:Button  ui:field="cancelButton" addStyleNames="button">Cancel</g:Button></h1>
       	<div class="content">
 
@@ -23,13 +25,13 @@
 
       		<label>
       			<h3>Description</h3>
-      			<g:TextArea visibleLines="4" tabIndex="4" ui:field="spotDescriptionTextArea"/>
+      			<g:TextArea visibleLines="4" tabIndex="2" ui:field="spotDescriptionTextArea"/>
       		</label>
       <fieldset >
       			<h3>Location</h3>
       		<label>
       			<!-- Note: if text input or select is filled(selected) it should have "_done" class-->
-                  <g:SuggestBox ui:field="countryTextBox"/>
+                  <g:SuggestBox tabIndex="3" ui:field="countryTextBox"/>
       		</label>
       		<label>
                   <g:SuggestBox ui:field="stateTextBox"/>

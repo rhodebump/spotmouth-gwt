@@ -20,14 +20,7 @@ public class ConsolePanel extends SpotBasePanel implements SpotMouthPanel {
 
     }
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.consoleMobile();
-        } else {
-            return MyWebApp.resources.console();
-        }
 
-    }
 
     public ConsolePanel(MyWebApp mywebapp) {
         super(mywebapp);

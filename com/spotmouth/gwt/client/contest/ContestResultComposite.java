@@ -14,28 +14,25 @@ import com.google.gwt.user.client.ui.*;
  * To change this template use File | Settings | File Templates.
  */
 public class ContestResultComposite extends Composite {
-    interface MyUiBinder extends UiBinder<Widget, ContestResultComposite> {
-    }
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
 
     public ContestResultComposite(Image contestImage,Button mostVotedButton,Button winnersButton) {
 
         this.contestImage = contestImage;
-        this.contestImage.setStyleName("cl_item_photo");
+
         this.mostVotedButton = mostVotedButton;
-        this.mostVotedButton.setStyleName("button");
+
         this.winnersButton = winnersButton;
-        this.winnersButton.setStyleName("button");
-        initWidget(uiBinder.createAndBindUi(this));
-        setStyleName("cl_item");
+
+
+
 
     }
 
 
     @UiField
-    Anchor nameAnchor;
+    Anchor detailAnchor;
 
 
 

@@ -6,7 +6,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Widget;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.GroupHolder;
@@ -40,12 +40,13 @@ public class ManageMembersPanel extends SpotBasePanel implements SpotMouthPanel 
             clickMemberMap.put(label, memberHolder);
             label.addClickHandler(memberDetailsHandler);
             label.setStyleName("linky");
-            ImageResource deleteImageIR = MyWebApp.resources.deleteX();
-            Image deleteImage = new Image(deleteImageIR);
-            selectedMembersPanel.add(deleteImage);
-            deleteImage.addClickHandler(removeMemberHandler);
-            deleteImage.setTitle("Remove Member " +  memberHolder.getId());
-            clickMemberMap.put(deleteImage, memberHolder);
+            //ImageResource deleteImageIR = MyWebApp.resources.deleteX();
+            //Image deleteImage = new Image(deleteImageIR);
+            Button removeMember = new Button();
+            selectedMembersPanel.add(removeMember);
+            removeMember.addClickHandler(removeMemberHandler);
+            removeMember.setTitle("Remove Member " +  memberHolder.getId());
+            clickMemberMap.put(removeMember, memberHolder);
         }
     }
 

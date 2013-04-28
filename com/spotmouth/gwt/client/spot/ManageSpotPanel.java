@@ -57,10 +57,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
                 System.out.println("File size " + info.size);
                 // You can send any customized message and parse it
                 System.out.println("Server message " + info.message);
-                //okay, we don't have a final "URL" for this image, and we need one to be able to insert into
-                //a wysiwyg editor
-                //let's call the server and sweep through the session files and convert these to content
-                //saveSessionContents();
+
             }
         }
     };
@@ -109,31 +106,8 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
     private SpotHolder spotHolder = null;
-    ClickHandler changeListingHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            changeListingInfo();
-        }
-    };
-    ClickHandler manageProductsHandler = new ClickHandler() {
-        public void onClick(ClickEvent clickEvent) {
-            manageProducts();
-        }
-    };
-    ClickHandler manageMediaHandler = new ClickHandler() {
-        public void onClick(ClickEvent clickEvent) {
-            manageMedia();
-        }
-    };
-    ClickHandler newCouponHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            createCoupon();
-        }
-    };
-//    ClickHandler lockSpotHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            lockSpot();
-//        }
-//    };
+
+
 
     public void unlockSpot() {
         getMessagePanel().clear();
@@ -189,8 +163,6 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
         History.newItem(token);
-//        SpotDetailPanel spotDetailPanel = new SpotDetailPanel(mywebapp, mobileResponse);
-//        mywebapp.swapCenter(spotDetailPanel);
     }
 
     public void addToFavorites() {
@@ -212,11 +184,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
             createEvent();
         }
     };
-//    ClickHandler deleteSpotHandler = new ClickHandler() {
-//        public void onClick(ClickEvent event) {
-//            deleteSpot();
-//        }
-//    };
+
 
 
     AsyncCallback spotDeletedCallback = new AsyncCallback() {
@@ -272,7 +240,7 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
     public ManageSpotPanel(MyWebApp mywebapp, SpotHolder spotHolder) {
         super(mywebapp);
         this.spotHolder = spotHolder;
-        if (MyWebApp.isDesktop()) {
+
             Image mainImage = getImage(spotHolder.getContentHolder(), "320x320");
             if (mainImage == null) {
                 mainImage = new Image(MyWebApp.resources.spot_image_placeholder320x320());
@@ -284,51 +252,12 @@ public class ManageSpotPanel extends SpotBasePanel implements SpotMouthPanel {
             msc.setName(spotHolder.getName());
             add(msc);
             return;
-        }
-        //change listing info
-        add(changeListingInfoButton());
-        add(manageMediaButton());
-        add(manageProductsButton());
-        FlowPanel topPanel = new FlowPanel();
-        topPanel.setStyleName("menugrouping");
-        topPanel.addStyleName("clearing");
-        add(topPanel);
-        addImageIcon(newCouponHandler, "Create Coupon", new Image(MyWebApp.resources.coupon()), topPanel, "Create Coupon");
-        addImageIcon(newEventHandler, "Create Event", new Image(MyWebApp.resources.event()), topPanel, "Create Event");
-        //addImageIcon(viewMapHandler, "View Map", MyWebApp.resources.locationmanualBig(), topPanel, "View this spot on a map");
-        //groups
-        //let's display all groups for this spot, clicking on the group takes one to manage the group
-        //wait... lets
-        GWT.log("spotHolder.isLockedForEdit() " + spotHolder.isLockedForEdit());
 
-        addSpotLink(spotHolder);
-        //add to favorites
-        addToFavorites(spotHolder);
-        //addDeleteButton();
+
     }
 
 
 
-    Label manageProductsButton() {
-        Label btn = new Label("Manage Products");
-        btn.addClickHandler(manageProductsHandler);
-        fixButton(btn);
-        return btn;
-    }
-
-    Label manageMediaButton() {
-        Label btn = new Label("Manage Photos");
-        btn.addClickHandler(manageMediaHandler);
-        fixButton(btn);
-        return btn;
-    }
-
-    Label changeListingInfoButton() {
-        Label btn = new Label("Change Listing Info");
-        btn.addClickHandler(changeListingHandler);
-        fixButton(btn);
-        return btn;
-    }
 
     public void toggleFirst() {
         //To change body of implemented methods use File | Settings | File Templates.

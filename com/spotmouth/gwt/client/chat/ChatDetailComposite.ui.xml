@@ -9,7 +9,7 @@
 <div class="add_contest" id="add_contest">
        	<div class="content">
 
-               <g:InlineLabel addStyleNames="ac_photo" ui:field="photoSpan"/>
+               <g:InlineLabel styleName="ac_photo" ui:field="photoSpan"/>
 
        		<h1 class="ac_title"><span ui:field='nameSpan'/></h1>
        		<h2 class="ac_title"><span ui:field='locationSpan'/></h2>

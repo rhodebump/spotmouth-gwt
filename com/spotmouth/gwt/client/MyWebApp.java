@@ -1,6 +1,6 @@
 package com.spotmouth.gwt.client;
 
-import com.spotmouth.gwt.client.contact.*;
+import com.spotmouth.gwt.client.account.AccountSettingsPanel;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.gwt.core.client.EntryPoint;
@@ -53,12 +53,14 @@ import com.spotmouth.gwt.client.contest.ManageContestPanel;
 import com.spotmouth.gwt.client.contest.ViewContestPanel;
 import com.spotmouth.gwt.client.coupon.CouponForm;
 import com.spotmouth.gwt.client.coupon.Coupons8Panel;
+import com.spotmouth.gwt.client.detail.SpotDetailPanel;
 import com.spotmouth.gwt.client.directory.DirectoryCountriesPanel;
 import com.spotmouth.gwt.client.directory.DirectoryPostalCodesPanel;
 import com.spotmouth.gwt.client.directory.DirectoryStatesPanel;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.event.EventForm;
-import com.spotmouth.gwt.client.friends.Invited;
+import com.spotmouth.gwt.client.friends.InvitedPanel;
+import com.spotmouth.gwt.client.contact.*;
 import com.spotmouth.gwt.client.friends.ManageFriendPanel;
 import com.spotmouth.gwt.client.friends.ManageFriendsPanel;
 import com.spotmouth.gwt.client.group.GroupPanel;
@@ -69,6 +71,7 @@ import com.spotmouth.gwt.client.instagram.Data;
 import com.spotmouth.gwt.client.layout.MapPage;
 import com.spotmouth.gwt.client.layout.Page;
 import com.spotmouth.gwt.client.location.SetLocationManuallyPanel;
+import com.spotmouth.gwt.client.login.LoginForm;
 import com.spotmouth.gwt.client.menu.ApplicationMenuPanel;
 import com.spotmouth.gwt.client.menu.TopNav;
 import com.spotmouth.gwt.client.messaging.MessagingPanel;
@@ -84,7 +87,8 @@ import com.spotmouth.gwt.client.spot.CreateSpotMarkPanel;
 import com.spotmouth.gwt.client.spot.ManageSpotPanel;
 import com.spotmouth.gwt.client.usergroups.ManageUserGroupPanel;
 import com.spotmouth.gwt.client.usergroups.ViewUserGroupsPanel;
-
+import com.spotmouth.gwt.client.favorites.*;
+import com.spotmouth.gwt.client.features.*;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -183,11 +187,13 @@ public class MyWebApp implements EntryPoint {
     }-*/;
 
     public static native void showPopup() /*-{
+        if ($doc.getElementById('popup') == null) return;
         $doc.getElementById('popup').style.zIndex = "9999999";
         $doc.getElementById('popup').style.opacity = "1";
     }-*/;
 
     public static native void hidePopup() /*-{
+        if ($doc.getElementById('popup') == null) return;
         $doc.getElementById('popup').style.opacity = "0";
         $doc.getElementById('popup').style.zIndex = "-1";
     }-*/;
@@ -1695,7 +1701,7 @@ public class MyWebApp implements EntryPoint {
 
     NotificationsPanel notificationsPanel = null;
     MessagingPanel messagingPanel = null;
-    SimplePanel topPanel = new SimplePanel();
+    //SimplePanel topPanel = new SimplePanel();
     //SimplePanel footerPanel = new SimplePanel();
     ResultsPanel resultsPanel = null;
     // only one panel can be center
@@ -1760,14 +1766,14 @@ public class MyWebApp implements EntryPoint {
             doDefaultPage();
         }
         this.currentSpotBasePanel = spotBasePanel;
-        this.topPanel.clear();
-        this.topPanel.add(getTopContents(spotBasePanel));
-        spotBasePanel.getTopPanelHolder().setWidget(this.topPanel);
+        //this.topPanel.clear();
+        //this.topPanel.add(getTopContents(spotBasePanel));
+        //spotBasePanel.getTopPanelHolder().setWidget(this.topPanel);
         this.vp = new VerticalPanel();
         vp.setWidth("100%");
-        if (!isDesktop()) {
-            vp.add(this.topPanel);
-        }
+//        if (!isDesktop()) {
+//            vp.add(this.topPanel);
+//        }
         //addBackToResults(spotBasePanel, vp);
         if (isFormSupported()) {
             vp.add(spotBasePanel.getFormPanel());
@@ -2012,7 +2018,7 @@ public class MyWebApp implements EntryPoint {
     //  private static boolean mobileSmallFormat = true;
 
     public static boolean isDesktop() {
-        //if (true) return false;
+        if (true) return false;
         if (getHost().startsWith("http://m.")) {
             return false;
         }
@@ -3184,7 +3190,7 @@ public class MyWebApp implements EntryPoint {
         resultsPanel.getSearchParameters().setSpots(true);
         addCurrentLocation();
         getResultsPanel().setTitle("Dining");
-        resultsPanel.setImageResources(resources.dining(), resources.diningMobile());
+      //  resultsPanel.setImageResources(resources.dining(), resources.diningMobile());
         resultsPanel.performSearch();
     }
 
@@ -3201,7 +3207,7 @@ public class MyWebApp implements EntryPoint {
         resultsPanel.getSearchParameters().setSpots(true);
         addCurrentLocation();
         getResultsPanel().setTitle("Fun");
-        resultsPanel.setImageResources(resources.fun(), resources.funMobile());
+
         resultsPanel.performSearch();
     }
 
@@ -3687,10 +3693,10 @@ public class MyWebApp implements EntryPoint {
     private void toggleFeatures() {
         this.getMessagePanel().clear();
         // need to clear out keyword search if one was done
-        String html = MyHtmlResources.INSTANCE.getFeatures().getText();
+
         //FeaturesPanel featuresPanel = new FeaturesPanel();
 
-            AboutPanel aboutPanel = new AboutPanel(this, html);
+        FeaturesPanel aboutPanel = new FeaturesPanel(this);
         swapCenter(aboutPanel);
     }
 
@@ -4056,7 +4062,7 @@ public class MyWebApp implements EntryPoint {
     }
 
     private void viewInvited() {
-        Invited mgp = new Invited(this);
+        InvitedPanel mgp = new InvitedPanel(this);
         swapCenter(mgp);
     }
 
@@ -4279,7 +4285,7 @@ public class MyWebApp implements EntryPoint {
         resultsPanel.getSearchParameters().setSpots(true);
         addCurrentLocation();
         getResultsPanel().setTitle("Drinking");
-        resultsPanel.setImageResources(resources.drinking(), resources.drinkingMobile());
+        //resultsPanel.setImageResources(resources.drinking(), resources.drinkingMobile());
         resultsPanel.performSearch();
        // swapCenter(resultsPanel);
 

@@ -4,7 +4,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.common.DateTextField;
 import com.spotmouth.gwt.client.common.TextField;
 import gwtupload.client.MultiUploader;
@@ -17,8 +19,21 @@ import gwtupload.client.MultiUploader;
  * To change this template use File | Settings | File Templates.
  */
 public class EventFormComposite extends Composite {
-    interface MyUiBinder extends UiBinder<Widget, EventFormComposite> {
+
+    @UiTemplate("EventFormComposite.ui.xml")
+    interface DesktopBinder extends UiBinder<Widget, EventFormComposite> {
     }
+
+    private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
+
+    @UiTemplate("EventFormCompositeM.ui.xml")
+    interface MobileBinder extends UiBinder<Widget, EventFormComposite> {
+    }
+
+    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
+
+
+
 
     @UiField(provided = true)
     final Button cancelButton;
@@ -56,10 +71,17 @@ public class EventFormComposite extends Composite {
     final FlowPanel selectedTagsPanel;
     @UiField(provided = true)
     final Button saveButton;
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+
+    @UiField(provided = true)
+    final Anchor spotDetailsAnchor;
+
+
+
 
     public EventFormComposite(Button cancelButton, SimplePanel imagePanel, MultiUploader multiUploader, DateTextField startDatePicker, DateTextField endDatePicker, TextField titleTextField,
-                               TextArea descriptionTextArea, Button saveButton,FlowPanel suggestionsPanel,SuggestBox tagSearchTextBox, FlowPanel selectedTagsPanel) {
+                               TextArea descriptionTextArea, Button saveButton,FlowPanel suggestionsPanel,SuggestBox tagSearchTextBox, FlowPanel selectedTagsPanel,
+                               Anchor spotDetailsAnchor) {
         this.cancelButton = cancelButton;
         this.imagePanel = imagePanel;
         this.multiUploader = multiUploader;
@@ -71,8 +93,12 @@ public class EventFormComposite extends Composite {
         this.suggestionsPanel = suggestionsPanel;
         this.tagSearchTextBox     = tagSearchTextBox;
         this.selectedTagsPanel = selectedTagsPanel;
+        this.spotDetailsAnchor = spotDetailsAnchor;
 
-
-        initWidget(uiBinder.createAndBindUi(this));
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        } else {
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
     }
 }

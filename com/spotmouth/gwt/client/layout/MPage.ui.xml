@@ -8,12 +8,7 @@
 
   <g:HTMLPanel>
 
-      <div id="popup" class="_pop" onmousedown="hidePop()"><!-- "onmousedown" should be removed-->
-      	<span class="_loader" id="loader">
-      		<img src="css/preloader.gif"/>
-      		<p>Loading</p>
-      	</span>
-      </div>
+
 
 
 
@@ -21,15 +16,19 @@
       <g:SimplePanel ui:field='messages'/>
 
 
-      <a href="#menu/">menu</a>
-      <sn:TopNav ui:field="topNav"/>
+
+      <div style="display:none">
+          <a href="#menu/">menu</a>
+          <sn:TopNav ui:field="topNav"/>
+      </div>
+
 
 
       <div id="header" class="header">
      		<button id="show-nav" class="_nav" onclick="screenLoc('navigation','_right');"><span class="_icon _nav"></span></button>
      		<button id="show-search" class="_search" onclick="screenLoc('search','_right');"><span class="_icon _search"></span></button>
      		<button id="hide-search" class="_search _blue" onclick="screenNormal();"><span class="_icon _search"></span></button>
-     		<a href="home-page.html"><img class="logo" src="css/img/sm-logo.png"/></a>
+     		<a href="#home"><img class="logo" src="css/img/sm-logo.png"/></a>
 
           <g:Button styleName="_menu" ui:field="menuButton"><span class="_icon _menu"></span></g:Button>
           <!--
@@ -168,32 +167,6 @@
      	</div>
 
 
-     	<div id="login" class="login">
-     		<h1>Login</h1>
-
-     			<label>
-     				<input type="text" placeholder="Username"/>
-     			</label>
-     			<label>
-     				<input type="password" placeholder="Password"/>
-     			</label>
-     			<label>
-     				<button class="_white _active" onclick="return false">Login</button>
-     			</label>
-     			<span class="_sep"></span>
-     			<h2>Or use social</h2>
-     			<div>
-     				<button class="_social _twitter" onclick="return false"><span class="_icon _twitter"></span></button>
-     				<button class="_social _facebook" onclick="return false"><span class="_icon _facebook"></span></button>
-     				<button class="_social _google" onclick="return false"><span class="_icon _google"></span></button>
-     			</div>
-     			<span class="_sep"></span>
-     			<div class="_bottom">
-     				<a href="javascript:;">Reset Password</a>
-     				<a href="javascript:;">Registration</a>
-     			</div>
-
-     	</div>
 
 
 
@@ -484,13 +457,12 @@
      			<span>&copy; spotmouth</span>
      	</div>
 
-     <script type="text/javascript">
-
-     window.onload = function() {
-     	accordion('menu-acc');
-     };
-
-     </script>
+      <div id="popup" class="_pop" onmousedown="hidePop()"><!-- "onmousedown" should be removed-->
+      	<span class="_loader" id="loader">
+      		<img src="css/preloader.gif"/>
+      		<p>Loading</p>
+      	</span>
+      </div>
 
   </g:HTMLPanel>
 

@@ -28,14 +28,7 @@ public class FavoritesPanel extends ResultsPanel implements SpotMouthPanel {
         return "Favorites";
     }
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.favoritesMobile();
-        } else {
-            return MyWebApp.resources.favorites();
-        }
 
-    }
 
 
 

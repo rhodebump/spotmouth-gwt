@@ -25,13 +25,7 @@ public class PasswordChangeForm extends SpotBasePanel implements SpotMouthPanel 
     public PasswordChangeForm() {}
 
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.passwordMobile();
-        } else {
-            return MyWebApp.resources.password();
-        }
-    }
+
 
 
     AsyncCallback passwordSaved = new AsyncCallback() {

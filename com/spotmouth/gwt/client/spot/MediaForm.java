@@ -104,7 +104,7 @@ public class MediaForm extends SpotBasePanel implements SpotMouthPanel {
 
         btn.addClickHandler(cancelHandler2);
 
-        addImageToButton(btn, MyWebApp.resources.cancelButton(),MyWebApp.resources.cancelButtonMobile());
+
 
 
         btn.setStyleName("btn_blue");
