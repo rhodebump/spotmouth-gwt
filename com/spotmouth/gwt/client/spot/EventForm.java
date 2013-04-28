@@ -1,6 +1,5 @@
 package com.spotmouth.gwt.client.spot;
 
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;

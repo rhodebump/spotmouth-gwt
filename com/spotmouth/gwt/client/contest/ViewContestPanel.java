@@ -3,11 +3,11 @@ package com.spotmouth.gwt.client.contest;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.ui.Button;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.SolrDocument;
-import com.google.gwt.user.client.ui.*;
 
 /**
  * Created by IntelliJ IDEA.

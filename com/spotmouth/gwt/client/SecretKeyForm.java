@@ -2,11 +2,9 @@ package com.spotmouth.gwt.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.Label;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.help.HelpResources;
+
 
 public class SecretKeyForm extends SpotBasePanel implements SpotMouthPanel {
     public String getTitle() {
@@ -16,9 +14,6 @@ public class SecretKeyForm extends SpotBasePanel implements SpotMouthPanel {
 
 
 
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getSecretKeyForm();
-    }
 
 
     //TextBox keywordsTextBox = new TextBox();

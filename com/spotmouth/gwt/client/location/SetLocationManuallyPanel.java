@@ -5,8 +5,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.Maps;
 import com.google.gwt.maps.client.geocode.Geocoder;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
@@ -18,20 +16,16 @@ import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.GeocodeRequest;
 import com.spotmouth.gwt.client.dto.Location;
 import com.spotmouth.gwt.client.dto.MobileResponse;
-import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import java.util.List;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SetLocationManuallyPanel extends SpotBasePanel implements SpotMouthPanel {
 
 
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getSetLocation();
-    }
 
     public static String WHERE_ARE_YOU = "Where are you?  We need to know your location before we can show you stuff.";
     ClickHandler selectLocationHandler = new ClickHandler() {

@@ -1,4 +1,4 @@
-package com.spotmouth.gwt.client;
+package com.spotmouth.gwt.client.results;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,16 +14,17 @@ import com.google.gwt.maps.client.geom.Size;
 import com.google.gwt.maps.client.overlay.Icon;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.MarkerOptions;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.*;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.*;
-import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
 
@@ -85,9 +86,6 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         this.searchTitle = searchTitle;
     }
 
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getResultsPanel();
-    }
 
     protected SearchParameters searchParameters = new SearchParameters();
 
@@ -191,8 +189,6 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
             userimage = new Image(ANON_IMAGE_PATH);
         }
 
-//        Image userimage = addImage(solrDocument, fp, "latest_mark_user__thumbnail_130x130_url_s",
-//                MyWebApp.resources.anon130x130(), MyWebApp.resources.anon130x130Mobile(), "userimage", targetHistoryToken);
 
 
         String username_s = userHolder.getUsername();

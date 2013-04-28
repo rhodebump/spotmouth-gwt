@@ -1,13 +1,13 @@
 package com.spotmouth.gwt.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.*;
-import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.mark.MarkComposite;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.MultiUploader;
@@ -20,9 +20,7 @@ public class LeaveMarkForm extends SpotBasePanel implements SpotMouthPanel {
 
 
     public LeaveMarkForm() {}
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getLeaveMarkForm();
-    }
+
     public Button leaveMarkButton = new Button();
 
 

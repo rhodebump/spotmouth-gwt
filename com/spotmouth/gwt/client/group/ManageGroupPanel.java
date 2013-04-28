@@ -3,8 +3,6 @@ package com.spotmouth.gwt.client.group;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
@@ -17,7 +15,6 @@ import com.spotmouth.gwt.client.dto.GroupHolder;
 import com.spotmouth.gwt.client.dto.GroupRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.SpotHolder;
-import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 
 /*
@@ -35,10 +32,6 @@ public class ManageGroupPanel extends SpotBasePanel implements SpotMouthPanel {
         return getTitle();
     }
 
-    @Override
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getGroupPanel();
-    }
 
     GroupHolder groupHolder = null;
     private SimpleCheckBox visibleToMembersCheckbox = new SimpleCheckBox();

@@ -1,12 +1,10 @@
 package com.spotmouth.gwt.client;
 
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.spotmouth.gwt.client.dto.LocationResult;
 import com.spotmouth.gwt.client.dto.SolrDocument;
-import com.spotmouth.gwt.client.help.HelpResources;
+import com.spotmouth.gwt.client.results.ResultsPanel;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,10 +21,6 @@ public class BusinessOwnerPanel extends ResultsPanel implements SpotMouthPanel {
 
 
 
-    @Override
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getBizOwner();
-    }
 
     public BusinessOwnerPanel() {
     }

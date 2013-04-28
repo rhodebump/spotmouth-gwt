@@ -5,7 +5,6 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.maps.client.geocode.Geocoder;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -16,9 +15,7 @@ import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
-import com.spotmouth.gwt.client.detail.Detail;
 import com.spotmouth.gwt.client.dto.*;
-import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.mark.SpotMarkComposite;
 import com.spotmouth.gwt.client.spot.ContactForm;
 
@@ -35,9 +32,7 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
     }
 
 
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getSpotDetailPanel();
-    }
+
 
     FlowPanel mapHolderPanel = new FlowPanel();
     private Anchor hideMapAnchor = new Anchor("Show Information");

@@ -22,7 +22,6 @@ import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.ULPanel;
-import com.spotmouth.gwt.client.common.H1;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.QueryResponse;
 import com.spotmouth.gwt.client.dto.SolrDocument;

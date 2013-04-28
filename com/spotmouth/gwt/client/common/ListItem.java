@@ -4,11 +4,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.ComplexPanel;
-import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.HTMLPanel;
 
 public class ListItem extends HTMLPanel implements   HasClickHandlers {
     public ListItem() {

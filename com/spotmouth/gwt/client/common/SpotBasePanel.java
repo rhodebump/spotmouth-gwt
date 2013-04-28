@@ -24,7 +24,6 @@ import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.maps.client.overlay.Overlay;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.DOM;
@@ -43,18 +42,15 @@ import com.phonegap.gwt.capture.client.Capture.MediaFile;
 import com.phonegap.gwt.console.client.Logger;
 import com.phonegap.gwt.filetransfer.client.FileTransfer;
 import com.spotmouth.gwt.client.*;
-import com.spotmouth.gwt.client.contest.ContestsPanel;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.group.ManageGroupPanel;
-import com.spotmouth.gwt.client.help.HelpPanel;
-import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.icons.SpotImageResource;
 import com.spotmouth.gwt.client.instagram.Data;
 import com.spotmouth.gwt.client.mark.SmallAdvancedForm;
 import com.spotmouth.gwt.client.messaging.ViewMessagePanel;
 import com.spotmouth.gwt.client.product.ProductInstallPanel;
+import com.spotmouth.gwt.client.results.LocationResultComposite;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
-import com.spotmouth.gwt.client.search.SearchForm;
 import gwtupload.client.IUploadStatus;
 import gwtupload.client.IUploadStatus.Status;
 import gwtupload.client.IUploader;
@@ -1393,11 +1389,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         this.imageResourceMobile = imageResourceMobile;
     }
 
-    private TextResource helpTextResource = HelpResources.INSTANCE.getHelp();
 
-    public TextResource getHelpTextResource() {
-        return helpTextResource;
-    }
 
     protected void checkRequired(SuggestBox textBox, String message) {
         if (textBox == null) return;
@@ -2241,10 +2233,22 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     //We do not need to crawl this stuff, so we will use a handler
     protected void addLocation(ULPanel ul, LocationResult locationResult, ClickHandler handler, boolean showCategories) {
-        ListItem li = new ListItem();
-        ComplexPanel vp = getLocationPanel(locationResult, handler, showCategories);
-        li.add(vp);
-        ul.add(li);
+
+        if (MyWebApp.isDesktop()) {
+            ListItem li = new ListItem();
+            ComplexPanel vp = getLocationPanel(locationResult, handler, showCategories);
+            li.add(vp);
+            ul.add(li);
+
+        } else {
+            //todo, test if location vs solr document
+            LocationResultComposite locationResultComposite = new LocationResultComposite();
+            ul.add(locationResultComposite);
+
+
+        }
+
+
     }
 
     //protected Map<TextArea, MarkData> autoGrowTextAreaLocationResultMap = new HashMap<TextArea, MarkData>();
@@ -2373,7 +2377,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         userImage.setStyleName("com-ava");
         if (userId != null) {
             String userHistoryToken = MyWebApp.VIEW_USER_PROFILE + userId;
-            String userHistoryToken2 = "#" + userHistoryToken;
+           // String userHistoryToken2 = "#" + userHistoryToken;
         }
         TextArea saySomethingTextArea = new TextArea();
         MarkData markData = new MarkData();

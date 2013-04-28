@@ -2,7 +2,6 @@ package com.spotmouth.gwt.client;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Label;
@@ -13,7 +12,6 @@ import com.spotmouth.gwt.client.dto.FriendHolder;
 import com.spotmouth.gwt.client.dto.FriendRequest;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.SpotHolder;
-import com.spotmouth.gwt.client.help.HelpResources;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 
 /**
@@ -179,9 +177,6 @@ public class SpotFriendPanel extends SpotBasePanel implements SpotMouthPanel {
     private CheckBox deviceCheckBox = new CheckBox("Receive Device Notifications (iphone and android)");
 
 
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getSpotDetailPanel();
-    }
 
     public void toggleFirst() {
         //To change body of implemented methods use File | Settings | File Templates.

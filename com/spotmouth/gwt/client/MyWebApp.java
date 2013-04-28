@@ -1,6 +1,5 @@
 package com.spotmouth.gwt.client;
 
-import com.spotmouth.gwt.client.account.AccountSettingsPanel;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.gwt.core.client.EntryPoint;
@@ -42,12 +41,14 @@ import com.gwtfb.sdk.FBCore;
 import com.phonegap.gwt.device.client.Device;
 import com.phonegap.gwt.fbconnect.client.FBConnect;
 import com.spotmouth.gwt.client.about.AboutPanel;
+import com.spotmouth.gwt.client.account.*;
 import com.spotmouth.gwt.client.chat.ChatPanel;
 import com.spotmouth.gwt.client.chat.ChatsPanel;
 import com.spotmouth.gwt.client.chat.ManageChatPanel;
 import com.spotmouth.gwt.client.chat.ViewChatPanel;
 import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
+import com.spotmouth.gwt.client.contact.ContactPanel;
 import com.spotmouth.gwt.client.contest.ContestsPanel;
 import com.spotmouth.gwt.client.contest.ManageContestPanel;
 import com.spotmouth.gwt.client.contest.ViewContestPanel;
@@ -59,13 +60,13 @@ import com.spotmouth.gwt.client.directory.DirectoryPostalCodesPanel;
 import com.spotmouth.gwt.client.directory.DirectoryStatesPanel;
 import com.spotmouth.gwt.client.dto.*;
 import com.spotmouth.gwt.client.event.EventForm;
+import com.spotmouth.gwt.client.favorites.FavoritesPanel;
+import com.spotmouth.gwt.client.features.FeaturesPanel;
 import com.spotmouth.gwt.client.friends.InvitedPanel;
-import com.spotmouth.gwt.client.contact.*;
 import com.spotmouth.gwt.client.friends.ManageFriendPanel;
 import com.spotmouth.gwt.client.friends.ManageFriendsPanel;
 import com.spotmouth.gwt.client.group.GroupPanel;
 import com.spotmouth.gwt.client.group.ManageGroupPanel;
-import com.spotmouth.gwt.client.help.IntroPanel;
 import com.spotmouth.gwt.client.icons.SpotImageResource;
 import com.spotmouth.gwt.client.instagram.Data;
 import com.spotmouth.gwt.client.layout.MapPage;
@@ -80,6 +81,7 @@ import com.spotmouth.gwt.client.om.LocationOverlay;
 import com.spotmouth.gwt.client.product.ManageProductsPanel;
 import com.spotmouth.gwt.client.profile.ProfileSettingsPanel;
 import com.spotmouth.gwt.client.profile.ViewProfilePanel;
+import com.spotmouth.gwt.client.results.ResultsPanel;
 import com.spotmouth.gwt.client.rpc.ApiService;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import com.spotmouth.gwt.client.search.SearchForm;
@@ -87,8 +89,7 @@ import com.spotmouth.gwt.client.spot.CreateSpotMarkPanel;
 import com.spotmouth.gwt.client.spot.ManageSpotPanel;
 import com.spotmouth.gwt.client.usergroups.ManageUserGroupPanel;
 import com.spotmouth.gwt.client.usergroups.ViewUserGroupsPanel;
-import com.spotmouth.gwt.client.favorites.*;
-import com.spotmouth.gwt.client.features.*;
+
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1917,40 +1918,9 @@ public class MyWebApp implements EntryPoint {
         }
     }
 
-    private IntroPanel introPanel = new IntroPanel(this);
     public static String HIDE_INTRO = "HIDE_INTRO";
 
-    //return true if we show a splash message
-    private boolean displaySplash() {
-        log("displaySplash");
-        if (!isLocalStorageSupported()) {
-            return false;
-        }
-        //only do splash for mobile
-        if (MyWebApp.isDesktop()) {
-            return false;
-        }
-        log("displaySplash 1");
-        Storage localStorage = Storage.getLocalStorageIfSupported();
-        if (localStorage == null) {
-            return false;
-        }
-        log("displaySplash 2");
-        String hideintro = localStorage.getItem(HIDE_INTRO);
-        log("displaySplash 3");
-        if (hideintro == null) {
-            log("displaySplash 4");
-            swapCenter(introPanel);
-            return true;
-        } else if (hideintro.equals("true")) {
-            log("displaySplash 4");
-            return false;
-        } else {
-            log("displaySplash 5");
-            swapCenter(introPanel);
-            return true;
-        }
-    }
+
 
     public void toggleSettings(boolean newItem) {
         if (newItem) {
@@ -3342,9 +3312,7 @@ public class MyWebApp implements EntryPoint {
 
     public void showHome() {
         GWT.log("showHome");
-        if (displaySplash()) {
-            return;
-        }
+
         if (!checkValidToToggle()) {
             return;
         }

@@ -2,7 +2,6 @@ package com.spotmouth.gwt.client.product;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
@@ -12,7 +11,7 @@ import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.dto.ProductHolder;
 import com.spotmouth.gwt.client.dto.ProductInstallHolder;
 import com.spotmouth.gwt.client.dto.SpotHolder;
-import com.spotmouth.gwt.client.help.HelpResources;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,10 +47,6 @@ public class ManageProductsPanel  extends SpotBasePanel implements SpotMouthPane
     }
 
 
-
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getPlaceForm();
-    }
 
     private ULPanel getInstalledProductsULPanel(SpotHolder spotHolder) {
         ULPanel ulPanel = new ULPanel();

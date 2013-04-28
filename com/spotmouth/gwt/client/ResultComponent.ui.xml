@@ -3,12 +3,6 @@
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
     <g:HTMLPanel>
-        <!--
-        <input type="checkbox" class="ex_toggle"/>
-                <span class="expand"><g:Anchor ui:field="expandAnchor"/> </span>
-        <span class="expand"><span class="ex_switch">Expand</span><span class="ex_switch">Hide</span></span>
-        -->
-
         <div class="ex_areaXX">
             <h3>Last 5 marks</h3>
             <xx:ULPanel ui:field="latestMarksPanel"/>

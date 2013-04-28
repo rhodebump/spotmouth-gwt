@@ -3,9 +3,6 @@ package com.spotmouth.gwt.client;
 import com.allen_sauer.gwt.log.client.DivLogger;
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.*;
-
 import com.google.gwt.user.client.ui.Widget;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 //import com.allen_sauer.gwt.log.client.Log;

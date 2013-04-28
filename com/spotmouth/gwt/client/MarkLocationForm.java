@@ -1,6 +1,5 @@
 package com.spotmouth.gwt.client;
 
-import com.google.gwt.resources.client.ImageResource;
 import com.spotmouth.gwt.client.dto.ItemHolder;
 import com.spotmouth.gwt.client.dto.Location;
 

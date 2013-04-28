@@ -1,0 +1,52 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+        >
+
+<!--
+     			<li class="result">
+     				<a href="spot-details.html">
+     					<img src="css/img/mcd.jpg"/>
+     					<div class="center_block">
+     						<h2>@Harris Theater, 809 Liberty Ave, Pittsburgh, PA 15222,US</h2>
+     						<div class="tags">
+     							<span>Arts, Entertainment &amp; Nightlife</span>
+     							<span>Movie Theatres</span>
+     							<span>PA</span>
+     							<span>15222</span>
+     							<span>Pittsburgh</span>
+     						</div>
+
+     					</div>
+     					<div class="distance">
+     						<span>25</span>
+     						<span>meters</span>
+     					</div>
+     				</a>
+     			</li>
+     			-->
+
+<g:HTMLPanel tag="li" styleName="result">
+
+    <a href="spot-details.html">
+					<img src="css/img/mcd.jpg"/>
+					<div class="center_block">
+						<h2>@Harris Theater, 809 Liberty Ave, Pittsburgh, PA 15222,US</h2>
+						<div class="tags">
+							<span>Arts, Entertainment &amp; Nightlife</span>
+							<span>Movie Theatres</span>
+							<span>PA</span>
+							<span>15222</span>
+							<span>Pittsburgh</span>
+						</div>
+
+					</div>
+					<div class="distance">
+						<span>25</span>
+						<span>meters</span>
+					</div>
+				</a>
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

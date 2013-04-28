@@ -1,6 +1,5 @@
 package com.spotmouth.gwt.client.directory;
 
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.spotmouth.gwt.client.MyWebApp;

@@ -1,16 +1,14 @@
 package com.spotmouth.gwt.client.favorites;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
-import com.spotmouth.gwt.client.ResultsPanel;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.dto.LocationResult;
 import com.spotmouth.gwt.client.dto.SolrDocument;
-import com.spotmouth.gwt.client.help.HelpResources;
+import com.spotmouth.gwt.client.results.ResultsPanel;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,10 +30,6 @@ public class FavoritesPanel extends ResultsPanel implements SpotMouthPanel {
 
 
 
-    @Override
-    public TextResource getHelpTextResource() {
-        return HelpResources.INSTANCE.getFavorites();
-    }
 
     public FavoritesPanel() {
     }

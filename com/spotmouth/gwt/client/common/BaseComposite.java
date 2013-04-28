@@ -1,18 +1,14 @@
 package com.spotmouth.gwt.client.common;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.datepicker.client.DateBox;
-import com.kiouri.sliderbar.client.solution.simplehorizontal.SliderBarSimpleHorizontal;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.spotmouth.gwt.client.MyWebApp;
-import com.spotmouth.gwt.client.dto.ContestHolder;
-import gwtupload.client.MultiUploader;
 import org.vectomatic.dnd.DataTransferExt;
 import org.vectomatic.dnd.DropPanel;
 import org.vectomatic.file.*;

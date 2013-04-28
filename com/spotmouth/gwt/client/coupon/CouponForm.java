@@ -2,19 +2,17 @@ package com.spotmouth.gwt.client.coupon;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.SpotMouthPanel;
 import com.spotmouth.gwt.client.common.SpotBasePanel;
 import com.spotmouth.gwt.client.common.TextField;
-import com.spotmouth.gwt.client.dto.*;
+import com.spotmouth.gwt.client.dto.ItemHolder;
+import com.spotmouth.gwt.client.dto.LeaveMarkRequest;
+import com.spotmouth.gwt.client.dto.MobileResponse;
+import com.spotmouth.gwt.client.dto.SpotHolder;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
 import gwtupload.client.MultiUploader;
 

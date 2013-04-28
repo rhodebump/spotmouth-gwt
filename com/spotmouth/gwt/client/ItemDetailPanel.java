@@ -331,17 +331,7 @@ public class ItemDetailPanel extends SpotBasePanel implements SpotMouthPanel {
             History.newItem(MyWebApp.LEAVE_SPOT_MARK + spotHolder.getId());
         }
     };
-    ClickHandler viewMapHandler2 = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Location location = new Location();
-            ItemHolder itemHolder = itemResponse.getItemHolder();
-            location.setLatitude(itemHolder.getLatitude());
-            location.setLongitude(itemHolder.getLongitude());
-            History.newItem(MyWebApp.MAP);
-            SpotMap spotMap = new SpotMap(mywebapp, location);
-            mywebapp.swapCenter(spotMap);
-        }
-    };
+
 
     FlowPanel mapHolderPanel = new FlowPanel();
     private Anchor hideMapAnchor = new Anchor("Show Information");

@@ -3,11 +3,11 @@ package com.spotmouth.gwt.client.layout;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.ULPanel;
 import com.spotmouth.gwt.client.menu.TopNav;
-import  com.google.gwt.uibinder.client.*;
 
 /**
  * Created with IntelliJ IDEA.
