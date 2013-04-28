@@ -32,12 +32,6 @@ public class HomePanel extends SpotBasePanel implements SpotMouthPanel {
     };
 
 
-    ClickHandler cmsHandler = new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Window.Location.assign("http://cms.spotmouth.com");
-        }
-    };
-
 
     private void addimage(ClickHandler handler, ImageResource imageResource, String desc,
                           ULPanel ul) {
@@ -62,10 +56,10 @@ public class HomePanel extends SpotBasePanel implements SpotMouthPanel {
         ULPanel ul = new ULPanel();
         ul.setStyleName("results");
 
-        addimage(
-                iphoneHandler,
-                mywebapp.resources.spotmouth50x50(),
-                "Download the FREE iphone app", ul);
+//        addimage(
+//                iphoneHandler,
+//                mywebapp.resources.spotmouth50x50(),
+//                "Download the FREE iphone app", ul);
         addimage(
                 androidHandler,
                 mywebapp.resources.android(),
@@ -80,23 +74,11 @@ public class HomePanel extends SpotBasePanel implements SpotMouthPanel {
 
     public HomePanel(MyWebApp mywebapp,boolean b) {
         super(mywebapp,false);
-        if (!MyWebApp.isDesktop()) {
-            add(getHomeLinks2());
-        }
+
 
     }
 
-    private ULPanel getHomeLinks2() {
-        ULPanel ul = new ULPanel();
-        ul.setStyleName("results");
 
-        addimage(
-                cmsHandler,
-                mywebapp.resources.spotmouthLogo(),
-                "visit our site", ul);
-
-        return ul;
-    }
 
     public void toggleFirst() {
         // TODO Auto-generated method stub

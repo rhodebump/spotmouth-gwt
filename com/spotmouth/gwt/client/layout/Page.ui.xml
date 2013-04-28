@@ -94,7 +94,7 @@
           -->
 
         <a href="/">
-            <g:Image resource="{myResources.worldlogo}" />
+            <img src="images/worldlogo.png" />
         </a>
 
 

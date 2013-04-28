@@ -10,9 +10,6 @@
 
 <div id="prof">
 <ul id="nav">
-    <!--
-<li><a title="Account Settings" href="account-set.html"></a></li>
--->
     <li><a title="Account Settings" href="#account-settings"></a></li>
 <li><a title="Profile Settings" href="#profile-settings" id="prop"></a></li>
 <li class="pact"><a title="Favorite Places" href="#favorites" id="pfav"></a></li>
@@ -24,47 +21,6 @@
 
     <g:Panel ui:field="spotsAreaPanel"/>
 
-    <!--
-<div id="spots-area">
-
-<span class="fspots">
-<span class="remove"></span>
-<img src="y_e4525243.jpg"/>
-<a href="#">A Technical Hair Systems</a>
-</span>
-
-<span class="fspots">
-<span class="remove"></span>
-<img src="y_e4525243.jpg"/>
-<a href="#">A Technical Hair Systems A Technical Hair Systems</a>
-</span>
-
-<span class="fspots">
-<span class="remove"></span>
-<img src="y_e4525243.jpg"/>
-<a href="#">A Technical Hair Systems</a>
-</span>
-
-<span class="fspots">
-<span class="remove"></span>
-<img src="y_e4525243.jpg"/>
-<a href="#">A Technical Hair Systems A Technical Hair Systems</a>
-</span>
-
-<span class="fspots">
-<span class="remove"></span>
-<img src="y_e4525243.jpg"/>
-<a href="#">A Technical Hair Systems</a>
-</span>
-
-<span class="fspots">
-<span class="remove"></span>
-<img src="y_e4525243.jpg"/>
-<a href="#">A Technical Hair Systems</a>
-</span>
-
-</div>
--->
 
 
 </div>

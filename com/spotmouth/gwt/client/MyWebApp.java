@@ -1969,10 +1969,6 @@ public class MyWebApp implements EntryPoint {
         }
         return apiServiceAsync;
     }
-//
-//    public List<CountryHolder> getCountryHolders() {
-//        return countryHolders;
-//    }
 
     public List<ManufacturerHolder> getManufacturerHolders() {
         return manufacturerHolders;
@@ -1980,15 +1976,11 @@ public class MyWebApp implements EntryPoint {
 
     private List<ManufacturerHolder> manufacturerHolders = new ArrayList<ManufacturerHolder>();
     private List<ProductHolder> productHolders = new ArrayList<ProductHolder>();
-    //private List<CountryHolder> countryHolders = new ArrayList<CountryHolder>();
 
-//    public List<StateProvinceHolder> getStateProvinceHolders() {
-//        return stateProvinceHolders;
-//    }
-    //  private static boolean mobileSmallFormat = true;
+
 
     public static boolean isDesktop() {
-        if (true) return false;
+        //if (true) return false;
         if (getHost().startsWith("http://m.")) {
             return false;
         }
@@ -2053,33 +2045,6 @@ public class MyWebApp implements EntryPoint {
                     notMini();
                 }
 
-               // notMini();
-              //  int notTop = getCoords(notElem);
-             //   com.google.gwt.dom.client.Element wrapper = DOM.getElementById("wrapper");
-              //  int pageY = Window.getScrollTop();
-             //   com.google.gwt.dom.client.Element mNav = DOM.getElementById("m_nav");
-               // int mWrapTop = wrapper.getOffsetTop();
-//                if (pageY >= mWrapTop * 2) {
-//                    mNav.setClassName("m_nav_fixed");
-//                } else if (pageY <= mWrapTop * 2) {
-//                    mNav.setClassName("m_nav");
-//                }
-//                if (pageY >= notTop + notElem.getOffsetHeight()) {
-//                    if (notElem.getClassName().equals("normal minimized")) {
-//                       // notElem.setClassName("normal minimized");
-//                        notElem.setClassName("normal scrolled");
-//                    } else {
-//                        notElem.setClassName("normal scrolled");
-//                        notMini();
-//                    }
-//                } else {
-//                    if (notElem.getClassName().equals("normal minimized")) {
-//                       // notElem.setClassName("normal minimized");
-//                        notElem.setClassName("normal scrolled");
-//                    } else {
-//                        notElem.setClassName("normal");
-//                    }
-//                }
 
 
             }
@@ -2869,12 +2834,6 @@ public class MyWebApp implements EntryPoint {
     public void onModuleLoad() {
 
 
-        if (MyWebApp.isDesktop()) {
-            loadDesktopCss();
-        }else {
-            loadMobileCss();
-        }
-
 
 
         GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
@@ -3227,66 +3186,9 @@ public class MyWebApp implements EntryPoint {
         }
     }
 
-    private static native void loadCss(String url) /*-{
-       var l = $doc.createElement("link");
-       l.setAttribute("id", url);
-       l.setAttribute("rel", "stylesheet");
-       l.setAttribute("type", "text/css");
-       l.setAttribute("href", url); // Make sure this request is not cached
-       $doc.getElementsByTagName("head")[0].appendChild(l);
-   	}-*/;
-
-    private void loadMobileCss() {
-
-        loadCss("css/m-style.css");
-        loadCss("css/m-pcr.css");
-    }
-    private void loadDesktopCss() {
-        loadCss("css/style.css");
-        loadCss("css/pagenavi-css.css");
-        loadCss("css/spotmouth.css");
-        loadCss("css/default.css");
-
-        loadCss("css/cat-menu.css");
-        loadCss("css/topnav.css");
-
-        loadCss("css/login.css");
-        loadCss("css/new-search.css");
-
-        loadCss("css/styles.css");
-        loadCss("css/details.css");
+;
 
 
-        loadCss("css/message.css");
-        loadCss("css/friends.css");
-
-
-        loadCss("css/notifications.css");
-        loadCss("css/contests.css");
-        loadCss("css/prof.css");
-
-         /*
-            <link rel="stylesheet" href="css/style.css" type="text/css"/>
-   <link rel="stylesheet" href="css/pagenavi-css.css" type="text/css"/>
-   <link rel="stylesheet" href="css/spotmouth.css" type="text/css"/>
-   <link rel="stylesheet" href="css/default.css" type="text/css"/>
-   <link rel="stylesheet" href="css/cat-menu.css" type="text/css"/>
-   <link rel="stylesheet" href="css/topnav.css" type="text/css"/>
-   <link rel="stylesheet" href="css/login.css" type="text/css"/>
-   <link rel="stylesheet" href="css/new-search.css" type="text/css"/>
-   <link rel="stylesheet" href="css/styles.css" type="text/css"/>
-   <link rel="stylesheet" href="css/details.css" type="text/css"/>
-
-   <link rel="stylesheet" href="css/message.css" type="text/css"/>
-
-   <link rel="stylesheet" href="css/friends.css" type="text/css"/>
-   <link rel="stylesheet" href="css/notifications.css" type="text/css"/>
-   <link rel="stylesheet" href="css/contests.css" type="text/css"/>
-
-      <link rel="stylesheet" href="css/prof.css" type="text/css"/>
-          */
-
-    }
     SetLocationManuallyPanel setLocationManuallyPanel = null;
     HomePanel homePanel = new HomePanel(this);
 

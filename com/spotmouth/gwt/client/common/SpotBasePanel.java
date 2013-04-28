@@ -1594,7 +1594,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         mywebapp.getMessagePanel().clear();
         mywebapp.getResultsPanel().performSearch();
         mywebapp.getTopMenuPanel().setTitleBar("Search");
-        mywebapp.getResultsPanel().setImageResources(resources.search(), resources.searchMobile());
+        //mywebapp.getResultsPanel().setImageResources(resources.search(), resources.searchMobile());
     }
 
     protected TextField keywordsTextBox = new TextField();
@@ -2242,7 +2242,89 @@ public abstract class SpotBasePanel extends FlowPanel {
 
         } else {
             //todo, test if location vs solr document
-            LocationResultComposite locationResultComposite = new LocationResultComposite();
+            Anchor detailAnchor = new Anchor();
+            detailAnchor.addClickHandler(handler);
+            clickMapLocation.put(detailAnchor, locationResult);
+            Image image = new Image(getSpotImage());
+
+            Location location = locationResult.getLocation();
+                       //tags display
+            FlowPanel tagsPanel = new FlowPanel();
+            tagsPanel.setStyleName("tags");
+            //we do not want to show categories when we are showing spots that we are picking from
+            if (showCategories) {
+                if ((location.getFactualCategories() != null) && (location.getFactualCategories().length() > 0)) {
+                    String[] cats = location.getFactualCategories().split(">");
+                    for (String cat : cats) {
+                        //        //<div class="tags"><a href="#">ks</a><a href="#">66104</a><a href="#">kansas city</a></div>
+                        String trimCat = cat.trim();
+                        TagHolder tagHolder = new TagHolder(trimCat);
+                        InlineLabel inlineLabel = new InlineLabel(tagHolder.getName());
+                        //Anchor catLabel = new Anchor(trimCat);
+                        //catLabel.addStyleName("linky");
+                        //catLabel.addClickHandler(clickTagHandler2);
+                        //tagHolderClickMap.put(catLabel, tagHolder);
+                        tagsPanel.add(inlineLabel);
+                    }
+                }
+            }
+
+
+            LocationResultComposite locationResultComposite = new LocationResultComposite(detailAnchor,image,tagsPanel);
+
+            locationResultComposite.addClickHandler(handler);
+            clickMapLocation.put(locationResultComposite, locationResult);
+
+
+            StringBuffer sb = new StringBuffer();
+            add(sb, "", location.getName());
+            add(sb, ", ", location.getAddress1());
+            add(sb, ", ", location.getCity());
+            add(sb, ", ", location.getState());
+            add(sb, " ", location.getZipcode());
+            locationResultComposite.setLocationDescription(sb.toString());
+
+
+
+            double displayDistance = 0.0D;
+            Double ddistance = new Double(locationResult.getDistance());
+            if (mywebapp.isShowMeters()) {
+                displayDistance = locationResult.getDistance() / 1000.0;
+                if (displayDistance > 1.0D) {
+                    String val = NumberFormat.getFormat("####.#").format(displayDistance);
+                    //safe = "<h1>" + val + "</h1><p>km away</p>";
+                    locationResultComposite.setDistance(val);
+                    locationResultComposite.setUnit("km");
+                } else {
+                    int dd = ddistance.intValue();
+                    //safe = "<h1>" + dd + "</h1><p>meters away</p>";
+                    locationResultComposite.setDistance("" + dd);
+                    locationResultComposite.setUnit("meters");
+
+                }
+            } else {
+                double displayDistanceInMiles = locationResult.getDistance() * METERS_TO_MILES;
+                double distanceInYards = locationResult.getDistance() * YARD;
+                int dd = new Double(distanceInYards).intValue();
+                //int dd = ddistance.intValue();
+                if (dd > 999) {
+                    String val = NumberFormat.getFormat("####.#").format(displayDistanceInMiles);
+                    //safe = "<h1>" + val + "</h1><p>miles away</p>";
+                    locationResultComposite.setDistance(val);
+                    locationResultComposite.setUnit("miles");
+
+                } else {
+                   // safe = "<h1>" + dd + "</h1><p>yards away</p>";
+                    locationResultComposite.setDistance("" + dd);
+                    locationResultComposite.setUnit("yards");
+                }
+            }
+
+
+
+
+
+
             ul.add(locationResultComposite);
 
 
@@ -2251,14 +2333,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     }
 
-    //protected Map<TextArea, MarkData> autoGrowTextAreaLocationResultMap = new HashMap<TextArea, MarkData>();
-    /*
-                   <form class="comment-form">
-                   <img src="" class="com-ava"/>
-                   <textarea rows="1" placeholder="Leave your comment..."></textarea><input class="search-send" type="submit"><br>
-                   <a class="adv">show advanced</a><a class="adv">hide</a>
-               </form>
-    */
+
     protected Map<Widget, MarkData> widgetMarkDataMap = new HashMap<Widget, MarkData>();
     public ClickHandler saveHandler2 = new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -2738,15 +2813,11 @@ public abstract class SpotBasePanel extends FlowPanel {
         addYahooUpcoming(middleTable, locationResult.getEvents());
     }
 
-    boolean alex = false;
 
     protected ImageResource getSpotImage() {
-        //150px × 120px for theme
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.spot_image_placeholder57x57();
-        } else {
+
             return MyWebApp.resources.spot_image_placeholder130x130();
-        }
+
     }
 
 
@@ -3171,13 +3242,13 @@ public abstract class SpotBasePanel extends FlowPanel {
         //2nd image
         //spot
         if (!MyWebApp.isSmallFormat()) {
-            if ((alex)) {
+         //   if ((alex)) {
                 Hyperlink userHyperLink = new Hyperlink();
                 userHyperLink.setTargetHistoryToken(targetHistoryToken);
                 Image image = addImage(solrDocument, hp, "image_thumbnail_130x130_url_s",
                         userHyperLink, resources.spot_image_placeholder130x130(), resources.spot_image_placeholder57x57(), "spotimage");
                 setColumnWidth(image, hp);
-            }
+        //    }
         }
         hp.add(distancePanel);
         setColumnWidth(distancePanel, hp);
@@ -3319,8 +3390,9 @@ public abstract class SpotBasePanel extends FlowPanel {
             FlowPanel flowPanel = new FlowPanel();
             flowPanel.setStyleName("yelp_marks");
             //flowPanel.getElement().setId("yelp_marks");
-            Image image = new Image(MyWebApp.resources.yelp());
-            anchor.getElement().appendChild(image.getElement());
+            //todo
+           // Image image = new Image(MyWebApp.resources.yelp());
+           // anchor.getElement().appendChild(image.getElement());
             HorizontalPanel topRow = new HorizontalPanel();
             flowPanel.add(topRow);
             topRow.add(anchor);
@@ -3345,8 +3417,8 @@ public abstract class SpotBasePanel extends FlowPanel {
             anchor.setTarget("_blank");
             FlowPanel flowPanel = new FlowPanel();
             flowPanel.setStyleName("yelp");
-            Image image = new Image(MyWebApp.resources.yelp());
-            anchor.getElement().appendChild(image.getElement());
+            //Image image = new Image(MyWebApp.resources.yelp());
+            //anchor.getElement().appendChild(image.getElement());
             HorizontalPanel topRow = new HorizontalPanel();
             flowPanel.add(topRow);
             topRow.add(anchor);

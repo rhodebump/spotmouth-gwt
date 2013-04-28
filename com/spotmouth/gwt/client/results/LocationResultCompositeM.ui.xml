@@ -28,24 +28,20 @@
 
 <g:HTMLPanel tag="li" styleName="result">
 
-    <a href="spot-details.html">
-					<img src="css/img/mcd.jpg"/>
+					<g:Image ui:field="image"/>
+
 					<div class="center_block">
-						<h2>@Harris Theater, 809 Liberty Ave, Pittsburgh, PA 15222,US</h2>
-						<div class="tags">
-							<span>Arts, Entertainment &amp; Nightlife</span>
-							<span>Movie Theatres</span>
-							<span>PA</span>
-							<span>15222</span>
-							<span>Pittsburgh</span>
-						</div>
+						<h2>@<span ui:field='locationDescriptionSpan'/></h2>
+
+                        <g:FlowPanel ui:field="tagsPanel"/>
+
 
 					</div>
 					<div class="distance">
-						<span>25</span>
-						<span>meters</span>
+						<span ui:field='distanceSpan'/>
+                        <span ui:field='unitSpan'/>
 					</div>
-				</a>
+
 
 </g:HTMLPanel>
 

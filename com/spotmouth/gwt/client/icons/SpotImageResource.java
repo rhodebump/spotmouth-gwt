@@ -17,19 +17,7 @@ public interface SpotImageResource extends ClientBundle {
     int buttonSizeMobile = 20;
 
 
-    //following is 300 width
 
-    @Source("spotmouth_logo.png")
-    ImageResource spotmouthLogo();
-
-
-
-    @Source("spotmouth_logo.png")
-    ImageResource worldlogo();
-
-//
-//    @Source("icon-search.gif")
-//    ImageResource iconsearch();
 
 
 
@@ -53,10 +41,10 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-
-    //@Source("yelp_logo_75x38.png")
-    @Source("reviewsFromYelpRED.gif")
-    ImageResource yelp();
+//
+//    //@Source("yelp_logo_75x38.png")
+//    @Source("reviewsFromYelpRED.gif")
+//    ImageResource yelp();
 
 
 //
@@ -129,14 +117,11 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-    @Source("spotmouth-50x50.png")
-    ImageResource spotmouth50x50();
+
 
     @Source("android-developer-minidroid.jpg.png")
     ImageResource android();
 
-    @Source("ajax-loader.gif")
-    ImageResource ajaxLoader();
 
 
 
@@ -182,23 +167,6 @@ public interface SpotImageResource extends ClientBundle {
 
 
 
-
-    @Source("find.png")
-    @ImageOptions(width = 72)
-    ImageResource search();
-
-    @Source("find.png")
-    @ImageOptions(width = mobileSize)
-    ImageResource searchMobile();
-
-
-    @Source("find.png")
-    @ImageOptions(width = 30)
-    ImageResource searchButton();
-
-    @Source("find.png")
-    @ImageOptions(width = 20)
-    ImageResource searchButtonSmall();
 
 
 

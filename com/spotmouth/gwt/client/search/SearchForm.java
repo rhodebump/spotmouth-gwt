@@ -11,13 +11,7 @@ public class SearchForm extends SpotBasePanel implements SpotMouthPanel {
     public SearchForm() {
     }
 
-    public ImageResource getImageResource() {
-        if (MyWebApp.isSmallFormat()) {
-            return MyWebApp.resources.searchMobile();
-        } else {
-            return MyWebApp.resources.search();
-        }
-    }
+
 
     public String getTitle() {
         return "Search";
