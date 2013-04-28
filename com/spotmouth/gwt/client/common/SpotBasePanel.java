@@ -1607,18 +1607,6 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     protected TextField keywordsTextBox = new TextField();
 
-    /*
-    the following addHelp and addTopPanel are used to add
-    the help and toppanel to each base class
-    sometimes, we will clear the panel and reuse it, if we
-    do this, we need to restore the panel and that is why
-    we use the class vars
-     */
-    protected void addHelp() {
-        if (!displayHelp) return;
-        HelpPanel helpPanel = new HelpPanel(mywebapp, this);
-        add(helpPanel);
-    }
 
 
 
