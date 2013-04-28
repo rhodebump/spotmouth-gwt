@@ -1,0 +1,47 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+
+
+
+  <g:HTMLPanel>
+
+
+      <div class="contact _page">
+    			<h1>Contact Us!</h1>
+
+    				<label>
+    					<p>Your Name</p>
+                        <smc:TextField required="true" ui:field="yourNameTextBox"/>
+    				</label>
+    				<span class="_sep _light"></span>
+    				<label>
+    					<p>Email</p>
+                        <smc:TextField placeholder="example@mail.com" required="true" ui:field="email"/>
+    				</label>
+    				<span class="_sep _light"></span>
+    				<label>
+    					<p>Message Subject</p>
+                        <g:TextBox ui:field="messageSubject"/>
+    				</label>
+    				<label>
+    					<p>Your Message</p>
+                        <g:TextArea ui:field="contentTextArea"/>
+    				</label>
+    				<span class="_sep _light"></span>
+    				<label>
+
+                        <g:Button addStyleNames="_white _active" ui:field="sendButton"/>
+    				</label>
+
+    		</div>
+
+
+
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>
