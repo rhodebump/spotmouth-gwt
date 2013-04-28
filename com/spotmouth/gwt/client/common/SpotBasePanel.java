@@ -741,23 +741,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     };
 
-    public FlowPanel getTopPanel() {
-        FlowPanel topPanel = new FlowPanel();
-        topPanel.setStyleName("menugrouping");
-        topPanel.addStyleName("clearing");
-        if (mywebapp.getAuthenticatedUser() == null) {
-            addImageIcon(MyWebApp.LOGIN, new LoginForm(), topPanel);
-        } else {
-            addImageIcon(logoutHandler, "Logout", MyWebApp.resources.logout(), MyWebApp.resources.logoutMobile(), topPanel, null);
-        }
-        addImageIcon(MyWebApp.MARK_SPOT, new MarkSpotTypePanel(), topPanel);
-        addImageIcon(MyWebApp.SEARCH, new SearchForm(), topPanel);
-        addImageIcon(MyWebApp.CONTESTS, new ContestsPanel(), topPanel);
-       // addImageIcon("Drivers", MyWebApp.DRIVERS, mywebapp.resources.drivers(), mywebapp.resources.driversMobile(), topPanel, null);
-        return topPanel;
-    }
 
-    ;
 
     public static Image addImageToButton(Widget buttonLabel, ImageResource bigImage, ImageResource smallImage) {
         Image image = null;
@@ -1016,56 +1000,52 @@ public abstract class SpotBasePanel extends FlowPanel {
     };
     private ItemHolder itemHolder2 = null;
 
-    public void showAvailableUserGroups(List<UserGroupHolder> allGroupHolders, List<UserGroupHolder> selectedGroupHolders, ClickHandler addGroupHandler) {
-        GWT.log("showFriends");
-        // GWT.log("there are friends " + friendHolders.size());
-        //List<UserGroupHolder> groupsList = new ArrayList<UserGroupHolder>();
-        List<UserGroupHolder> filteredGroups = new ArrayList<UserGroupHolder>();
-        for (UserGroupHolder ugh : allGroupHolders) {
-            if (!inList(selectedGroupHolders, ugh)) {
-                filteredGroups.add(ugh);
-            }
-        }
-        // groupsList.removeAll(selectedGroupHolders);
-        // need to filter to just accepted friends
-//        for (UserGroupHolder groupHolder : groupsList) {
+//    public void showAvailableUserGroups(List<UserGroupHolder> allGroupHolders, List<UserGroupHolder> selectedGroupHolders, ClickHandler addGroupHandler) {
+//        GWT.log("showFriends");
+//        // GWT.log("there are friends " + friendHolders.size());
+//        //List<UserGroupHolder> groupsList = new ArrayList<UserGroupHolder>();
+//        List<UserGroupHolder> filteredGroups = new ArrayList<UserGroupHolder>();
+//        for (UserGroupHolder ugh : allGroupHolders) {
+//            if (!inList(selectedGroupHolders, ugh)) {
+//                filteredGroups.add(ugh);
+//            }
+//        }
+//
+//        for (UserGroupHolder groupHolder : filteredGroups) {
+//            Label label = new Label(groupHolder.getName());
+//            label.setStyleName("notgwt");
+//            availableFriendsAndGroupsPanel.add(label);
+////            ImageResource addImageIR = MyWebApp.resources.add();
+////            Image addImage = new Image(addImageIR);
+////            availableFriendsAndGroupsPanel.add(addImage);
+//            addImage.setTitle("Add Group");
+//            addImage.addClickHandler(addGroupHandler);
+//            clickMapUserGroupHolder.put(addImage, groupHolder);
+//        }
+//    }
+
+//    public void showAvailableGroups(List<GroupHolder> allGroupHolders, List<GroupHolder> selectedGroupHolders, ClickHandler addGroupHandler) {
+//        GWT.log("showFriends");
+//        // GWT.log("there are friends " + friendHolders.size());
+//        List<GroupHolder> groupsList = new ArrayList(allGroupHolders);
+//        List<GroupHolder> filteredGroups = new ArrayList<GroupHolder>();
+//        groupsList.removeAll(selectedGroupHolders);
+//        // need to filter to just accepted friends
+//        for (GroupHolder groupHolder : groupsList) {
 //            filteredGroups.add(groupHolder);
 //        }
-        for (UserGroupHolder groupHolder : filteredGroups) {
-            Label label = new Label(groupHolder.getName());
-            label.setStyleName("notgwt");
-            availableFriendsAndGroupsPanel.add(label);
-            ImageResource addImageIR = MyWebApp.resources.add();
-            Image addImage = new Image(addImageIR);
-            availableFriendsAndGroupsPanel.add(addImage);
-            addImage.setTitle("Add Group");
-            addImage.addClickHandler(addGroupHandler);
-            clickMapUserGroupHolder.put(addImage, groupHolder);
-        }
-    }
-
-    public void showAvailableGroups(List<GroupHolder> allGroupHolders, List<GroupHolder> selectedGroupHolders, ClickHandler addGroupHandler) {
-        GWT.log("showFriends");
-        // GWT.log("there are friends " + friendHolders.size());
-        List<GroupHolder> groupsList = new ArrayList(allGroupHolders);
-        List<GroupHolder> filteredGroups = new ArrayList<GroupHolder>();
-        groupsList.removeAll(selectedGroupHolders);
-        // need to filter to just accepted friends
-        for (GroupHolder groupHolder : groupsList) {
-            filteredGroups.add(groupHolder);
-        }
-        for (GroupHolder groupHolder : filteredGroups) {
-            Label label = new Label(groupHolder.getName());
-            label.setStyleName("notgwt");
-            availableFriendsAndGroupsPanel.add(label);
-            ImageResource addImageIR = MyWebApp.resources.add();
-            Image addImage = new Image(addImageIR);
-            availableFriendsAndGroupsPanel.add(addImage);
-            addImage.setTitle("Add Group");
-            addImage.addClickHandler(addGroupHandler);
-            clickMapGroupHolder.put(addImage, groupHolder);
-        }
-    }
+//        for (GroupHolder groupHolder : filteredGroups) {
+//            Label label = new Label(groupHolder.getName());
+//            label.setStyleName("notgwt");
+//            availableFriendsAndGroupsPanel.add(label);
+//            ImageResource addImageIR = MyWebApp.resources.add();
+//            Image addImage = new Image(addImageIR);
+//            availableFriendsAndGroupsPanel.add(addImage);
+//            addImage.setTitle("Add Group");
+//            addImage.addClickHandler(addGroupHandler);
+//            clickMapGroupHolder.put(addImage, groupHolder);
+//        }
+//    }
 
     protected boolean inList(List<FriendHolder> selectedFriendHolders, FriendHolder fh) {
         for (FriendHolder friendHolder : selectedFriendHolders) {
@@ -1101,14 +1081,14 @@ public abstract class SpotBasePanel extends FlowPanel {
         if (getItemHolder() == null) {
             getMessagePanel().displayError("It's null");
         }
-        showSelectedFriends(getItemHolder().getFriendHolders(), removeFriendFromItemHandler);
-        showSelectedGroups(getItemHolder().getGroupHolders(), removeGroupFromItemHandler);
-        showSelectedUserGroups(getItemHolder().getUserGroupHolders(), removeUserGroupFromItemHandler);
+        //showSelectedFriends(getItemHolder().getFriendHolders(), removeFriendFromItemHandler);
+//        showSelectedGroups(getItemHolder().getGroupHolders(), removeGroupFromItemHandler);
+//        showSelectedUserGroups(getItemHolder().getUserGroupHolders(), removeUserGroupFromItemHandler);
         GWT.log("refreshAvailable");
         availableFriendsAndGroupsPanel.clear();
-        showAvailableFriends(mywebapp.getFriendsAndGroups().getFriendHolders(), getItemHolder().getFriendHolders(), addFriendHandler);
-        showAvailableGroups(mywebapp.getFriendsAndGroups().getGroupHolders(), getItemHolder().getGroupHolders(), addGroupHandler);
-        showAvailableUserGroups(mywebapp.getFriendsAndGroups().getUserGroupHolders(), getItemHolder().getUserGroupHolders(), addUserGroupHandler);
+        //showAvailableFriends(mywebapp.getFriendsAndGroups().getFriendHolders(), getItemHolder().getFriendHolders(), addFriendHandler);
+        //showAvailableGroups(mywebapp.getFriendsAndGroups().getGroupHolders(), getItemHolder().getGroupHolders(), addGroupHandler);
+        //showAvailableUserGroups(mywebapp.getFriendsAndGroups().getUserGroupHolders(), getItemHolder().getUserGroupHolders(), addUserGroupHandler);
     }
 
     protected ClickHandler removeFriendFromItemHandler = new ClickHandler() {
@@ -1232,27 +1212,27 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     };
 
-    public void showAvailableFriends(List<FriendHolder> allFriendHolders, List<FriendHolder> selectedFriendHolders, ClickHandler addFriendHandler) {
-        GWT.log("showFriends");
-        List<FriendHolder> friendsList = new ArrayList<FriendHolder>();
-        for (FriendHolder friendHolder : allFriendHolders) {
-            if (!inList(selectedFriendHolders, friendHolder)) {
-                friendsList.add(friendHolder);
-            }
-        }
-        for (FriendHolder friendHolder : friendsList) {
-            Label label = new Label(friendHolder.getLabel());
-            label.setStyleName("notgwt");
-            availableFriendsAndGroupsPanel.add(label);
-            ImageResource addImageIR = MyWebApp.resources.add();
-            Image addImage = new Image(addImageIR);
-            availableFriendsAndGroupsPanel.add(addImage);
-            addImage.setTitle("Add Friend");
-            addImage.addStyleName("linky");
-            addImage.addClickHandler(addFriendHandler);
-            clickMapFriendHolder.put(addImage, friendHolder);
-        }
-    }
+//    public void showAvailableFriends(List<FriendHolder> allFriendHolders, List<FriendHolder> selectedFriendHolders, ClickHandler addFriendHandler) {
+//        GWT.log("showFriends");
+//        List<FriendHolder> friendsList = new ArrayList<FriendHolder>();
+//        for (FriendHolder friendHolder : allFriendHolders) {
+//            if (!inList(selectedFriendHolders, friendHolder)) {
+//                friendsList.add(friendHolder);
+//            }
+//        }
+//        for (FriendHolder friendHolder : friendsList) {
+//            Label label = new Label(friendHolder.getLabel());
+//            label.setStyleName("notgwt");
+//            availableFriendsAndGroupsPanel.add(label);
+//            ImageResource addImageIR = MyWebApp.resources.add();
+//            Image addImage = new Image(addImageIR);
+//            availableFriendsAndGroupsPanel.add(addImage);
+//            addImage.setTitle("Add Friend");
+//            addImage.addStyleName("linky");
+//            addImage.addClickHandler(addFriendHandler);
+//            clickMapFriendHolder.put(addImage, friendHolder);
+//        }
+//    }
 
     protected Map<Widget, UserGroupHolder> clickMapUserGroupHolder = new HashMap<Widget, UserGroupHolder>();
     protected Map<Widget, GroupHolder> clickMapGroupHolder = new HashMap<Widget, GroupHolder>();
@@ -1271,61 +1251,61 @@ public abstract class SpotBasePanel extends FlowPanel {
     }
 
     protected FlowPanel selectedMembersPanel = new FlowPanel();
-
-    public void showSelectedUserGroups(List<UserGroupHolder> selectedGroupHolders, ClickHandler clickHandler) {
-        // clickMapGroupHolder.clear();
-        for (UserGroupHolder groupHolder : selectedGroupHolders) {
-            GWT.log("UserGroupHolder" + groupHolder.getId());
-            Label label = new Label(groupHolder.getName());
-            selectedFriendsAndGroupsPanel.add(label);
-            if (clickHandler != null) {
-                ImageResource deleteImageIR = MyWebApp.resources.deleteX();
-                Image deleteImage = new Image(deleteImageIR);
-                selectedFriendsAndGroupsPanel.add(deleteImage);
-                deleteImage.addClickHandler(clickHandler);
-                deleteImage.setTitle("Remove Group");
-                deleteImage.addStyleName("linky");
-                clickMapUserGroupHolder.put(deleteImage, groupHolder);
-            }
-        }
-    }
-
-    public void showSelectedGroups(List<GroupHolder> selectedGroupHolders, ClickHandler clickHandler) {
-        //selectedGroupsPanel.clear();
-        //clickMapGroupHolder.clear();
-        for (GroupHolder groupHolder : selectedGroupHolders) {
-            Label label = new Label(groupHolder.getName());
-            selectedFriendsAndGroupsPanel.add(label);
-            if (clickHandler != null) {
-                ImageResource deleteImageIR = MyWebApp.resources.deleteX();
-                Image deleteImage = new Image(deleteImageIR);
-                selectedFriendsAndGroupsPanel.add(deleteImage);
-                deleteImage.addClickHandler(clickHandler);
-                deleteImage.setTitle("Remove Group");
-                deleteImage.addStyleName("linky");
-                clickMapGroupHolder.put(deleteImage, groupHolder);
-            }
-        }
-    }
+//
+//    public void showSelectedUserGroups(List<UserGroupHolder> selectedGroupHolders, ClickHandler clickHandler) {
+//        // clickMapGroupHolder.clear();
+//        for (UserGroupHolder groupHolder : selectedGroupHolders) {
+//            GWT.log("UserGroupHolder" + groupHolder.getId());
+//            Label label = new Label(groupHolder.getName());
+//            selectedFriendsAndGroupsPanel.add(label);
+//            if (clickHandler != null) {
+//                ImageResource deleteImageIR = MyWebApp.resources.deleteX();
+//                Image deleteImage = new Image(deleteImageIR);
+//                selectedFriendsAndGroupsPanel.add(deleteImage);
+//                deleteImage.addClickHandler(clickHandler);
+//                deleteImage.setTitle("Remove Group");
+//                deleteImage.addStyleName("linky");
+//                clickMapUserGroupHolder.put(deleteImage, groupHolder);
+//            }
+//        }
+//    }
+//
+//    public void showSelectedGroups(List<GroupHolder> selectedGroupHolders, ClickHandler clickHandler) {
+//        //selectedGroupsPanel.clear();
+//        //clickMapGroupHolder.clear();
+//        for (GroupHolder groupHolder : selectedGroupHolders) {
+//            Label label = new Label(groupHolder.getName());
+//            selectedFriendsAndGroupsPanel.add(label);
+//            if (clickHandler != null) {
+//                ImageResource deleteImageIR = MyWebApp.resources.deleteX();
+//                Image deleteImage = new Image(deleteImageIR);
+//                selectedFriendsAndGroupsPanel.add(deleteImage);
+//                deleteImage.addClickHandler(clickHandler);
+//                deleteImage.setTitle("Remove Group");
+//                deleteImage.addStyleName("linky");
+//                clickMapGroupHolder.put(deleteImage, groupHolder);
+//            }
+//        }
+//    }
 
     //handler could be null, in case we do not do a delete or remove link
-    public void showSelectedFriends(List<FriendHolder> selectedFriendHolders, ClickHandler clickHandler) {
-        //selectedFriendsPanel.clear();
-        // clickMapFriendHolder.clear();
-        for (FriendHolder friendHolder : selectedFriendHolders) {
-            Label label = new Label(friendHolder.getLabel());
-            label.setStyleName("notgwt");
-            selectedFriendsAndGroupsPanel.add(label);
-            if (clickHandler != null) {
-                ImageResource deleteImageIR = MyWebApp.resources.deleteX();
-                Image deleteImage = new Image(deleteImageIR);
-                selectedFriendsAndGroupsPanel.add(deleteImage);
-                deleteImage.addClickHandler(clickHandler);
-                deleteImage.setTitle("Remove Friend");
-                clickMapFriendHolder.put(deleteImage, friendHolder);
-            }
-        }
-    }
+//    public void showSelectedFriends(List<FriendHolder> selectedFriendHolders, ClickHandler clickHandler) {
+//        //selectedFriendsPanel.clear();
+//        // clickMapFriendHolder.clear();
+//        for (FriendHolder friendHolder : selectedFriendHolders) {
+//            Label label = new Label(friendHolder.getLabel());
+//            label.setStyleName("notgwt");
+//            selectedFriendsAndGroupsPanel.add(label);
+//            if (clickHandler != null) {
+//                ImageResource deleteImageIR = MyWebApp.resources.deleteX();
+//                Image deleteImage = new Image(deleteImageIR);
+//                selectedFriendsAndGroupsPanel.add(deleteImage);
+//                deleteImage.addClickHandler(clickHandler);
+//                deleteImage.setTitle("Remove Friend");
+//                clickMapFriendHolder.put(deleteImage, friendHolder);
+//            }
+//        }
+//    }
 
     protected void addImageIcon(String token, SpotBasePanel spotBasePanel, FlowPanel flowPanel) {
         addImageIcon(token, spotBasePanel.getTitle(), spotBasePanel.getImage(), flowPanel, spotBasePanel.getTitle());
@@ -1640,19 +1620,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         add(helpPanel);
     }
 
-    protected void addTopPanel() {
-//        if (MyWebApp.isDesktop()) {
-//            return;
-//        }
-        if (!displayTopPanel) return;
-        if (MyWebApp.isDesktop()) {
-            //our desktop already has tons of links in the ui
-            return;
-        }
-        if (!MyWebApp.isSmallFormat()) {
-            add(getTopPanel());
-        }
-    }
 
 
 
@@ -2349,6 +2316,9 @@ public abstract class SpotBasePanel extends FlowPanel {
     private static String EXPAND = "Expand";
     private Anchor lastExpandAnchor = null;
 
+
+    protected static String ANON_IMAGE_PATH = "css/anon130x130.png";
+
     public void doReply(MarkData replyToMarkData) {
         Long userId = null;
         Image userImage = null;
@@ -2360,7 +2330,7 @@ public abstract class SpotBasePanel extends FlowPanel {
             }
         }
         if (userPath == null) {
-            userImage = new Image(MyWebApp.resources.anon57x57());
+            userImage = new Image(ANON_IMAGE_PATH);
         } else {
             String fullUrl = mywebapp.getUrl(userPath);
             userImage = new Image(fullUrl);
@@ -2392,19 +2362,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         myFormPanel.setWidget(flowPanel);
         setupRootPanelForm(myFormPanel, markData);
         replyToMarkData.expandData.replyGoesHere.add(myFormPanel);
-        /*
-        shareOnFacebookButton.addClickHandler(saveHandlerFacebook);
-        widgetMarkDataMap.put(shareOnFacebookButton, markData);
 
-        ULPanel latestMarksPanel = new ULPanel();
-        ResultComponent resultComponent = new ResultComponent(saySomethingTextArea, leaveMarkButton, userImage, latestMarksPanel, showAdvancedButton,shareOnFacebookButton);
-        FormPanel myFormPanel = new FormPanel();
-        myFormPanel.setWidget(resultComponent);
-        setupRootPanelForm(myFormPanel, markData);
-        replyToMarkData.expandData.replyGoesHere.add(myFormPanel);
-
-        replyToMarkData.expandData.resultPanel = replyToMarkData.expandData.replyGoesHere;
-        */
     }
 
     public MarkData expandLocation(ExpandData expandData) {
@@ -2419,7 +2377,7 @@ public abstract class SpotBasePanel extends FlowPanel {
             }
         }
         if (userPath == null) {
-            userImage = new Image(MyWebApp.resources.anon57x57());
+            userImage = new Image(ANON_IMAGE_PATH);
         } else {
             String fullUrl = mywebapp.getUrl(userPath);
             userImage = new Image(fullUrl);
@@ -2495,11 +2453,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
         FlowPanel categoriesPanel = addCategories(location, showCategories);
         centerBlock.add(categoriesPanel);
-        //<a href="#" class="distanse"><h1>560</h1><p>meters avay</p></a>
-        //centerBlock
-        // asdf
-        //Label distanceLabel = getDistanceLabel(locationResult);
-        //<h1>560</h1><p>meters avay</p>
         Anchor distanceAnchor = getDistanceAnchor(locationResult);
         result.add(distanceAnchor);
         addOurBuddies(centerBlock, locationResult);
@@ -2665,13 +2618,12 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
 
     */
-    protected Label leaveMarkButton() {
-        Label leaveMarkButton = new Label("Leave Mark");
-        leaveMarkButton.addClickHandler(saveHandler);
-        fixButton(leaveMarkButton);
-        addImageToButton(leaveMarkButton, MyWebApp.resources.saveButton(), MyWebApp.resources.saveButtonMobile());
-        return leaveMarkButton;
-    }
+//    protected Label leaveMarkButton() {
+//        Label leaveMarkButton = new Label("Leave Mark");
+//        leaveMarkButton.addClickHandler(saveHandler);
+//        fixButton(leaveMarkButton);
+//
+//    }
 
 
 
@@ -2768,67 +2720,6 @@ public abstract class SpotBasePanel extends FlowPanel {
     //
 
 
-    protected void addLeaveMarkAtTopForm() {
-        Long userId = null;
-        Image userImage = null;
-        String userPath = null;
-        HorizontalPanel hp = new HorizontalPanel();
-        if (mywebapp.getAuthenticatedUser() != null) {
-            ImageScaleHolder imageScaleHolder = getImageScaleHolder(mywebapp.getAuthenticatedUser().getContentHolder(), "57x57");
-            if (imageScaleHolder != null) {
-                userPath = imageScaleHolder.getWebServerAssetHolder().getUrl();
-            }
-        }
-        if (userPath == null) {
-            userImage = new Image(MyWebApp.resources.anon57x57());
-        } else {
-            String fullUrl = mywebapp.getUrl(userPath);
-            userImage = new Image(fullUrl);
-        }
-        if (userId != null) {
-            String userHistoryToken = MyWebApp.VIEW_USER_PROFILE + userId;
-            String userHistoryToken2 = "#" + userHistoryToken;
-            Anchor userAnchor = new Anchor("", userHistoryToken2);
-            userAnchor.getElement().appendChild(userImage.getElement());
-            hp.add(userAnchor);
-        } else {
-            hp.add(userImage);
-        }
-        //AutoGrowTextArea saySomethingTextArea = new AutoGrowTextArea();
-        VerticalPanel topFormPanel = new VerticalPanel();
-        topFormPanel.setStyleName("topFormPanel");
-        topFormPanel.setWidth("100%");
-        add(hp);
-        topFormPanel.add(hp);
-        Label advancedLabel = new Label(SHOW_ADVANCED);
-        //MarkData markData = new MarkData();
-        // markData.saySomethingTextArea = saySomethingTextArea;
-        //  markData.formHolder = hp;
-        //advancedMap.put(advancedLabel, markData);
-        //labelParentMap.put(advancedLabel,middleTable);
-        //advancedLabel.addStyleName("linky");
-        //advancedLabel.addClickHandler(showAdvancedWriteHerePanelHandler);
-        topFormPanel.add(advancedLabel);
-        // markData.wherePanel = topFormPanel;
-        //labelParentMap.put(advancedLabel,topFormPanel);
-        // add(statusLocationSpotListBox);
-        imagePanel.setWidth("100%");
-        imagePanel.clear();
-        imagePanel.setVisible(false);
-        addMediaFields("Upload images OR video", imagePanel);
-        imagePanel.add(contentsPanel);
-        if (mywebapp.isFacebookUser()) {
-          //  addCheckbox(shareOnFacebookCheckbox, null, imagePanel);
-        }
-        secretKeyTextBox = addTextBox("Secret Key", "secretKey", "", false, imagePanel);
-        topFormPanel.add(imagePanel);
-        Label leaveMarkButton = new Label("Leave Mark");
-        leaveMarkButton.addClickHandler(saveHandler);
-        leaveMarkButton.setStyleName("button");
-        leaveMarkButton.addStyleName("leavermarkbutton");
-        imagePanel.add(leaveMarkButton);
-        //topFormPanel.add(fp);
-    }
 
     public static String SHOW_SORTING = "Show Sorting/Tags";
     protected Label sortingLabel = new Label(SHOW_SORTING);
@@ -3565,8 +3456,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
         ComplexPanel categoriesPanel = addCategories(solrDocument);
         centerBlock.add(categoriesPanel);
-        // FlowPanel categoriesPanel = addCategories( location, showCategories);
-        // centerBlock.add(categoriesPanel);
         Anchor distanceAnchor = getDistanceAnchor(locationResult);
         result.add(distanceAnchor);
         addOurBuddies(centerBlock, locationResult);
@@ -3591,7 +3480,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         FlowPanel centerBlock = new FlowPanel();
         centerBlock.setStyleName("center-block");
         result.add(centerBlock);
-        //	<a href="#" class="result-header"><h2>@Vishal Adma, 4300 Brenner Dr, Kansas City, KS 66104</h2></a>
         String spot_label_s = solrDocument.getFirstString("location_label_s");
         if (spot_label_s != null) {
             String sl = "@" + spot_label_s.toString();
@@ -3601,85 +3489,15 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
         ComplexPanel categoriesPanel = addCategories(solrDocument);
         centerBlock.add(categoriesPanel);
-        // FlowPanel categoriesPanel = addCategories( location, showCategories);
-        // centerBlock.add(categoriesPanel);
+
         Anchor distanceAnchor = getDistanceAnchor(locationResult);
         result.add(distanceAnchor);
         //addOurBuddies(centerBlock, locationResult);
         addExpand(result, locationResult, centerBlock);
         return result;
-        /*
 
-       VerticalPanel vp = new VerticalPanel();
-       vp.addStyleName("markHolder");
-       HorizontalPanel hp = new HorizontalPanel();
-       hp.addStyleName("markHolder");
-       // Long spotId = null;
-       //spotId = solrDocument.getFirstLong("spotid_l");
-       Long itemId = solrDocument.getFirstLong("georepoitemid_l");
-       if (itemId == null) {
-           itemId = solrDocument.getFirstLong("latest_mark_georepoitemid_l");
-       }
-       vp.add(hp);
-       ListItem li = new ListItem();
-       //li.setStyleName("clearing");
-       li.add(vp);
-       ul.add(li);
-       String targetHistoryToken = MyWebApp.ITEM_DETAIL + itemId;
-       String targetHistoryToken2 = "#" + targetHistoryToken;
-       //need to add mark photo
-       addMarkPhoto(solrDocument, targetHistoryToken, hp);
-       VerticalPanel middleTable = new VerticalPanel();
-       // hp.add(middleTable);
-       //hp.setCellWidth(middleTable, "100%");
-       middleTable.setStyleName("middletable");
-       String location_label_s = solrDocument.getFirstString("location_label_s");
-       if (location_label_s != null) {
-           String sl = location_label_s.toString();
-           Anchor spotLabel = new Anchor("@" + sl, targetHistoryToken2);
-           spotLabel.setStyleName("spotLabel");
-           middleTable.add(spotLabel);
-       }
-       ComplexPanel distancePanel = getDistancePanel(locationResult, targetHistoryToken2);
-       Hyperlink latest_mark_escapedjavascriptsnippet_s = addHtml2(solrDocument, middleTable, "latest_mark_escapedjavascriptsnippet_s", targetHistoryToken);
-       if (latest_mark_escapedjavascriptsnippet_s != null) {
-           latest_mark_escapedjavascriptsnippet_s.addStyleName("latestMarkEscapedJavascriptSnippet");
-       }
-       ComplexPanel catsPanel = addCategories(solrDocument);
-       middleTable.add(catsPanel);
-       Hyperlink html2 = addHtml2(solrDocument, middleTable, "spot_geoRepoItemescapedjavascriptsnippet_s", targetHistoryToken);
-       if (html2 != null) {
-           html2.addStyleName("spotGeoRepoItemEscapedJavascriptSnippet");
-       }
-       //2nd image
-       //spot
-       if (!MyWebApp.isSmallFormat()) {
-           if (alex) {
-               Hyperlink userHyperLink = new Hyperlink();
-               userHyperLink.setTargetHistoryToken(targetHistoryToken);
-               Image image = addImage(solrDocument, hp, "image_thumbnail_130x130_url_s",
-                       userHyperLink, resources.spot_image_placeholder130x130(), resources.spot_image_placeholder57x57(), "spotimage");
-               setColumnWidth(image, hp);
-           }
-       }
-       //hp.add(distancePanel);
-       //setColumnWidth(distancePanel, hp);
-       if (MyWebApp.isDesktop()) {
-           setColumnWidth(distancePanel, hp);
-           hp.add(middleTable);
-           hp.add(distancePanel);
-           hp.setCellWidth(middleTable, "100%");
-       } else {
-           setColumnWidth(distancePanel, hp);
-           hp.add(middleTable);
-           //not enought space
-           //hp.add(distancePanel);
-           hp.setCellWidth(middleTable, "100%");
-       }
-        */
-        //return result;
     }
-    //Map<LocationResult,ULPanel> locationResultLatestMarksPanelMap = new HashMap<LocationResult,ULPanel>();
+
 
     protected ULPanel getLatestMarksPanel(ExpandData expandData) {
         LocationResult locationResult = expandData.locationResult;
@@ -3742,7 +3560,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         usernameReplyAnchor.addClickHandler(replyHandler);
         usernameReplyAnchor.setStyleName("mark_username");
         if (userImage == null) {
-            userImage = new Image(MyWebApp.resources.anon57x57());
+            userImage = new Image(ANON_IMAGE_PATH);
         }
         userImage.setStyleName("ex_ava");
         if (userId != null) {
@@ -4463,11 +4281,12 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     private void addDeleteLink(Panel vp, ContentHolder contentHolder, boolean deleteLink) {
         if (deleteLink) {
-            ImageResource deleteImageIR = MyWebApp.resources.deleteX();
-            Image deleteImage = new Image(deleteImageIR);
-            deleteImage.addClickHandler(deleteHandler);
-            vp.add(deleteImage);
-            mediaMap.put(deleteImage, contentHolder);
+            //ImageResource deleteImageIR = MyWebApp.resources.deleteX();
+            //Image deleteImage = new Image(deleteImageIR);
+            Button deleteButton = new Button();
+            deleteButton.addClickHandler(deleteHandler);
+            vp.add(deleteButton);
+            mediaMap.put(deleteButton, contentHolder);
         }
     }
 
@@ -5027,8 +4846,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
     public void clear() {
         super.clear();
-        addTopPanel();
-       // setActiveTabId(null);
+
     }
 
     protected Long getManufacturerId() {
@@ -5070,11 +4888,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         if (!MyWebApp.isMobileDevice()) {
             setupRootPanelForm();
             formPanel.setWidget(this);
-        }
-        if (!MyWebApp.isDesktop()) {
-            GWT.log("addinttop panel");
-            addTopPanel();
-            addHelp();
         }
     }
 

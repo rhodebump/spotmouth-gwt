@@ -1,0 +1,40 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+        >
+
+
+
+<g:HTMLPanel tag="li">
+
+    <div style="display:none">
+        <g:Anchor ui:field="nameAnchor"/>
+        <g:Button ui:field="mostVotedButton">Most Voted</g:Button>
+          <g:Button ui:field="winnersButton">Winners</g:Button>
+    </div>
+    <!--
+       				<a href="contest-details.html">
+   					<img src="css/img/contest.png" class="_s"/>
+   					<div class="center_block">
+   						<h2>Contest Name</h2>
+   						<p>Description</p>
+   					</div>
+   				</a>
+   				-->
+    <g:Anchor ui:field="detailAnchor">
+    <g:Image ui:field="contestImage" styleName="_s"/>
+
+
+   		<div class="center_block">
+   			<h2> <span ui:field='nameSpan'/></h2>
+   			<p><span ui:field='descriptionSpan'/></p>
+   		</div>
+
+
+
+       </g:Anchor>
+
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

@@ -1,0 +1,71 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:xx='urn:import:com.spotmouth.gwt.client'>
+
+
+
+
+
+
+  <g:HTMLPanel>
+
+
+<div id="content" class="content">
+      <a href="http://www.8coupons.com" target="_blank"><button class="_dark"><img src="css/img/8coupons.png" style="width: 90px;"/></button></a>
+	<div class="coupons _page">
+
+
+        <xx:ULPanel styleName="_list" ui:field="couponResultsUL"/>
+
+       <!--
+		<div class="_list">
+			<a href="javascript:;">
+				<h2>@Brazil Bronze, 580 Broadway, New York, NY</h2>
+				<p>$25 For A Full Body Airbrush Tan</p>
+				<span>Valid until 2013 April 10</span>
+			</a>
+			<a href="javascript:;">
+				<h2>@Brazil Bronze, 580 Broadway, New York, NY</h2>
+				<p>$25 For A Full Body Airbrush Tan</p>
+				<span>Valid until 2013 April 10</span>
+			</a>
+			<a href="javascript:;">
+				<h2>@Brazil Bronze, 580 Broadway, New York, NY</h2>
+				<p>$25 For A Full Body Airbrush Tan</p>
+				<span>Valid until 2013 April 10</span>
+			</a>
+			<a href="javascript:;">
+				<h2>@Brazil Bronze, 580 Broadway, New York, NY</h2>
+				<p>$25 For A Full Body Airbrush Tan</p>
+				<span>Valid until 2013 April 10</span>
+			</a>
+			<a href="javascript:;">
+				<h2>@Brazil Bronze, 580 Broadway, New York, NY</h2>
+				<p>$25 For A Full Body Airbrush Tan</p>
+				<span>Valid until 2013 April 10</span>
+			</a>
+			<a href="javascript:;">
+				<h2>@Brazil Bronze, 580 Broadway, New York, NY</h2>
+				<p>$25 For A Full Body Airbrush Tan</p>
+				<span>Valid until 2013 April 10</span>
+			</a>
+			<a href="javascript:;">
+				<h2>@Brazil Bronze, 580 Broadway, New York, NY</h2>
+				<p>$25 For A Full Body Airbrush Tan</p>
+				<span>Valid until 2013 April 10</span>
+			</a>
+			<a href="javascript:;">
+				<h2>@Brazil Bronze, 580 Broadway, New York, NY</h2>
+				<p>$25 For A Full Body Airbrush Tan</p>
+				<span>Valid until 2013 April 10</span>
+			</a>
+		</div>
+		-->
+	</div>
+
+
+</div>
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

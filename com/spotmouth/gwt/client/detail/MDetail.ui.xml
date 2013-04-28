@@ -1,0 +1,134 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:sm="urn:import:com.spotmouth.gwt.client"
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <ui:with field="myResources" type="com.spotmouth.gwt.client.icons.SpotImageResource"/>
+
+
+
+
+  <g:HTMLPanel>
+
+        <div style="display:none">
+            <h1><span ui:field='nameSpan'/></h1>
+            <g:Button ui:field="addGroupButton"/>
+            <g:Anchor title="This is my biz" ui:field="addMyBizAnchor"></g:Anchor>
+
+            <g:Anchor title="Add to Favorite" ui:field="addtoFavoriteAnchor"></g:Anchor>
+            <g:Anchor title="Administer Spot" ui:field="adminSpotAnchor"></g:Anchor>
+            <g:Anchor title="Back to Search Results" ui:field="backToSearchResultsAnchor">  <img src="images/back.png"/></g:Anchor>
+            <g:Anchor addStyleNames="tab-tgl fw-tab-two" title="Description" ui:field="descriptionAnchor">Description</g:Anchor>
+            <g:Anchor addStyleNames="tab-tgl fw-tab-three" title="Groups" ui:field="groupsAnchor">Groups</g:Anchor>
+            <g:FlowPanel ui:field="groupsPanel"/>
+
+            <g:Image ui:field="mainImage"/>
+            <g:Anchor  addStyleNames="tab-tgl fw-tab-one" title="View Map" ui:field="mapAnchor">View Map</g:Anchor>
+            <g:SimplePanel ui:field="mapPanel"/>
+            <g:Anchor title="Mark This Spot" ui:field="markSpotAnchor"></g:Anchor>
+        </div>
+
+      <div id="content" class="content">
+     		<div class="spot_details _page">
+     			<h1>@<span ui:field='labelSpan'/></h1>
+     			<div class="_tabs_wrap">
+     				<ul id="tab-nav" class="_tab_navigation">
+     					<li class="_active"><button><span class="_icon _photo"></span></button></li>
+     					<li><button><span class="_icon _info"></span></button></li>
+     					<li><button><span class="_icon _map"></span></button></li>
+     					<li><button><span class="_icon _spot_groups"></span></button></li>
+     					<button><span class="_icon _mark"></span></button>
+     					<button><span class="_icon _favorite"></span></button>
+     					<button><span class="_icon _menu"></span></button>
+     					<button><span class="_icon _biz"></span></button>
+     					<li><button><span class="_icon _more"></span></button></li>
+     				</ul>
+     				<ul id="tabs" class="_tabs">
+     					<li class="_active">
+     						<div class="content" style="background:#191919;"><img class="_big" src="css/img/mcd.jpg"/></div>
+     					</li>
+     					<li>
+     						<div class="content">
+     							<h3>Address</h3>
+     							<p><span ui:field='addressSpan'/></p>
+     							<span class="_sep _light"></span>
+     							<h3>Hours</h3>
+     							<p> <g:HTML ui:field="hoursHTML"/></p>
+     							<span class="_sep _light"></span>
+     							<h3>Web Site</h3>
+     							<p>  <g:Anchor title="Website" ui:field="websiteAnchor" target="_blank"></g:Anchor></p>
+     							<span class="_sep _light"></span>
+     							<h3>Phone</h3>
+     							<p><g:Anchor ui:field="phoneAnchor"></g:Anchor></p>
+     							<span class="_sep _light"></span>
+     							<h3>Description</h3>
+     							<p>   <span ui:field='descriptionSpan'/></p>
+     						</div>
+     					</li>
+     					<li>
+     						<div class="content" style="background:#191919;"><img class="_big" src="css/img/mcd.jpg"/></div>
+     					</li>
+     					<li>
+     						<div class="content" style="background:#191919;"></div>
+     					</li>
+     					<li>
+     						<div class="content _more">
+     							<button><span class="_icon _mark"></span></button>
+     							<button><span class="_icon _favorite"></span></button>
+     							<button><span class="_icon _menu"></span></button>
+     							<button><span class="_icon _biz"></span></button>
+     						</div>
+     					</li>
+     				</ul>
+     			</div>
+
+
+     			<ul id="marks" class="marks">
+     				<li class="mark">
+     					<img src="css/img/mcd.jpg"/>
+     					<h2>User Name</h2>
+     					<div class="center_block">
+     						<p>Some user mark</p>
+     					</div>
+     				</li>
+     				<li class="mark">
+     					<img src="css/img/mcd.jpg"/>
+     					<h2>User Name</h2>
+     					<div class="center_block">
+     						<p>Some user mark</p>
+     					</div>
+     				</li>
+     				<li class="mark">
+     					<img src="css/img/mcd.jpg"/>
+     					<h2>User Name</h2>
+     					<div class="center_block">
+     						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+     					</div>
+     				</li>
+     				<li class="mark">
+     					<img src="css/img/mcd.jpg"/>
+     					<h2>User Name</h2>
+     					<div class="center_block">
+     						<p>Some user mark</p>
+     					</div>
+     				</li>
+     				<li class="mark">
+     					<img src="css/img/mcd.jpg"/>
+     					<h2>User Name</h2>
+     					<div class="center_block">
+     						<p>Some user mark</p>
+     					</div>
+     				</li>
+     				<div class="_no_marks">
+     					<label><button class="_white _active">Leave Mark</button></label>
+     					<span class="_sep _light"></span>
+     				</div>
+     				<img src="css/img/yelp.gif"/>
+     				<img src="css/img/fors.png" style="width: 200px;"/>
+     			</ul>
+     		</div>
+     	</div>
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

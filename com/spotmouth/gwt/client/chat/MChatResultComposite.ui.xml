@@ -1,0 +1,38 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+        >
+
+
+
+<g:HTMLPanel tag="a">
+
+
+
+    <div style="display:none">
+        <g:Button ui:field="joinChatButton">Join Chat</g:Button>
+    </div>
+
+
+        <g:Image ui:field="chatImage" addStyleNames="+s"/>
+   		<div class="center_block">
+   			<h2><span ui:field='nameSpan'/></h2>
+   			<p><span ui:field='descriptionSpan'/></p>
+   		</div>
+
+
+
+      <!--
+      				<a href="join-chat.html">
+					<img src="css/img/chat.png" class="_s"/>
+					<div class="center_block">
+						<h2>Chat Name</h2>
+						<p>This will link to join chat page(for not logged users)</p>
+					</div>
+				</a>
+				-->
+
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>

@@ -1,0 +1,78 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+    xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+
+
+
+
+  <g:HTMLPanel>
+
+      <div id="content" class="content">
+
+     		<div class="features _page">
+     			<ul id="feat-tab-nav" class="_tab_navigation _top _two">
+     				<li class="_active"><button><span class="_icon _login"></span></button></li>
+     				<li><button><span class="_icon _port"></span></button></li>
+     			</ul>
+     			<ul id="feat-tab" class="_tabs">
+     				<li class="_active">
+     					<div class="content">
+     						<h1>Features for Users</h1>
+     						<div>
+     							<img src="css/img/mushup.png" class="_m"/>
+     							<p><strong>Spotmouth</strong> is a mashup of all the information about your local spots, in one place. It aggregates content from Factual, Yelp, Instagram, Google Places, Yahoo Place Finder, Coupons 8, Four Square and others into a single view of your local spots. spotmouth also is the provider of valuable tools for local businesses. Tools include (but now limited to), group sms messaging, wordpress sites, email, accounting, and other promotional and backoffice applications.</p>
+     						</div>
+     						<span class="_sep _light _big"></span>
+     						<div>
+     							<img src="css/img/Countries.png" class="_m"/>
+     							<p><strong>Spotmouth</strong>provides you with the ability to leave your mark upon the world! Put your comments/video/audio/pictures on any address, long/latitude location or license plate.</p>
+     						</div>
+     						<span class="_sep _light _big"></span>
+     						<div>
+     							<img src="css/img/mark-spot.png" class="_m"/>
+     							<p><strong>Spotmouth</strong> allows user to <strong>"mark"</strong> spots with images, videos, audio files and text. Spotmouth uses your location to determine what spots to show you.</p>
+     						</div>
+     						<span class="_sep _light _big"></span>
+     						<div>
+     							<img src="css/img/spot.png" class="_m"/>
+     							<p><strong>Spots</strong> are places (like color me mine), or license plates (as on cars), or just where you happen to be (in the woods, or on a river).
+     Each spot can have one or more "groups". For example, there could be "Schenley High School" which would be a spot, and for this spot there could be a bunch of groups such as "Chess Club", "Swim Team" Anybody can create a group at any spot. The person who creates the group can control how the group is run. For example, the group can be public and anyone can join, or it can require approval to join. One users are part of a group, any messages sent to the group will be sent to that person. Messages are sent via email, SMS messaging, the spotmouth website, or the spotmouth mobile applications.</p>
+     						</div>
+     					</div>
+     				</li>
+     				<li>
+     					<div class="content">
+     						<h1>Features for Business and Organizations</h1>
+     						<div>
+     							<img src="css/img/bizman.png" class="_m"/>
+     							<p>As a business owner, you can maintain your listing information (address, phone, email, web address, photos) and create coupons and events.</p>
+     						</div>
+     						<span class="_sep _light _big"></span>
+     						<div>
+     							<img src="css/img/mails.png" class="_m"/>
+     							<p><strong>Group sms</strong> - create groups for your business, such as an "Emergency Notification Group" that your users can join and be instantly notified of important messages that you send to them. No need to remember or manage huge lists of contact numbers or email addresses since the folks who join are responsible to provide these details.</p>
+     						</div>
+     						<span class="_sep _light _big"></span>
+     						<div>
+     							<p style="margin-left: 10px;"><strong>Tons of Tools!</strong> Spotmouth provides ready-to-roll versions of the following products in just a couple of clicks to power your small business:</p>
+     							<div class="_list">
+     								<a href="javascript:;"><span class="_icon _mp _money"></span>Front accounting</a>
+     								<a href="javascript:;"><span class="_icon _mp _lime"></span>Lime Survey</a>
+     								<a href="javascript:;"><span class="_icon _mp _wiki"></span>Mediawiki</a>
+     								<a href="javascript:;"><span class="_icon _mp _wordpress"></span>Wordpress</a>
+     								<a href="javascript:;"><span class="_icon _mp _html"></span>Static HTML page</a>
+     								<a href="javascript:;"><span class="_icon _mp _search"></span>Sphider</a>
+     								<a href="javascript:;"><span class="_icon _mp _php"></span>Phplist</a>
+     								<a href="javascript:;"><span class="_icon _mp _email"></span>Email</a>
+     							</div>
+     						</div>
+     					</div>
+     				</li>
+     			</ul>
+     		</div>
+      </div>
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

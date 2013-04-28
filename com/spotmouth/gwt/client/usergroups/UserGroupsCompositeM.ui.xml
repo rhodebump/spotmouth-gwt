@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:x='urn:import:com.spotmouth.gwt.client'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+
+    <g:HTMLPanel>
+        <div id="content" class="content">
+       		<div class="groups _page">
+       			<h1>  <g:Button addStyleNames="_white" ui:field="addGroupButton">Create Group</g:Button></h1>
+       			<ul id="gr-tab-nav" class="_tab_navigation _top _two">
+       				<li class="_active"><button><span class="_icon _login"></span></button></li>
+       				<li><button><span class="_icon _spot"></span></button></li>
+       			</ul>
+       			<ul id="gr-tab" class="_tabs">
+       				<li class="_active">
+       					<div class="content">
+                               <x:ULPanel addStyleNames="_list groups" ui:field="userGroupsULPanel"/>
+
+       					</div>
+       				</li>
+       				<li>
+       					<div class="content">
+
+                               <x:ULPanel addStyleNames="_list groups spots" ui:field="spotGroupsULPanel"/>
+
+       					</div>
+       				</li>
+       			</ul>
+       		</div>
+
+       	</div>
+
+</g:HTMLPanel>
+
+</ui:UiBinder>

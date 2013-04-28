@@ -1,0 +1,68 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:mu='urn:import:gwtupload.client'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+
+
+
+
+
+  <g:HTMLPanel>
+
+      <div style="display:none">
+          <g:SimplePanel ui:field="imagePanel"/>
+          <mu:MultiUploader ui:field="multiUploader"/>
+          <h2><span ui:field='nameSpan'/></h2>
+      </div>
+
+      <div id="content" class="content">
+     		<div class="create_event _page">
+                 <g:Button ui:field="cancelButton" styleName="_dark">Go Back</g:Button>
+                 <g:Anchor ui:field="spotDetailsAnchor"><h1>@<span ui:field='locationSpan'/></h1></g:Anchor>
+     			<h2>Create Event</h2>
+
+     				<span class="_sep _light"></span>
+     				<div class="date">
+     					<label class="_date">
+     						<p>Start Date</p>
+                             <smc:DateTextField ui:field="startDatePicker" placeholder="Start Date" tabIndex="2" />
+     					</label>
+     					<label class="_date">
+     						<p>End Date</p>
+                             <smc:DateTextField ui:field="endDatePicker" placeholder="End date"  tabIndex="3"/>
+     					</label>
+     				</div>
+     				<span class="_sep _light"></span>
+     				<label>
+     					<p>Event Title</p>
+                         <smc:TextField ui:field="titleTextField"  tabIndex="1" placeholder="Title"/>
+     				</label>
+     				<label>
+     					<p>Description</p>
+     				</label>
+                 <g:TextArea visibleLines="4" tabIndex="4" ui:field="descriptionTextArea"/>
+     				<label>
+     					<p>Select Tags</p>
+                         <g:SuggestBox tabIndex="13"  ui:field="tagSearchTextBox"/>
+     				</label>
+                     <div class="ma_tags">
+                               <g:FlowPanel ui:field="selectedTagsPanel" />
+                               <g:FlowPanel ui:field="suggestionsPanel" />
+
+
+                   		</div>
+     				<label>
+                         <g:Button ui:field="saveButton" addStyleNames="_white _active">Create</g:Button>
+
+     				</label>
+
+     		</div>
+
+     	</div>
+
+
+</g:HTMLPanel>
+
+</ui:UiBinder>
