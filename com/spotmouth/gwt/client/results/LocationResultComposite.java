@@ -38,8 +38,6 @@ public class LocationResultComposite extends Composite implements HasClickHandle
 
 
 
-//    @UiField(provided = true)
-//    final Anchor detailAnchor;
 
 
     @UiField(provided = true)
@@ -50,8 +48,7 @@ public class LocationResultComposite extends Composite implements HasClickHandle
 
 
 
-    public LocationResultComposite(Anchor detailAnchor,Image image,FlowPanel tagsPanel) {
-       // this.detailAnchor = detailAnchor;
+    public LocationResultComposite(Image image,FlowPanel tagsPanel) {
         this.image = image;
         this.tagsPanel = tagsPanel;
         initWidget(mobileBinder.createAndBindUi(this));

@@ -2099,16 +2099,8 @@ public abstract class SpotBasePanel extends FlowPanel {
             li.add(vp);
             ul.add(li);
         } else {
-            //todo, test if location vs solr document
-            Anchor detailAnchor = new Anchor();
-            detailAnchor.addClickHandler(handler);
-            clickMapLocation.put(detailAnchor, locationResult);
             Image image = new Image(getSpotImage());
             Location location = locationResult.getLocation();
-            if (location == null) {
-                //todo process solr result
-                return;
-            }
             //tags display
             FlowPanel tagsPanel = new FlowPanel();
             tagsPanel.setStyleName("tags");
@@ -2124,7 +2116,7 @@ public abstract class SpotBasePanel extends FlowPanel {
                     }
                 }
             }
-            LocationResultComposite locationResultComposite = new LocationResultComposite(detailAnchor, image, tagsPanel);
+            LocationResultComposite locationResultComposite = new LocationResultComposite( image, tagsPanel);
             locationResultComposite.addClickHandler(handler);
             clickMapLocation.put(locationResultComposite, locationResult);
             StringBuffer sb = new StringBuffer();
@@ -2134,39 +2126,46 @@ public abstract class SpotBasePanel extends FlowPanel {
             add(sb, ", ", location.getState());
             add(sb, " ", location.getZipcode());
             locationResultComposite.setLocationDescription(sb.toString());
-            double displayDistance = 0.0D;
-            Double ddistance = new Double(locationResult.getDistance());
-            if (mywebapp.isShowMeters()) {
-                displayDistance = locationResult.getDistance() / 1000.0;
-                if (displayDistance > 1.0D) {
-                    String val = NumberFormat.getFormat("####.#").format(displayDistance);
-                    //safe = "<h1>" + val + "</h1><p>km away</p>";
-                    locationResultComposite.setDistance(val);
-                    locationResultComposite.setUnit("km");
-                } else {
-                    int dd = ddistance.intValue();
-                    //safe = "<h1>" + dd + "</h1><p>meters away</p>";
-                    locationResultComposite.setDistance("" + dd);
-                    locationResultComposite.setUnit("meters");
-                }
-            } else {
-                double displayDistanceInMiles = locationResult.getDistance() * METERS_TO_MILES;
-                double distanceInYards = locationResult.getDistance() * YARD;
-                int dd = new Double(distanceInYards).intValue();
-                //int dd = ddistance.intValue();
-                if (dd > 999) {
-                    String val = NumberFormat.getFormat("####.#").format(displayDistanceInMiles);
-                    //safe = "<h1>" + val + "</h1><p>miles away</p>";
-                    locationResultComposite.setDistance(val);
-                    locationResultComposite.setUnit("miles");
-                } else {
-                    // safe = "<h1>" + dd + "</h1><p>yards away</p>";
-                    locationResultComposite.setDistance("" + dd);
-                    locationResultComposite.setUnit("yards");
-                }
-            }
+
+            processDistance(locationResult,locationResultComposite);
             ul.add(locationResultComposite);
         }
+    }
+
+    private void processDistance(LocationResult locationResult,LocationResultComposite locationResultComposite) {
+
+        double displayDistance = 0.0D;
+        Double ddistance = new Double(locationResult.getDistance());
+        if (mywebapp.isShowMeters()) {
+            displayDistance = locationResult.getDistance() / 1000.0;
+            if (displayDistance > 1.0D) {
+                String val = NumberFormat.getFormat("####.#").format(displayDistance);
+                //safe = "<h1>" + val + "</h1><p>km away</p>";
+                locationResultComposite.setDistance(val);
+                locationResultComposite.setUnit("km");
+            } else {
+                int dd = ddistance.intValue();
+                //safe = "<h1>" + dd + "</h1><p>meters away</p>";
+                locationResultComposite.setDistance("" + dd);
+                locationResultComposite.setUnit("meters");
+            }
+        } else {
+            double displayDistanceInMiles = locationResult.getDistance() * METERS_TO_MILES;
+            double distanceInYards = locationResult.getDistance() * YARD;
+            int dd = new Double(distanceInYards).intValue();
+            //int dd = ddistance.intValue();
+            if (dd > 999) {
+                String val = NumberFormat.getFormat("####.#").format(displayDistanceInMiles);
+                //safe = "<h1>" + val + "</h1><p>miles away</p>";
+                locationResultComposite.setDistance(val);
+                locationResultComposite.setUnit("miles");
+            } else {
+                // safe = "<h1>" + dd + "</h1><p>yards away</p>";
+                locationResultComposite.setDistance("" + dd);
+                locationResultComposite.setUnit("yards");
+            }
+        }
+
     }
 
     protected Map<Widget, MarkData> widgetMarkDataMap = new HashMap<Widget, MarkData>();
@@ -3532,7 +3531,7 @@ public abstract class SpotBasePanel extends FlowPanel {
         return categoriesPanel;
     }
 
-    protected void addHomePageResult(ULPanel ul, LocationResult locationResult) {
+    protected void addHomePageResultDesktop(ULPanel ul, LocationResult locationResult) {
         SolrDocument solrDocument = locationResult.getSolrDocument();
         boolean isSpot = isSpot(solrDocument);
         ListItem li = new ListItem();
@@ -3548,7 +3547,102 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     }
 
-    //
+    protected void addHomePageResult(ULPanel ul, LocationResult locationResult)  {
+        if (MyWebApp.isDesktop()) {
+            addHomePageResultDesktop(ul,locationResult);
+        } else {
+            addHomePageResultMobile(ul,locationResult);
+        }
+    }
+
+    protected void addHomePageResultMobile(ULPanel ul, LocationResult locationResult) {
+        SolrDocument solrDocument = locationResult.getSolrDocument();
+        boolean isSpot = isSpot(solrDocument);
+        if (isSpot) {
+            LocationResultComposite li = getLocationResultPanelSolrNewMobile(locationResult);
+            ul.add(li);
+        } else {
+            ComplexPanel li = getLocationResultPanelSolrMark(locationResult);
+            ul.add(li);
+        }
+    }
+
+
+    protected LocationResultComposite getLocationResultPanelSolrNewMobile(LocationResult locationResult) {
+        /*
+
+
+
+        Long spotId = solrDocument.getFirstLong("spotid_l");
+        String targetHistoryToken = MyWebApp.SPOT_DETAIL + spotId;
+        String targetHistoryToken2 = "#" + targetHistoryToken;
+        FlowPanel result = new FlowPanel();
+        result.setStyleName("result");
+        addMarkPhoto2(solrDocument, targetHistoryToken2, result);
+        FlowPanel centerBlock = new FlowPanel();
+        centerBlock.setStyleName("center-block");
+        result.add(centerBlock);
+        //	<a href="#" class="result-header"><h2>@Vishal Adma, 4300 Brenner Dr, Kansas City, KS 66104</h2></a>
+        String spot_label_s = solrDocument.getFirstString("spot_label_s");
+        if (spot_label_s != null) {
+            String sl = "@" + spot_label_s.toString();
+            Anchor resultHeader = getResultHeader(sl);
+            resultHeader.setHref(targetHistoryToken2);
+            centerBlock.add(resultHeader);
+        }
+        ComplexPanel categoriesPanel = addCategories(solrDocument);
+        centerBlock.add(categoriesPanel);
+        Anchor distanceAnchor = getDistanceAnchor(locationResult);
+        result.add(distanceAnchor);
+        addOurBuddies(centerBlock, locationResult);
+        addExpand(result, locationResult, centerBlock);
+        return result;
+
+        */
+        SolrDocument solrDocument = locationResult.getSolrDocument();
+
+        Image image = new Image(getSpotImage());
+        Location location = locationResult.getLocation();
+        //tags display
+        FlowPanel tagsPanel = new FlowPanel();
+        tagsPanel.setStyleName("tags");
+
+
+        List<String> cats = solrDocument.getStrings("cat");
+        if (cats != null) {
+            for (String cat : cats) {
+                InlineLabel inlineLabel = new InlineLabel(cat);
+                tagsPanel.add(inlineLabel);
+            }
+        }
+
+        LocationResultComposite locationResultComposite = new LocationResultComposite( image, tagsPanel);
+        locationResultComposite.addClickHandler(spotDetailClickHandler);
+        clickMapLocation.put(locationResultComposite, locationResult);
+        String spot_label_s = solrDocument.getFirstString("spot_label_s");
+        locationResultComposite.setLocationDescription(spot_label_s);
+
+        processDistance(locationResult,locationResultComposite);
+        return locationResultComposite;
+
+
+    }
+
+    protected ClickHandler spotDetailClickHandler = new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Widget widget = (Widget) event.getSource();
+            LocationResult locationResult = pickLocationMap.get(widget);
+            SolrDocument solrDocument = locationResult.getSolrDocument();
+            Long spotId = solrDocument.getFirstLong("spotid_l");
+            String targetHistoryToken = MyWebApp.SPOT_DETAIL + spotId;
+
+            History.newItem(targetHistoryToken);
+        }
+    };
+
+
+
+
     protected ComplexPanel getDistancePanel(Widget row1, Widget row2, LocationResult locationResult) {
         VerticalPanel vp = new VerticalPanel();
         vp.setStyleName("distancePanel");
