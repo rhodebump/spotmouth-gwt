@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.spotmouth.gwt.client.common.ListItem;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.dto.SaveSpotRequest;
 import com.spotmouth.gwt.client.dto.SearchParameters;
@@ -60,7 +61,11 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
         defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler3);
             //IUploader.OnFinishUploaderHandler onFinishUploaderHandler = getOnFinishUploaderHandler(panelImages3);
             // multiUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-            ULPanel pickSpotListBox = getPickSpotULPanel();
+            ULPanel pickSpotListBox = new ULPanel();
+        getPickSpotULPanel(pickSpotListBox);
+        FlowPanel pickSpotPanel = new FlowPanel();
+        getPickSpotMobile(pickSpotPanel);
+
             FlowPanel selectedTagsPanel = widgetSelectedTagsPanelMap.get(tagSearchTextBox);
             FlowPanel suggestionsPanel = widgetSelectedTagsPanelMap2.get(tagSearchTextBox);
             Button shareOnFacebookButton = getFacebookButton(markData);
@@ -68,14 +73,14 @@ public class PlateSearchPanel extends MarkSpotPanel implements SpotMouthPanel {
             //addTagAnchor.getElement().setId("addTag");
             addTagButton.addClickHandler(addTagHandler);
             DropPanel dropPanel = getDropPanel();
+
             PlateSearchComposite plateSearchComposite = new PlateSearchComposite(colorsListBox, plateNameTextBox, keywordsTextBox, manufacturersListBox, stateTextBox,
                     vehicleTypeListBox, plateSearchButton, markData.tagSearchTextBox, markData.secretKeyTextBox, markData.saySomethingTextArea,
-                    selectedTagsPanel, leaveMarkButton, defaultUploader, panelImages, pickSpotListBox, mywebapp, shareOnFacebookButton, addTagButton, suggestionsPanel, markData.spotDescriptionTextArea,dropPanel,countryTextBox);
+                    selectedTagsPanel, leaveMarkButton, defaultUploader, panelImages, pickSpotListBox, mywebapp, shareOnFacebookButton, addTagButton, suggestionsPanel, markData.spotDescriptionTextArea,dropPanel,countryTextBox,pickSpotPanel);
             plateSearchComposite.tab1.setValue(true);
             add(plateSearchComposite);
 
     }
-
 
     public void performPlateSearch() {
         getMessagePanel().clear();

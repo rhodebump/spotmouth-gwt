@@ -1,10 +1,19 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 
 
   <g:HTMLPanel>
+
+      <div style="display:none">
+          <smc:ListItem styleName="_active" ui:field="usersListItem"/>
+          <smc:ListItem styleName="_active" ui:field="usersListItem2"/>
+          <smc:ListItem styleName="_active" ui:field="bizListItem"/>
+          <smc:ListItem styleName="_active" ui:field="bizListItem2"/>
+
+      </div>
 
       <article id="post-24" class="post-24 page type-page status-publish hentry">
       <div id="features_page" class="features_page">

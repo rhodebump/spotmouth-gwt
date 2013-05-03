@@ -104,6 +104,10 @@ public class SpotDetailPanel extends SpotBasePanel implements SpotMouthPanel {
 
     private void activateTab(String id,Anchor clickAnchor) {
 
+        if (! MyWebApp.isDesktop()) {
+            return;
+        }
+
         groupsAnchor.removeStyleName("activeTab");
         mapAnchor.removeStyleName("activeTab");
 

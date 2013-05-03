@@ -1,0 +1,165 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:dnd='urn:import:org.vectomatic.dnd'
+             xmlns:mu='urn:import:gwtupload.client'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:xx2='urn:import:com.spotmouth.gwt.client'
+        >
+
+
+
+    <g:HTMLPanel>
+
+
+
+        <div style="display:none">
+            <dnd:DropPanel ui:field="dropPanel"/>
+            <g:Button ui:field="shareOnFacebookButton">Share on facebook</g:Button>
+            <mu:MultiUploader ui:field="multiUploader"/>
+            <g:FlowPanel ui:field="panelImages" addStyleNames="imageUploadDisplay"/>
+            <g:SimpleRadioButton ui:field="tab1"/>
+            <g:SimpleRadioButton ui:field="tab2"/>
+            <g:SimpleRadioButton ui:field="tab3"/>
+            <xx2:ULPanel ui:field="pickSpotUL"/>
+
+        </div>
+
+
+        <div id="content" class="content">
+      		<div class="mark_spot _page">
+      			<ul id="mark-tab-nav" class="_tab_navigation _top">
+
+
+                      <smc:ListItem styleName="_active" ui:field="markPlateListItem">
+                          <button>Mark Plate</button>
+
+                      </smc:ListItem>
+
+                    <smc:ListItem ui:field="leaveMarkListItem">
+                        <button>Leave Mark</button>
+
+                    </smc:ListItem>
+                      <smc:ListItem ui:field="markAddressListItem">
+                          <button>Mark Address</button>
+
+                      </smc:ListItem>
+
+      			</ul>
+
+      			<ul id="mark-tab" class="_tabs">
+
+                          <smc:ListItem styleName="_active" ui:field="markPlateListItem2">
+      					<div class="content">
+
+      							<label>
+      								<a href="javscript:;" onclick="toggle('hint');" style="text-align: center; display: block;">Hint</a>
+      								<p id="hint" onclick="toggle('hint');" class="_hint _arr _c" style="display: none">While you can always add a new plate, it's best for everyone to try to see if the plate you want to mark is already in spotmouth. Try putting in keywords that may describe the vehicle (e.g. red ford blond driver)</p>
+      							</label>
+      							<label>
+      								<p>Plate</p>
+                                      <g:TextBox ui:field="plateNameTextBox"/>
+      							</label>
+      							<label>
+      								<p>Keywords</p>
+                                      <g:TextBox ui:field="keywordsTextBox"/>
+      							</label>
+
+
+                              <label>
+                       								<p>Country</p>
+                                  <g:SuggestBox ui:field="countryTextBox"/>
+                       							</label>
+
+      							<label>
+      								<p>State</p>
+                                      <g:SuggestBox ui:field="stateTextBox"/>
+      							</label>
+      							<label>
+      								<p>Color</p>
+                                      <g:ListBox ui:field="colorsListBox"/>
+      							</label>
+      							<label>
+      								<p>Manufacturer</p>
+                                      <g:ListBox ui:field="manufacturersListBox"/>
+      							</label>
+      							<label>
+      								<p>Vehicle Type</p>
+                                      <g:ListBox ui:field="vehicleTypeListBox"/>
+      							</label>
+                              <!--
+                               style="margin-top:20px;"
+                               -->
+
+      							<label>   <g:Button  addStyleNames="_white _active" ui:field="plateSearchButton">Submit</g:Button></label>
+
+
+      					</div>
+                          </smc:ListItem>
+                      <smc:ListItem ui:field="leaveMarkListItem2">
+      					<div class="content">
+
+                              <!--
+                              no file upload for mobile
+      							<div id="mark-files" class="_files">
+      								<label>
+      									<p>Upload photos</p>
+      									<input type="file"/>
+      								</label>
+      								<label>
+      									<input type="file"/>
+      								</label>
+      								<label>
+      									<input type="file"/>
+      								</label>
+      							</div>
+      							<label><button class="_white" onclick="add('mark-files','file'); return false;">Add more files</button></label>
+      							-->
+      							<span class="_sep _light"></span>
+      							<label>
+      								<p>Your Mark</p>
+
+                                      <g:TextArea  visibleLines="5" ui:field="contentTextArea"/>
+      							</label>
+      							<label>
+      								<p>Description</p>
+      						 <g:TextArea visibleLines="5" ui:field="spotDescriptionTextArea"/>
+      							</label>
+      							<label>
+      								<p>Tags</p>
+                                      <g:SuggestBox ui:field="tagSearchTextBox"/>       <g:Button ui:field="addTagButton">Add</g:Button>
+                                      <g:FlowPanel ui:field="selectedTagsPanel"/>
+                                                    <g:FlowPanel ui:field="suggestionsPanel"/>
+      							</label>
+      							<label>
+      								<p>Secret Key</p>
+                                      <g:TextBox ui:field="secretKeyTextBox"/>
+      							</label>
+      							<span class="_sep _light"></span>
+                              <!--
+                              style="margin-top:20px;"
+                              -->
+      							<label>    <g:Button   addStyleNames="_white _active" ui:field="leaveMarkButton">Submit</g:Button></label>
+
+      					</div>
+                      </smc:ListItem>
+                        <smc:ListItem ui:field="markAddressListItem2">
+      					<div class="content">
+
+      					<h2 class="_dark"><g:Button ui:field="notHereButton1" styleName="_dark">My spot is not listed here</g:Button></h2>
+
+                              <g:FlowPanel ui:field="pickSpotPanel" styleName="_list"/>
+
+                              <!--
+                              style="margin-bottom: -25px;"
+                              -->
+                              <h2 class="_dark"><g:Button ui:field="notHereButton2" styleName="_dark">My spot is not listed here</g:Button></h2>
+      					</div>
+                        </smc:ListItem>
+      			</ul>
+      		</div>
+      	</div>
+
+
+
+    </g:HTMLPanel>
+
+</ui:UiBinder>

@@ -12,14 +12,24 @@
 
 
 
+
       <g:SimpleCheckBox ui:field="toggleMapMode"/>          <g:SimpleCheckBox ui:field="toggleMilesCheckBox"/>
       <g:SimplePanel ui:field='messages'/>
 
 
 
       <div style="display:none">
+          <g:Button ui:field="markSpotButton"/>
           <a href="#menu/">menu</a>
           <sn:TopNav ui:field="topNav"/>
+          <g:TextBox ui:field='keywordsTextBox'/>
+
+          <g:Button ui:field="searchButton">Go</g:Button>
+          <g:TextBox ui:field='locationTextBox'/>
+          <xx:ULPanel ui:field="previousLocationsULPanel"/>
+          <g:ListBox ui:field="tagListBox"/>
+                               <g:ListBox ui:field="sortingListBox"/>
+
       </div>
 
 
@@ -42,11 +52,13 @@
      	</div>
 
 
-     	<div id="navigation" class="navigation">
-     		<ul>
 
-     			<li><g:Button ui:field="markSpotButton"/> <a href="#test">Mark Spot</a></li>
-     			<li><a id="tgl-subnav" href="javascript;" onclick="toggle('subnav');">All<span class="_icon _drop_down"/></a>
+
+
+      <div id="navigation" class="navigation">
+     		<ul>
+     			<li><a href="#test">Mark Spot</a></li>
+     			<li><a id="tgl-subnav" href="javascript:;" onclick="toggle('subnav');">All<span class="_icon _drop_down"/></a>
      				<ul id="subnav" class="_sub_navigation">
      					<li><a href="javascript:;">Dining</a></li>
      					<li><a href="javascript:;">Drinking</a></li>
@@ -66,138 +78,12 @@
      	</div>
 
 
-     	<div id="search" class="search">
-     		<h1>Search</h1>
-     		<div id="main-search" class="main_search" style="display: block;">
-
-     				<label>
-                         <g:TextBox ui:field='keywordsTextBox'/>
-
-                         <g:Button ui:field="searchButton">Go</g:Button>
-
-     				</label>
-     				<span class="_sep"></span>
-     				<label>
-     					<p>Near</p>
-                         <g:TextBox ui:field='locationTextBox'/>
-     				</label>
-     				<div>
-     					<p>Previous locations</p>
-     					<button id="show-prevloc" class="_white" onclick="show('prev-loc');return false;">Select<span class="_icon _drop_down _dark"></span></button>
-     					<div id="prev-loc" class="_select">
-     						<ul><h1>Select location<span id="hide-prevloc" onclick="hide('prev-loc');">x</span></h1>
-     							<li><span>Location first</span></li>
-     							<li><span>Location</span></li>
-     							<li><span>Location</span></li>
-     							<li><span>Location</span></li>
-     							<li><span>Location</span></li>
-     							<li><span>Location</span></li>
-     							<li><span>Location last</span></li>
-     						</ul>
-
-                             <xx:ULPanel ui:field="previousLocationsULPanel"/>
-
-     					</div>
-     				</div>
-     				<span class="_sep"></span>
-     				<label>
-     					<button id="show-advsearch" class="_white" onclick="toggle('main-search','advanced-search');return false;">Show Advanced</button>
-     				</label>
-
-     		</div>
-
-
-     		<div id="advanced-search" class="advanced_search">
-
-     				<label>
-     					<button id="hide-advsearch" class="_white" onclick="toggle('main-search','advanced-search');return false;">Hide Advanced</button>
-     				</label>
-     				<span class="_sep"></span>
-     				<label>
-     					<p>Keywords</p>
-     					<input type="text" placeholder="Keywords..."/>
-     				</label>
-     				<div>
-     					<p>Filter by</p>
-     				</div>
-     				<label class="_check"><input type="checkbox"/>Distance</label>
-     				<label class="_check"><input type="checkbox"/>Spots</label>
-     				<label class="_check"><input type="checkbox"/>Drivers</label>
-     				<label class="_check"><input type="checkbox"/>Marks</label>
-     				<label class="_check"><input type="checkbox"/>Contests</label>
-     				<div>
-     					<p>Tags</p>
-     					<button id="show-tags" class="_white" onclick="show('tags');return false;">Select Tags <span class="_icon _drop_down _dark"></span></button>
-     					<div id="tags" class="_select">
-     						<ul><h1>Select Tags<span id="hide-tags" onclick="hide('tags');">x</span></h1>
-     							<li><span>Tag first</span></li>
-     							<li><span>Tag</span></li>
-     							<li><span>Tag</span></li>
-     							<li><span>Tag</span></li>
-     							<li><span>Tag</span></li>
-     							<li><span>Tag</span></li>
-     							<li><span>Tag last</span></li>
-     						</ul>
-     					</div>
-     				</div>
-     				<div>
-     					<p>Color</p>
-     					<select>
-     						<option value="-1">Please choose...</option><option value="White">White</option><option value="Black">Black</option><option value="Silver">Silver</option><option value="Grey">Grey</option><option value="Red">Red</option><option value="Blue">Blue</option><option value="Brown/Beige">Brown/Beige</option><option value="Yellow/Gold">Yellow/Gold</option><option value="Green">Green</option><option value="Other">Other</option>
-     					</select>
-     				</div>
-     				<div>
-     					<p>Manufacturer</p>
-     					<select>
-     						<option value="-1">Please choose...</option><option value="1">Audi</option><option value="2">BMW</option><option value="3">Buick</option><option value="4">Cadillac</option><option value="5">Chevrolet</option><option value="6">Chrysler</option><option value="7">Dodge</option><option value="8">Ferrari</option><option value="10">Fiat</option><option value="9">Ford</option><option value="12">GEM</option><option value="11">GM</option><option value="13">GMC</option><option value="14">Honda</option><option value="15">Hummer</option><option value="16">Hyundai</option><option value="17">Infiniti</option><option value="18">Isuzu</option><option value="19">Jaguar</option><option value="20">Jeep</option><option value="21">Kia</option><option value="22">Lamborghini</option><option value="23">Land Rover</option><option value="24">Lexus</option><option value="25">Lincoln</option><option value="26">Lotus</option><option value="27">Mazda</option><option value="28">Mercedes-Benz</option><option value="29">Mercury</option><option value="30">Mitsubishi </option><option value="31">Nissan</option><option value="32">Oldsmobile</option><option value="44">Other</option><option value="33">Peugeot</option><option value="34">Pontiac</option><option value="35">Porsche</option><option value="36">Regal</option><option value="37">Saab</option><option value="38">Saturn</option><option value="39">Subaru</option><option value="40">Suzuki</option><option value="41">Toyota</option><option value="42">Volkswagen</option><option value="43">Volvo</option>
-     					</select>
-     				</div>
-     				<div>
-     					<p>Vehicle Type</p>
-     					<select>
-     						<option value="-1">Please choose...</option><option value="Car">Car</option><option value="Truck">Truck</option><option value="SUV">SUV</option><option value="Van">Van</option><option value="Motorcycle">Motorcycle</option><option value="Other">Other</option>
-     					</select>
-     				</div>
-     				<span class="_sep"></span>
-     				<label>
-     					<button class="_white _active" onclick="return false">Submit</button>
-     				</label>
-
-     		</div>
-     	</div>
-
-
 
 
 
       <g:SimplePanel ui:field='body' />
 
-     	<div id="content" class="content">
-     		<div class="home _page">
-     		<div id="filters" class="filters">
 
-     				<button class="_white" onclick="hide('filters'); show('show-filters'); return false;">Hide Filters</button>
-     				<label>
-
-
-                         <g:ListBox ui:field="tagListBox"/>
-     				</label>
-     				<label>
-     					<p>Sort by</p>
-
-
-                         <g:ListBox ui:field="sortingListBox"/>
-     				</label>
-     				<span class="_sep"></span>
-     				<label>
-     					<button class="_white _active">Map View</button>
-     				</label>
-
-     		</div>
-
-
-     	</div>
-     	</div>
 
      	<div id="footer" class="footer">
      			<span>&copy; spotmouth</span>

@@ -25,6 +25,18 @@
             <g:Anchor  addStyleNames="tab-tgl fw-tab-one" title="View Map" ui:field="mapAnchor">View Map</g:Anchor>
             <g:SimplePanel ui:field="mapPanel"/>
             <g:Anchor title="Mark This Spot" ui:field="markSpotAnchor"></g:Anchor>
+
+            <div id="fw-group">
+
+            </div>
+
+            <div id="fw-desc">
+
+            </div>
+            <div id="fw-map">
+
+            </div>
+
         </div>
 
       <div id="content" class="content">

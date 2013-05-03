@@ -1,15 +1,53 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:dnd='urn:import:org.vectomatic.dnd'
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:dnd='urn:import:org.vectomatic.dnd'
              xmlns:mu='urn:import:gwtupload.client'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
              xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:xx2='urn:import:com.spotmouth.gwt.client'
         >
 
-    <ui:with field="myResources" type="com.spotmouth.gwt.client.icons.SpotImageResource"/>
 
 
     <g:HTMLPanel>
 
 
+        <div style="display:none">
+            <h2 class="_dark"><g:Button ui:field="notHereButton1" styleName="_dark">My spot is not listed here</g:Button></h2>
+            <h2 class="_dark"><g:Button ui:field="notHereButton2" styleName="_dark">My spot is not listed here</g:Button></h2>
+
+            <g:FlowPanel ui:field="pickSpotPanel" styleName="_list"/>
+            <smc:ListItem styleName="_active" ui:field="markPlateListItem">
+                <button>Mark Plate</button>
+
+            </smc:ListItem>
+
+          <smc:ListItem ui:field="leaveMarkListItem">
+              <button>Leave Mark</button>
+
+          </smc:ListItem>
+            <smc:ListItem ui:field="markAddressListItem">
+                <button>Mark Address</button>
+
+            </smc:ListItem>
+
+
+            <smc:ListItem styleName="_active" ui:field="markPlateListItem2">
+
+
+            </smc:ListItem>
+
+          <smc:ListItem ui:field="leaveMarkListItem2">
+
+
+          </smc:ListItem>
+            <smc:ListItem ui:field="markAddressListItem2">
+
+
+            </smc:ListItem>
+
+
+
+        </div>
         <div id="mspot">
 
             <div class="tabs">

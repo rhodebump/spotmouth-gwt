@@ -5,11 +5,14 @@ import com.google.gwt.event.dom.client.*;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.spotmouth.gwt.client.dto.MobileResponse;
 import com.spotmouth.gwt.client.rpc.ApiServiceAsync;
+import com.spotmouth.gwt.client.common.*;
 import gwtupload.client.MultiUploader;
 import org.vectomatic.dnd.DataTransferExt;
 import org.vectomatic.dnd.DropPanel;
@@ -30,10 +33,71 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class PlateSearchComposite extends Composite {
-    interface MyUiBinder extends UiBinder<Widget, PlateSearchComposite> {
+    private void resettabs() {
+        this.leaveMarkListItem.removeStyleName("_active");
+        this.markAddressListItem.removeStyleName("_active");
+        this.markPlateListItem.removeStyleName("_active");
+        this.leaveMarkListItem2.removeStyleName("_active");
+        this.markAddressListItem2.removeStyleName("_active");
+        this.markPlateListItem2.removeStyleName("_active");
     }
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+
+    @UiHandler("leaveMarkListItem")
+    public void onClick1(ClickEvent event) {
+        resettabs();
+        leaveMarkListItem.addStyleName("_active");
+        leaveMarkListItem2.addStyleName("_active");
+    }
+
+    @UiHandler("markAddressListItem")
+    public void onClick2(ClickEvent event) {
+        resettabs();
+        markAddressListItem.addStyleName("_active");
+        markAddressListItem2.addStyleName("_active");
+    }
+
+    @UiHandler("markPlateListItem")
+    public void onClick3(ClickEvent event) {
+        resettabs();
+        markPlateListItem.addStyleName("_active");
+        markPlateListItem2.addStyleName("_active");
+    }
+
+    @UiHandler("notHereButton1")
+    public void onClick4(ClickEvent event) {
+         History.newItem(MyWebApp.CREATE_SPOT);
+    }
+
+    @UiHandler("notHereButton2")
+    public void onClick5(ClickEvent event) {
+        History.newItem(MyWebApp.CREATE_SPOT);
+    }
+
+
+    @UiTemplate("PlateSearchComposite.ui.xml")
+    interface DesktopBinder extends UiBinder<Widget, PlateSearchComposite> {
+    }
+
+    private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
+
+    @UiTemplate("PlateSearchCompositeM.ui.xml")
+    interface MobileBinder extends UiBinder<Widget, PlateSearchComposite> {
+    }
+
+    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
+    @UiField
+    ListItem leaveMarkListItem;
+    @UiField
+    ListItem markAddressListItem;
+    @UiField
+    ListItem markPlateListItem;
+    @UiField
+    ListItem leaveMarkListItem2;
+    @UiField
+    ListItem markAddressListItem2;
+    @UiField
+    ListItem markPlateListItem2;
     @UiField(provided = true)
     final ListBox colorsListBox;
     @UiField(provided = true)
@@ -44,14 +108,8 @@ public class PlateSearchComposite extends Composite {
     final ListBox manufacturersListBox;
     @UiField(provided = true)
     final SuggestBox stateTextBox;
-
-
     @UiField(provided = true)
     final SuggestBox countryTextBox;
-
-
-
-
     @UiField(provided = true)
     final ListBox vehicleTypeListBox;
     @UiField(provided = true)
@@ -62,28 +120,16 @@ public class PlateSearchComposite extends Composite {
     final TextBox secretKeyTextBox;
     @UiField(provided = true)
     final TextArea contentTextArea;
-
     @UiField(provided = true)
     final TextArea spotDescriptionTextArea;
-
-
-
-
     @UiField(provided = true)
     final FlowPanel selectedTagsPanel;
     @UiField(provided = true)
     final Button leaveMarkButton;
-
-
     @UiField(provided = true)
     final Button shareOnFacebookButton;
-
     @UiField(provided = true)
     final Button addTagButton;
-
-
-
-
     @UiField(provided = true)
     SimpleRadioButton tab1 = null;
     @UiField(provided = true)
@@ -99,26 +145,33 @@ public class PlateSearchComposite extends Composite {
     @UiField(provided = true)
     final ULPanel pickSpotUL;
 
+    @UiField(provided = true)
+    final FlowPanel pickSpotPanel;
+
+
+    @UiField
+    Button notHereButton1;
+
+    @UiField
+    Button notHereButton2;
+
 
     @UiField(provided = true)
     final FlowPanel suggestionsPanel;
-
-
 
     public void setTab3(boolean x) {
         tab3.setValue(x);
     }
 
     String group = "tab-group-1";
-
     private MyWebApp mywebapp = null;
-
 
     public PlateSearchComposite(ListBox colorsListBox, TextBox plateNameTextBox, TextBox keywordsTextBox, ListBox manufacturersListBox, SuggestBox stateTextBox, ListBox vehicleTypeListBox,
                                 Button plateSearchButton, SuggestBox tagSearchTextBox, TextBox secretKeyTextBox, TextArea contentTextArea, FlowPanel selectedTagsPanel,
-                                Button leaveMarkButton, MultiUploader multiUploader, FlowPanel panelImages1, ULPanel pickSpotUL,MyWebApp mywebapp,Button shareOnFacebookButton,Button addTagButton,
-                                FlowPanel suggestionsPanel,TextArea spotDescriptionTextArea,DropPanel dropPanel,SuggestBox countryTextBox
+                                Button leaveMarkButton, MultiUploader multiUploader, FlowPanel panelImages1, ULPanel pickSpotUL, MyWebApp mywebapp, Button shareOnFacebookButton, Button addTagButton,
+                                FlowPanel suggestionsPanel, TextArea spotDescriptionTextArea, DropPanel dropPanel, SuggestBox countryTextBox,FlowPanel pickSpotPanel
     ) {
+        this.pickSpotPanel = pickSpotPanel;
         this.dropPanel = dropPanel;
         this.spotDescriptionTextArea = spotDescriptionTextArea;
         this.suggestionsPanel = suggestionsPanel;
@@ -151,8 +204,11 @@ public class PlateSearchComposite extends Composite {
         tab1.getElement().setId("tab-1");
         tab2.getElement().setId("tab-2");
         tab3.getElement().setId("tab-3");
-        initWidget(uiBinder.createAndBindUi(this));
-
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        } else {
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
         try {
             reader = new FileReader();
             reader.addLoadEndHandler(new LoadEndHandler() {
@@ -186,7 +242,7 @@ public class PlateSearchComposite extends Composite {
                     }
                 }
             });
-        }catch (Exception e) {
+        } catch (Exception e) {
             GWT.log("filereader init error',e");
         }
         readQueue = new ArrayList<File>();
@@ -234,9 +290,7 @@ public class PlateSearchComposite extends Composite {
         readNext();
     }
 
-
     private Image createBitmapImage(final File file) {
-
         String result = reader.getStringResult();
         String url = FileUtils.createDataUrl(file.getType(), result);
         final Image image = new Image();
@@ -262,11 +316,8 @@ public class PlateSearchComposite extends Composite {
         final String name = file.getName();
         String result = reader.getStringResult();
         String data = FileUtils.base64encode(result);
-
         //we should probably upload file into session now
-
         doSaveImage(name, data);
-
         //String dataUrl = FileUtils.createDataUrl(file.getType(), result);
 //        mywebapp.getApiServiceAsync().uploadFile(name, data, new AsyncCallback() {
 //            public void onFailure(Throwable throwable) {
@@ -288,9 +339,7 @@ public class PlateSearchComposite extends Composite {
 //
 //            }
 //        });
-
     }
-
 
     private void readNext() {
         if (readQueue.size() > 0) {
@@ -331,11 +380,10 @@ public class PlateSearchComposite extends Composite {
         Window.alert("File loading error for file: " + file.getName() + "\n" + errorDesc);
     }
 
-    public void doSaveImage(String name,String data) {
+    public void doSaveImage(String name, String data) {
         mywebapp.getMessagePanel().clear();
-
         ApiServiceAsync myService = mywebapp.getApiServiceAsync();
-        myService.uploadFile(name,data, new AsyncCallback() {
+        myService.uploadFile(name, data, new AsyncCallback() {
             public void onFailure(Throwable caught) {
                 mywebapp.getMessagePanel().displayError(caught.getMessage());
             }
@@ -343,13 +391,10 @@ public class PlateSearchComposite extends Composite {
             public void onSuccess(Object result) {
                 MobileResponse mobileResponse = (MobileResponse) result;
                 if (mobileResponse.getStatus() == 1) {
-
                 } else {
                     mywebapp.getMessagePanel().displayErrors(mobileResponse.getErrorMessages());
                 }
             }
         });
     }
-
-
 }

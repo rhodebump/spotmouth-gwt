@@ -1,11 +1,15 @@
 package com.spotmouth.gwt.client.features;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.spotmouth.gwt.client.MyWebApp;
+import com.spotmouth.gwt.client.common.ListItem;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,6 +19,18 @@ import com.spotmouth.gwt.client.MyWebApp;
  * To change this template use File | Settings | File Templates.
  */
 public class FeaturesComposite   extends Composite {
+
+    @UiField
+    ListItem usersListItem;
+
+    @UiField
+    ListItem bizListItem;
+
+    @UiField
+    ListItem usersListItem2;
+
+    @UiField
+    ListItem bizListItem2;
 
 
 
@@ -35,5 +51,28 @@ public class FeaturesComposite   extends Composite {
         }
     }
 
+
+    @UiHandler("usersListItem")
+    public void onClick1(ClickEvent event) {
+        resetall();
+        usersListItem.addStyleName("_active");
+        usersListItem2.addStyleName("_active");
+    }
+
+    @UiHandler("bizListItem")
+    public void onClick2(ClickEvent event) {
+        resetall();
+        bizListItem.addStyleName("_active");
+        bizListItem2.addStyleName("_active");
+    }
+
+    private void resetall() {
+        bizListItem.removeStyleName("_active");
+        bizListItem2.removeStyleName("_active");
+
+        usersListItem.removeStyleName("_active");
+        usersListItem2.removeStyleName("_active");
+
+    }
 
 }

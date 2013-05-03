@@ -1,5 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:smc='urn:import:com.spotmouth.gwt.client.common'
     xmlns:g='urn:import:com.google.gwt.user.client.ui'>
 
 
@@ -12,11 +13,13 @@
 
      		<div class="features _page">
      			<ul id="feat-tab-nav" class="_tab_navigation _top _two">
-     				<li class="_active"><button><span class="_icon _login"></span></button></li>
-     				<li><button><span class="_icon _port"></span></button></li>
+                     <smc:ListItem styleName="_active" ui:field="usersListItem">
+     			<button><span class="_icon _login"></span></button></smc:ListItem>
+                     <smc:ListItem ui:field="bizListItem"><button><span class="_icon _port"></span></button></smc:ListItem>
      			</ul>
      			<ul id="feat-tab" class="_tabs">
-     				<li class="_active">
+
+                         <smc:ListItem styleName="_active" ui:field="usersListItem2">
      					<div class="content">
      						<h1>Features for Users</h1>
      						<div>
@@ -40,8 +43,8 @@
      Each spot can have one or more "groups". For example, there could be "Schenley High School" which would be a spot, and for this spot there could be a bunch of groups such as "Chess Club", "Swim Team" Anybody can create a group at any spot. The person who creates the group can control how the group is run. For example, the group can be public and anyone can join, or it can require approval to join. One users are part of a group, any messages sent to the group will be sent to that person. Messages are sent via email, SMS messaging, the spotmouth website, or the spotmouth mobile applications.</p>
      						</div>
      					</div>
-     				</li>
-     				<li>
+     				</smc:ListItem>
+                     <smc:ListItem  ui:field="bizListItem2">
      					<div class="content">
      						<h1>Features for Business and Organizations</h1>
      						<div>
@@ -68,7 +71,7 @@
      							</div>
      						</div>
      					</div>
-     				</li>
+                     </smc:ListItem>
      			</ul>
      		</div>
       </div>

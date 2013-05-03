@@ -3,7 +3,9 @@ package com.spotmouth.gwt.client.search;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.*;
+import com.spotmouth.gwt.client.MyWebApp;
 import com.spotmouth.gwt.client.common.TextField;
 
 /**
@@ -14,10 +16,22 @@ import com.spotmouth.gwt.client.common.TextField;
  * To change this template use File | Settings | File Templates.
  */
 public class SearchFormComposite extends Composite {
-    interface MyUiBinder extends UiBinder<Widget, SearchFormComposite> {
+
+    @UiTemplate("SearchFormComposite.ui.xml")
+    interface DesktopBinder extends UiBinder<Widget, SearchFormComposite> {
     }
 
-    private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
+    private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
+
+    @UiTemplate("SearchFormCompositeM.ui.xml")
+    interface MobileBinder extends UiBinder<Widget, SearchFormComposite> {
+    }
+
+    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
+
+
+
+
     @UiField(provided = true)
     final TextField keywordsTextBox;
     @UiField(provided = true)
@@ -64,6 +78,11 @@ public class SearchFormComposite extends Composite {
         this.searchButton = searchButton;
         this.manufacturersListBox = manufacturersListBox;
         this.colorsListBox = colorsListBox;
-        initWidget(uiBinder.createAndBindUi(this));
+
+        if (MyWebApp.isDesktop()) {
+            initWidget(desktopBinder.createAndBindUi(this));
+        } else {
+            initWidget(mobileBinder.createAndBindUi(this));
+        }
     }
 }

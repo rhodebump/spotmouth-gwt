@@ -598,7 +598,7 @@ public class MyWebApp implements EntryPoint {
     }
 
     public static boolean isMobileDevice() {
-        //if (true) return true;
+      //  if (true) return true;
         if (GWT.getModuleBaseURL().startsWith("file:")) {
             return true;
         } else {
@@ -1740,7 +1740,8 @@ public class MyWebApp implements EntryPoint {
 
 
     SimplePanel simplePanel = new SimplePanel();
-    private VerticalPanel vp = new VerticalPanel();
+    //private VerticalPanel vp = new VerticalPanel();
+    private FlowPanel vp = new FlowPanel();
 
     public boolean swapCenter(final SpotBasePanel spotBasePanel) {
         GWT.log("swapCenter");
@@ -1770,12 +1771,9 @@ public class MyWebApp implements EntryPoint {
         //this.topPanel.clear();
         //this.topPanel.add(getTopContents(spotBasePanel));
         //spotBasePanel.getTopPanelHolder().setWidget(this.topPanel);
-        this.vp = new VerticalPanel();
+        this.vp = new FlowPanel();
         vp.setWidth("100%");
-//        if (!isDesktop()) {
-//            vp.add(this.topPanel);
-//        }
-        //addBackToResults(spotBasePanel, vp);
+
         if (isFormSupported()) {
             vp.add(spotBasePanel.getFormPanel());
             simplePanel.setWidget(vp);

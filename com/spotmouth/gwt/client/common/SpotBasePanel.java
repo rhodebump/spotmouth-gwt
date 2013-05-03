@@ -445,6 +445,9 @@ public abstract class SpotBasePanel extends FlowPanel {
     };
     Map<Widget, LocationResult> pickLocationMap = new HashMap<Widget, LocationResult>();
 
+
+    Map<Widget, LocationResult> spotDetailMap = new HashMap<Widget, LocationResult>();
+
     private ListItem addSpotNotHere() {
         ListItem listItem = new ListItem();
         Anchor newSpotAnchor = new Anchor("My Spot is not listed here.", "#" + MyWebApp.CREATE_SPOT);
@@ -452,8 +455,22 @@ public abstract class SpotBasePanel extends FlowPanel {
         return listItem;
     }
 
-    protected ULPanel getPickSpotULPanel() {
-        final ULPanel ulPanel = new ULPanel();
+    //this is fine for desktop, but now i have mobile....
+    /*
+          						<div class="_list">
+      							<a href="mark-address.html">Spot</a>
+      							<a href="mark-address.html">Spot</a>
+      							<a href="mark-address.html">Spot</a>
+      							<a href="mark-address.html">Spot</a>
+      							<a href="mark-address.html">Spot</a>
+      							<a href="mark-address.html">Spot</a>
+      							<a href="mark-address.html">Spot</a>
+      							<a href="mark-address.html">Spot</a>
+      							<a href="mark-address.html">Spot</a>
+      						</div>
+     */
+    protected void getPickSpotULPanel(final ULPanel ulPanel ) {
+        //final ULPanel ulPanel = new ULPanel();
         SearchParameters searchParameters = new SearchParameters();
         searchParameters.setLatitude(mywebapp.getCurrentLocation().getLatitude());
         searchParameters.setLongitude(mywebapp.getCurrentLocation().getLongitude());
@@ -484,8 +501,49 @@ public abstract class SpotBasePanel extends FlowPanel {
                 ulPanel.add(addSpotNotHere());
             }
         });
-        return ulPanel;
+        //return ulPanel;
     }
+
+
+
+    protected void getPickSpotMobile(final FlowPanel flowPanel) {
+       // final FlowPanel flowPanel = new FlowPanel();
+        SearchParameters searchParameters = new SearchParameters();
+        searchParameters.setLatitude(mywebapp.getCurrentLocation().getLatitude());
+        searchParameters.setLongitude(mywebapp.getCurrentLocation().getLongitude());
+        searchParameters.setLicensePlate(false);
+        ApiServiceAsync myService = mywebapp.getApiServiceAsync();
+        myService.search(searchParameters, new AsyncCallback() {
+            public void onFailure(Throwable caught) {
+                getMessagePanel().displayMessage("Error:" + caught.getMessage());
+            }
+
+            public void onSuccess(Object result) {
+                MobileResponse mobileResponse = (MobileResponse) result;
+               // ulPanel.add(addSpotNotHere());
+                for (LocationResult locationResult : mobileResponse.getLocationResults()) {
+                    ListItem listItem = new ListItem();
+                    Anchor anchor = new Anchor(locationResult.getLabel());
+
+                    flowPanel.add(anchor);
+                    //listItem.add(anchor);
+                    //ulPanel.add(listItem);
+                    if (locationResult.getSolrDocument() == null) {
+                        pickLocationMap.put(anchor, locationResult);
+                        anchor.addClickHandler(createSpotFromLocationHandler);
+                    } else {
+                        Long spotId = locationResult.getSolrDocument().getFirstLong("spotid_l");
+                        String targetHistoryToken = "#" + MyWebApp.LEAVE_SPOT_MARK + spotId;
+                        anchor.setHref(targetHistoryToken);
+                    }
+                }
+               // ulPanel.add(addSpotNotHere());
+            }
+        });
+
+    }
+
+
 
     /*
     added so we can add a special id at the top level for the "mark_address" for dmitriy
@@ -3618,7 +3676,7 @@ public abstract class SpotBasePanel extends FlowPanel {
 
         LocationResultComposite locationResultComposite = new LocationResultComposite( image, tagsPanel);
         locationResultComposite.addClickHandler(spotDetailClickHandler);
-        clickMapLocation.put(locationResultComposite, locationResult);
+        spotDetailMap.put(locationResultComposite, locationResult);
         String spot_label_s = solrDocument.getFirstString("spot_label_s");
         locationResultComposite.setLocationDescription(spot_label_s);
 
@@ -3631,7 +3689,7 @@ public abstract class SpotBasePanel extends FlowPanel {
     protected ClickHandler spotDetailClickHandler = new ClickHandler() {
         public void onClick(ClickEvent event) {
             Widget widget = (Widget) event.getSource();
-            LocationResult locationResult = pickLocationMap.get(widget);
+            LocationResult locationResult = spotDetailMap.get(widget);
             SolrDocument solrDocument = locationResult.getSolrDocument();
             Long spotId = solrDocument.getFirstLong("spotid_l");
             String targetHistoryToken = MyWebApp.SPOT_DETAIL + spotId;

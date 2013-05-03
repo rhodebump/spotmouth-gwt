@@ -51,7 +51,7 @@ public class RegisterForm extends SpotBasePanel implements SpotMouthPanel {
     public RegisterForm(MyWebApp mywebapp) {
         super(mywebapp,false);
 
-        if (MyWebApp.isDesktop()) {
+
             Button registrationButton = new Button("Submit");
             registrationButton.addClickHandler(registerHandler);
             usernameTextBox = new TextField();
@@ -74,7 +74,7 @@ public class RegisterForm extends SpotBasePanel implements SpotMouthPanel {
 
 
 
-        }
+
 
 
     }
