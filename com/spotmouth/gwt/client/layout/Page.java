@@ -22,33 +22,14 @@ public class Page extends Composite {
 
 
     @UiTemplate("Page.ui.xml")
-    interface PageBinder extends UiBinder<Widget, Page> {}
+    interface PageBinder extends UiBinder<Widget, Page> {
+    }
+
     private static PageBinder desktopBinder = GWT.create(PageBinder.class);
-
-    @UiTemplate("MPage.ui.xml")
-    interface MPageBinder extends UiBinder<Widget, Page> {}
-    private static MPageBinder mobileBinder = GWT.create(MPageBinder.class);
-
-
-//    protected Page(UiBinder<Widget, Page> binder) {
-//      initWidget(uiBinder.createAndBindUi(this));
-//    }
-
-
-  // private static MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
-
-
-//
-//    public static Page createRedPicker() {
-//      return new Page(redBinder);
-//    }
-
 
 
     @UiField(provided = true)
     Button menuButton;
-
-
 
 
     //@UiField ListBox listBox;
@@ -61,7 +42,6 @@ public class Page extends Composite {
 
     @UiField(provided = true)
     Button searchButton;
-
 
 
     @UiField
@@ -97,35 +77,29 @@ public class Page extends Composite {
     TopNav topNav;
 
 
-
     //simplePanel,popularPanel,latestPanel,mp,tagCloudPanel,locationPanel,tagCloudPanel2,googleMapPanel
-    public Page(Panel bodyPanel, Panel messagePanel, Panel searchBoxPanel, TextBox keywordsTextBox, TextBox locationTextBox,ULPanel previousLocationsULPanel,
-                SimpleCheckBox toggleMilesCheckBox,SimpleCheckBox toggleMapMode,Button markSpotButton, ListBox tagListBox ,
-                ListBox sortingListBox,Button searchButton,
-                TopNav topNav,Button menuButton) {
+    public Page(Panel bodyPanel, Panel messagePanel, Panel searchBoxPanel, TextBox keywordsTextBox, TextBox locationTextBox, ULPanel previousLocationsULPanel,
+                SimpleCheckBox toggleMilesCheckBox, SimpleCheckBox toggleMapMode, Button markSpotButton, ListBox tagListBox,
+                ListBox sortingListBox, Button searchButton,
+                TopNav topNav, Button menuButton) {
         this.keywordsTextBox = keywordsTextBox;
 
         this.markSpotButton = markSpotButton;
         this.locationTextBox = locationTextBox;
-        this.previousLocationsULPanel=previousLocationsULPanel;
+        this.previousLocationsULPanel = previousLocationsULPanel;
         this.toggleMapMode = toggleMapMode;
         this.toggleMilesCheckBox = toggleMilesCheckBox;
-       this.tagListBox = tagListBox;
-       this.sortingListBox = sortingListBox;
+        this.tagListBox = tagListBox;
+        this.sortingListBox = sortingListBox;
         this.topNav = topNav;
 
 
         this.searchButton = searchButton;
-      this.menuButton = menuButton;
+        this.menuButton = menuButton;
 
         this.menuButton.getElement().setId("show-menu");
-        if (MyWebApp.isDesktop()) {
-            initWidget(desktopBinder.createAndBindUi(this));
-        }else {
-            GWT.log("mpage binder");
-            initWidget(mobileBinder.createAndBindUi(this));
-        }
 
+        initWidget(desktopBinder.createAndBindUi(this));
 
 
         body.setWidget(bodyPanel);

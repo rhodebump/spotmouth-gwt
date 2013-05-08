@@ -32,9 +32,6 @@ public class Detail extends Composite {
     interface DesktopBinder extends UiBinder<Widget, Detail> {}
     private static DesktopBinder desktopBinder = GWT.create(DesktopBinder.class);
 
-    @UiTemplate("MDetail.ui.xml")
-    interface MobileBinder extends UiBinder<Widget, Detail> {}
-    private static MobileBinder mobileBinder = GWT.create(MobileBinder.class);
 
 
 
@@ -131,12 +128,7 @@ public class Detail extends Composite {
         this.hoursHTML = hoursHTML;
         this.websiteAnchor = websiteAnchor;
         this.descriptionAnchor = descriptionAnchor;
-        //this.descriptionAnchor.getElement().setId("fw-tab-one");
-        if (MyWebApp.isDesktop()) {
-            initWidget(desktopBinder.createAndBindUi(this));
-        }else {
-            initWidget(mobileBinder.createAndBindUi(this));
-        }
+        initWidget(desktopBinder.createAndBindUi(this));
 
     }
 }

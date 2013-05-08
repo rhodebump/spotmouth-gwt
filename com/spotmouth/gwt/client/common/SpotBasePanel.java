@@ -3606,11 +3606,9 @@ public abstract class SpotBasePanel extends FlowPanel {
     }
 
     protected void addHomePageResult(ULPanel ul, LocationResult locationResult)  {
-        if (MyWebApp.isDesktop()) {
+
             addHomePageResultDesktop(ul,locationResult);
-        } else {
-            addHomePageResultMobile(ul,locationResult);
-        }
+
     }
 
     protected void addHomePageResultMobile(ULPanel ul, LocationResult locationResult) {
@@ -3748,16 +3746,6 @@ public abstract class SpotBasePanel extends FlowPanel {
         }
     }
 
-    protected Label getDistanceLabel(LocationResult locationResult) {
-        Double ddistance = new Double(locationResult.getDistance());
-        int distance = ddistance.intValue();
-        Label distanceLabel = new Label(new Integer(distance).toString());
-        distanceLabel.setWidth("100%");
-        distanceLabel.setStyleName("distance");
-        distanceLabel.addStyleName("linky");
-        //walking, biking, else
-        return distanceLabel;
-    }
 
     protected void setColumnWidth(Widget image, HorizontalPanel hp) {
         if (image == null) {

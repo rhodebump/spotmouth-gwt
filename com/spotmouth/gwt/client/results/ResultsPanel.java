@@ -314,38 +314,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         }
     }
 
-    public void displayQueryResponse(QueryResponse queryResponse, String label, int mode) {
-        if (queryResponse.getResults().isEmpty()) {
-            return;
-        }
-        if (label != null) {
-            Label mylabel = new Label(label);
-            mylabel.setStyleName("h1");
-            add(mylabel);
-        }
-        try {
-            ULPanel facetsUL = new ULPanel();
-            facetsUL.setStyleName("facets");
-            add(facetsUL);
-            displayFacets(facetsUL);
-            ULPanel ul = new ULPanel();
-            ul.setStyleName("results");
-            add(ul);
-            for (SolrDocument solrDocument : queryResponse.getResults()) {
-                LocationResult lr = new LocationResult();
-                lr.setSolrDocument(solrDocument);
-                addResult(ul, lr, mode);
-            }
-            GWT.log("adding paginationPanel");
-            PaginationPanel paginationPanel = new PaginationPanel(
-                    previousResultsHandler, nextResultsHandler,
-                    searchParameters, queryResponse.getNumFound());
-            add(paginationPanel);
-        } catch (Exception e) {
-            debug("Error on resultspanel " + e.getMessage());
-            mywebapp.printStackTrace2(e);
-        }
-    }
+
 
     protected void addResult(ULPanel ul, LocationResult locationResult, int mode) {
         if (mode == 1) {
@@ -624,6 +593,7 @@ public class ResultsPanel extends SpotBasePanel implements SpotMouthPanel {
         add(selectedTagsPanel);
 
         ULPanel ul = new ULPanel();
+        ul.setWidth("100%");
         ul.setStyleName("results");
         add(ul);
         for (LocationResult locationResult : mobileResponse.getLocationResults()) {
